@@ -1,7 +1,12 @@
-# Auto-generated 2024-12-31T12:06:31.328465
+# Auto-generated 2025-03-21T15:49:49.650521
 from collections import OrderedDict
 
 driver_info = OrderedDict([
+    ('cameras.basler', {
+        'params': ['model', 'name', 'serial'],
+        'classes': ['BaslerCamera'],
+        'imports': ['pypylon'],
+    }),
     ('cameras.picam', {
         'params': ['model', 'serial'],
         'classes': ['PicamCamera'],

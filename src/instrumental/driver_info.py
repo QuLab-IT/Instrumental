@@ -36,7 +36,7 @@ driver_info = OrderedDict([
             'Agilent81110A': ('HEWLETT-PACKARD', ['HP81110A']),
             'AgilentE4400B': ('Hewlett-Packard', ['ESG-1000B']),
             'AgilentMXG': ('Agilent Technologies', ['N5181A']),
-            'Keysight33500B': ('Keysight Technologies', ['33511B', '33512B', '33521B', '33522B']),
+            'Keysight33500B': ('Agilent Technologies', ['33511B', '33512B', '33521B', '33522B']),
             'Keysight81160A': ('Agilent Technologies', ['81160A']),
         },
     }),

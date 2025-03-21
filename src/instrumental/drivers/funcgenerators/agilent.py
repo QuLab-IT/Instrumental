@@ -356,7 +356,7 @@ class Keysight33500B(AgilentFuncGenerator):
     - Remote control via SCPI
     """
     _INST_PARAMS_ = ['visa_address']
-    _INST_VISA_INFO_ = ('Keysight Technologies', ['33511B', '33512B', '33521B', '33522B'])
+    _INST_VISA_INFO_ = ('Agilent Technologies', ['33511B', '33512B', '33521B', '33522B'])
 
     def _initialize(self):
         """Initialize the instrument."""

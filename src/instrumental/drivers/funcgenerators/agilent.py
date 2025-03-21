@@ -304,3 +304,419 @@ class Keysight81160A(AgilentFuncGenerator):
    
     def _initialize(self):
         self._rsrc.read_termination = '\n'
+
+class Keysight33500B(AgilentFuncGenerator):
+    """Driver for Keysight 33500B Series Waveform Generators.
+    
+    This driver supports the 33500B Series of waveform generators, including:
+    - 33511B (1 channel, 20 MHz)
+    - 33512B (1 channel, 20 MHz, with arbitrary waveform)
+    - 33521B (2 channels, 20 MHz)
+    - 33522B (2 channels, 20 MHz, with arbitrary waveform)
+
+    Model-Specific Features:
+    -----------------------
+    33511B:
+        - Single channel output
+        - Standard waveforms (sine, square, triangle, ramp, pulse, noise, DC)
+        - Basic modulation (AM, FM, PM, FSK, PWM)
+        - Burst mode
+        - Sweep mode
+        - Triggering capabilities
+
+    33512B:
+        - All features of 33511B
+        - Arbitrary waveform capability
+        - Waveform memory management
+        - Waveform editing and downloading
+
+    33521B:
+        - All features of 33511B
+        - Dual channel output
+        - Channel synchronization
+        - Channel phase control
+        - Channel math operations (add, subtract, multiply)
+
+    33522B:
+        - All features of 33521B
+        - Arbitrary waveform capability on both channels
+        - Waveform memory management
+        - Waveform editing and downloading
+        - Dual arbitrary waveform playback
+
+    Common Features:
+    --------------
+    - Frequency range: 1 µHz to 20 MHz
+    - Amplitude range: 1 mVpp to 10 Vpp into 50 Ω
+    - DC offset range: ±5 V into 50 Ω
+    - Output impedance: 50 Ω
+    - Modulation capabilities
+    - Sweep capabilities
+    - Trigger capabilities
+    - Remote control via SCPI
+    """
+    _INST_PARAMS_ = ['visa_address']
+    _INST_VISA_INFO_ = ('Keysight Technologies', ['33511B', '33512B', '33521B', '33522B'])
+
+    def _initialize(self):
+        """Initialize the instrument."""
+        super()._initialize()
+        self._rsrc.read_termination = '\n'
+        self._rsrc.write_termination = '\n'
+        
+        # Get model information
+        idn = self.query('*IDN?').strip().split(',')
+        self.model = idn[1]  # Store model number for feature checking
+        
+    def _check_arbitrary_capability(self):
+        """Check if the model supports arbitrary waveforms.
+        
+        Returns
+        -------
+        bool
+            True if the model supports arbitrary waveforms (33512B or 33522B)
+        """
+        return self.model in ['33512B', '33522B']
+        
+    def _check_dual_channel(self):
+        """Check if the model supports dual channel operation.
+        
+        Returns
+        -------
+        bool
+            True if the model supports dual channel (33521B or 33522B)
+        """
+        return self.model in ['33521B', '33522B']
+
+    # Basic waveform parameters
+    frequency = SCPI_Facet('FREQ', convert=float, units='Hz')
+    voltage = SCPI_Facet('VOLT', convert=float, units='V')
+    voltage_offset = SCPI_Facet('VOLT:OFFS', convert=float, units='V')
+    
+    # Function selection
+    function = SCPI_Facet('FUNC', convert=str)
+    function_shape = SCPI_Facet('FUNC:SHAP', convert=str)
+    
+    # Burst mode settings
+    burst_mode = SCPI_Facet('BURS:MODE', convert=str)
+    burst_ncycles = SCPI_Facet('BURS:NCYC', convert=int)
+    burst_phase = SCPI_Facet('BURS:PHAS', convert=float, units='deg')
+    
+    # Modulation settings
+    modulation_state = SCPI_Facet('MOD:STAT', convert=bool)
+    modulation_type = SCPI_Facet('MOD:TYP', convert=str)
+    modulation_depth = SCPI_Facet('MOD:DEPT', convert=float)
+    modulation_rate = SCPI_Facet('MOD:RATE', convert=float, units='Hz')
+    
+    # Sweep settings
+    sweep_state = SCPI_Facet('SWE:STAT', convert=bool)
+    sweep_time = SCPI_Facet('SWE:TIME', convert=float, units='s')
+    sweep_spacing = SCPI_Facet('SWE:SPAC', convert=str)
+    
+    def set_arbitrary_waveform(self, waveform_data, sample_rate=None, channel=1):
+        """Load arbitrary waveform data.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        waveform_data : array-like
+            Array of waveform points (normalized to ±1)
+        sample_rate : float, optional
+            Sample rate in Hz. If None, uses current sample rate.
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        # Convert data to string format
+        data_str = ','.join(f'{x:.6f}' for x in waveform_data)
+        
+        # Set sample rate if specified
+        if sample_rate is not None:
+            self.write(f'FUNC:ARB:SRAT {sample_rate}, (@{channel})')
+            
+        # Load waveform data
+        self.write(f'DATA:ARB:DAC16 {data_str}, (@{channel})')
+        
+    def get_arbitrary_waveform(self, channel=1):
+        """Retrieve current arbitrary waveform data.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Returns
+        -------
+        array-like
+            Array of waveform points (normalized to ±1)
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        data_str = self.query(f'DATA:ARB:DAC16? (@{channel})')
+        return [float(x) for x in data_str.split(',')]
+    
+    def save_arbitrary_waveform(self, name, waveform_data, sample_rate=None, channel=1):
+        """Save arbitrary waveform to internal memory.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        name : str
+            Name to save waveform as
+        waveform_data : array-like
+            Array of waveform points (normalized to ±1)
+        sample_rate : float, optional
+            Sample rate in Hz. If None, uses current sample rate.
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        # Convert data to string format
+        data_str = ','.join(f'{x:.6f}' for x in waveform_data)
+        
+        # Set sample rate if specified
+        if sample_rate is not None:
+            self.write(f'FUNC:ARB:SRAT {sample_rate}, (@{channel})')
+            
+        # Save waveform data
+        self.write(f'DATA:ARB:DAC16 {name},{data_str}, (@{channel})')
+        
+    def load_arbitrary_waveform(self, name, channel=1):
+        """Load arbitrary waveform from internal memory.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        name : str
+            Name of waveform to load
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        self.write(f'FUNC:ARB {name}, (@{channel})')
+        
+    def get_available_waveforms(self, channel=1):
+        """Get list of available arbitrary waveforms.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Returns
+        -------
+        list
+            List of waveform names
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        return self.query(f'DATA:ARB:CAT? (@{channel})').strip('"').split(',')
+        
+    def delete_arbitrary_waveform(self, name, channel=1):
+        """Delete arbitrary waveform from internal memory.
+        
+        This feature is only available on 33512B and 33522B models.
+        
+        Parameters
+        ----------
+        name : str
+            Name of waveform to delete
+        channel : int, optional
+            Channel number (1 or 2). For 33522B, can be either channel.
+            
+        Raises
+        ------
+        ValueError
+            If the model doesn't support arbitrary waveforms
+        """
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+            
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        self.write(f'DATA:ARB:DEL {name}, (@{channel})')
+        
+    def set_phase(self, phase, channel=1):
+        """Set the phase of the waveform.
+        
+        Parameters
+        ----------
+        phase : float
+            Phase in degrees
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        self.write(f'PHAS {phase}, (@{channel})')
+        
+    def get_phase(self, channel=1):
+        """Get the phase of the waveform.
+        
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Returns
+        -------
+        float
+            Phase in degrees
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        return float(self.query(f'PHAS? (@{channel})'))
+        
+    def set_duty_cycle(self, duty_cycle, channel=1):
+        """Set the duty cycle of the waveform.
+        
+        Parameters
+        ----------
+        duty_cycle : float
+            Duty cycle in percent (0-100)
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        self.write(f'FUNC:PULS:DCYC {duty_cycle}, (@{channel})')
+        
+    def get_duty_cycle(self, channel=1):
+        """Get the duty cycle of the waveform.
+        
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Returns
+        -------
+        float
+            Duty cycle in percent (0-100)
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        return float(self.query(f'FUNC:PULS:DCYC? (@{channel})'))
+        
+    def set_ramp_symmetry(self, symmetry, channel=1):
+        """Set the ramp symmetry.
+        
+        Parameters
+        ----------
+        symmetry : float
+            Symmetry in percent (0-100)
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        self.write(f'FUNC:RAMP:SYMM {symmetry}, (@{channel})')
+        
+    def get_ramp_symmetry(self, channel=1):
+        """Get the ramp symmetry.
+        
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2). For 33521B and 33522B only.
+            
+        Returns
+        -------
+        float
+            Symmetry in percent (0-100)
+            
+        Raises
+        ------
+        ValueError
+            If dual channel operation is not available and channel=2
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        return float(self.query(f'FUNC:RAMP:SYMM? (@{channel})'))

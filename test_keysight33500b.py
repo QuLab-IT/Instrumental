@@ -16,11 +16,20 @@ def print_generator_info(generator):
     """
     print("\nGenerator Information:")
     print(f"Model: {generator.model}")
-    print(f"Frequency: {generator.frequency}")
-    print(f"Voltage: {generator.voltage}")
-    print(f"Voltage Offset: {generator.voltage_offset}")
-    print(f"Function: {generator.function}")
-    print(f"Function Shape: {generator.function_shape}")
+    print(f"Channel 1:")
+    print(f"  Frequency: {generator.frequency1}")
+    print(f"  Voltage: {generator.voltage1}")
+    print(f"  Voltage Offset: {generator.voltage_offset1}")
+    print(f"  Function: {generator.function1}")
+    print(f"  Function Shape: {generator.function_shape1}")
+    
+    if generator._check_dual_channel():
+        print(f"\nChannel 2:")
+        print(f"  Frequency: {generator.frequency2}")
+        print(f"  Voltage: {generator.voltage2}")
+        print(f"  Voltage Offset: {generator.voltage_offset2}")
+        print(f"  Function: {generator.function2}")
+        print(f"  Function Shape: {generator.function_shape2}")
 
 def print_errors(generator):
     """Print all errors from the generator's error queue.
@@ -66,57 +75,57 @@ def main():
         
         # Test frequency
         test_freq = 1.0 * u.kHz
-        print(f"Setting frequency to {test_freq}")
-        generator.frequency = test_freq
+        print(f"Setting frequency to {test_freq} on channel 1")
+        generator.frequency1 = test_freq
         print_errors(generator)
         
         # Test voltage
         test_voltage = 1.0 * u.V
-        print(f"Setting voltage to {test_voltage}")
-        generator.voltage = test_voltage
+        print(f"Setting voltage to {test_voltage} on channel 1")
+        generator.voltage1 = test_voltage
         print_errors(generator)
         
         # Test voltage offset
         test_offset = 0.5 * u.V
-        print(f"Setting voltage offset to {test_offset}")
-        generator.voltage_offset = test_offset
+        print(f"Setting voltage offset to {test_offset} on channel 1")
+        generator.voltage_offset1 = test_offset
         print_errors(generator)
         
         # Test function selection
         test_function = "SIN"
-        print(f"Setting function to {test_function}")
-        generator.function = test_function
+        print(f"Setting function to {test_function} on channel 1")
+        generator.function1 = test_function
         print_errors(generator)
         
         # Test function shape
         test_shape = "SIN"
-        print(f"Setting function shape to {test_shape}")
-        generator.function_shape = test_shape
+        print(f"Setting function shape to {test_shape} on channel 1")
+        generator.function_shape1 = test_shape
         print_errors(generator)
         
         # Test burst mode
         print("\nTesting burst mode...")
-        print("Setting burst mode parameters...")
-        generator.burst_mode = "GAT"
-        generator.burst_ncycles = 5
-        generator.burst_phase = 0.0
+        print("Setting burst mode parameters on channel 1...")
+        generator.burst_mode1 = "GAT"
+        generator.burst_ncycles1 = 5
+        generator.burst_phase1 = 0.0
         print_errors(generator)
         
         # Test modulation
         print("\nTesting modulation...")
-        print("Setting modulation parameters...")
-        generator.modulation_state = True
-        generator.modulation_type = "AM"
-        generator.modulation_depth = 50.0
-        generator.modulation_rate = 1.0 * u.kHz
+        print("Setting modulation parameters on channel 1...")
+        generator.modulation_state1 = True
+        generator.modulation_type1 = "AM"
+        generator.modulation_depth1 = 50.0
+        generator.modulation_rate1 = 1.0 * u.kHz
         print_errors(generator)
         
         # Test sweep
         print("\nTesting sweep...")
-        print("Setting sweep parameters...")
-        generator.sweep_state = True
-        generator.sweep_time = 1.0 * u.s
-        generator.sweep_spacing = "LIN"
+        print("Setting sweep parameters on channel 1...")
+        generator.sweep_state1 = True
+        generator.sweep_time1 = 1.0 * u.s
+        generator.sweep_spacing1 = "LIN"
         print_errors(generator)
         
         # Test arbitrary waveform (if supported)
@@ -125,31 +134,65 @@ def main():
             # Create a simple sine wave
             t = np.linspace(0, 2*np.pi, 1000)
             waveform = np.sin(t)
-            print("Loading arbitrary waveform...")
-            generator.set_arbitrary_waveform(waveform, sample_rate=1000)
+            print("Loading arbitrary waveform on channel 1...")
+            generator.set_arbitrary_waveform(waveform, sample_rate=1000, channel=1)
             print_errors(generator)
             
             # Test saving and loading arbitrary waveform
             print("Saving arbitrary waveform...")
-            generator.save_arbitrary_waveform("TEST_WAVE", waveform)
+            generator.save_arbitrary_waveform("TEST_WAVE", waveform, channel=1)
             print_errors(generator)
             
             print("Loading arbitrary waveform...")
-            generator.load_arbitrary_waveform("TEST_WAVE")
+            generator.load_arbitrary_waveform("TEST_WAVE", channel=1)
             print_errors(generator)
             
             print("Getting available waveforms...")
-            waveforms = generator.get_available_waveforms()
+            waveforms = generator.get_available_waveforms(channel=1)
             print(f"Available waveforms: {waveforms}")
             print_errors(generator)
             
             print("Deleting test waveform...")
-            generator.delete_arbitrary_waveform("TEST_WAVE")
+            generator.delete_arbitrary_waveform("TEST_WAVE", channel=1)
             print_errors(generator)
         
         # Test dual channel features (if supported)
         if generator._check_dual_channel():
             print("\nTesting dual channel features...")
+            
+            # Test channel 2 basic parameters
+            print("\nTesting channel 2 basic parameters...")
+            test_freq2 = 2.0 * u.kHz
+            print(f"Setting frequency to {test_freq2} on channel 2")
+            generator.frequency2 = test_freq2
+            print_errors(generator)
+            
+            test_voltage2 = 2.0 * u.V
+            print(f"Setting voltage to {test_voltage2} on channel 2")
+            generator.voltage2 = test_voltage2
+            print_errors(generator)
+            
+            # Test channel 2 burst mode
+            print("\nTesting channel 2 burst mode...")
+            generator.burst_mode2 = "GAT"
+            generator.burst_ncycles2 = 5
+            generator.burst_phase2 = 0.0
+            print_errors(generator)
+            
+            # Test channel 2 modulation
+            print("\nTesting channel 2 modulation...")
+            generator.modulation_state2 = True
+            generator.modulation_type2 = "AM"
+            generator.modulation_depth2 = 50.0
+            generator.modulation_rate2 = 1.0 * u.kHz
+            print_errors(generator)
+            
+            # Test channel 2 sweep
+            print("\nTesting channel 2 sweep...")
+            generator.sweep_state2 = True
+            generator.sweep_time2 = 1.0 * u.s
+            generator.sweep_spacing2 = "LIN"
+            print_errors(generator)
             
             # Test phase control
             test_phase = 90.0
@@ -171,13 +214,13 @@ def main():
         
         print("Testing invalid frequency...")
         try:
-            generator.frequency = -1.0 * u.Hz
+            generator.frequency1 = -1.0 * u.Hz
         except Exception as e:
             print(f"Expected error: {e}")
             
         print("Testing invalid voltage...")
         try:
-            generator.voltage = 11.0 * u.V  # Should be out of range
+            generator.voltage1 = 11.0 * u.V  # Should be out of range
         except Exception as e:
             print(f"Expected error: {e}")
             
@@ -191,7 +234,7 @@ def main():
         if generator._check_arbitrary_capability():
             print("Testing invalid arbitrary waveform...")
             try:
-                generator.set_arbitrary_waveform([1.1])  # Value out of range
+                generator.set_arbitrary_waveform([1.1], channel=1)  # Value out of range
             except Exception as e:
                 print(f"Expected error: {e}")
             

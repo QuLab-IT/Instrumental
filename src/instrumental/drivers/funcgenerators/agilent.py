@@ -436,185 +436,51 @@ class Keysight33500B(AgilentFuncGenerator):
         """
         return self.model in ["33521B", "33522B"]
 
-    # Basic waveform parameters
-    def _get_channel_cmd(self, cmd, channel):
-        """Helper method to format channel-specific commands."""
-        return cmd.format(channel=channel)
-
-    frequency = SCPI_Facet(
-        "SOURce{channel}:FREQ",
-        convert=float,
-        units="Hz",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FREQ?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FREQ {}", channel
-        ),
-    )
-
-    voltage = SCPI_Facet(
-        "SOURce{channel}:VOLT",
-        convert=float,
-        units="V",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:VOLT?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:VOLT {}", channel
-        ),
-    )
-
-    voltage_offset = SCPI_Facet(
-        "SOURce{channel}:VOLT:OFFS",
-        convert=float,
-        units="V",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:VOLT:OFFS?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:VOLT:OFFS {}", channel
-        ),
-    )
-
-    # Function selection
-    function = SCPI_Facet(
-        "SOURce{channel}:FUNC",
-        convert=str,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FUNC?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FUNC {}", channel
-        ),
-    )
-
-    function_shape = SCPI_Facet(
-        "SOURce{channel}:FUNC:SHAP",
-        convert=str,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FUNC:SHAP?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:FUNC:SHAP {}", channel
-        ),
-    )
-
-    # Burst mode settings
-    burst_mode = SCPI_Facet(
-        "SOURce{channel}:BURS:MODE",
-        convert=str,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:MODE?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:MODE {}", channel
-        ),
-    )
-
-    burst_ncycles = SCPI_Facet(
-        "SOURce{channel}:BURS:NCYC",
-        convert=int,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:NCYC?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:NCYC {}", channel
-        ),
-    )
-
-    burst_phase = SCPI_Facet(
-        "SOURce{channel}:BURS:PHAS",
-        convert=float,
-        units="deg",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:PHAS?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:BURS:PHAS {}", channel
-        ),
-    )
-
-    # Modulation settings
-    modulation_state = SCPI_Facet(
-        "SOURce{channel}:MOD:STAT",
-        convert=bool,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:STAT?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:STAT {}", channel
-        ),
-    )
-
-    modulation_type = SCPI_Facet(
-        "SOURce{channel}:MOD:TYP",
-        convert=str,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:TYP?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:TYP {}", channel
-        ),
-    )
-
-    modulation_depth = SCPI_Facet(
-        "SOURce{channel}:MOD:DEPT",
-        convert=float,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:DEPT?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:DEPT {}", channel
-        ),
-    )
-
-    modulation_rate = SCPI_Facet(
-        "SOURce{channel}:MOD:RATE",
-        convert=float,
-        units="Hz",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:RATE?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:MOD:RATE {}", channel
-        ),
-    )
-
-    # Sweep settings
-    sweep_state = SCPI_Facet(
-        "SOURce{channel}:SWE:STAT",
-        convert=bool,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:STAT?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:STAT {}", channel
-        ),
-    )
-
-    sweep_time = SCPI_Facet(
-        "SOURce{channel}:SWE:TIME",
-        convert=float,
-        units="s",
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:TIME?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:TIME {}", channel
-        ),
-    )
-
-    sweep_spacing = SCPI_Facet(
-        "SOURce{channel}:SWE:SPAC",
-        convert=str,
-        get_cmd=lambda self, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:SPAC?", channel
-        ),
-        set_cmd=lambda self, value, channel=1: self._get_channel_cmd(
-            "SOURce{channel}:SWE:SPAC {}", channel
-        ),
-    )
+    # Basic waveform parameters for channel 1
+    frequency1 = SCPI_Facet('SOURce1:FREQ', convert=float, units='Hz')
+    voltage1 = SCPI_Facet('SOURce1:VOLT', convert=float, units='V')
+    voltage_offset1 = SCPI_Facet('SOURce1:VOLT:OFFS', convert=float, units='V')
+    function1 = SCPI_Facet('SOURce1:FUNC', convert=str)
+    function_shape1 = SCPI_Facet('SOURce1:FUNC:SHAP', convert=str)
+    
+    # Basic waveform parameters for channel 2
+    frequency2 = SCPI_Facet('SOURce2:FREQ', convert=float, units='Hz')
+    voltage2 = SCPI_Facet('SOURce2:VOLT', convert=float, units='V')
+    voltage_offset2 = SCPI_Facet('SOURce2:VOLT:OFFS', convert=float, units='V')
+    function2 = SCPI_Facet('SOURce2:FUNC', convert=str)
+    function_shape2 = SCPI_Facet('SOURce2:FUNC:SHAP', convert=str)
+    
+    # Burst mode settings for channel 1
+    burst_mode1 = SCPI_Facet('SOURce1:BURS:MODE', convert=str)
+    burst_ncycles1 = SCPI_Facet('SOURce1:BURS:NCYC', convert=int)
+    burst_phase1 = SCPI_Facet('SOURce1:BURS:PHAS', convert=float, units='deg')
+    
+    # Burst mode settings for channel 2
+    burst_mode2 = SCPI_Facet('SOURce2:BURS:MODE', convert=str)
+    burst_ncycles2 = SCPI_Facet('SOURce2:BURS:NCYC', convert=int)
+    burst_phase2 = SCPI_Facet('SOURce2:BURS:PHAS', convert=float, units='deg')
+    
+    # Modulation settings for channel 1
+    modulation_state1 = SCPI_Facet('SOURce1:MOD:STAT', convert=bool)
+    modulation_type1 = SCPI_Facet('SOURce1:MOD:TYP', convert=str)
+    modulation_depth1 = SCPI_Facet('SOURce1:MOD:DEPT', convert=float)
+    modulation_rate1 = SCPI_Facet('SOURce1:MOD:RATE', convert=float, units='Hz')
+    
+    # Modulation settings for channel 2
+    modulation_state2 = SCPI_Facet('SOURce2:MOD:STAT', convert=bool)
+    modulation_type2 = SCPI_Facet('SOURce2:MOD:TYP', convert=str)
+    modulation_depth2 = SCPI_Facet('SOURce2:MOD:DEPT', convert=float)
+    modulation_rate2 = SCPI_Facet('SOURce2:MOD:RATE', convert=float, units='Hz')
+    
+    # Sweep settings for channel 1
+    sweep_state1 = SCPI_Facet('SOURce1:SWE:STAT', convert=bool)
+    sweep_time1 = SCPI_Facet('SOURce1:SWE:TIME', convert=float, units='s')
+    sweep_spacing1 = SCPI_Facet('SOURce1:SWE:SPAC', convert=str)
+    
+    # Sweep settings for channel 2
+    sweep_state2 = SCPI_Facet('SOURce2:SWE:STAT', convert=bool)
+    sweep_time2 = SCPI_Facet('SOURce2:SWE:TIME', convert=float, units='s')
+    sweep_spacing2 = SCPI_Facet('SOURce2:SWE:SPAC', convert=str)
 
     def set_sweep_frequency(self, start_freq, stop_freq, channel=1):
         """Set sweep frequency range.

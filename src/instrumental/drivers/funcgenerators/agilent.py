@@ -1225,6 +1225,24 @@ class Keysight33500B(AgilentFuncGenerator):
             
         self.write(f"OUTP{channel}:IMP {imp}")
 
+    def get_out_impedance(self, channel=1):
+        """Get the output impedance of a channel.
+
+        Parameters
+        ----------
+        channel : int
+            The channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            The impedance value in ohms
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        return float(self.query(f"OUTP{channel}:IMP?"))
+
     def set_width(self, width, channel=1):
         """Set the pulse width.
 

@@ -390,10 +390,17 @@ class Keysight33500B(AgilentFuncGenerator):
         super()._initialize()
         self._rsrc.read_termination = '\n'
         self._rsrc.write_termination = '\n'
+        self._rsrc.timeout = 10000  # Set timeout to 10 seconds
+        
+        # Clear any pending errors
+        self.clear_error_queue()
         
         # Get model information
         idn = self.query('*IDN?').strip().split(',')
         self.model = idn[1]  # Store model number for feature checking
+        
+        # Set default channel to 1
+        self.write('SOURce1')
         
     def _check_arbitrary_capability(self):
         """Check if the model supports arbitrary waveforms.
@@ -416,18 +423,18 @@ class Keysight33500B(AgilentFuncGenerator):
         return self.model in ['33521B', '33522B']
 
     # Basic waveform parameters
-    frequency = SCPI_Facet('FREQ', convert=float, units='Hz')
-    voltage = SCPI_Facet('VOLT', convert=float, units='V')
-    voltage_offset = SCPI_Facet('VOLT:OFFS', convert=float, units='V')
+    frequency = SCPI_Facet('SOURce{channel}:FREQ', convert=float, units='Hz')
+    voltage = SCPI_Facet('SOURce{channel}:VOLT', convert=float, units='V')
+    voltage_offset = SCPI_Facet('SOURce{channel}:VOLT:OFFS', convert=float, units='V')
     
     # Function selection
-    function = SCPI_Facet('FUNC', convert=str)
-    function_shape = SCPI_Facet('FUNC:SHAP', convert=str)
+    function = SCPI_Facet('SOURce{channel}:FUNC', convert=str)
+    function_shape = SCPI_Facet('SOURce{channel}:FUNC:SHAP', convert=str)
     
     # Burst mode settings
-    burst_mode = SCPI_Facet('BURS:MODE', convert=str)
-    burst_ncycles = SCPI_Facet('BURS:NCYC', convert=int)
-    burst_phase = SCPI_Facet('BURS:PHAS', convert=float, units='deg')
+    burst_mode = SCPI_Facet('SOURce{channel}:BURS:MODE', convert=str)
+    burst_ncycles = SCPI_Facet('SOURce{channel}:BURS:NCYC', convert=int)
+    burst_phase = SCPI_Facet('SOURce{channel}:BURS:PHAS', convert=float, units='deg')
     
     # Modulation settings
     modulation_state = SCPI_Facet('SOURce{channel}:MOD:STAT', convert=bool)

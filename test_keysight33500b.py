@@ -16,12 +16,17 @@ def print_generator_info(generator):
     """
     print("\nGenerator Information:")
     print(f"Model: {generator.model}")
+    print(f"System Date: {generator.get_system_date()}")
+    print(f"System Time: {generator.get_system_time()}")
     print(f"Channel 1:")
     print(f"  Frequency: {generator.frequency1}")
     print(f"  Voltage: {generator.voltage1}")
     print(f"  Voltage Offset: {generator.voltage_offset1}")
     print(f"  Function: {generator.function1}")
     print(f"  Function Shape: {generator.function_shape1}")
+    print(f"  Polarity: {generator.get_polarity(1)}")
+    print(f"  Output Impedance: {generator.get_out_impedance(1)}")
+    print(f"  Output State: {'ON' if generator.output1 else 'OFF'}")
     
     if generator._check_dual_channel():
         print(f"\nChannel 2:")
@@ -30,6 +35,10 @@ def print_generator_info(generator):
         print(f"  Voltage Offset: {generator.voltage_offset2}")
         print(f"  Function: {generator.function2}")
         print(f"  Function Shape: {generator.function_shape2}")
+        print(f"  Polarity: {generator.get_polarity(2)}")
+        print(f"  Output Impedance: {generator.get_out_impedance(2)}")
+        print(f"  Output State: {'ON' if generator.output2 else 'OFF'}")
+        print(f"  Combined Output: {'ON' if generator.combined else 'OFF'}")
 
 def print_errors(generator):
     """Print all errors from the generator's error queue.
@@ -46,6 +55,238 @@ def print_errors(generator):
             print(f"Error {code}: {message}")
     else:
         print("\nNo errors in queue")
+
+def test_basic_parameters(generator):
+    """Test basic waveform parameters.
+    
+    Parameters
+    ----------
+    generator : Keysight33500B
+        The generator instance to test.
+    """
+    print("\nTesting basic waveform parameters...")
+    
+    # Test frequency
+    test_freq = 1.0 * u.kHz
+    print(f"Setting frequency to {test_freq} on channel 1")
+    generator.frequency1 = test_freq
+    print_errors(generator)
+    
+    # Test voltage
+    test_voltage = 1.0 * u.V
+    print(f"Setting voltage to {test_voltage} on channel 1")
+    generator.voltage1 = test_voltage
+    print_errors(generator)
+    
+    # Test voltage offset
+    test_offset = 0.5 * u.V
+    print(f"Setting voltage offset to {test_offset} on channel 1")
+    generator.voltage_offset1 = test_offset
+    print_errors(generator)
+    
+    # Test function selection
+    test_function = "SIN"
+    print(f"Setting function to {test_function} on channel 1")
+    generator.function1 = test_function
+    print_errors(generator)
+    
+    # Test function shape
+    test_shape = "SIN"
+    print(f"Setting function shape to {test_shape} on channel 1")
+    generator.function_shape1 = test_shape
+    print_errors(generator)
+
+def test_trigger_settings(generator):
+    """Test trigger settings.
+    
+    Parameters
+    ----------
+    generator : Keysight33500B
+        The generator instance to test.
+    """
+    print("\nTesting trigger settings...")
+    
+    # Test trigger source
+    test_source = "IMM"
+    print(f"Setting trigger source to {test_source}")
+    generator.set_trigger_source(test_source)
+    print(f"Current trigger source: {generator.get_trigger_source()}")
+    print_errors(generator)
+    
+    # Test trigger slope
+    test_slope = "POS"
+    print(f"Setting trigger slope to {test_slope}")
+    generator.set_trigger_slope(test_slope)
+    print(f"Current trigger slope: {generator.get_trigger_slope()}")
+    print_errors(generator)
+    
+    # Test trigger level
+    test_level = 1.0
+    print(f"Setting trigger level to {test_level}V")
+    generator.trigger_level = test_level
+    print(f"Current trigger level: {generator.trigger_level}V")
+    print_errors(generator)
+
+def test_output_settings(generator):
+    """Test output settings.
+    
+    Parameters
+    ----------
+    generator : Keysight33500B
+        The generator instance to test.
+    """
+    print("\nTesting output settings...")
+    
+    # Test polarity
+    test_polarity = "NORM"
+    print(f"Setting polarity to {test_polarity} on channel 1")
+    generator.set_polarity(test_polarity, 1)
+    print(f"Current polarity: {generator.get_polarity(1)}")
+    print_errors(generator)
+    
+    # Test output impedance
+    test_imp = 50.0
+    print(f"Setting output impedance to {test_imp} ohms on channel 1")
+    generator.set_out_impedance(test_imp, 1)
+    print(f"Current output impedance: {generator.get_out_impedance(1)} ohms")
+    print_errors(generator)
+    
+    # Test output state
+    print("Testing output state on channel 1")
+    generator.output1 = True
+    print(f"Output 1 state: {'ON' if generator.output1 else 'OFF'}")
+    time.sleep(1)  # Wait a second
+    generator.output1 = False
+    print(f"Output 1 state: {'ON' if generator.output1 else 'OFF'}")
+    print_errors(generator)
+    
+    if generator._check_dual_channel():
+        # Test channel 2 output settings
+        print("\nTesting channel 2 output settings...")
+        test_polarity2 = "INV"
+        print(f"Setting polarity to {test_polarity2} on channel 2")
+        generator.set_polarity(test_polarity2, 2)
+        print(f"Current polarity: {generator.get_polarity(2)}")
+        print_errors(generator)
+        
+        test_imp2 = 75.0
+        print(f"Setting output impedance to {test_imp2} ohms on channel 2")
+        generator.set_out_impedance(test_imp2, 2)
+        print(f"Current output impedance: {generator.get_out_impedance(2)} ohms")
+        print_errors(generator)
+        
+        print("Testing output state on channel 2")
+        generator.output2 = True
+        print(f"Output 2 state: {'ON' if generator.output2 else 'OFF'}")
+        time.sleep(1)  # Wait a second
+        generator.output2 = False
+        print(f"Output 2 state: {'ON' if generator.output2 else 'OFF'}")
+        print_errors(generator)
+        
+        # Test combined output
+        print("\nTesting combined output...")
+        generator.combined = True
+        print(f"Combined output state: {'ON' if generator.combined else 'OFF'}")
+        time.sleep(1)  # Wait a second
+        generator.combined = False
+        print(f"Combined output state: {'ON' if generator.combined else 'OFF'}")
+        print_errors(generator)
+
+def test_pulse_settings(generator):
+    """Test pulse settings.
+    
+    Parameters
+    ----------
+    generator : Keysight33500B
+        The generator instance to test.
+    """
+    print("\nTesting pulse settings...")
+    
+    # Set function to pulse
+    print("Setting function to pulse on channel 1")
+    generator.function1 = "PULS"
+    print_errors(generator)
+    
+    # Test pulse width
+    test_width = 1e-6  # 1 microsecond
+    print(f"Setting pulse width to {test_width}s on channel 1")
+    generator.set_width(test_width, 1)
+    print_errors(generator)
+    
+    # Test delay
+    test_delay = 1e-6  # 1 microsecond
+    print(f"Setting delay to {test_delay}s on channel 1")
+    generator.set_delay(test_delay, 1)
+    print_errors(generator)
+    
+    # Test high/low voltage levels
+    test_high = 2.0
+    test_low = 0.0
+    print(f"Setting high voltage to {test_high}V on channel 1")
+    generator.set_high(test_high, 1)
+    print(f"Setting low voltage to {test_low}V on channel 1")
+    generator.set_low(test_low, 1)
+    print_errors(generator)
+
+def test_error_handling(generator):
+    """Test error handling.
+    
+    Parameters
+    ----------
+    generator : Keysight33500B
+        The generator instance to test.
+    """
+    print("\nTesting error handling...")
+    
+    # Test invalid polarity
+    print("Testing invalid polarity...")
+    try:
+        generator.set_polarity("INVALID", 1)
+    except ValueError as e:
+        print(f"Expected error: {e}")
+    
+    # Test invalid trigger source
+    print("Testing invalid trigger source...")
+    try:
+        generator.set_trigger_source("INVALID")
+    except ValueError as e:
+        print(f"Expected error: {e}")
+    
+    # Test invalid trigger slope
+    print("Testing invalid trigger slope...")
+    try:
+        generator.set_trigger_slope("INVALID")
+    except ValueError as e:
+        print(f"Expected error: {e}")
+    
+    # Test invalid channel
+    if generator._check_dual_channel():
+        print("Testing invalid channel...")
+        try:
+            generator.set_polarity("NORM", 3)
+        except ValueError as e:
+            print(f"Expected error: {e}")
+    
+    # Test invalid impedance
+    print("Testing invalid impedance...")
+    try:
+        generator.set_out_impedance(-1.0, 1)
+    except ValueError as e:
+        print(f"Expected error: {e}")
+    
+    # Test invalid pulse width
+    print("Testing invalid pulse width...")
+    try:
+        generator.set_width(-1.0, 1)
+    except ValueError as e:
+        print(f"Expected error: {e}")
+    
+    # Test invalid delay
+    print("Testing invalid delay...")
+    try:
+        generator.set_delay(-1.0, 1)
+    except ValueError as e:
+        print(f"Expected error: {e}")
 
 def main():
     """Run the interactive test suite for the Keysight 33500B generator."""
@@ -70,38 +311,11 @@ def main():
         print_generator_info(generator)
         print_errors(generator)  # Check for any initial errors
         
-        # Test basic waveform parameters
-        print("\nTesting basic waveform parameters...")
-        
-        # Test frequency
-        test_freq = 1.0 * u.kHz
-        print(f"Setting frequency to {test_freq} on channel 1")
-        generator.frequency1 = test_freq
-        print_errors(generator)
-        
-        # Test voltage
-        test_voltage = 1.0 * u.V
-        print(f"Setting voltage to {test_voltage} on channel 1")
-        generator.voltage1 = test_voltage
-        print_errors(generator)
-        
-        # Test voltage offset
-        test_offset = 0.5 * u.V
-        print(f"Setting voltage offset to {test_offset} on channel 1")
-        generator.voltage_offset1 = test_offset
-        print_errors(generator)
-        
-        # Test function selection
-        test_function = "SIN"
-        print(f"Setting function to {test_function} on channel 1")
-        generator.function1 = test_function
-        print_errors(generator)
-        
-        # Test function shape
-        test_shape = "SIN"
-        print(f"Setting function shape to {test_shape} on channel 1")
-        generator.function_shape1 = test_shape
-        print_errors(generator)
+        # Run all test suites
+        test_basic_parameters(generator)
+        test_trigger_settings(generator)
+        test_output_settings(generator)
+        test_pulse_settings(generator)
         
         # Test burst mode
         print("\nTesting burst mode...")
@@ -210,33 +424,7 @@ def main():
             generator.set_ramp_symmetry(test_symmetry, channel=2)
         
         # Test error handling
-        print("\nTesting error handling...")
-        
-        print("Testing invalid frequency...")
-        try:
-            generator.frequency1 = -1.0 * u.Hz
-        except Exception as e:
-            print(f"Expected error: {e}")
-            
-        print("Testing invalid voltage...")
-        try:
-            generator.voltage1 = 11.0 * u.V  # Should be out of range
-        except Exception as e:
-            print(f"Expected error: {e}")
-            
-        if generator._check_dual_channel():
-            print("Testing invalid channel...")
-            try:
-                generator.set_phase(0.0, channel=3)  # Invalid channel
-            except Exception as e:
-                print(f"Expected error: {e}")
-                
-        if generator._check_arbitrary_capability():
-            print("Testing invalid arbitrary waveform...")
-            try:
-                generator.set_arbitrary_waveform([1.1], channel=1)  # Value out of range
-            except Exception as e:
-                print(f"Expected error: {e}")
+        test_error_handling(generator)
             
     finally:
         # Cleanup

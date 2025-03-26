@@ -278,6 +278,33 @@ class AgilentFuncGenerator(FunctionGenerator, VisaMixin):
         mag = low.to('V').magnitude
         self.write('ARM:LEV {:5.2f}V', mag)
 
+    def get_all_errors(self):
+        """Get all errors from the error queue.
+        
+        Returns
+        -------
+        list
+            List of (error_code, error_message) tuples
+        """
+        errors = []
+        while True:
+            error = self.query('SYST:ERR?')
+            code, message = error.split(',')
+            code = int(code)
+            message = message.strip('"')
+            if code == 0:  # No error
+                break
+            errors.append((code, message))
+        return errors
+
+    def clear_error_queue(self):
+        """Clear the error queue by reading all errors."""
+        while True:
+            error = self.query('SYST:ERR?')
+            code = int(error.split(',')[0])
+            if code == 0:  # No error
+                break
+
 class Agilent81110A(AgilentFuncGenerator):
     _INST_PARAMS_ = ['visa_address']
     _INST_VISA_INFO_ = ('HEWLETT-PACKARD', ['HP81110A'])

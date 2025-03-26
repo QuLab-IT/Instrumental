@@ -430,10 +430,10 @@ class Keysight33500B(AgilentFuncGenerator):
     burst_phase = SCPI_Facet('BURS:PHAS', convert=float, units='deg')
     
     # Modulation settings
-    modulation_state = SCPI_Facet('MOD:STAT', convert=bool)
-    modulation_type = SCPI_Facet('MOD:TYP', convert=str)
-    modulation_depth = SCPI_Facet('MOD:DEPT', convert=float)
-    modulation_rate = SCPI_Facet('MOD:RATE', convert=float, units='Hz')
+    modulation_state = SCPI_Facet('SOURce{channel}:MOD:STAT', convert=bool)
+    modulation_type = SCPI_Facet('SOURce{channel}:MOD:TYP', convert=str)
+    modulation_depth = SCPI_Facet('SOURce{channel}:MOD:DEPT', convert=float)
+    modulation_rate = SCPI_Facet('SOURce{channel}:MOD:RATE', convert=float, units='Hz')
     
     # Sweep settings
     sweep_state = SCPI_Facet('SWE:STAT', convert=bool)

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Pulse Waveforms</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Pulse Waveforms<a name="kanchor425"></a></h1>
+        <p>As shown below, a pulse or square wave consists of a period, a pulse width, a rising edge, and a falling edge.</p>
+        <p>
+            <br /><a name="PulseDiagram"></a>
+            <img src="../_Graphics_/pulse_summ.png" />
+            <br />
+        </p>
+        <h2><a name="Period"></a>Period</h2>
+        <ul>
+            <li class="IndentTight" value="1">Period: reciprocal of maximum frequency to 1,000,000 s. The default is 1 ms.</li>
+            <li class="IndentTight" value="2">The instrument adjusts the pulse width and edge time as needed to accommodate the specified period.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <br />Select Pulse waveform:<br /><img src="../_Graphics_/Button%20-%20Waveform.png" /><img src="../_Graphics_/Softkey%20-%20Pulse.png" /><br /><br />Select period instead of frequency:<br>Set freunits</br><img src="../_Graphics_/Button%20-%20Units.png" alt="Units key" /><img src="../_Graphics_/Softkeys%20-%20FREQUENCY%20Period.png" alt="Frequency - Period softkey (Frequency)" /> <img src="../_Graphics_/SoftkeyNF%20-%20Frequency%20PERIOD.png" alt="Frequency/Period softkey (Period)" /><br /><br />Set the period:<br /><img src="../_Graphics_/Button%20-%20Parameters.png" alt="Parameters key" /><img src="../_Graphics_/Softkey%20-%20Period.png" alt="Period softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_PULSe_PERiod">[SOURce[1|2]:]FUNC:PULS:PER {&lt;<i>seconds</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Pulse_Width"></a>Pulse Width</h2>
+        <p>Pulse width is the time from the 50% threshold of a pulse's rising edge to the 50% threshold of the next falling edge.</p>
+        <ul>
+            <li class="IndentTight" value="1">Pulse width: 16 ns to 1,000,000 s (see restrictions below). The default pulse width is 100 &#956;s.</li>
+            <li class="IndentTight" value="2">The specified pulse width must also be less than the difference between the period and the minimum pulse width.<br /></li>
+            <li class="IndentTight" value="3">The instrument will adjust the pulse width to accommodate the specified period.</li>
+            <li class="IndentTight" value="4"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" /> <img src="../_Graphics_/Softkey%20-%20Pulse%20Width.png" alt="Pulse Width softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" /><br /></li>
+            <li class="IndentTight" value="5"><b>SCPI:</b> <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_PULSe_WIDTh">FUNCtion:PULSe:WIDTh {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</a></li>
+        </ul>
+        <h2><a name="Pulse_Duty_Cycle"></a>Pulse Duty Cycle</h2>
+        <p>The pulse duty cycle is defined as follows:</p>
+        <p>Duty Cycle = 100(Pulse Width)/Period</p>
+        <p>Pulse width is the time from the 50% threshold of a pulse's rising edge to the 50% threshold of the next falling edge.</p>
+        <ul>
+            <li class="IndentTight" value="1">Pulse duty cycle: 0.01% to 99.99% (see restrictions below). The default is 10%.</li>
+            <li class="IndentTight" value="2">The pulse duty cycle must conform to the following restrictions determined by the minimum pulse width (Wmin). The instrument will adjust the pulse duty cycle to accommodate the specified period.<br /><br />Duty Cycle &gt; 100(16 ns) / Period<br /><br />and<br /><br />Duty Cycle &lt; 100(1 – (16 ns / Period))</li>
+            <li class="IndentTight" value="3">To achieve edges &gt; 8.4 ns (the minimum edge time), the pulse width must be at least 20 ns. The longer the edges, the greater the minimum pulse width. Longer edges will therefore restrict duty cycle more than shorter edges.</li>
+            <li class="IndentTight" value="4"><b>Front Panel:</b>
+                <br />
+                <br />Select pulse function:<br /><img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" /><img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" /><br /><br />Toggle to Duty Cycle:<br /><img src="../_Graphics_/Button%20-%20Units.png" alt="Units key" /><img src="../_Graphics_/Softkey%20-%20WIDTH%20Duty%20Cyc.png" alt="Width / Duty Cycle softkey (Width)" /> <img src="../_Graphics_/SoftkeyNF%20-%20Width%20DUTY%20CYC.png" alt="Width / Duty Cycle softkey (Duty Cycle)" /><br /><br />Enter the Duty Cycle:<br /><img src="../_Graphics_/Button%20-%20Parameters.png" alt="Parameters key" /><img src="../_Graphics_/Softkey%20-%20Duty%20Cycle.png" alt="Duty Cycle softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" /></li>
+            <li class="IndentTight" value="5"><b>SCPI:</b> <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_PULSe_DCYCle">FUNCtion:PULSe:DCYCle {&lt;<i>percent</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Edge_Times"></a>Edge Times</h2>
+        <p>The edge times set the transition times for the leading and trailing edges of the pulse, either independently or together. The edge time represents the time between the 10% and 90% thresholds.</p>
+        <ul>
+            <li class="IndentTight" value="1">Edge time: 8.4 ns to 1 &#956;s (default 10 ns).</li>
+            <li class="IndentTight" value="2">The specified edge time must fit within the specified pulse width <a href="#PulseDiagram">as shown above</a>. The instrument will adjust the edge time to accommodate the specified pulse width.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Edge%20Times.png" alt="Edge Times softkey" /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_PULSe_TRANsition">FUNC:PULS:TRAN:LEAD {&lt;seconds&gt;|MIN|MAX}<br /><br />FUNC:PULS:TRAN:TRA {&lt;seconds&gt;|MIN|MAX}<br /><br />FUNC:PULS:TRAN[:BOTH] {&lt;seconds&gt;|MIN|MAX}</a>
+            </li>
+        </ul>
+        
+    </body>
+</html>

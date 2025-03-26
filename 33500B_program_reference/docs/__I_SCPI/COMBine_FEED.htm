@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>COMBine:FEED</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor83"></a>[SOURce[1|2]:]COMBine:FEED {CH1|CH2|NONE}<br />[SOURce[1|2]:]COMBine:FEED?</h1>
+        <p class="IndentTight">Enables or disables the combining of both channels' outputs on a two-channel instrument into a single channel connector. The "SOURce" keyword (default, SOURce1) specifies the base channel, and &lt;<i>source</i>&gt;  specifies the channel to be combined with the base channel.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{CH1|CH2|NONE}, default NONE</td>
+                    <td class="BodyD-Column1-Body1">CH1, CH2, or NONE</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the COMBine:FEED source for base Channel 1 to be Channel 2:<br />COMB:FEED CH2</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">COMBine:FEED allows digital data from both channels to be added together to create the output signal on the output DAC for the base channel.</li>
+            <li class="IndentTight" value="2">Only one channel may operate in COMBine:FEED mode at a time</li>
+            <li class="IndentTight" value="3">Unlike the Modulation and <a href="SUM_Subsystem.htm">SUM</a> commands, COMBine:FEED can add two modulated signals.</li>
+            <li class="IndentTight" value="4">COMBine:FEED can generate quadrature modulated signals from the two channels to be added together into a single connector.</li>
+            <li class="IndentTight" value="5">To use COMBine:FEED, first configure all parameters on the individual channels.</li>
+            <li class="IndentTight" value="6">The signals to be combined may have a fixed phase offset between the channels.</li>
+            <li class="IndentTight" value="7">You can use COMBine:FEED to add noise from a second channel to a modulated signal on the base channel.</li>
+            <li class="IndentTight" value="8">If COMBine:FEED would cause the combined output to exceed either the instrument's output rating or the programmed limits, the instrument will set COMBine:FEED to NONE and report a settings conflict error.</li>
+            <li class="IndentTight" value="9">Signals are combined in digital form. When two signals of significantly different amplitudes are combined, the lower amplitude signal may have reduced resolution proportional to the ratio of the two amplitudes.</li>
+            <li class="IndentTight" value="10">Changing the function amplitude or sum amplitude of the master or combined channel will not change the amplitude or offset of any other function or channel. If changing the function amplitude or sum amplitude of the master or combined channel would result in exceeding either the output rating or the programmed limits, the amplitude value will be clipped and a settings conflict error will be reported.</li>
+            <li class="IndentTight" value="11">Changing the channel offset of the master or combined channel will not change the amplitude or offset of any other function or channel. If changing channel offset of the master or combined channel would result in exceeding either the output rating or the programmed limits, the amplitude value will be clipped and the instrument will report a settings conflict error.</li>
+            <li class="IndentTight" value="12">If turning limits on or adjusting programmed limits would result in a limit being lower than a signal maximum or higher than a signal minimum, the limits will not be turned on or adjusted, and the instrument will report a settings conflict error.</li>
+        </ul>
+        
+    </body>
+</html>

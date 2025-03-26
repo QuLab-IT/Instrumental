@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="SYSTem_Subsystem_Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>SYSTem Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        <link href="../NoteTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>SYSTem Subsystem</h1>
+        <p>The SYSTem subsystem manages instrument state storage, power-down recall, error 
+ conditions, self test, front-panel display control and remote interface 
+ configuration.</p>
+        <table style="border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;caption-side: top;width: 90%;" cellspacing="0" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">The instrument uses LAN port 5024 for SCPI Telnet sessions, and port 5025 for SCPI Socket sessions.</td>
+            </tr>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1"><a href="#SYSTem_BEEPer">SYSTem:BEEPer[:IMMediate]</a> - issues a single beep</li>
+            <li class="IndentTight" value="2"><a href="#SYSTem_BEEPer_STATe">SYSTem:BEEPer:STATe</a> - disables or enables beeper</li>
+            <li class="IndentTight" value="3"><a href="#SYSTem_COMMunicate_ENABle">SYSTem:COMMunicate:ENABle</a> - disables or enables GPIB, USB, LAN interface, and remote services</li>
+            <li class="IndentTight" value="4"><a href="#SYSTem_COMMunicate_GPIB_ADDRess">SYSTem:COMMunicate:GPIB:ADDRess</a> - assigns instrument's GPIB (IEEE-488) address</li>
+            <li class="IndentTight" value="5"><a href="#SYSTem_DATE">SYSTem:DATE</a> - sets system clock date</li>
+            <li class="IndentTight" value="6"><a href="#SYSTem_ERRor">SYSTem:ERRor?</a> - reads and clears one error from error queue</li>
+            <li class="IndentTight" value="7"><a href="#SYSTem_LICense_CATalog">SYSTem:LICense:CATalog?</a> - lists installed, <a href="../__A_Preliminary%20Information/02%20Models_and_Options.htm">licensed options</a></li>
+            <li class="IndentTight" value="8"><a href="#SYSTem_LICense_DELete">SYSTem:LICense:DELete</a> - deletes a license</li>
+            <li class="IndentTight" value="9"><a href="#SYSTem_LICense_DELete_ALL">SYSTem:LICense:DELete:ALL</a> - deletes all licenses</li>
+            <li class="IndentTight" value="10"><a href="#SYSTem_LICense_DESCription">SYSTem:LICense:DESCription?</a> - returns description of a <a href="../__A_Preliminary%20Information/02%20Models_and_Options.htm">licensed option</a></li>
+            <li class="IndentTight" value="11"><a href="#SYSTem_LICense_ERRor">SYSTem:LICense:ERRor?</a> - lists errors generated during license installation</li>
+            <li class="IndentTight" value="12"><a href="#SYSTem_LICense_ERRor_COUNt">SYSTem:LICense:ERRor:COUNt?</a> - returns number of errors generated during license installation</li>
+            <li class="IndentTight" value="13"><a href="#SYSTem_LICense_INSTall">SYSTem:LICense:INSTall</a> - installs licenses from a file or folder</li>
+            <li class="IndentTight" value="14"><a href="#SYSTem_LOCK_NAME">SYSTem:LOCK:NAME?</a> - returns current I/O interface</li>
+            <li class="IndentTight" value="15"><a href="#SYSTem_LOCK_OWNer">SYSTem:LOCK:OWNer?</a> - returns interface that has the lock</li>
+            <li class="IndentTight" value="16"><a href="#SYSTem_LOCK_RELease">SYSTem:LOCK:RELease</a> - releases lock and decrements lock count by 1</li>
+            <li class="IndentTight" value="17"><a href="#SYSTem_LOCK_REQuest">SYSTem:LOCK:REQuest?</a> - requests lock of current interface</li>
+            <li class="IndentTight" value="18"><a href="#SYSTem_SECurity_IMMediate">SYSTem:SECurity:IMMediate</a> - sanitizes user-accessible instrument memory</li>
+            <li class="IndentTight" value="19"><a href="#SYSTem_TIME">SYSTem:TIME</a> - sets system clock time</li>
+            <li class="IndentTight" value="20"><a href="#SYSTem_VERSion">SYSTem:VERSion?</a> - returns version of SCPI&#160;used by instrument</li>
+        </ul>
+        <h2><a name="kanchor307"></a><a name="SYSTem_BEEPer"></a>SYSTem:BEEPer[:IMMediate]</h2>
+        <p class="IndentTight">Issues a single beep.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Issue a single beep:<br />SYST:BEEP</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Sending a programmed beep may be useful for program development and troubleshooting.</li>
+            <li class="IndentTight" value="2">This command overrides the current beeper state (the SYSTem:BEEPer:STATe 
+). This means that you can issue a single beep even if the beeper is turned off.</li>
+        </ul>
+        <h2><a name="kanchor308"></a><a name="SYSTem_BEEPer_STATe"></a>SYSTem:BEEPer:STATe {ON|1|OFF|0}<br />SYSTem:BEEPer:STATe?</h2>
+        <p class="IndentTight">Disables or enables the beeper tone heard 
+ when an error is generated from the front panel or remote interface. </p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default ON</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Disable beeper state:<br />SYST:BEEP:STAT OFF</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Turning 
+ off the beeper does not  disable the front-panel key click.</li>
+            <li class="IndentTight" value="2">A beep is always emitted (even with beep state OFF) when  <a href="#SYSTem_BEEPer">SYSTem:BEEPer</a> is sent.</li>
+            <li class="IndentTight" value="3">This setting is non-volatile; it will not be changed by power cycling or <a href="IEEE-488_Subsystem.htm#RST"><a href="IEEE-488_Subsystem.htm#RST">*RST</a></a>.</li>
+        </ul>
+        <h2><a name="kanchor309"></a><a name="SYSTem_COMMunicate_ENABle"></a>SYSTem:COMMunicate:ENABle {ON|1|OFF|0}, &lt;<i>interface</i>&gt;<br />SYSTem:COMMunicate:ENABle? &lt;<i>interface</i>&gt;</h2>
+        <p class="IndentTight">Disables or enables the GPIB, USB, or LAN remote interface. Also disables 
+ or enables available remote services such as Sockets, Telnet, VXI11, 
+ and the built-in Web Interface.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default ON&#160;for all interfaces</td>
+                    <td class="BodyD-Column1-Body1" rowspan="2">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{GPIB|USB|LAN|SOCKets|TELNet|VXI11|WEB}</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Disable the USB interface:<br />SYST:COMM:ENAB OFF,USB</p>
+                        <p colspan="2">Returns the state of the USB interface:<br />SYST:COMM:ENAB? USB</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="IndentTight" />
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;margin-left: auto;margin-right: auto;mc-table-style: url('../NoteTable.css');" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr style="height: 16px;" valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                    <p>When you disable or re-enable any interface or LAN service, you 
+ must cycle power to activate the new setting.</p>
+                </td>
+            </tr>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">If you disable the LAN interface, all associated LAN services will not be started when you power on the instrument.</li>
+            <li class="IndentTight" value="2">This setting is non-volatile; it will not be changed by power cycling or <a href="IEEE-488_Subsystem.htm#RST"><a href="IEEE-488_Subsystem.htm#RST">*RST</a></a>.</li>
+            <li class="IndentTight" value="3"><a href="#SYSTem_SECurity_IMMediate">SYSTem:SECurity:IMMediate</a> enables all interfaces.</li>
+        </ul>
+        <h2><a name="kanchor310"></a><a name="SYSTem_COMMunicate_GPIB_ADDRess"></a>SYSTem:COMMunicate:GPIB:ADDRess {&lt;<i>address</i>&gt;}<br />SYSTem:COMMunicate:GPIB:ADDRess?</h2>
+        <p class="IndentTight">Assigns instrument's GPIB (IEEE-488) address, which is displayed  at power-on. Each device on the GPIB interface must have a unique address.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0&#160;to&#160;30,&#160;default&#160;10</td>
+                    <td class="BodyD-Column1-Body1">+15</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set GPIB address to 15:<br />SYST:COMM:GPIB:ADDR 15</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">Your computer's GPIB interface card has its own 
+ address. Avoid using this address for any instrument 
+ on the GPIB bus.</li>
+            <li class="IndentTight" value="2">This setting is non-volatile; it will not be changed by power cycling or <a href="IEEE-488_Subsystem.htm#RST"><a href="IEEE-488_Subsystem.htm#RST">*RST</a></a>.</li>
+            <li class="IndentTight" value="3"><a href="#SYSTem_SECurity_IMMediate">SYSTem:SECurity:IMMediate</a> sets GPIB address to 10.</li>
+            <li class="IndentTight" value="4">Must cycle power for this command to take effect.</li>
+        </ul>
+        <h2><a name="kanchor311"></a><a name="SYSTem_DATE"></a>SYSTem:DATE &lt;<i>yyyy</i>&gt;, &lt;<i>mm</i>&gt;, &lt;<i>dd</i>&gt;<br />SYSTem:DATE?</h2>
+        <p class="IndentTight">Sets system clock date.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>yyyy</i>&gt; 2000 to 2100<br />&lt;<i>mm</i>&gt; 1 to 12<br />&lt;<i>dd</i>&gt; 1 to 31</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">+2011,+7,+26</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set system date to July 26, 2011:<br />SYST:DAT 2011,7,26</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor312"></a><a name="SYSTem_ERRor"></a>SYSTem:ERRor?</h2>
+        <p class="IndentTight">Reads and clears one error from error queue.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">-113,"Undefined header"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Read and clear first error in error queue:<br />SYST:ERR?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Up to 20 command syntax or hardware errors can be stored in the error queue.</li>
+            <li class="IndentTight" value="2">Error retrieval is first-in-first-out (FIFO), and errors are cleared as you read them. The instrument beeps once each time an error is generated (unless disabled by <a href="#SYSTem_BEEPer_STATe">SYSTem:BEEPer:STATe OFF</a>).</li>
+            <li class="IndentTight" value="3">If more than 20 errors have occurred, the last error stored in the queue (the most recent error) is replaced with -350,"Error queue overflow". No additional errors are stored until you remove errors from the queue. If no errors have occurred when you read the error queue, the instrument responds with +0,"No error".</li>
+            <li class="IndentTight" value="4">The error queue is cleared by the *CLS and when power is cycled. It is not cleared by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>.</li>
+            <li class="IndentTight" value="5">Errors have the following format (the error string may contain up to 255 characters).<br /><br />&lt;<i>error code</i>&gt;,&lt;<i>error string</i>&gt;<br /><br />Where:<br /><br />&lt;<i>error code</i>&gt; = a three-digit code, sometimes preceded by a dash<br /><br />&lt;<i>error string</i>&gt; = a quoted ASCII string up to 255 characters</li>
+        </ul>
+        <h2><a name="Licensed_Options"></a>Licensed Options</h2>
+        <p>The following commands are associated with licensed options. The licensed options are named as shown below.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Option Code</th>
+                    <th class="HeadD-Column1-Header1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">OCXO</td>
+                    <td class="BodyD-Column1-Body1">High-stability OCXO Timebase</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>MEM</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">16MSa Arb Memory</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">GPIB</td>
+                    <td class="BodyD-Column1-Body1">GPIB Interface (3352xA only)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">SEC</td>
+                    <td class="BodyD-Column1-Body1">Enable NISPOM &amp; File Security</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">BW30</td>
+                    <td class="BodyD-Column1-Body1">Increase bandwidth to 30 MHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">ARB</td>
+                    <td class="BodyD-Column1-Body1">Arbitrary waveforms</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">IQP</td>
+                    <td class="BodyA-Column1-Body1">IQ Player (2-channel instruments only)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor313"></a><a name="SYSTem_LICense_CATalog"></a>SYSTem:LICense:CATalog?</h2>
+        <p class="IndentTight">Returns a comma separated list of installed, <a href="#Licensed_Options">licensed options</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" style="width: 131px;" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"SEC","IQP","MEM"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return currently licensed options:<br />SYST:LIC:CAT?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Only those installed options that require a license are returned.</li>
+        </ul>
+        <h2><a name="kanchor314"></a><a name="SYSTem_LICense_DELete"></a>SYSTem:LICense:DELete "<i>&lt;option_name&gt;</i>"</h2>
+        <p class="IndentTight">Deletes a license.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>{SEC|IQP|MEM|BW30}</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Delete license for IQ Player:<br />SYST:LIC:DEL "IQP"</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">Valid option names are double quoted strings representing the installed <a href="#Licensed_Options">licensed options</a>.  They can be easily identified using <a href="#SYSTem_LICense_CATalog">SYSTem:LICense:CATalog?</a>.<br /></li>
+        </ul>
+        <h2><a name="kanchor315"></a><a name="SYSTem_LICense_DELete_ALL"></a>SYSTem:LICense:DELete:ALL</h2>
+        <p class="IndentTight">Deletes all licenses.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Delete all licenses:<br />SYST:LIC:DEL:ALL</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor316"></a><a name="SYSTem_LICense_DESCription"></a>SYSTem:LICense:DESCription? "&lt;<i>option_name</i>&gt;"</h2>
+        <p class="IndentTight">Returns a description of specified option, regardless of whether it is currently licensed.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">See list of <a href="#Licensed_Options">licensed options</a></td>
+                    <td class="BodyD-Column1-Body1">"Extended Memory Option: 16 MSa/channel waveform memory"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return description for option 002:<br />SYST:LIC:DESC? "MEM"</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Option names are quoted strings representing options that may be licensed. Installed licensed items can be identified with <a href="#SYSTem_LICense_CATalog">SYSTem:LICense:CATalog?</a>.</li>
+        </ul>
+        <h2><a name="kanchor317"></a><a name="SYSTem_LICense_ERRor"></a>SYSTem:LICense:ERRor?</h2>
+        <p class="IndentTight">Returns a string of all the errors produced by <a href="#SYSTem_LICense_INSTall">SYSTem:LICense:INSTall</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">#279File: MyFile.lic&lt;CR&gt;&lt;LF&gt;[Ignored - &#160;The license file is  not formatted correctly.]&lt;CR&gt;&lt;LF&gt;
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return the license installation error string:<br />SYST:LIC:ERR?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">String can be up to 2096 characters.</li>
+            <li class="IndentTight" value="2">Returns a definite-length block containing multi-line ASCII text,  including carriage returns and line feeds.</li>
+        </ul>
+        <h2><a name="kanchor318"></a><a name="SYSTem_LICense_ERRor_COUNt"></a>SYSTem:LICense:ERRor:COUNt?</h2>
+        <p class="IndentTight">Returns the number of license errors generated by <a href="#SYSTem_LICense_INSTall">SYSTem:LICense:INSTall</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+0</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return number of license errors:<br />SYST:LIC:ERR:COUN?</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor319"></a><a name="SYSTem_LICense_INSTall"></a>SYSTem:LICense:INSTall [{&lt;<span class="hcp1" style="font-style: italic;">folder</span>&gt; | &lt;<span class="hcp1" style="font-style: italic;">file</span><span>&gt;}</span>]<br />SYSTem:LICense:INSTall? &lt;<span class="hcp1" style="font-style: italic;">option</span>&gt;</h2>
+        <p class="IndentTight">This command installs all licenses from a specified file or from all license  files in the specified folder. They query returns 0 or 1 to indicate whether the specified license is installed.</p>
+        <table style="mc-table-style: url('../RegTable.css');border-left-style: solid;border-left-width: 1px;border-left-color: #000000;border-right-style: solid;border-right-width: 1px;border-right-color: #000000;border-top-style: solid;border-top-width: 1px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="padding: 0px;">
+                        <table style="width: 100%;">
+                            <col />
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>&lt;<i>folder&gt;</i> may be any valid folder name. Default is root directory of a front panel USB&#160;storage device.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;<i>file</i>&gt; may be any valid license file name</td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;<i>option</i> is one of the <a href="#Licensed_Options">licensed options</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>0 (license not installed) or 1 (license installed)</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Install licenses from a file:<br />SYST:LIC:INSTALL "USB:\33522B_LICENSE071.lic"</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">License files must have a ".lic" file extension.</li>
+            <li class="IndentTight" value="2">The format for &lt;<i>file</i>&gt; is "[&lt;<i>drive</i>&gt;:&lt;<i>path</i>&gt;]&lt;<i>file_name</i>&gt;", where &lt;<i>drive</i>&gt; can be INTernal or USB, and &lt;<i>path</i>&gt; must be an absolute folder path.</li>
+            <li class="IndentTight2" value="3">INTernal specifies the internal flash file system.USB specifies a front panel USB storage device.e.</li>
+            <li class="IndentTight2" value="4">If &lt;<i>drive</i>&gt;:&lt;<i>path</i>&gt; is omitted, the folder specified by the MMEMory:CDIRectory command is used.</li>
+            <li class="IndentTight2" value="5">Absolute paths begin with "\" or "/" and start at the root folder of &lt;<i>drive</i>&gt;.</li>
+            <li class="IndentTight2" value="6">Folder and file names cannot contain the following characters: \ / : * ? " &lt; &gt; |</li>
+            <li class="IndentTight2" value="7">The combination of folder and file name cannot exceed 240 characters.</li>
+            <li class="IndentTight2" value="8">The specified folder must exist and cannot be marked hidden or system.</li>
+        </ul>
+        <h2><a name="kanchor320"></a><a name="SYSTem_LOCK_NAME"></a>SYSTem:LOCK:NAME?</h2>
+        <p class="IndentTight">Returns the current I/O interface (the I/O interface in use by the querying computer).</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"LAN169.254.149.35"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">See <a href="#Interface_Locking_Examples">Interface Locking Examples</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li value="1" class="IndentTight">After using this command to determine the name of the interface that 
+ you are using, use SYSTem:LOCK:OWNer? 
+ to determine which interface, if any, has the lock.</li>
+            <li class="IndentTight" value="2">Returns  
+ "USB", "VXI11", "GPIB", or "LAN &lt;<i>IP Address</i>&gt;" indicating the I/O interface being used by the querying computer.</li>
+        </ul>
+        <h2><a name="kanchor321"></a><a name="SYSTem_LOCK_OWNer"></a>SYSTem:LOCK:OWNer?</h2>
+        <p class="IndentTight">Returns the I/O interface that currently has a lock.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"LAN169.254.149.35"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">See <a href="#Interface_Locking_Examples">Interface Locking Examples</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li value="1" class="IndentTight">When a lock is active, Bit 10 in the Standard Operation Register will be set (<a href="STATus_Subsystem.htm#STATus_OPERation_CONDition">STATus:OPERation:CONDition?</a>). When the lock is released on all I/O interfaces, this bit will be cleared.</li>
+            <li class="IndentTight" value="2">Returns  "USB", "VXI11", "GPIB", or "LAN &lt;<i>IP Address</i>&gt;" indicating the I/O interface that currently 
+ has a lock. If no interfaces have a lock, "NONE" is returned.</li>
+        </ul>
+        <h2><a name="kanchor322"></a><a name="SYSTem_LOCK_RELease"></a>SYSTem:LOCK:RELease</h2>
+        <p class="IndentTight">Decrements the lock count by 1 and may release the I/O interface from which the command is executed.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">See <a href="#Interface_Locking_Examples">Interface Locking Examples</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">When a lock is active, Bit 10 in the Standard Operation Register will be set (<a href="STATus_Subsystem.htm#STATus_OPERation_CONDition">STATus:OPERation:CONDition?</a>). When the lock is released on all I/O interfaces, this bit will be cleared.</li>
+        </ul>
+        <h2><a name="kanchor323"></a><a name="SYSTem_LOCK_REQuest"></a>SYSTem:LOCK:REQuest?</h2>
+        <p class="IndentTight">Requests a lock of the current I/O interface. This allows you to lock the instrument's configuration or cooperatively share the instrument with other computers.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">0 (denied) or 1 (granted)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">See <a href="#Interface_Locking_Examples">Interface Locking Examples</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li value="1" class="IndentTight">Lock requests can be nested; each request increases lock count by 1. For every request, you will need a release ( SYSTem:LOCK:RELease) from the same I/O interface. 
+</li>
+            <li value="2" class="IndentTight">Locks are handled at the I/O interface level (USB, LAN, etc.) and you are responsible for all coordination between threads and/or programs 
+ on that interface.</li>
+            <li value="3" class="IndentTight">When a request is granted, only I/O sessions from the present interface will be allowed to change the state of the instrument. You can only query the instrument state from other I/O interfaces.</li>
+            <li value="4" class="IndentTight">LAN sessions locks are automatically released when a LAN disconnect is detected.</li>
+            <li value="5" class="IndentTight">Granting a lock sets Bit 10 in the Standard Operation Register (<a href="STATus_Subsystem.htm#STATus_OPERation_CONDition">STATus:OPERation:CONDition?</a>).</li>
+        </ul>
+        <h2><a name="kanchor324"></a><a name="SYSTem_SECurity_IMMediate"></a>SYSTem:SECurity:IMMediate</h2>
+        <p class="IndentTight">Sanitizes all user-accessible instrument memory. This command complies with requirements in chapter 8 of the National Instrument Security Program Operating Manual (NISPOM).</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Sanitize all user-accessible instrument memory:<br />SYST:SEC:IMM</td>
+                </tr>
+            </tbody>
+        </table>
+        <blockquote>
+            <table style="border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;left: 0px;top: 193px;caption-side: top;mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;" cellspacing="0" class="TableStyle_NoteTable">
+                <col style="width: 11.684%;" />
+                <col style="width: 587px;" />
+                <tr valign="top">
+                    <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p>
+                            <img src="../caution.gif" alt="Caution" />
+                        </p>
+                    </td>
+                    <td style="padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>This command is recommended for customers, such as military contractors, who must comply with NISPOM. Excessive use of this command may cause premature failure of the flash memory.</p>
+                        <p>This command destroys all user-defined state information, user-defined arbitrary waveforms, and user-defined I/O settings such as the IP address.</p>
+                    </td>
+                </tr>
+            </table>
+        </blockquote>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Typically used before removing an instrument from 
+ a secure area.</li>
+            <li class="IndentTight" value="2">Initializes all instrument settings to their Factory Reset (<a href="IEEE-488_Subsystem.htm#RST">*RST</a>) values.</li>
+        </ul>
+        <h2><a name="kanchor325"></a><a name="SYSTem_TIME"></a>SYSTem:TIME &lt;<i>hh</i>&gt;, &lt;<i>mm</i>&gt;, &lt;<i>ss</i>&gt;<br />SYSTem:TIME?</h2>
+        <p class="IndentTight">Sets system clock time.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;hh&gt; 0 to 23<br />&lt;mm&gt; 0 to 59<br />&lt;ss&gt; 0 to 60</td>
+                    <td class="BodyD-Column1-Body1">20,15,30.000</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set system Time to 20:15:30 (8:15:30 PM)<br />SYST:TIM 20,15,30</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">This time is used for file timestamps in the Mass 
+ Memory (<a href="MMEMory_Subsystem.htm">MMEMory</a>) system.</li>
+        </ul>
+        <h2><a name="kanchor326"></a><a name="SYSTem_VERSion"></a>SYSTem:VERSion?</h2>
+        <p class="IndentTight">Returns version of the SCPI (Standard Commands for Programmable Instruments) that the instrument complies with. Cannot be determined from front panel.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">1994.0</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Return the SCPI version:<br />SYST:VERS?</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="Interface_Locking_Examples"></a>Interface Locking Examples</h2>
+        <p class="IndentTight">The following series of commands illustrates usage.</p>
+        <p class="IndentTight" style="margin-left: 64px;">Initial State = unlocked, Count = 0</p>
+        <p class="Shaded" style="margin-left: 64px;">&lt;<i>FROM USB</i>&gt; &#160;&#160;SYST:LOCK:REQ?&#160;&#160;&#160;&#160;<i>returns 1 (request successful)</i></p>
+        <p class="IndentTight" style="margin-left: 64px;">State = locked, Count = 1</p>
+        <p class="Shaded" style="margin-left: 64px;">&lt;<i>FROM LAN</i>&gt; &#160;SYST:LOCK:REQ? &#160;&#160;&#160;&#160;<i>returns 0 because USB has lock</i></p>
+        <p class="IndentTight" style="margin-left: 64px;">State = locked, Count = 1</p>
+        <p class="Shaded" style="margin-left: 64px;">&lt;<i>FROM USB</i>&gt; &#160;&#160;SYST:LOCK:REQ? &#160;&#160;&#160;&#160;<i>returns 1 (request successful)</i></p>
+        <p class="IndentTight" style="margin-left: 64px;">State = locked, Count = 2</p>
+        <p class="Shaded" style="margin-left: 64px;">&lt;<i>FROM USB</i>&gt; &#160;&#160;SYST:LOCK:REL</p>
+        <p class="IndentTight" style="margin-left: 64px;">State = locked, Count = 1</p>
+        <p class="Shaded" style="margin-left: 64px;">&lt;<i>FROM USB</i>&gt; &#160;&#160;SYST:LOCK:REL</p>
+        <p class="IndentTight" style="margin-left: 64px;">State = unlocked, Count = 0</p>
+        <p class="indented1">Note that for each successful lock request, a lock release is required. Two requests require two releases.</p>
+        
+    </body>
+</html>

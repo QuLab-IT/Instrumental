@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="FREQuency Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:ignoredWords="n" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>FREQuency Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>&#160;</h1>
+        <h1>FREQuency Subsystem<a name="kanchor113"></a></h1>
+        <p class="IndentTight">The FREQuency subsystem sets the instrument's output frequency. In two-channel instruments, the channels' frequencies may be coupled in various ways.</p>
+        <p class="IndentTight"><b><a href="#FREQuency:COUPle">FREQuency:COUPle[:STATe] {ON|OFF|ONCE}</a></b> enables or disables coupling, or using the ONCE, one channel's is copied to the other, but not coupled to it.</p>
+        <p class="IndentTight"><b><a href="#FREQuency_COUPle_MODE">FREQuency:COUPle:MODE {OFFSet|RATio}</a></b> specifies the frequency coupling mode.</p>
+        <p class="IndentTight"><b><a href="#FREQuency_MODE">FREQuency:MODE</a></b> allows you to specify a frequency mode  to use, including a sweep, frequency list, or fixed frequency.</p>
+        <h2>Example</h2>
+        <p>The remaining FREQuency commands are used to generate a sweep, as summarized below:</p>
+        <ol style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="1"><b>Select the waveform shape, amplitude and offset:</b> Use <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> or the  equivalent <a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion</a>, <a href="#FREQuency">FREQuency</a>, <a href="VOLTage_Subsystem.htm#VOLTage">VOLTage</a>, and <a href="VOLTage_Subsystem.htm#VOLTage_OFFSet">VOLTage:OFFSet</a> commands to select the function, frequency, amplitude, and offset. You 
+ can select any non-arbitrary waveform.</li>
+            <li class="IndentTight" value="2"><b>Set frequency boundaries of the sweep:</b><a href="#FREQuency:STARt">FREQuency:STARt</a>  and <a href="#FREQuency_STOP">FREQuency:STOP</a>, or <a href="#FREQuency_CENTer">FREQuency:CENTer</a> and <a href="#FREQuency_SPAN">FREQuency:SPAN</a>.</li>
+        </ol>
+        <ol start="3" style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="3"><b>Select sweep mode (linear or logarithmic):</b> <a href="SWEep_Subsystem.htm#SWEep_SPACing">SWEep:SPACing</a></li>
+            <li class="IndentTight" value="4"><b>Set sweep time in seconds:</b> <a href="SWEep_Subsystem.htm#SWEep_TIME">SWEep:TIME</a></li>
+            <li class="IndentTight" value="5"><b>Select sweep trigger source: </b><a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce</a>
+            </li>
+            <li class="IndentTight" value="6"><b>Set frequency at which signal on front-panel Sync connector goes low during sweep (optional):</b><a href="MARKer_Subsystem.htm#MARKer_FREQuency">MARKer:FREQuency</a>
+            </li>
+        </ol>
+        <h2><a name="kanchor114"></a><a name="FREQuency"></a>[SOURce[1|2]:]FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FREQuency? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the output frequency. This command is paired with <a href="FUNCtion_Subsystem.htm#FUNCtion_PULSe_PERiod">FUNCtion:PULSe:PERiod</a>; whichever one is executed last overrides the other.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 &#956;Hz to maximum instrument frequency, except for triangle and ramp, which are limited to 200 kHz. Default 1 kHz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output frequency to 60 Hz:<br />FREQ 60</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Function Limitations:</i> The frequency limits are function dependent, as shown in the above table. If you send a command specifying a frequency that is not in the appropriate range for the current function, an error will occur. For example, if the current function is "ramp" and you send the command FREQ 20 MHZ, a "Data out of range" error is generated and the frequency is set to 200 kHz, which is the maximum for a ramp waveform.</li>
+        </ul>
+        <h2><a name="kanchor115"></a><a name="FREQuency_CENTer"></a>[SOURce[1|2]:]FREQuency:CENTer {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FREQuency:CENTer? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the center frequency. Used with frequency span for a frequency sweep.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 &#956;Hz to maximum instrument frequency, except for triangle and ramp, which are limited to 200 kHz. Default default 550 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep center frequency to 1 kHz:<br />FREQ:CENT 1000</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The following equation shows how center frequency is limited by span frequency.<br /><br />&#160;&#160;&#160;&#160;&#160;Center Frequency (max) = Max. Frequency for 
+ waveform - (Span/2)</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The following equation shows how center frequency relates to start and stop frequencies.<br /><br />&#160;&#160;&#160;&#160;&#160;Center Frequency &#160;= 
+ |(Stop Frequency - Start Frequency)|/2</li>
+        </ul>
+        <h2><a name="kanchor116"></a><a name="FREQuency:COUPle"></a>[SOURce[1|2]:]FREQuency:COUPle[:STATe] {ON|1|OFF|0}<br />[SOURce[1|2]:]FREQuency:COUPle[:STATe]?</h2>
+        <p class="IndentTight">Enables/disables frequency coupling 
+ between channels in a two-channel instrument.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0},&#160;default&#160;OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Turn on the frequency couple state:<br></br>FREQ:COUP ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Specifying ON starts frequency coupling as specified by <a href="#FREQuency_COUPle_MODE">FREQuency:COUPle:MODE</a>.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">If the current offset or ratio, combined with 
+ the current frequency settings, would cause either frequency to exceed 
+ instrument specifications, the instrument will generate an error and the exceeded frequency will clip at its maximum or minimum value.</li>
+            <li class="IndentTight" value="2">If setting mode to RATIO and setting RATIO to 
+ 1.0 still exceeds the specifications of either channel (for example, channel 
+ 1 is a 3 MHz sine and channel 2 is a ramp, which cannot go 
+ that high), an error message will be generated and FREQuency:COUPle will be turned OFF.</li>
+        </ul>
+        <h2><a name="kanchor117"></a><a name="FREQuency_COUPle_MODE"></a>[SOURce[1|2]:]FREQuency:COUPle:MODE {OFFSet|RATio}<br />[SOURce[1|2]:]FREQuency:COUPle:MODE?</h2>
+        <p class="IndentTight">Sets the type of frequency coupling between 
+ frequency coupled channels; OFFSet specifies a constant frequency offset between channels; RATio specifies a constant ratio between the channels' frequencies.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{OFFSet|RATio},&#160;default&#160;RATio with ratio 1.0</td>
+                    <td class="BodyD-Column1-Body1">OFFS&#160;or&#160;RAT</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set &#160;frequency coupling mode to OFFSet:<br />FREQ:COUP:MODE OFFS</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Power-on default for frequency 
+ coupling is OFF.</li>
+            <li class="IndentTight" value="2">Specifying 
+ SOURce1 or SOURce2 is irrelevant; either syntax sets the same coupling mode for both channels.</li>
+        </ul>
+        <h2><a name="kanchor118"></a><a name="FREQuency_COUPle_OFFSet"></a>[SOURce[1|2]:]FREQuency:COUPle:OFFSet &lt;<i>frequency</i>&gt;<br />[SOURce[1|2]:]FREQuency:COUPle:OFFSet?</h2>
+        <p class="IndentTight">Sets the offset frequency when an instrument is in frequency coupled mode OFFSet.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">A number between plus and minus the instrument's maximum frequency (limited to ± 200 kHz for ramps and triangles); default 0.</td>
+                    <td class="BodyD-Column1-Body1">+7.650000000000000E+05</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set frequency of channel 2 to 10.245 MHz above frequency of channel 1:<br />FREQ:COUP:OFFS 10.245 MHZ</p>
+                        <p colspan="2">Set frequency of channel 1 to 350 kHz above frequency of channel 2:<br />SOUR2:FREQ:COUP:OFFS 350 KHZ</p>
+                        <p colspan="2">Set frequency of channel 1 to 455 kHz below frequency of channel 2:<br />SOUR2:FREQ:COUP:OFFS -455 KHZ</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li value="1">The SOURce channel (SOURce1 or SOURce2) is used as the reference channel and 
+ the OFFSet is applied to the other channel. For example, suppose the instrument is in <a href="#FREQuency:COUPle">FREQ:COUPLE:STATE ON</a> and in <a href="#FREQuency_COUPle_MODE">FREQ:COUPLE:MODE OFFSET</a> (frequency offset mode active), and channel 1 is currently operating 
+ at 1.0 MHz. The command SOURce1:FREQuency:COUPle:OFFSet 500 will cause channel 1 to remain at 1.0 MHz, and channel 2 to 
+ be set to 1.5 MHz. As the frequency of either channel is changed, the 
+ frequency of the other channel will change to maintain the 500 kHz offset. 
+</li>
+            <li class="IndentTight" value="2">If the frequency coupling would cause either channel to exceed instrument frequency specifications for the present functions, the command will result in an error, and the frequency will be set to its maximum or minimum limit for that channel.</li>
+            <li class="IndentTight" value="3">Frequency coupling is not valid with arbitrary waveforms, but you can couple the sample rate of arbitrary waveforms.</li>
+        </ul>
+        <h2><a name="kanchor119"></a><a name="FREQuency:COUPle:RATio"></a>[SOURce[1|2]:]FREQuency:COUPle:RATio &lt;<i>ratio</i>&gt;<br />[SOURce[1|2]:]FREQuency:COUPle:RATio?</h2>
+        <p class="IndentTight">Sets offset ratio between channel frequencies in frequency coupled mode RATio.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0.001 to 1000, default 1</td>
+                    <td class="BodyD-Column1-Body1">+7.500000000000000E-01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set frequency of channel 2 to twice the frequency of channel 1:<br />FREQ:COUP:RAT 2.0</p>
+                        <p colspan="2">Set frequency of channel 1 to 3.14 times the frequency of channel 2:<br />SOUR2:FREQ:COUP:RAT 3.14</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The SOURce channel (SOURce1 or SOURce2) is used as the reference channel and 
+ the RATIO is applied to the other channel. For example, suppose the instrument is in  <a href="#FREQuency:COUPle">FREQuency:COUPle ON</a> and <a href="#FREQuency_COUPle_MODE">FREQuency:COUPle:MODE RATio</a>. Furthermore, suppose channel 1 is currently operating 
+ at 2 kHz, and channel 2 is at 10 kHz. The command SOURce1:FREQuency:COUPle:RATio 
+ 2.5           will cause channel 1 to remain at 2 kHz, and Channel 2 
+to be set to 5 kHz. As the frequency of either channel is changed, 
+ the frequency of the other channel will change to maintain the 2.5 
+ ratio.</li>
+            <li class="IndentTight" value="2">If the frequency coupling would cause either channel to exceed instrument frequency specifications for the present functions, the command will result in an error, and the frequency will be set to its maximum or minimum limit for that channel.</li>
+            <li class="IndentTight" value="3">Frequency coupling is not valid with arbitrary waveforms, but you can couple the sample rate of arbitrary waveforms.</li>
+        </ul>
+        <h2><a name="kanchor120"></a><a name="FREQuency_MODE"></a>[SOURce[1|2]:]FREQuency:MODE {CW|LIST|SWEep|FIXed}<br />[SOURce[1|2]:]FREQuency:MODE?</h2>
+        <p class="IndentTight">Sets the type of frequency mode as a continuous wave at a fixed frequency (CW or FIXed), a frequency sweep (SWEep), or a frequency list (<a href="LIST_Subsystem.htm">LIST</a>).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{CW|LIST|SWEep|FIXed},&#160;default&#160;CW</td>
+                    <td class="BodyD-Column1-Body1">CW, LIST, SWE, or FIX</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set frequency mode to LIST:<br />FREQ:MODE&#160;LIST</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">If the mode is set to list, use <a href="LIST_Subsystem.htm#LIST_FREQuency">LIST:FREQuency</a> to specify the frequency list.</li>
+        </ul>
+        <h2><a name="kanchor121"></a><a name="FREQuency_SPAN"></a>[SOURce[1|2]:]FREQuency:SPAN {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FREQuency:SPAN? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets frequency span (used in conjunction with the <i>center frequency</i>) for a frequency sweep.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">± instrument's maximum frequency (± 200 kHz for ramps and triangles), default 900 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+02</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep frequency span to 100 kHz:<br />FREQ:SPAN 100 KHZ</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The following equation shows the limitation for 
+ the maximum frequency span:<br /><br />&#160;&#160;&#160;&#160;&#160;Frequency Span (max) = (Max. Frequency for 
+ the chosen waveform - Center Frequency) X 2</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The following equation shows the relationship 
+ between the span and the start/stop frequencies.<br /><br />&#160;&#160;&#160;&#160;&#160;Frequency Span &#160;= 
+ Stop Frequency - Start Frequency</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">To sweep up in frequency, set a positive frequency span; to sweep down, set a negative frequency span.</li>
+        </ul>
+        <h2><a name="kanchor122"></a><a name="FREQuency:STARt"></a>[SOURce[1|2]:]FREQuency:STARt {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FREQuency:STARt? [{MINimum|MAXimum}]</h2>
+        <h2><a name="kanchor123"></a><a name="FREQuency_STOP"></a>[SOURce[1|2]:]FREQuency:STOP {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FREQuency:STOP? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the start and stop frequencies for a frequency sweep. </p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">± instrument's maximum frequency (± 200 kHz for ramps and triangles), default 100 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+02</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep start and stop frequency to 100 Hz and 1 kHz, respectively:<br />FREQ:STAR 100<br />FREQ:STOP&#160;1000</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </body>
+</html>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="MEMory_Subsystem_Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>MEMory Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>MEMory Subsystem<a name="kanchor215"></a></h1>
+        <p>The MEMory subsystem saves (<a href="IEEE-488_Subsystem.htm#SAV">*SAV</a>) and recalls (<a href="IEEE-488_Subsystem.htm#RCL">*RCL</a>) instrument states in non-volatile storage 
+ locations numbered 0 through 4.</p>
+        <h2>Example</h2>
+        <p class="Shaded">MEM:STAT:DEL 3<br />*SAV 3<br />MEM:STAT:VAL? 3<br />MEM:STAT:NAME 3,PATS_STATE<br />MEM:STAT:CAT?<br /></p>
+        <h2>Commands and Queries</h2>
+        <ul>
+            <li class="IndentTight" value="1"><a href="#MEMory_NSTates">MEMory:NSTates?</a> - return total number of state storage memory locations</li>
+            <li class="IndentTight" value="2"><a id="a2" href="#MEMory_STATe_CATalog">MEMory:STATe:CATalog?</a> - list the names associated with all five state storage locations</li>
+            <li class="IndentTight" value="3"><a href="#MEMory_STATe_DELete">MEMory:STATe:DELete</a> - delete the contents of a state storage location</li>
+            <li class="IndentTight" value="4"><a href="#MEMory_STATe_NAME">MEMory:STATe:NAME</a> - assign a custom name to a state storage locations</li>
+            <li class="IndentTight" value="5"><a href="#MEMory_STATe_RECall_AUTO">MEMory:STATe:RECall:AUTO</a> - specify whether the power-down state is recalled from location 0 on power-on</li>
+            <li class="IndentTight" value="6"><a href="#MEMory_STATe_VALid">MEMory:STATe:VALid?</a> - determine whether a storage location contains a valid state</li>
+        </ul>
+        <h2><a name="kanchor216"></a><a name="MEMory_NSTates"></a>MEMory:NSTates?</h2>
+        <p class="IndentTight">Returns the total number of memory locations available for state storage (always +5, including memory location 0).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+5</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return number of state storage locations:<br />MEM:NST?</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor217"></a><a name="MEMory_STATe_CATalog"></a>MEMory:STATe:CATalog?</h2>
+        <p class="IndentTight">Returns the names assigned to locations 0 through 4.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"AUTO_RECALL","STATE_1","STATE_2","STATE_3","STATE_4"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return location names:<br />MEM:STAT:CAT?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Default names are "AUTO_RECALL", "STATE_1", "STATE_2", "STATE_3", and "STATE_4".</li>
+            <li class="IndentTight" value="2">You can name location 0, but the name is overwritten when power is cycled and a new power-down state is stored there.</li>
+        </ul>
+        <h2><a name="kanchor218"></a><a name="MEMory_STATe_DELete"></a>MEMory:STATe:DELete {0|1|2|3|4|}</h2>
+        <p class="IndentTight">Deletes a state storage location.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{0|1|2|3|4|}</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Delete the contents of storage location 1:<br />MEM:STAT:DEL 1</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Default names are "AUTO_RECALL", "STATE_1", "STATE_2", "STATE_3", and "STATE_4".</li>
+            <li class="IndentTight" value="2">Although you may delete the state in location 
+ 0, it will be restored to its <a href="../_Home_Page/Factory_Reset_State.htm">factory default state</a>, and state name 
+ ("AUTO_RECALL") at the next power up.</li>
+            <li class="IndentTight" value="3">Attempting to recall a state 
+ from an empty location generates an error.</li>
+        </ul>
+        <h2><a name="kanchor219"></a><a name="MEMory_STATe_NAME"></a>MEMory:STATe:NAME {0|1|2|3|4} [,&lt;<i>name</i>&gt;]<br />MEMory:STATe:NAME? {0|1|2|3|4}</h2>
+        <p class="IndentTight">Names a storage location. </p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">An unquoted string of up to 12 characters. <br />The first character must be a letter (A-Z).<br />Others can be letters, numbers (0-9), or underscores ("_").<br />If name omitted, factory default name is used.</td>
+                    <td class="BodyD-Column1-Body1">TEST_RACK_1</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Rename location 1:<br />MEM:STAT:NAME 1,TEST_RACK_1</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Default names are "AUTO_RECALL", "STATE_1", "STATE_2", "STATE_3", and "STATE_4".</li>
+            <li class="IndentTight" value="2">You can name location 0, but the name is overwritten when power is cycled and a new power-down state is stored there.</li>
+            <li class="IndentTight" value="3">May assign same name to different locations.</li>
+            <li class="IndentTight" value="4">Deleting a storage location's contents (<a href="#MEMory_STATe_DELete">MEMory:STATe:DELete</a>) resets associated name to factory default ("AUTO_RECALL", "STATE_1", "STATE_2", "STATE_3", or "STATE_4").</li>
+            <li class="IndentTight" value="5">State names are unaffected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>.</li>
+        </ul>
+        <h2><a name="kanchor220"></a><a name="MEMory_STATe_RECall_AUTO"></a>MEMory:STATe:RECall:AUTO {ON|1|OFF|0}<br />MEMory:STATe:RECall:AUTO?</h2>
+        <p class="IndentTight">Disables or enables automatic recall 
+ of instrument state in storage location "0" at power on.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default ON</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Disable automatic recall of power-down state:<br />MEM:STAT:REC:AUTO OFF</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">OFF is equivalent to Factory Reset (<a href="IEEE-488_Subsystem.htm#RST">*RST</a>) on power-up.</li>
+        </ul>
+        <h2><a name="kanchor221"></a><a name="MEMory_STATe_VALid"></a>MEMory:STATe:VALid? {0|1|2|3|4}</h2>
+        <p class="IndentTight">Indicates whether a valid state is currently stored in a storage location.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{0|1|2|3|4}</td>
+                    <td class="BodyD-Column1-Body1">0 (no valid state stored) or 1&#160;(valid state stored)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Return state of memory location 3:<br />MEM:STAT:VAL 3?</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Use this before sending <a href="IEEE-488_Subsystem.htm#SAV">*SAV</a> to avoid accidentally overwriting a state.</li>
+        </ul>
+        
+    </body>
+</html>

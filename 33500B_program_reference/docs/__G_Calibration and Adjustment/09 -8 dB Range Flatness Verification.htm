@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>-8 dB Range Flatness Verification</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor451"></a>-8 dB Range Flatness Verification</h1>
+        <p>Checks high frequency AC amplitude flatness on the -8 dB attenuator range. Also checks flatness for all other ranges excluding the -24 dB and 0 dB attenuator ranges.</p>
+        <ol>
+            <li class="IndentTight" value="1"> Connect a precision AC voltmeter to measure the output amplitude as shown below.   Connect the BNC cable to the Wide Band input of the Fluke 5790A.If you are using substitute test equipment, verify that the input impedance is 50 &#937;, because load accuracy directly affects measurement quality.<br /><br /><img src="../_Graphics_/adj_setup3.png" alt="Adjustment setup 3" /></li>
+            <li class="IndentTight" value="2"> Set the precision AC Voltmeter to "Medium, Medium" Digital Filter and Filter Restart.</li>
+            <li class="IndentTight" value="3"> Set the instrument to each output described in the table below and measure the output amplitude with the AC voltmeter. This will become the reference measurement. Set the output impedance to 50 &#937;. Be sure the output is enabled.</li>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;border-left-style: solid;border-left-width: 1px;border-left-color: #000000;border-right-style: solid;border-right-width: 1px;border-right-color: #000000;border-top-style: solid;border-top-width: 1px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Use</th>
+                        <th class="HeadE-Column1-Header1" colspan="4">Waveform Generator</th>
+                        <th class="HeadD-Column1-Header1" colspan="2">Measurement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Output Load</td>
+                        <td class="BodyE-Column1-Body1">Function</td>
+                        <td class="BodyE-Column1-Body1">Amplitude</td>
+                        <td class="BodyE-Column1-Body1">Frequency</td>
+                        <td class="BodyE-Column1-Body1">Nominal</td>
+                        <td class="BodyD-Column1-Body1">Error</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">Q</td>
+                        <td class="BodyB-Column1-Body1">50 &#937;</td>
+                        <td class="BodyB-Column1-Body1">Sine</td>
+                        <td class="BodyB-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyB-Column1-Body1">1.000 kHz</td>
+                        <td class="BodyB-Column1-Body1">1.2 Vrms</td>
+                        <td class="BodyA-Column1-Body1">±0.0127 Vrms</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li class="IndentTight" value="4">Set the measured value in Step 3 to be the reference value on the AC voltmeter.</li>
+            <li class="IndentTight" value="5"> Set the instrument to each output described in the table below and measure the output amplitude relative to the source as a percent with the AC voltmeter. Note that the table also lists the output in dB if you are using a power meter to perform this test.</li>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;border-left-style: solid;border-left-width: 1px;border-left-color: #000000;border-right-style: solid;border-right-width: 1px;border-right-color: #000000;border-top-style: solid;border-top-width: 1px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Use</th>
+                        <th class="HeadE-Column1-Header1" colspan="4">Waveform Generator</th>
+                        <th class="HeadD-Column1-Header1" colspan="4">Measurement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Output Load</td>
+                        <td class="BodyE-Column1-Body1">Function</td>
+                        <td class="BodyE-Column1-Body1">Amplitude</td>
+                        <td class="BodyE-Column1-Body1">Frequency</td>
+                        <td class="BodyE-Column1-Body1">Nominal</td>
+                        <td class="BodyE-Column1-Body1">Error</td>
+                        <td class="BodyE-Column1-Body1">Nominal</td>
+                        <td class="BodyD-Column1-Body1">Error</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">100.000 kHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 1.15%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.10 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">500.000 kHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 1.74%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.15 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">1.000 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 1.74%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.15 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Q</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">2.000 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 1.74%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.15 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">5.000 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 1.74%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.15 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">10.00 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 3.51%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.30 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">15.00 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 3.51%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.30 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">20.00 MHz</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 3.51%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.30 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">
+                            <p>22.00 MHz<br />(unnecessary for 20 MHz instruments)</p>
+                        </td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 4.71%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.40 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">50 &#937;</td>
+                        <td class="BodyE-Column1-Body1">Sine</td>
+                        <td class="BodyE-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyE-Column1-Body1">27.00 MHz<br />(unnecessary for 20 MHz instruments)</td>
+                        <td class="BodyE-Column1-Body1">100%</td>
+                        <td class="BodyE-Column1-Body1">± 4.71%</td>
+                        <td class="BodyE-Column1-Body1">0 dB</td>
+                        <td class="BodyD-Column1-Body1">± 0.40 dB</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">50 &#937;</td>
+                        <td class="BodyB-Column1-Body1">Sine</td>
+                        <td class="BodyB-Column1-Body1">1.200 Vrms</td>
+                        <td class="BodyB-Column1-Body1">30.00 MHz<br />(unnecessary for 20 MHz instruments)</td>
+                        <td class="BodyB-Column1-Body1">100%</td>
+                        <td class="BodyB-Column1-Body1">± 4.71%</td>
+                        <td class="BodyB-Column1-Body1">0 dB</td>
+                        <td class="BodyA-Column1-Body1">± 0.40 dB</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li class="IndentTight" value="6">Compare the measured value to the test limits shown in the table.</li>
+            <li class="IndentTight" value="7">Two-channel instruments only: Connect the AC voltmeter to channel 2 and repeat steps 2 through 6.</li>
+        </ol>
+        <p>
+        </p>
+        <p><a href="08%20DC%20Offset%20Voltage%20Verification.htm">Previous Calibration Topic</a>&#160;&#160;&#160;&#160;&#160;<a href="10%20-24%20dB%20Range%20Flatness%20Verification.htm">Next Calibration Topic</a></p>
+        
+    </body>
+</html>

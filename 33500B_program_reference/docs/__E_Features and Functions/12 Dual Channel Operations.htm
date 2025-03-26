@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Dual Channel Operations</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Dual Channel Operations<a name="kanchor434"></a></h1>
+        <p>This section covers most topics related to dual channel operation. It does not cover the <a href="13%20IQ%20Player%20Option.htm">optional IQ Player</a>.</p>
+        <h2><a name="Entering_Dual_Channel_Operation"></a>Entering Dual Channel Operation</h2>
+        <p>You enter dual channel configuration by pressing a channel output button, then <b>More</b>, then <b>Dual Channel</b>.</p>
+        <p>
+            <br />
+            <img src="../_Graphics_/Dual_Chan_Config_Menu.bmp" style="width: 359px;height: 176px;" alt="Dual Channel Configuration Menu" />
+        </p>
+        <h2><a name="Frequency_Coupling"></a>Frequency Coupling</h2>
+        <p>Frequency coupling allows you to couple frequencies or sample rates between channels, either by a constant ratio or offset between them. Press <b>Freq Cpl</b> to turn frequency coupling on or off, and press <b>Freq Cpl Settings</b> to configure frequency coupling.</p>
+        <p>The <b>Freq Cpl Settings</b> softkey opens the menu shown below. The first softkey allows you to specify whether you want to couple the frequencies with a ratio or an offset, and the second softkey allows you to specify the ratio or offset.</p>
+        <p>
+            <img src="../_Graphics_/Freq_Cpl_Config_Menu.bmp" style="width: 359px;height: 176px;" alt="Frequency coupling configuration menu" />
+        </p>
+        <h2><a name="Amplitude_Coupling"></a>Amplitude Coupling</h2>
+        <p>Amplitude coupling, enabled by the <b>Ampl Cpl</b> softkey, couples the amplitude and offset voltage between the channels so that changing the amplitude or offset on one channel affects both channels.</p>
+        <h2><a name="Tracking"></a>Tracking</h2>
+        <p>Tracking, configured by the <b>Tracking</b> softkey, has three modes: <b>Off</b>, <b>On</b> and <b>Invert</b>. When tracking is off, the two channels operate independently. When tracking is on, they behave as one channel. The third mode, <b>Invert</b>, makes the channels’ outputs inverses of each other, resulting in a differential channel using both outputs.</p>
+        <h2><a name="Combine"></a>Combine</h2>
+        <p>The <b>Combine</b> feature combines two outputs into one connector. If you choose <b>CH2</b> from the <b>Channel 1</b> menu, they are combined on channel 1; choosing <b>CH1</b> from the <b>Channel 2</b> menu combines them on channel 2.</p>
+        <p>In the image below, the top waveform is a 100 mVpp, 1 kHz sine wave on channel 1, and the bottom waveform is a 100 mVpp, 5 kHz sine wave on channel 2.</p>
+        <p>
+            <img src="../_Graphics_/scope_9d.png" />
+        </p>
+        <p>The image below shows the two outputs combined on channel 1. Note that the X-axis has been compressed (zoomed out) to show more cycles.<br /></p>
+        <p>
+            <img src="../Resources/Images/scope_10d.png" />
+            <br />
+        </p>
+        <p>The signals being combined do not have to be of the same type; for example, this image shows the same 5 kHz channel on channel 2 combined with a 100 mVpp square wave on channel 1.<br /><img src="../_Graphics_/scope_11d.png" /></p>
+        <p>&#160;</p>
+        <p>When signals are combined, the DC Offset values are not added together. Only the DC Offset from the receiving channel is used in the combined output. The figure below shows 50 a mV DC Offset added to Channel 1. The 50 mV offset added to Channel 2 is ignored. <br /><img src="../_Graphics_/scope_12d.png" /></p>
+        <p>You may also use <b>Combine</b> with bursts. For example, consider the image below, which includes a 1 kHz sine wave on channel 1 and three-cycle bursts of a 5 kHz sine wave on channel 2.</p>
+        <p>
+            <img src="../_Graphics_/scope_14d.png" />
+        </p>
+        <p>When these signals are combined on channel 1, the result is a simple amplitude addition of the two signals, as shown below.</p>
+        <p>
+            <img src="../_Graphics_/scope_15d.png" />
+        </p>
+        <p>You also can combine the signals on channel 2, as shown below.</p>
+        <p>
+            <img src="../_Graphics_/scope_16d.png" />
+        </p>
+        
+    </body>
+</html>

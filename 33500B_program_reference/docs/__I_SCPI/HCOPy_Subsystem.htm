@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>HCOPy Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>HCOPy Subsystem<a name="kanchor161"></a></h1>
+        <p>The HCOPy subsystem produces screen images ("screen shots") of the front-panel display.</p>
+        <h2>Example</h2>
+        <p>The following example captures and returns the front-panel display image in BMP format.
+</p>
+        <p class="Shaded">HCOP:SDUM:DATA:FORM BMP<br />HCOP:SDUM:DATA?<br /></p>
+        <h2><a name="kanchor162"></a><a name="HCOPy_SDUMp_DATA"></a>HCOPy:SDUMp:DATA?</h2>
+        <p class="IndentTight">Returns the front panel display 
+ image ("screen shot")</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(<i>A definite-length binary block containing the image.</i>)<br /><p class="IndentTight">Definite-length block data allows any type 
+ of device-dependent data to be transmitted as a series of 8-bit binary 
+ data bytes. This is particularly useful for transferring large quantities 
+ of data or 8-bit extended ASCII codes.</p></td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Capture and return the display image:<br />HCOP:SDUM:DATA?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The image format (PNG or BMP) is 
+ specified by <a href="#HCOPy_SDUMp_DATA_FORMat">HCOPy:SDUMp:DATA:FORMat</a>.</li>
+        </ul>
+        <h2><a name="kanchor163"></a><a name="HCOPy_SDUMp_DATA_FORMat"></a>HCOPy:SDUMp:DATA:FORMat {PNG|BMP}<br />HCOPy:SDUMp:DATA:FORMat?</h2>
+        <p class="IndentTight">Specifies the image format for images 
+ returned by <a href="#HCOPy_SDUMp_DATA">HCOPy:SDUMp:DATA?</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{PNG|BMP}, default PNG</td>
+                    <td class="BodyD-Column1-Body1">PNG or BMP</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the display image format to BMP<br />HCOP:SDUM:DATA:FORM BMP</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Output Impedance Adjustment</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor460"></a>Output Impedance Adjustment</h1>
+        <p>The instrument stores calibration constants for the channels' output impedance. These constants are generated with and without the post-amplifier attenuator.</p>
+        <ol>
+            <li class="IndentTight" value="1">Set the DMM to measure offset-compensated, four-wire Ohms. Set the DMM to use 100 NPLC integration. Connect the Ohms Source and Ohms Sense DMM inputs to the channel output as shown below.<br /><img src="../_Graphics_/adj_setup5.png" alt="Adjustment setup 5" /><br /></li>
+            <li class="IndentTight" value="2"> Use the DMM to make a 4-wire resistance measurement at the front panel output connector for each setup in the following table. The expected measured value is approximately 50 &#937;.<br /></li>
+            <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Setup</th>
+                        <th class="HeadD-Column1-Header1">&#160;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">8*</td>
+                        <td class="BodyD-Column1-Body1">-24 dB post-attenuator range</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">9*</td>
+                        <td class="BodyA-Column1-Body1">0 dB range</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>* Constants are stored after completing this setup.</p>
+            <li class="IndentTight" value="3"> Using the numeric keypad or knob, adjust the displayed impedance at each setup to match the measured impedance. Select <b>ENTER VALUE</b>.</li>
+            <li class="IndentTight" value="4"> There are no specific operational verification tests for output impedance. Continue with the next adjustment procedure in this section.</li>
+        </ol>
+        <p>
+        </p>
+        <p><a href="17%20Self%20Calibration%20Adjustment.htm">Previous Calibration Topic</a>&#160;&#160;&#160;&#160;&#160;<a href="19%20AC%20Amplitude%20(high-impedance)%20Adjustment.htm">Next Calibration Topic</a></p>
+        
+    </body>
+</html>

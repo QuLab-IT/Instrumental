@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <body>
+        <h1>OUTPut Subsystem<a name="kanchor245"></a></h1>
+        <p>The OUTPut subsystem controls the front-panel channel output 
+ and <b>Sync</b> connectors and the rear-panel <b>Ext Trig</b> connector:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a href="#OUTPut">OUTPut[1|2]</a> - front-panel channel output connector state</li>
+            <li class="IndentTight" value="2"><a href="#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> - output termination impedance</li>
+            <li class="IndentTight" value="3"><a href="#OUTPut_MODE">OUTPut[1|2]:MODE</a> - channel output mode</li>
+            <li class="IndentTight" value="4"><a href="#OUTPut_POLarity">OUTPut[1|2]:POLarity</a> - output waveform polarity</li>
+            <li class="IndentTight" value="5"><a href="#OUTPut_SYNC">OUTPut:SYNC</a> - front-panel <b>Sync</b> connector state</li>
+            <li class="IndentTight" value="6"><a href="#OUTPut_SYNC_MODE">OUTPut[1|2]:SYNC:MODE</a> - sync signal mode</li>
+            <li class="IndentTight" value="7"><a href="#OUTPut_SYNC_POLarity">OUTPut[1|2]:SYNC:POLarity</a> - sync waveform polarity</li>
+            <li class="IndentTight" value="8"><a href="#OUTPut_SYNC_SOURce">OUTPut:SYNC:SOURce</a> - channel used to drive sync signal</li>
+            <li class="IndentTight" value="9"><a href="#OUTPut_TRIGger">OUTPut:TRIGger</a> - rear-panel <b>Ext Trig</b> connector state</li>
+            <li class="IndentTight" value="10"><a href="#OUTPut_TRIGger_SLOPe">OUTPut:TRIGger:SLOPe</a> - "trigger out" polarity</li>
+            <li class="IndentTight" value="11"><a href="#OUTPut_TRIGger_SOURce">OUTPut:TRIGger:SOURce</a> - channel for driving output trigger</li>
+        </ul>
+        <h2><a name="kanchor246"></a><a name="OUTPut"></a>OUTPut[1|2] {ON|1|OFF|0}<br />OUTPut[1|2]?</h2>
+        <p class="IndentTight">Enables or disables the front-panel output connector.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable output connector for channel 1:<br />OUTP ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When output is enabled, the front-panel channel output key is illuminated.</li>
+            <li class="IndentTight" value="2">The <a href="APPLY_Subsystem.htm">APPLy</a> commands override current OUTPut 
+ setting and  enable the channel output  connector.</li>
+            <li class="IndentTight" value="3">If excessive external voltage is applied to 
+ the front-panel channel output  connector, 
+ an error message appears and output is disabled. To 
+ re-enable output, remove overload from the output 
+ connector and send  OUTPut ON.</li>
+            <li class="IndentTight" value="4">OUTPut changes the state of the channel output connector by switching the
+ output relay, without zeroing output voltage. Therefore, output may glitch 
+ for about a millisecond until signal stabilizes. Minimize 
+glitching by first minimizing amplitude (<a href="VOLTage_Subsystem.htm#VOLTage">VOLTage MIN</a>) and setting
+ offset to 0 (<a href="VOLTage_Subsystem.htm#VOLTage_OFFSet">VOLTage:OFFSet 0</a>) before changing output state.</li>
+        </ul>
+        <h2><a name="kanchor247"></a><a name="OUTPut_LOAD"></a>OUTPut[1|2]:LOAD {&lt;<i>ohms</i>&gt;|INFinity|MINimum|MAXimum}<br />OUTPut[1|2]:LOAD?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets expected output termination. Should equal the load impedance attached to the output.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 &#937; to 10 k&#937;, default 50 &#937;</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E+02</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set output impedance to 300 &#937;:<br />OUTP:LOAD 300</p>
+                        <p colspan="2">Set output impedance to "high impedance":<br />OUTP:LOAD INF</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The specified value is used for amplitude, offset, 
+ and high/low level settings.</li>
+            <li class="IndentTight" value="2">The instrument has a fixed series output impedance of 50 &#937; to the front-panel channel connectors. If the actual load impedance differs from the value specified, the displayed amplitude and offset levels will be incorrect. The load impedance setting is simply a convenience to ensure that the displayed voltage matches the expected load.</li>
+            <li class="IndentTight" value="3">If you change the output termination setting, 
+ the displayed output amplitude, offset, and high/low levels are  adjusted (with no error generated). If the amplitude is 10 Vpp and you change the output termination setting from 50 &#937; to "high impedance" (<a href="#OUTPut_LOAD">OUTPut[1|2]:LOAD INF</a>), the displayed amplitude doubles to 20 Vpp. Changing from "high impedance" to 50 &#937; halves the displayed amplitude. The output termination setting does not affect the actual output voltage; it only changes the values displayed and queried from the remote interface.  Actual output voltage depends on the connected load.</li>
+            <li class="IndentTight" value="4">You cannot specify output amplitude in dBm if output termination is set to high impedance.The units are automatically converted to Vpp. See <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLT:UNIT</a> 
+ for details.</li>
+            <li class="IndentTight" value="5">You cannot change the output termination setting with voltage limits enabled; the instrument cannot know which output termination settings the voltage limits apply to. To change the output termination setting, disable voltage limits, set the new termination value, adjust voltage limits, and re-enable voltage limits.</li>
+            <li class="IndentTight" value="6">If INF 
+ (high impedance) is selected, the query returns 9.9E+37.</li>
+        </ul>
+        <h2><a name="kanchor248"></a><a name="OUTPut_MODE"></a>OUTPut[1|2]:MODE {NORMal|GATed}<br />OUTPut[1|2]:MODE?</h2>
+        <p class="IndentTight">Enables (GATed) or disables (NORMal) gating of the  output 
+ waveform signal on and off using the trigger input.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{NORMal|GATed}, default NORMal</td>
+                    <td class="BodyD-Column1-Body1">GAT or NORM</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Enable gated output:<br />OUTP:MODE GAT</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The effect of gating is independent of 
+ waveform phase or timing of any sort. When trigger input is asserted, the output signal is generated. When trigger is not asserted, 
+ the waveform continues to be generated internally, but it is not routed 
+ to channel output connector.</li>
+            <li class="IndentTight" value="2">Gating does not change channel output termination (does not operate output on/off relay).</li>
+        </ul>
+        <h2><a name="kanchor249"></a><a name="OUTPut_POLarity"></a>OUTPut[1|2]:POLarity {NORMal|INVerted}<br />OUTPut[1|2]:POLarity?</h2>
+        <p class="IndentTight">Inverts waveform relative to the offset 
+ voltage.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{NORMal|INVerted}, default NORMal</td>
+                    <td class="BodyD-Column1-Body1">NORM or INV</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output polarity to INVerted:<br />OUTP:POL INV</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><b>NORMal:</b> waveform goes in one direction at the beginning of the cycle; <b>INVerted:</b> waveform goes in other.</li>
+            <li class="IndentTight" value="2">As shown below, the waveform is 
+ inverted relative to the offset voltage. The offset voltage 
+ remains unchanged when the waveform is inverted.<br /><br /><img src="../With_and_Without_Offset_Voltage.bmp" style="width: 5in;height: 1.61in;" alt="With and without offset voltage" /></li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The <b>Sync</b> signal associated with an inverted waveform is not inverted.</li>
+        </ul>
+        <h2><a name="kanchor250"></a><a name="OUTPut_SYNC"></a>OUTPut:SYNC {ON|1|OFF|0}<br />OUTPut:SYNC?</h2>
+        <p class="IndentTight">Disables or enables the front-panel <b>Sync</b> connector. &#160;&#160;</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default ON</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Disable front panel <b>Sync</b> connector:<br />OUTP:SYNC OFF</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Disabling the <b>Sync</b> signal reduces output distortion at lower amplitudes.</li>
+            <li class="IndentTight" value="2">For more details on the <b>Sync</b> signal for each waveform 
+ function, see <a href="../__E_Features%20and%20Functions/02%20Output%20Configuration.htm#Sync_Output_Signal">Sync Output Signal</a>.</li>
+            <li class="IndentTight" value="3">When <b>Sync</b> is disabled, the output level 
+ on the <b>Sync</b> connector is a logic 
+ "low."</li>
+            <li class="IndentTight" value="4">Inverting a waveform (<a href="#OUTPut_POLarity">OUTPut[1|2]:POLarity 
+INV</a>) does not invert the <b>Sync</b> signal.</li>
+        </ul>
+        <h2><a name="kanchor251"></a><a name="OUTPut_SYNC_MODE"></a>OUTPut[1|2]:SYNC:MODE {NORMal|CARRier|MARKer}<br />OUTPut[1|2]:SYNC:MODE?</h2>
+        <p class="IndentTight">Specifies normal <b>Sync</b> behavior (NORMal),  forces <b>Sync</b> to follow the carrier waveform (CARRier), or indicates marker position (MARKer).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{NORMal|CARRier|MARKer}, default NORMal</td>
+                    <td class="BodyD-Column1-Body1">NORM, CARR, or MARK</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output sync mode to CARRier:<br />OUTPut:SYNC:MODE CARR</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The following table details the command's behavior:<br /></li>
+            <table style="mc-table-style: url('../RegTable.css');margin-left: auto;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1"><i>&lt;mode&gt;</i>
+                        </th>
+                        <th class="HeadE-Column1-Header1">Sync Behavior</th>
+                        <th class="HeadD-Column1-Header1">Conditions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1" rowspan="4">NORMal</td>
+                        <td class="BodyE-Column1-Body1">Sync follows envelope of burst signal.</td>
+                        <td class="BodyD-Column1-Body1">When BURSt is on.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows envelope of sweep signal.</td>
+                        <td class="BodyD-Column1-Body1">When SWEep is on.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows modulating signal.</td>
+                        <td class="BodyD-Column1-Body1">When modulating and modulation source is internal.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows FUNC signal.</td>
+                        <td class="BodyD-Column1-Body1">All other conditions</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1" rowspan="3">CARRier</td>
+                        <td class="BodyE-Column1-Body1">Sync follows current SOURce:MARKer:POINt setting.</td>
+                        <td class="BodyD-Column1-Body1">When BURSt or SWEep is on and FUNC is ARB.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows FUNC signal while burst is on.</td>
+                        <td class="BodyD-Column1-Body1">When BURSt is on and FUNC is not ARB.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows FUNC signal.</td>
+                        <td class="BodyD-Column1-Body1">All other conditions</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1" rowspan="5">MARKer</td>
+                        <td class="BodyE-Column1-Body1">Sync follows current SOURce:MARKer:POINt setting.</td>
+                        <td class="BodyD-Column1-Body1">
+                            <p>When in CW mode and FUNC is ARB.</p>
+                            <p>When modulating, modulation source is internal, and FUNC is ARB or &lt;<i>modulation</i>&gt;:INT:FUNC is ARB.</p>
+                            <p>When modulating, modulation source is external, and FUNC is ARB.
+</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows current SOURce:MARKer:CYCLe setting.</td>
+                        <td class="BodyD-Column1-Body1">When BURST is on.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows current SOURce:MARKer:FREQuency setting.</td>
+                        <td class="BodyD-Column1-Body1">When SWEEP is on.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Sync follows modulating signal.</td>
+                        <td class="BodyD-Column1-Body1">When modulating, modulation source is external, FUNC is not ARB, and INT:FUNC is not ARB.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">Sync follows FUNC signal.</td>
+                        <td class="BodyA-Column1-Body1">All other conditions</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ul>
+        <h2><a name="kanchor252"></a><a name="OUTPut_SYNC_POLarity"></a>OUTPut[1|2]:SYNC:POLarity {NORMal|INVerted}<br />OUTPut[1|2]:SYNC:POLarity?</h2>
+        <p class="IndentTight">Sets the desired output polarity of the 
+ <b>Sync</b> output to trigger external equipment that may require falling or rising edge triggers.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{NORMal|INVerted}, default NORMal</td>
+                    <td class="BodyD-Column1-Body1">NORM&#160;or INV</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the instrument's output sync connector to normal behavior:<br />OUTP:SYNC:POL NORM</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><b>NORMal:</b> voltage on <b>Sync</b> output 
+ connector is near zero, and rises when a <b>Sync</b> event occurs. Voltage stays high (approximately 3.3 V into high impedance connection) until <b>Sync</b> signal is de-asserted, when it falls back to near zero.</li>
+            <li class="IndentTight" value="2"><b>INVerted:</b> opposite of NORMal.</li>
+            <li class="IndentTight" value="3">The <b>Sync</b> signal may be derived from either channel 
+ in a two-channel instrument (<a href="#OUTPut_SYNC_SOURce">OUTPut:SYNC:SOURce</a>), and from several operating 
+ modes of the <b>Sync</b> signal (<a href="#OUTPut_SYNC_MODE">OUTPut:SYNC:MODE</a>).</li>
+        </ul>
+        <h2><a name="kanchor253"></a><a name="OUTPut_SYNC_SOURce"></a>OUTPut:SYNC:SOURce {CH1|CH2}<br />OUTPut:SYNC:SOURce?</h2>
+        <p class="IndentTight">Sets the source for the <b>Sync</b> output connector.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{CH1|CH2}, default CH1</td>
+                    <td class="BodyD-Column1-Body1">CH1 or CH2</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sync source to channel 2:<br />OUTP :SYNC:SOUR CH2</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor254"></a><a name="OUTPut_TRIGger"></a>OUTPut:TRIGger {ON|1|OFF|0}<br />OUTPut:TRIGger?</h2>
+        <p class="IndentTight">Disables 
+ or enables the "trigger out" signal for sweep and burst modes.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable trigger out signal:<br />OUTP:TRIG ON<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When enabled, a TTL-compatible square wave with the specified edge direction (<a href="#OUTPut_TRIGger_SLOPe">OUTPut:TRIGger:SLOPe</a>) is output from the rear-panel <b>Ext Trig</b> connector at the beginning of the burst or sweep.</li>
+            <li class="IndentTight" value="2">	In triggered burst mode:</li>
+            <li class="IndentTight2" value="3">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce IMMediate</a>, instrument outputs square wave with 50% duty cycle from the <b>Ext Trig</b> connector. The waveform period equals the burst period (<a href="BURSt_Subsystem.htm#BURSt_INTernal_PERiod">BURSt:INTernal:PERiod</a>).</li>
+            <li class="IndentTight2" value="4">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce EXTernal</a> or <a href="BURSt_Subsystem.htm#BURSt_MODE">BURSt:MODE GAT</a>, the instrument disables "trigger out." The rear-panel <b>Ext Trig</b> connector cannot be used for both operations simultaneously (an externally-triggered waveform uses the same connector to trigger sweep or burst).<br /></li>
+            <li class="IndentTight2" value="5">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce BUS</a>, the instrument outputs a pulse (&gt;1 µs pulse width) from the <b>Ext Trig</b> connector at the beginning of each sweep or burst.</li>
+            <li class="IndentTight" value="6">In frequency sweep mode:</li>
+            <li class="IndentTight2" value="7">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce IMMediate</a>, the instrument outputs a square wave with a 50% duty cycle (the rising edge is the sweep trigger) from the <b>Ext Trig</b> connector. Waveform period equals to the sweep time (SWEep:TIME).</li>
+            <li class="IndentTight2" value="8">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce EXTernal</a>, instrument disables the "trigger out" signal. The rear-panel <b>Ext Trig</b> connector cannot be used for both operations simultaneously (an externally-triggered sweep uses the same connector to trigger the sweep).</li>
+            <li class="IndentTight2" value="9">With <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce BUS</a>, the instrument outputs a pulse (&gt;1 µs pulse width) from the <b>Ext Trig</b> connector at the beginning of each sweep or burst.</li>
+        </ul>
+        <h2><a name="kanchor255"></a><a name="OUTPut_TRIGger_SLOPe"></a>OUTPut:TRIGger:SLOPe {POSitive|NEGative}<br />OUTPut:TRIGger:SLOPe?</h2>
+        <p class="IndentTight">Selects whether the instrument uses the rising edge or falling edge for the "trigger out" signal.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{POSitive|NEGative}, default POSitive</td>
+                    <td class="BodyD-Column1-Body1">POS or NEG</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set trigger slope to NEGative (falling edge):<br />OUTP:TRIG:SLOP NEG</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">POSitive outputs a rising edge pulse; NEGative outputs a falling edge pulse.</li>
+            <li class="IndentTight" value="2">When enabled using OUTPut:TRIGger, a TTL-compatible square wave with the specified edge direction is output from the rear-panel <b>Trig 
+ Out</b> connector at the beginning of a sweep or burst.</li>
+        </ul>
+        <h2><a name="kanchor256"></a><a name="OUTPut_TRIGger_SOURce"></a>OUTPut:TRIGger:SOURce {CH1|CH2}<br />OUTPut:TRIGger:SOURce?</h2>
+        <p class="IndentTight">Selects the source channel used by trigger output on a two-channel instrument.  The source channel determines what output signal to generate on the trigger out connector.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{CH1|CH2}, default CH1</td>
+                    <td class="BodyD-Column1-Body1">CH1 or CH2</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output trigger source to CH2:<br />OUTP:TRIG:SOUR CH2</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">In a two-channel instrument, either channel may be source channel for the trigger output, but channel 2 is not valid for dual arbitrary (IQ) waveforms.</li>
+        </ul>
+        
+    </body>
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>OUTPut Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+</html>

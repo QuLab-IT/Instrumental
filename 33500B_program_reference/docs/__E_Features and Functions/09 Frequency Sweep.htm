@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Frequency Sweep</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="top"></a>Frequency Sweep<a name="kanchor431"></a></h1>
+        <p>In frequency sweep mode, the instrument moves from the start frequency to the stop frequency at a specified sweep rate. You can sweep up or down in frequency, with either linear or logarithmic spacing. You can also configure the instrument to output one sweep from start frequency to stop frequency by applying an external or manual trigger. The instrument can sweep sine, square, pulse, ramp, triangle, or arbitrary waveforms (PRBS, noise and DC are not allowed).</p>
+        <p>You can specify a hold time, during which the sweep remains at the stop frequency, and a return time, during which the frequency changes linearly from the stop frequency to the start frequency.</p>
+        <p>For more information, see <a href="../__F_CH5_Tutorial/Waveform%20Generation%20Tutorial.htm#Frequency_Sweep">Frequency Sweep</a>.</p>
+        <h2><a name="To_Select_Sweep"></a>To Select Sweep</h2>
+        <p>The instrument will not allow sweep or list mode to be enabled at the same time that burst or any modulation mode is enabled. When you enable sweep, the burst or modulation mode is turned off.</p>
+        <ul>
+            <li class="IndentTight" value="1">To avoid multiple waveform changes, enable the sweep mode after configuring the other parameters.</li>
+            <li class="IndentTight" value="2"><b>Front Panel:</b>
+                <br />
+                <br />Output a sweep using the present amplitude, offset, and frequency:<br /><img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" /><img src="../_Graphics_/Softkey%20-%20Sweep%20OFF%20On.png" alt="Sweep softkey (OFF)" />&#160;&#160;&#160;<img src="../_Graphics_/SoftkeyNF%20-%20Sweep%20Off%20ON.png" alt="Sweep Off/On softkey (ON)" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency_MODE">FREQuency:MODE SWEEP</a>
+                <br />
+                <br /><a href="../__I_SCPI/SWEep_Subsystem.htm#SWEep_STATe">SWEep:STATe {OFF|ON}</a>
+            </li>
+        </ul>
+        <h2><a name="Start_Frequency_and_Stop_Frequency"></a>Start Frequency and Stop Frequency</h2>
+        <p>The start frequency and stop frequency set the sweep’s upper and lower frequency bounds. The sweep begins at the start frequency, sweeps to the stop frequency, and then resets back to the start frequency.</p>
+        <ul>
+            <li class="IndentTight" value="1">Start and Stop frequencies: 1 µHz to 30 MHz (limited to 200 kHz for ramps). The sweep is phase continuous over the full frequency range. The default start frequency is 100 Hz. The default stop frequency is 1 kHz.</li>
+            <li class="IndentTight" value="2">To sweep up in frequency, set the start frequency less than the stop frequency. To sweep down in frequency, set the opposite relationship.</li>
+            <li class="IndentTight" value="3">Sync setting Normal: <b>Sync</b> pulse is high throughout the sweep.</li>
+            <li class="IndentTight" value="4">Sync setting Carrier: <b>Sync</b> pulse has a 50% duty cycle for every waveform cycle.</li>
+            <li class="IndentTight" value="5">Sync setting Marker: <b>Sync</b> pulse goes high at the beginning and goes low at the marker frequency.</li>
+            <li class="IndentTight" value="6"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" />
+                <img src="../_Graphics_/Softkey%20-%20Start%20Freq.png" alt="Start Freq softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /><br /><img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" /><img src="../_Graphics_/Softkey%20-%20Stop%20Freq.png" alt="Stop Freq softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="7"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency:STARt">[SOURce[1|2]:]FREQuency:STARt {&lt;<i>freq</i>&gt;|MIN|MAX}</a>
+                <br />
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency_STOP">[SOURce[1|2]:]FREQuency:STOP {&lt;<i>freq</i>&gt;|MIN|MAX}</a>
+            </li>
+        </ul>
+        <h2><a name="Center_Frequency_and_Frequency_Span"></a>Center Frequency and Frequency Span</h2>
+        <p>You can also set the sweep frequency boundaries of the sweep using a center frequency and frequency span. These parameters are similar to the start frequency and stop frequency (above) and they provide added flexibility.</p>
+        <ul>
+            <li class="IndentTight" value="1">Center frequency: 1 µHz to 30 MHz (limited to 200 kHz for ramps). The default is 550 Hz.</li>
+            <li class="IndentTight" value="2">Frequency span: -30 µHz to 30 MHz (limited to 200 kHz for ramps). The default is 900 Hz.</li>
+            <li class="IndentTight" value="3">To sweep up in frequency, set a positive frequency span; to sweep down, set a negative frequency span.</li>
+            <li class="IndentTight" value="4">For sweeps with Marker Off, the <b>Sync</b> signal is a square waveform with a 50% duty cycle. (missing or bad snippet) The frequency of the <b>Sync</b> waveform is equal to the specified sweep time. The signal is output from the front-panel <b>Sync</b> connector.</li>
+            <li class="IndentTight" value="5">For frequency sweeps with Marker On, the <b>Sync</b> signal is a TTL "high" at the beginning of the sweep and a "low" at the marker frequency. You can change this with <a href="../__I_SCPI/OUTPut_Subsystem.htm#OUTPut_SYNC_MODE">OUTPut[1|2]:SYNC:MODE MARKER</a>.</li>
+            <li class="IndentTight" value="6"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Units.png" alt="Units key" />
+                <img src="../_Graphics_/Softkey%20-%20START-STOP%20Cntr-Span.png" style="width: 60px;height: 102px;" alt="Start-Stop Cntr-Span softkey (Start-Stop)" /> <img src="../_Graphics_/SoftkeyNF%20-%20Start-Stop%20CNTR-SPAN.png" alt="Start-Stop Cntr-Span softkey (Cntr-Span)" /><br /><img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" /><img src="../_Graphics_/Softkey%20-%20Center.png" alt="Center softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /><img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" /><img src="../_Graphics_/Softkey%20-%20Span.png" alt="Span softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+        </ul>
+        <ul>
+            <li class="IndentTight" value="1"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency_CENTer">[SOURce[1|2]:]FREQuency:CENTer {&lt;freq&gt;|MIN|MAX}</a>
+                <br />
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency_SPAN">[SOURce[1|2]:]FREQuency:SPAN {&lt;freq&gt;|MIN|MAX}</a>
+            </li>
+        </ul>
+        <h2><a name="Sweep_Mode"></a>Sweep Mode</h2>
+        <p>You can sweep with linear or logarithmic spacing, or with a list of sweep frequencies. For a linear sweep, the instrument varies the output frequency linearly during the sweep. A logarithmic sweep, varies the output frequency logarithmically.</p>
+        <p>The selected mode does not affect the sweep return (from stop to start, if one is set). The sweep return is always linear.</p>
+        <ul>
+            <li class="IndentTight" value="1"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20LINEAR.png" alt="Type softkey (LINEAR)" />
+                <br />
+                <img src="../_Graphics_/Softkeys%20-%20LINEAR%20Log%20List.png" alt="LINEAR Log List softkeys" />
+            </li>
+            <li class="IndentTight" value="2"><b>SCPI:</b> <a href="../__I_SCPI/SWEep_Subsystem.htm#SWEep_SPACing">[SOURce[1|2]:]SWEep:SPACing {LINear|LOGarithmic}</a></li>
+        </ul>
+        <h2><a name="Sweep_Time"></a>Sweep Time</h2>
+        <p>Sweep time specifies the number of seconds required to sweep from the start frequency to the stop frequency. The instrument calculates the number of points in the sweep based on the sweep time.</p>
+        <ul>
+            <li class="IndentTight" value="1">Sweep time: 1 ms to 250,000 seconds, default 1 s. For a linear sweep in immediate trigger mode, the maximum total sweep time (including hold time and return time) is 8,000 s. The maximum total sweep time for linear sweeps using other trigger modes is 250,000 s, and the maximum total sweep time for logarithmic sweeps is 500 s.</li>
+            <li class="IndentTight" value="2"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" />
+                <img src="../_Graphics_/Softkey%20-%20Sweep%20Time.png" alt="Sweep Time softkey" /> <img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b> <a href="../__I_SCPI/SWEep_Subsystem.htm#SWEep_TIME">[SOURce[1|2]:]SWEep:TIME {&lt;seconds&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Hold_Time"></a>Hold Time</h2>
+        <p>Hold time specifies time (in seconds) to remain at the stop frequency, and return time specifies the number of seconds to return from the stop frequency to the start frequency.</p>
+        <ul>
+            <li class="IndentTight" value="1">Hold time and return time: 0 to 3600 seconds (default 0).</li>
+            <li class="IndentTight" value="2"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" />
+                <img src="../_Graphics_/Softkey - Hold &amp; Return.png" alt="Hold &amp; Return softkey" /> <img src="../_Graphics_/Softkey%20-%20Hold%20Time.png" alt="Hold Time softkey" /><br /><img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /><br /><img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" /><img src="../_Graphics_/Softkey - Hold &amp; Return.png" alt="Hold &amp; Return softkey" /> <img src="../_Graphics_/Softkey%20-%20Return%20Time.png" alt="Return Time softkey" /><br /><img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/SWEep_Subsystem.htm#SWEep_HTIMe">SWEep:HTIMe {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</a>
+                <br />
+                <br /><a href="../__I_SCPI/SWEep_Subsystem.htm#SWEep_RTIMe">SWEep:RTIMe {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</a>
+            </li>
+        </ul>
+        <h2><a name="Marker_Frequency"></a>Marker Frequency</h2>
+        <p>If desired, you can set the frequency at which the signal on the front-panel <b>Sync</b> connector goes to a logic low during the sweep. The <b>Sync</b> signal always goes from low to high at the beginning of the sweep.</p>
+        <ul>
+            <li class="IndentTight" value="1">Marker frequency: 1 µHz to 30 MHz (limited to 200 kHz for ramp). The default is 500 Hz.</li>
+            <li class="IndentTight" value="2">When the sweep mode is enabled, the marker frequency must be between the specified start frequency and stop frequency. If you attempt to set the marker frequency to a frequency not in this range, the instrument will set the marker frequency equal to the start frequency or stop frequency (whichever is closer).</li>
+            <li class="IndentTight" value="3">The <a href="02%20Output%20Configuration.htm#Sync_Output_Signal">Sync enable setting</a> is overridden by enabling the marker used with the sweep mode. Therefore, when the marker is enabled (with sweep mode also enabled), the <b>Sync</b> setting is ignored.</li>
+            <li class="IndentTight" value="4">You cannot configure the marker frequency with the front panel menus unless the <b>Sync</b> source is the sweeping channel.</li>
+            <li class="IndentTight" value="5"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Sweep.png" alt="Sweep key" />
+                <img src="../_Graphics_/Softkey%20-%20Sweep%20OFF%20On.png" alt="Sweep Off/On softkey (OFF)" />&#160;&#160;&#160;<img src="../_Graphics_/SoftkeyNF%20-%20Sweep%20Off%20ON.png" alt="Sweep Off/On softkey (ON)" /><br /><img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" /><img src="../_Graphics_/Softkey%20-%20Sync%20Setup.png" alt="Sync Setup softkey" /></li>
+            <li class="IndentTight" value="6"><b>SCPI:</b> <a href="../__I_SCPI/MARKer_Subsystem.htm#MARKer_FREQuency">[SOURce[1|2]:]MARKer:FREQuency {&lt;freq&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Sweep_Trigger_Source"></a>Sweep Trigger Source</h2>
+        <p>In sweep mode, the instrument outputs a single sweep when a trigger signal is received. After one sweep from the start frequency to the stop frequency, the instrument waits for the next trigger while outputting the start frequency.</p>
+        <ul>
+            <li class="IndentTight" value="1">Sweep trigger source: Internal (default), External, Time, or Manual.</li>
+            <li class="IndentTight" value="2">With the Internal (immediate) source, the instrument outputs a continuous sweep at a rate determined by the total of the hold time, sweep time and return time. The sweep time for this source is limited to 8000 seconds.</li>
+            <li class="IndentTight" value="3">With the External source, the instrument accepts a hardware trigger on the rear-panel Ext Trig connector and initiates one sweep each time Ext Trig receives a TTL pulse with the specified polarity.</li>
+            <li class="IndentTight" value="4">The trigger period must be greater than or equal to the specified sweep time.</li>
+            <li class="IndentTight" value="5">With the Manual source, the instrument outputs one sweep each time the front-panel <b>[Trigger]</b> key is pressed.</li>
+            <li class="IndentTight" value="6"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" />
+                <img src="../_Graphics_/Softkey%20-%20Source%20IMMED.png" alt="(Trigger) Source softkey (Immed)" />
+                <br />
+            </li>
+            <li class="IndentTight" value="7">To specify the slope of the trigger signal edge:<br /><img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" /><img src="../_Graphics_/Softkey%20-%20Trig%20Out%20Setup.png" alt="Trig Out Setup softkey" /> <img src="../_Graphics_/Softkey%20-%20Trig%20Out%20OFF.png" alt="Trig Out softkey (Off)" /></li>
+            <li class="IndentTight" value="8"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce {IMM|EXT|TIMer|BUS}</a>
+                <br />
+                <br /><a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SLOPe">TRIGger[1|2]:SLOPe {POSitive|NEGative}</a>
+            </li>
+        </ul>
+        <p>See <a href="11%20Triggering.htm">Triggering</a> for more information.</p>
+        <h2><a name="Trigger_Out_Signal"></a>Trigger Out Signal</h2>
+        <p>A "trigger out" signal is provided on the rear-panel <b>Ext Trig</b> connector (used with burst and sweep only). When enabled, a TTL-compatible pulse with either a rising edge (default) or falling edge is output from this connector at the beginning of the sweep or burst.</p>
+        <ul>
+            <li class="IndentTight" value="1">When the Internal (immediate) trigger source is selected, the instrument outputs a square waveform with a 50% duty cycle from the <b>Ext Trig</b> connector at the beginning of the sweep or burst. The frequency of the waveform corresponds to the specified burst period or total sweep time.</li>
+            <li class="IndentTight" value="2">When the External trigger source is selected, the instrument disables the "trigger out" signal. The <b>Ext Trig</b> connector cannot be used for sweep or burst and trigger out at the same time (an externally-triggered waveform uses the same connector to trigger the sweep or burst).</li>
+            <li class="IndentTight" value="3">When Manual trigger source is selected, the instrument outputs a pulse (&gt;1 &#956;s pulse width) from the <b>Ext Trig</b> connector at the beginning of each sweep or burst.</li>
+            <li class="IndentTight" value="4">To specify whether the instrument triggers on the rising or falling edge of the <b>Ext Trig</b> connector, press <b>[Trigger] &gt; Trig Out Setup</b>. Then select the desired edge by pressing <b>Trig Out</b>.</li>
+            <li class="IndentTight" value="5"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/OUTPut_Subsystem.htm#OUTPut_TRIGger_SLOPe">OUTPut:TRIGger:SLOPe {POSitive|NEGative}</a>
+                <br />
+                <br /><a href="../__I_SCPI/OUTPut_Subsystem.htm#OUTPut_TRIGger">OUTPut:TRIGger {OFF|ON}</a>
+            </li>
+        </ul>
+        <h2><a name="Frequency_List"></a>Frequency List</h2>
+        <p>In frequency list mode, the instrument "steps" through a list of frequencies, dwelling on each frequency for a specified period. You may also control progress through the list with triggering.</p>
+        <ul>
+            <li class="IndentTight" value="1">The instrument will not allow sweep or list mode to be enabled at the same time that burst or any modulation mode is enabled. When you enable sweep, the burst or modulation mode is turned off.</li>
+            <li class="IndentTight" value="2">To avoid multiple waveform changes, enable list mode after configuring its parameters.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b> Enable list before setting any other list parameter. Press <b>[Sweep] &gt; Type &gt;&#160;List</b>.</li>
+            <li class="IndentTight" value="4"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency_MODE">FREQuency:MODE LIST</a>
+                <br />
+                <br /><a href="../__I_SCPI/LIST_Subsystem.htm#LIST_FREQuency">LIST:FREQuency &lt;number&gt;, &lt;number&gt;, …</a>
+            </li>
+        </ul>
+        <p>Progress through list is controlled by the trigger system. If trigger source is internal or immediate, the dwell time setting (<a href="../__I_SCPI/LIST_Subsystem.htm#LIST_DWELl">LIST:DWELl</a>) determines time spent at each frequency. For any other trigger source, dwell time is determined by trigger event spacing.</p>
+        
+    </body>
+</html>

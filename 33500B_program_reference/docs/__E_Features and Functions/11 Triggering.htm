@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Triggering</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor433"></a>Triggering</h1>
+        <p>This section describes the instrument's triggering system.</p>
+        <h2><a name="Trigger_Overview"></a>Trigger Overview</h2>
+        <p>This triggering information applies to sweep and burst only. You can issue triggers for sweeps or bursts using internal triggering, external triggering, timer triggering, or manual triggering.</p>
+        <ul>
+            <li class="IndentTight" value="1">Internal or "automatic" (default): instrument outputs continuously when sweep or burst mode is selected.</li>
+            <li class="IndentTight" value="2">External: uses rear-panel <b>Ext Trig</b> connector to control sweep or burst. The instrument initiates one sweep or outputs one burst each time <b>Ext Trig</b> receives a TTL pulse. You can select whether instrument triggers on rising or falling edge.</li>
+            <li class="IndentTight" value="3">Manual: triggering initiates one sweep or outputs one burst each time you press <b>[Trigger]</b> on the front panel.</li>
+            <li class="IndentTight" value="4">When you sweep a list, trigger moves the waveform to the next frequency in the list.</li>
+            <li class="IndentTight" value="5">The <b>[Trigger]</b> key is disabled when in remote and when a function other than burst or sweep is currently selected.</li>
+        </ul>
+        <h2><a name="Trigger_Sources"></a>Trigger Sources</h2>
+        <p>This triggering information applies to sweep and burst only. You must specify the source from which the instrument accepts a trigger.</p>
+        <ul>
+            <li class="IndentTight" value="1">Sweep and Burst trigger source: Immediate (default), External, Manual or Timer.</li>
+            <li class="IndentTight" value="2">The instrument will accept a manual trigger, a hardware trigger from the rear-panel <b>Ext Trig</b> connector, or continuously output sweeps or bursts using an internal trigger. You can also trigger bursts based on a timer. At power-on, immediate trigger is selected.</li>
+            <li class="IndentTight" value="3">Trigger source setting is volatile; set to internal trigger (front panel) or immediate (remote interface) by power cycle or <a href="../__I_SCPI/IEEE-488_Subsystem.htm#RST">*RST</a>.</li>
+            <li class="IndentTight" value="4"><b>Front Panel:</b>
+                <br />Enable sweep or burst. Then:<br /><img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" /><img src="../_Graphics_/Softkey%20-%20Source%20IMMED.png" alt="(Trigger) Source softkey (Immed)" /></li>
+            <li class="IndentTight" value="5"><b>SCPI:</b> <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIG[1|2]:SOUR {IMMediate|EXTernal|TIMer|BUS}</a></li>
+        </ul>
+        <p>The <a href="../__I_SCPI/APPLY_Subsystem.htm#APPLy">APPLy</a> command automatically sets the source to Immediate.</p>
+        <h2><a name="Immediate_Triggering"></a>Immediate Triggering</h2>
+        <p>Internal trigger mode (default): instrument continuously outputs sweep or burst (as specified by sweep time or burst period).</p>
+        <p><b>Front-Panel:</b>
+            <img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" />
+            <img src="../_Graphics_/SoftkeyNF%20-%20Source%20IMMED.png" alt="Source IMMED softkey" />
+        </p>
+        <p><b>SCPI:</b> <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger:SOURce IMMediate</a></p>
+        <h2><a name="Manual_Triggering"></a>Manual Triggering</h2>
+        <p>Manual trigger mode (front panel only): you manually trigger the instrument by pressing <b>[Trigger]</b>. The instrument initiates one sweep or burst for each time you press <b>[Trigger]</b>. The button is lit when you are in the trigger menu and the instrument is waiting for a manual trigger. The button blinks when the instrument is waiting for a manual trigger, but you are not in the trigger menu. The key is disabled when the instrument is in remote.</p>
+        <h2><a name="External_Triggering"></a>External Triggering</h2>
+        <p>In external trigger mode, the instrument accepts a hardware trigger at the rear-panel <b>Ext Trig</b> connector. The instrument initiates one sweep or burst each time Ext Trig receives a TTL pulse with the specified edge. The external trigger mode is like the manual trigger mode except that you apply the trigger to the <b>Ext Trig</b> connector.</p>
+        <p>See <a href="#TrigInpSignal">Trigger Input Signal</a>, below.</p>
+        <p><b>Front-Panel:</b>
+            <br />
+            <img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" />
+            <img src="../_Graphics_/Softkey%20-%20Source%20IMMED.png" alt="(Trigger) Source softkey (Immed)" /> <img src="../_Graphics_/Softkey%20-%20Ext.png" alt="External trigger softkey" /><br /><br />To specify whether the instrument triggers on a rising or falling edge, press <b>Trigger Setup</b> and select the edge direction by pressing <b>Slope</b>.</p>
+        <p><b>SCPI:</b>
+            <br /><a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger:SOURce EXTernal</a>
+        </p>
+        <p><a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SLOPe">TRIGger:SLOPe {POSitive|NEGative}</a>
+        </p>
+        <h2><a name="Software_(Bus)_Triggering"></a>Software (Bus) Triggering</h2>
+        <p>Available only from remote interface, this is similar to manual trigger mode from the front panel, but you trigger the instrument with a bus trigger command. The instrument initiates one sweep or outputs one burst each time a bus trigger command is received. The key blinks when a bus trigger command is received.</p>
+        <p>To select the bus trigger source, send <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger:SOURce BUS</a>.</p>
+        <p>To trigger instrument from remote interface (GPIB, USB, or LAN) when Bus source is selected, send <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger">TRIG</a> or <a href="../__I_SCPI/IEEE-488_Subsystem.htm#TRG">*TRG</a> (trigger). The front-panel <b>[Trigger]</b> key is illuminated when the instrument is waiting for a bus trigger.</p>
+        <h2><a name="Timer_Triggering"></a>Timer Triggering</h2>
+        <p>The timer trigger mode issues triggers a fixed period apart. To select the bus trigger source, send <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger:SOURce TIM</a>.</p>
+        <h2><a name="TrigInpSignal"></a>Trigger Input Signal</h2>
+        <p>This rear-panel connector is used in the following modes:</p>
+        <ul>
+            <li class="IndentTight" value="1">Triggered Sweep Mode: Press <b>Trigger Setup &gt; Source Ext</b>, or execute <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIG:SOUR EXT</a>  (sweep must be enabled). When TTL edge of correct polarity  is received on the Ext Trig connector, instrument outputs a single sweep.</li>
+            <li class="IndentTight" value="2">Externally-Modulated FSK Mode: Press <b>Source</b> or execute  <a href="../__I_SCPI/01%20(Modulation)_SOURce.htm">FSK:SOUR EXT</a>  (FSK must be enabled). When a logic low level is present, carrier frequency is output. When a logic high level is present, hop frequency is output. Maximum external FSK rate is 100 kHz.</li>
+            <li class="IndentTight" value="3">Triggered Burst Mode: Press <b>Trigger Setup &gt; Source Ext</b>, or execute <a href="../__I_SCPI/TRIGger_Subsystem.htm#TRIGger_SOURce">TRIG:SOUR EXT</a>  (burst must be enabled). The instrument outputs a waveform with specified number of cycles (burst count) each time a trigger is received from the specified trigger source.</li>
+            <li class="IndentTight" value="4">External Gated Burst Mode: Press <b>Gated</b> softkey or execute <a href="../__I_SCPI/BURSt_Subsystem.htm#BURSt_MODE">BURS:MODE GAT</a> with burst enabled. When external gate signal is true, instrument outputs a continuous waveform. When external gate signal goes false, the current waveform cycle completes and then instrument stops while remaining at voltage level corresponding to starting burst phase. For noise, output stops as soon as the gate signal goes false.</li>
+        </ul>
+        <h2><a name="Trigger_Output_Signal"></a>Trigger Output Signal</h2>
+        <ul>
+            <li class="IndentTight" value="1">A "trigger out" signal is provided on the rear-panel <b>Ext Trig</b> connector (used with burst and sweep only). When enabled, a TTL-compatible pulse with either a rising edge (default) or falling edge is output from this connector at the beginning of the sweep or burst.<br /><img src="../_Graphics_/TrigOutRiseEdgeShown.bmp" style="width: 329px;height: 127px;" alt="Trigger Out, rising edge shown" /></li>
+            <li value="2">&#160;</li>
+            <li class="IndentTight" value="3">Internal (immediate) or Timer trigger source: instrument outputs a square wave with a 50% duty cycle from the <b>Ext Trig</b> connector at the beginning of the sweep or burst. Waveform period equals specified sweep time or burst period.</li>
+            <li class="IndentTight" value="4">External trigger source: instrument disables "trigger out" signal. The rear-panel <b>Ext Trig</b> connector cannot be used for both operations simultaneously (an externally-triggered waveform uses the same connector to trigger sweep or burst).</li>
+            <li class="IndentTight" value="5">Bus (software) or manual trigger source: instrument outputs a pulse (&gt;1 &#956;s pulse width) from <b>Ext Trig</b> connector at beginning of each sweep or burst.</li>
+            <li class="IndentTight" value="6"><b>Front Panel:</b> Enable sweep or burst. Then:<br /><img src="../_Graphics_/Button%20-%20Trigger.png" alt="Trigger key" /><img src="../_Graphics_/Softkey%20-%20Trig%20Out%20Setup.png" alt="Trig Out Setup softkey" /><br />Then use this softkey to choose the desired edge direction:<br /><img src="../_Graphics_/Softkey%20-%20Trig%20Out%20OFF.png" alt="Trig Out softkey (Off)" /></li>
+            <li class="IndentTight" value="7"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/OUTPut_Subsystem.htm#OUTPut_TRIGger_SLOPe">OUTPut:TRIGger:SLOPe {POSitive|NEGative}</a>
+                <br />
+                <br /><a href="../__I_SCPI/OUTPut_Subsystem.htm#OUTPut_TRIGger">OUTPut:TRIGger {OFF|ON}</a>
+            </li>
+        </ul>
+        
+    </body>
+</html>

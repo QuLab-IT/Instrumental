@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="PHASe Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" class="" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>RATE Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>RATE Subsystem<a name="kanchor272"></a></h1>
+        <p>The RATE subsystem allows you to couple the outputs' sample rates on a two-channel instrument by specifying the following items:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a href="#RATE_COUPle_STATe">RATE:COUPle[:STATe]</a> - whether coupling is used</li>
+            <li class="IndentTight" value="2"><a href="#RATE_COUPle_MODE">RATE:COUPle:MODE</a> - whether coupling is done as a ratio or an offset</li>
+            <li class="IndentTight" value="3"><a href="#RATE_COUPle_OFFSet">RATE:COUPle:OFFSet</a> - offset used when the coupling is done as an offset</li>
+            <li class="IndentTight" value="4"><a href="#RATe_COUPle_RATio">RATE:COUPle:RATio</a> - ratio used when the coupling is done as a ratio</li>
+        </ul>
+        <h2><a name="kanchor273"></a><a name="kanchor274"></a><a name="RATE_COUPle_STATe"></a>[SOURce[1|2]:]RATE:COUPle[:STATe] {ON|1|OFF|0}<br />[SOURce[1|2]:]RATE:COUPle[:STATe]?</h2>
+        <p class="IndentTight">Enables or disables sample rate coupling 
+ between channels, or allows one-time 
+ copying of one channel's sample rate  into the other channel.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Turn on sample rate coupled state:<br></br>RATE:COUP ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The ON value starts sample rate coupling in the mode specified by <a href="#RATE_COUPle_MODE">RATE:COUPle:MODE</a>.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">If the current offset or ratio, combined with 
+ the current sample rate settings, would cause either sample rate to exceed instrument specifications, the instrument will generate an error and the exceeded sample rate will clip at its maximum or minimum value.</li>
+            <li class="IndentTight" value="2">If setting mode to RATIO and setting RATIO to 
+ 1.0 still exceeds the specifications of either channel, an error message will be generated and the <a href="#">RATE:COUPle[:STATe]</a> will not be turned ON.</li>
+            <li class="IndentTight" value="3">Both channels must be configured for <a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion ARB</a> in order to enable sample rate coupling.</li>
+        </ul>
+        <h2><a name="kanchor275"></a><a name="kanchor276"></a><a name="RATE_COUPle_MODE"></a>[SOURce[1|2]:]RATE:COUPle:MODE {OFFSet|RATio}<br />[SOURce[1|2]:]RATE:COUPle:MODE?</h2>
+        <p class="IndentTight">Sets type of sample rate coupling to either a constant sample rate offset (OFFSet) or a constant ratio (RATio) between the channels' sample rates.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{OFFSet|RATio}, default RATio</td>
+                    <td class="BodyD-Column1-Body1">OFFS or RAT</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the &#160;sample rate coupling mode to OFFSet.<br />RATE:COUP:MODE OFFSet</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The default RATio is 1.</li>
+            <li class="IndentTight" value="2">The default sample rate
+ coupling is OFF.</li>
+            <li class="IndentTight" value="3">The SOURce[1|2] keyword is ignored; the setting applies to both channels.</li>
+        </ul>
+        <h2><a name="kanchor277"></a><a name="kanchor278"></a><a name="RATE_COUPle_OFFSet"></a>[SOURce[1|2]:]RATE:COUPle:OFFSet &lt;<i>sample_rate</i>&gt;<br />[SOURce[1|2]:]RATE:COUPle:OFFSet?</h2>
+        <p class="IndentTight">Sets sample rate offset when a two-channel instrument is in sample rate coupled mode OFFSet.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Valid values depend on <a href="FUNCtion_Subsystem.htm#FUNCtion_ARBitrary_FILTer">FUNCtion:ARBitrary:FILTer</a> setting. For NORMal and STEP, the range is between ± 250 MSa/s . For OFF, the range is between ±62.5 MSa/s. In either case, default is 0.</td>
+                    <td class="BodyD-Column1-Body1">+8.000000000000000E+02</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sample rate offset of channel 2  to 10.3 kSa/s higher than sample rate of channel 1.<br />RATE:COUPle:OFFSet 10300<p>Sets the sample rate offset of channel 1 to 45 kSa/s below the sample rate of channel 2.<br />SOUR2:RATE:COUP:OFFS -45000</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When specifying OFFSet or RATio, the SOURce channel specified 
+ in the command (SOURce1 or SOURce2) is used as the reference channel and 
+ the offset or ratio is applied to the other channel. For example, suppose the function 
+ generator is in <a href="#RATE_COUPle_STATe">RATE:COUPle[:STATe]</a> ON and <a href="#RATE_COUPle_MODE">RATE:COUPle:MODE</a> is set to OFFSet. Furthermore, suppose channel 1 is currently operating 
+ at 2 kSa/s, and channel 2 is at 10 kSa/s. The command <b>SOURce1:RATE:COUPle:OFFSet 2.5</b> causes Channel 1 to remain at 2 Sa/s, and Channel 2 to be set to 4.5 Sa/s. As the sample rate of either channel changes, 
+ the other channel's sample rate  changes to maintain the specified coupling.</li>
+            <li class="IndentTight" value="2">If the sample rate coupling
+ would cause either channel to exceed instrument sample rate specifications for the present functions, the command will result 
+ in an error, and the sample rate will be set to its maximum or minimum limit for the particular channel.</li>
+        </ul>
+        <h2><a name="kanchor279"></a><a name="kanchor280"></a><a name="RATe_COUPle_RATio"></a>[SOURce[1|2]:]RATe:COUPle:RATio &lt;<i>ratio</i>&gt;<br />[SOURce[1|2]:]RATe:COUPle:RATio?</h2>
+        <p class="IndentTight">Sets offset ratio between channel sample rates when a two-channel instrument is in sample rate coupled mode RATio.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0.001 to 1000, default 1</td>
+                    <td class="BodyD-Column1-Body1">+7.500000000000000E-1</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set channel 2's sample rate to twice that of channel 1.<br />SOUR1:RATE:COUP:RATio 2</p>
+                        <p colspan="2">Set channel 1's sample rate to 3.14 times that of channel 2.<br />SOUR2:RATE:COUPle:RAT 3.14</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When specifying OFFSet or RATio, the SOURce channel specified 
+ in the command (SOURce1 or SOURce2) is used as the reference channel and 
+ the offset or ratio is applied to the other channel. For example, suppose the function 
+ generator is coupled in RATio mode. Furthermore, suppose channel 1 is currently operating 
+ at 2 kSa/s, and channel 2 is at 10 kSa/s.<br /><br />The command <b>SOURce1:RATe:COUPle:RATio 2.5</b> causes Channel 1 to remain at 2 kSa/s, and Channel 2 to be set to 5 kSa/s. As the sample rate of either channel changes, 
+ the other channel's sample rate  changes to maintain the specified coupling.</li>
+            <li class="IndentTight" value="2">If the sample rate coupling
+ would cause either channel to exceed instrument sample rate specifications for the present functions, the command will result 
+ in an error, and the sample rate will be set to its maximum or minimum limit for the particular channel.</li>
+        </ul>
+        
+    </body>
+</html>

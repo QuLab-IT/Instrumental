@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Amplitude Modulation (AM) and Frequency Modulation (FM)</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Amplitude Modulation (AM) and Frequency Modulation (FM)<a name="kanchor426"></a></h1>
+        <p>A modulated waveform consists of a carrier waveform and a modulating waveform. In AM, the carrier amplitude is varied by the voltage level of the modulating waveform. In FM, the carrier frequency is varied by the voltage level of the modulating waveform. The instrument accepts an internal or external modulation source. On a two-channel instrument, one channel can modulate the other.</p>
+        <p>Select AM or FM before setting up any other modulation parameter. For more information on modulation, see <a href="../__F_CH5_Tutorial/Waveform%20Generation%20Tutorial.htm#Modulation">Modulation</a>.</p>
+        <h2><a name="To_Select_AM_or_FM_Modulation"></a>To Select AM or FM</h2>
+        <ul>
+            <li class="IndentTight" value="1">The instrument allows only one modulation mode to be enabled on a channel. When you enable AM or FM, all other modulations are off. On two-channel models, the two channels’ modulations are independent from one another, and the instrument can add modulated waveforms from two channels. See <a href="../__I_SCPI/PHASe_Subsystem.htm#PHASe_SYNChronize">PHASe:SYNChronize</a> and <a href="../__I_SCPI/COMBine_FEED.htm">COMBine:FEED</a> for details.</li>
+            <li class="IndentTight" value="2">The instrument will not allow AM or FM to be enabled with sweep or burst. Enabling AM or FM, turns off sweep and burst.</li>
+            <li class="IndentTight" value="3">To avoid multiple waveform changes, enable modulation after configuring the other modulation parameters.</li>
+            <li class="IndentTight" value="4"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" />
+                <img src="../_Graphics_/SoftkeyNF%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" /> <br />or<br /><img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" /><img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" /> <img src="../_Graphics_/Softkey%20-%20FM.png" alt="FM softkey" /> <img src="../_Graphics_/SoftkeyNF%20-%20Type%20FM.png" alt="Type softkey (FM)" /><br /><br />Then turn modulation on:<br /><img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" /><img src="../_Graphics_/Softkey%20-%20Modulate%20OFF%20On.png" alt="Modulate softkey (Off)" /> <img src="../_Graphics_/SoftkeyNF%20-%20Modulate%20Off%20ON.png" alt="Modulate softkey (ON)" /><br /><br />The waveform is output using the present carrier and modulating waveform settings..</li>
+            <li class="IndentTight" value="5"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/02%20(Modulation)_STATe.htm">AM:STATe {OFF|ON}<br />FM:STATE (OFF|ON)</a>
+            </li>
+        </ul>
+        <h2><a name="Carrier_Waveform_Shape"></a>Carrier Waveform Shape</h2>
+        <ul>
+            <li class="IndentTight" value="1">AM or FM carrier shape: Sine (default), Square, Ramp, Pulse, Triangle,  Noise, PRBS, or Arbitrary waveform. You cannot use DC as the carrier waveform.</li>
+            <li class="IndentTight" value="2">For FM, the carrier frequency must always be greater than or equal to the frequency deviation. Attempting to set a deviation greater than the carrier frequency will cause the instrument to set the deviation equal to the carrier frequency.</li>
+            <li class="IndentTight" value="3">The carrier frequency plus the deviation cannot exceed the selected function's maximum frequency plus 100 kHz. If you attempt to set the deviation to an invalid value, the instrument adjusts it to the maximum value allowed with the present carrier frequency. The remote interface also generates a "Data out of range" error.</li>
+            <li class="IndentTight" value="4"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <br />Then select a waveform shape.</li>
+            <li class="IndentTight" value="5"><b>SCPI:</b>
+                <br />FUNCtion {SINusoid|SQU|PULS|RAMP|TRI|ARB|NOISe|PRBS}</li>
+        </ul>
+        <p>The <a href="../__I_SCPI/APPLY_Subsystem.htm#APPLy">APPLy</a> command configures a waveform with one command.</p>
+        <h2><a name="Carrier_Frequency"></a>Carrier Frequency</h2>
+        <p>The maximum carrier frequency varies by function, as shown below. The default is 1 kHz for all functions. Arbitrary waveform "frequency" is also set using the <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_ARBitrary_SRATe">FUNCtion:ARBitrary:SRATe</a> command.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Function</th>
+                    <th class="HeadE-Column1-Header1" style="text-align: center;">Minimum Frequency</th>
+                    <th class="HeadD-Column1-Header1" style="text-align: center;">Maximum Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sine</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 µHz</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">30 MHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Square</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 µHz</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">30 MHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Ramp</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 µHz</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">200 kHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Pulse</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 µHz</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">30 MHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">PRBS</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 mBPS</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">50 mPBS</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Noise BW</td>
+                    <td class="BodyE-Column1-Body1" style="text-align: center;">1 mHz</td>
+                    <td class="BodyD-Column1-Body1" style="text-align: center;">30 MHz</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Arbitrary</td>
+                    <td class="BodyB-Column1-Body1" style="text-align: center;">1 µSa/s</td>
+                    <td class="BodyA-Column1-Body1" style="text-align: center;">250 MSa/s</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Parameters.png" alt="Parameters key" />
+                <img src="../_Graphics_/Softkey%20-%20Frequency.png" alt="Frequency softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="2">SCPI: <a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency">[SOURce[1|2]:]FREQuency {&lt;<i>frequency</i>&gt;|MIN|MAX}</a><br /></li>
+        </ul>
+        <p>The <a href="../__I_SCPI/APPLY_Subsystem.htm#APPLy">APPLy</a> command configures a waveform with one command.</p>
+        <h2><a name="Modulating_Waveform_Shape"></a>Modulating Waveform Shape</h2>
+        <p>The instrument accepts an internal or external AM or FM modulation source. On a two-channel instrument you can modulate one channel with the other. </p>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%">You cannot modulate noise with noise, PRBS with PRBS, or an arbitrary waveform with an arbitrary waveform.</td>
+            </tr>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">The modulating waveform shape (internal source) may be:</li>
+            <li class="IndentTight2" value="2">Sine wave</li>
+            <li class="IndentTight2" value="3">Square with 50% duty cycle&#160;&#160;<img src="../_Graphics_/Modulation%20Square%2050.png" style="width: 44px;height: 22px;" alt="Modulation Square 50" /></li>
+            <li class="IndentTight2" value="4">UpRamp with 100% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20UpRamp%20100.png" style="width: 46px;height: 24px;" alt="Modulation UpRamp 100" /></li>
+            <li class="IndentTight2" value="5">Triangle with 50% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20Triangle%2050.png" style="width: 38px;height: 19px;" alt="Modulation Triangle 50" /></li>
+            <li class="IndentTight2" value="6">DnRamp with 0% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20DnRamp%200.png" style="width: 48px;height: 24px;" alt="Modulation DnRamp 0" /></li>
+            <li class="IndentTight2" value="7">Noise - white gaussian noise</li>
+            <li class="IndentTight2" value="8">PRBS - Pseudo Random Bit Sequence (polynomial PN7)</li>
+            <li class="IndentTight2" value="9">Arb - Arbitrary waveform</li>
+            <li class="IndentTight" value="10"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/SoftkeyNF%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" /> <br />or<br /><img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" /><img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" /> <img src="../_Graphics_/Softkey%20-%20FM.png" alt="FM softkey" /><br /><br />Then choose the modulating shape:<br /><img src="../_Graphics_/Softkey%20-%20Modulate%20Shape.png" alt="Shape softkey (Sine)" /></li>
+            <li class="IndentTight" value="11"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/AM_Subsystem.htm#AM_INTernal_FUNCtion">AM:INTernal:FUNCtion{SIN|SQU|RAMP|NRAM|TRI|NOIS|PRBS|ARB}<br /></a>
+                <br /><a href="../__I_SCPI/FM_Subsystem.htm#FM_INTernal_FUNCtion">FM:INTernal:FUNCtion {SIN|SQU|RAMP|NRAM|TRI|NOIS|PRBS|ARB}</a>
+            </li>
+        </ul>
+        <h2><a name="Modulating_Waveform_Frequency"></a>Modulating Waveform Frequency</h2>
+        <p>The instrument accepts an internal or external modulation source.</p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating frequency (internal source): varies by signal type, from 1 µHz to 30 MHz.</li>
+            <li class="IndentTight" value="2">Modulating frequency (external source): 0 to 100 kHz</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/SoftkeyNF%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20More.png" alt="More softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20AM%20Freq.png" alt="AM Freq softkey" /><br /><br />or<br /><img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" /><img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20FM.png" alt="FM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20FM%20Freq.png" alt="FM Freq softkey" /><br /><br />Then enter the AM or FM frequency with the knob and keypad:<br /><img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /><br /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/AM_Subsystem.htm#AM_INTernal_FREQuency">[SOURce[1|2]:]AM:INTernal:FREQ {&lt;freq&gt;|MIN|MAX}</a>
+                <br />
+                <br /><a href="../__I_SCPI/FM_Subsystem.htm#FM_INTernal_FREQuency">[SOURce[1|2]:]FM:INTernal:FREQ {&lt;freq&gt;|MIN|MAX}</a>
+            </li>
+        </ul>
+        <h2><a name="Modulation_Depth_AM"></a>Modulation Depth (AM)</h2>
+        <p>The modulation depth is a percentage that represents the amplitude variation. At 0% depth, the amplitude is one-half of the carrier’s amplitude setting. At 100% depth, the amplitude varies according to the modulating waveform, from 0% to 100% of the carrier’s amplitude.</p>
+        <ul>
+            <li class="IndentTight" value="1">Modulation depth: 0% to 120%. The default is 100%.</li>
+            <li class="IndentTight" value="2">Even at greater than 100% depth, the instrument will not exceed ±5 V peak on the output (into a 50 &#937; load). To achieve modulation depth greater than 100%, output carrier amplitude may be reduced.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/SoftkeyNF%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20AM%20Depth.png" alt="AM Depth softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/AM_Subsystem.htm#AM_DEPTh">AM:DEPTh {&lt;<i>depth_in_percent</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Double_Sideband_Suppressed_Carrier_AM"></a>Double Sideband Suppressed Carrier AM</h2>
+        <p>The instrument supports two forms of amplitude modulation, "Normal" and Double Sideband Suppressed Carrier (DSSC). In DSSC, the carrier is not present unless the modulating signal has an amplitude greater than zero.</p>
+        <ul>
+            <li class="IndentTight" value="1"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/SoftkeyNF%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20More.png" alt="More softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20DSSC%20OFF%20On.png" alt="DSSC Off/On softkey (OFF)" />&#160;&#160;&#160;<img src="../_Graphics_/SoftkeyNF%20-%20DSSC%20Off%20ON.png" alt="DSSC Off/On softkey (ON)" /></li>
+            <li class="IndentTight" value="2"><b>SCPI:</b> <a href="../__I_SCPI/AM_Subsystem.htm#AM_DSSC">[SOURce[1|2]]:AM:DSSC {ON|OFF}</a>. </li>
+        </ul>
+        <h2><a name="Frequency_Deviation_FM"></a>Frequency Deviation (FM)</h2>
+        <p>The frequency deviation setting represents the peak variation in frequency of the modulated waveform from the carrier frequency.</p>
+        <p>When the carrier is PRBS, frequency deviation causes a change in the bit rate equal to one-half of the set frequency. For example, a 10 kHz deviation is equivalent to a 5 KBPS change in bit rate.</p>
+        <ul>
+            <li class="IndentTight" value="1">Frequency deviation: 1 µHz to (carrier frequency)/2, default 100 Hz.</li>
+            <li class="IndentTight" value="2">For FM, the carrier frequency must always be greater than or equal to the frequency deviation. Attempting to set a deviation greater than the carrier frequency will cause the instrument to set the deviation equal to the carrier frequency.</li>
+            <li class="IndentTight" value="3">The carrier frequency plus the deviation cannot exceed the selected function's maximum frequency plus 100 kHz. If you attempt to set the deviation to an invalid value, the instrument adjusts it to the maximum value allowed with the present carrier frequency. The remote interface also generates a "Data out of range" error.</li>
+            <li class="IndentTight" value="4"><b>Front-Panel</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20FM.png" alt="FM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Freq%20Dev.png" alt="Freq Dev softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="5"><b>SCPI:</b> <a href="../__I_SCPI/FM_Subsystem.htm#FM_DEViation">FM:DEViation {&lt;<i>peak_deviation_in_Hz</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Modulating_Source"></a>Modulating Source</h2>
+        <p>The instrument accepts an internal or external modulation source.  On a two-channel instrument you can modulate one channel with the other. </p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating source: Internal (default), Other Channel, or External. The External modulation source may be up to 100 kHz.</li>
+            <li class="IndentTight" value="2">With the External source, an external waveform modulates the carrier waveform. The modulation depth (AM) or frequency deviation (FM) is controlled by the ±5 V signal level on the rear-panel <b>Modulation In</b> connector. The external modulation input has -3 dB bandwidth of 100 kHz.</li>
+            <li class="IndentTight" value="3">AM example: with modulation depth 100%, when the modulating signal is at +5 V, the output will be at the maximum amplitude. When the modulating signal at -5 V, the output will be at minimum amplitude.</li>
+            <li class="IndentTight" value="4">FM example: with deviation of 10 kHz, then a +5 V signal level corresponds to a 10 kHz increase in frequency. Lower external signal levels produce less deviation and negative signal levels reduce the frequency below the carrier frequency.</li>
+            <li class="IndentTight" value="5"><b>Front-Panel</b>
+                <br />After enabling AM or FM, select the modulating source as shown:<br /><img src="../_Graphics_/Softkey%20-%20Source.png" alt="Source softkey (Internal)" /></li>
+            <li class="IndentTight" value="6"><b>SCPI:</b>
+                <br /><a href="../__I_SCPI/01%20(Modulation)_SOURce.htm">AM:SOURce {INTernal|EXTernal|CH1|CH2}<br /><br />FM:SOURce {INTernal|EXTernal|CH1|CH2}</a>
+            </li>
+        </ul>
+        
+    </body>
+</html>

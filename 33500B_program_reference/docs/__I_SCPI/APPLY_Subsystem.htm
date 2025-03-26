@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="Calculate_Subsystem_Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>APPLy Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>APPLy Subsystem<a name="kanchor52"></a></h1>
+        <p>The APPLy subsystem allows you to configure entire waveforms with one command. The general form of an APPLy command is shown below:</p>
+        <p class="CmdSyntax">[SOURce[1|2]:]APPLy:&lt;<i>function</i>&gt; [&lt;<i>frequency</i>&gt; [,&lt;<i>amplitude</i>&gt; [,&lt;<i>offset</i>&gt;]]]</p>
+        <p>For example,</p>
+        <p class="CmdSyntax">APPLy:SIN 1e4,1,0.1 </p>
+        <p>replaces the following commands:</p>
+        <p class="CmdSyntax">FUNCtion SIN<br />FREQ 1e4<br />VOLT 1<br />VOLT:OFF 0.1<br />OUTP ON</p>
+        <p>Not only is APPLy shorter, it avoids settings conflicts that occur when sending commands individually. In addition, <a href="#APPLy">APPLy</a> performs the following operations:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Sets trigger source to IMMediate (equivalent to <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce IMMediate</a>).</li>
+            <li class="IndentTight" value="2">Turns off any modulation, sweep, or burst mode currently enabled and places the instrument in continuous waveform mode.</li>
+            <li class="IndentTight" value="3">Turns on the channel output (<a href="OUTPut_Subsystem.htm#OUTPut">OUTPut ON</a>) without changing output termination setting (<a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a>).</li>
+            <li class="IndentTight" value="4">Overrides the voltage autorange setting and enables autoranging (<a href="VOLTage_Subsystem.htm#VOLTage_RANGe_AUTO">VOLTage:RANGe:AUTO</a>).</li>
+        </ul>
+        <p>The instrument can generate eight types of waveforms: DC voltage, gaussian noise, PRBS, pulse, ramp/triangle wave, sine wave, square wave and arbitrary (user) waveform. Waveform-specific settings exist in the <a href="FUNCtion_Subsystem.htm">FUNCtion subsystem</a>.</p>
+        <p>You can also query current output configuration (<a href="#APPLy">APPLy?</a>).</p>
+        <h2>General Remarks</h2>
+        <p style="font-weight: bold;margin-left: 24px;">Amplitude</p>
+        <ul>
+            <li class="IndentTight" value="1">Changing amplitude may briefly disrupt output at certain voltages due to output attenuator switching. The amplitude is controlled, however, so the output voltage will never exceed the current setting while switching ranges. To prevent this disruption, disable voltage autoranging using  <a href="VOLTage_Subsystem.htm#VOLTage_RANGe_AUTO">VOLTage:RANGe:AUTO OFF</a>. The <a href="#APPLy">APPLy</a> command automatically enables autoranging.</li>
+        </ul>
+        <ul>
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <ul>
+            <li class="IndentTight" value="1">Limits Due to Unit Selection: The amplitude limits are determined by the output units selected.</li>
+        </ul>
+        <ul>
+            <li class="IndentTight" value="1">You cannot specify output amplitude in dBm if output termination is set to high impedance.The units are automatically converted to Vpp.</li>
+        </ul>
+        <h2>Commands and Queries</h2>
+        <p><a href="#APPLy">APPLy?</a>
+        </p>
+        <p><a href="#APPLy_ARBitrary">APPLy:ARBitrary</a>
+        </p>
+        <p><a href="#APPLy_DC">APPLy:DC</a>
+        </p>
+        <p><a href="#APPLy_NOISe">APPLy:NOISe</a>
+        </p>
+        <p><a href="#APPLy_PRBS">APPLy:PRBS</a>
+        </p>
+        <p><a href="#APPLy_PULSe">APPLy:PULSe</a>
+        </p>
+        <p><a href="#APPLy_RAMP">APPLy:RAMP</a>
+        </p>
+        <p><a href="#APPLy_SINusoid">APPLy:SINusoid</a>
+        </p>
+        <p><a href="#APPLy_SQUare">APPLy:SQUare</a>
+        </p>
+        <p><a href="#APPLy_TRIangle">APPLy:TRIangle</a>
+        </p>
+        <h2><a name="kanchor53"></a><a name="APPLy"></a>[SOURce[1|2]:]APPLy?</h2>
+        <p class="IndentTight">Queries the 
+ output configuration.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"SIN +5.000000000000000E+03,<br />+3.0000000000000E+00,<br />-2.5000000000000E+00"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return the configuration for a 5 kHz, 3 V sine wave with a -2.5 VDC offset.<br />APPLY?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">The function, frequency, amplitude, and offset are returned 
+ as shown above. The amplitude, but not the offset, is returned as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.</li>
+        </ul>
+        <h2><a name="kanchor54"></a><a name="APPLy_ARBitrary"></a>[SOURce[1|2]:]APPLy:ARBitrary [{&lt;<i>sample_rate</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs arbitrary waveform selected by FUNCtion: ARBitrary, using the specified sample rate, amplitude, and offset. </p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>sample_rate</i>&gt; from 1 µSa/s to 250 MSa/s, default 40 kSa/s<br /></td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>amplitude</i>&gt; from 1 mVpp to 10 Vpp into 50 &#937;, 2 mVpp to 20 Vpp into an open circuit, default 100 mVpp into 50 &#937;</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output the arbitrary waveform selected using FUNCtion:ARBitrary:<br />APPLy:ARBitrary 1 KHZ, 5.0, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">General</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Setting a sample rate when not in the ARB mode will not change the frequency. For example, if the current function is sine, setting sample rate has no effect until the function changes to ARB.</li>
+        </ul>
+        <p style="font-weight: bold;margin-left: 24px;">Options</p>
+        <ul>
+            <li class="IndentTight" value="1">See FUNCtion: ARBitrary for available arbitrary waveform options. With FUNCtion:ARBitrary, you may select a built-in arbitrary waveform or the waveform currently downloaded to volatile memory using <a href="MMEMory_Subsystem.htm">MMEMory</a> commands.</li>
+        </ul>
+        <p style="font-weight: bold;margin-left: 24px;">Offset Voltage</p>
+        <ul>
+            <li class="IndentTight" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.<br /><br /></li>
+        </ul>
+        <ul>
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor55"></a><a name="APPLy_DC"></a>[SOURce[1|2]:]APPLy:DC [{&lt;<i>frequency</i>&gt;|DEF} [,{&lt;<i>amplitude</i>&gt;|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a DC voltage.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>frequency</i>&gt; not applicable to DC&#160;function. Must be specified as a placeholder; the value is remembered when you change to a different function.</td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>amplitude</i>&gt; not applicable to DC&#160;function. Must be specified as a placeholder; the value is remembered when you change to a different function.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output a DC voltage of -2.5 V:<br />APPLy:DC DEF, DEF, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.Changing the output termination setting does not change the voltage present at the output terminals of the instrument. This only changes the displayed values on the front panel and the values queried from the remote interface. The voltage present at the instrument's output depends on the load connected to the instrument. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor56"></a><a name="APPLy_NOISe"></a>[SOURce[1|2]:]APPLy:NOISe &#160;[{&lt;<i>frequency&gt;</i>|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs gaussian noise with the specified 
+ amplitude and DC offset.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>frequency</i>&gt; not applicable to noise&#160;function. Must be specified as a placeholder; the value is remembered when you change to a different function.</td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit.<p>If specified in Vpp, the peak to peak output will actually be output very rarely, due to gaussian nature of noise.</p></td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output gaussian noise bounded by 3 Vpp, with -2.5 V offset:<br />APPL:NOIS 5 KHZ, 3.0 V, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">Frequency</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">If you specify a frequency, 
+ it has no effect on the noise output, but the value is remembered when 
+ you change to a different function.</li>
+            <li class="IndentTight" value="2">For information on changing noise bandwidth, see FUNCtion:NOISe:BANDwidth.</li>
+        </ul>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li style="margin-left: 24px;" class="CmdSyntax" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.<p>&#160;  From the remote interface, a "Data out of range" error will also be generated.</p></li>
+            <li style="margin-left: 24px;" value="2">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor57"></a><a name="APPLy_PRBS"></a>[SOURce[1|2]:]APPLy:PRBS &#160;[{&lt;<i>frequency</i>&gt;|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a pseudo-random binary sequence with the specified bit rate, amplitude and DC offset.</p>
+        <p class="IndentTight">The default waveform is a PN7 Maximum Length Shift Register generator.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-style: normal;">&lt;<i>frequency</i>&gt; in bits/s, default 1000</td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit.Default 100 mVpp into 50 &#937;</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output pseudo-random bit sequence bounded by 3 Vpp, with -2.5 V offset:<br />APPL:PRBS 5 KHZ, 3.0 V, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">Frequency</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">PRBS is generated by a Maximum Length Sequence (MLS) generator (Linear Feedback Shift Register) which may be configured to several standard configurations. Default is PN7 at 1000 bits/second.</li>
+            <li class="IndentTight" style="font-style: normal;" value="2">A PRBS waveform using polynomial PN<b><i>x</i></b> is generated by a shift register of <b><i>x</i></b> bits, and the output waveform begins with <b><i>x</i></b> sample periods of high output. Sample period is the reciprocal of the sample rate (<a href="FUNCtion_Subsystem.htm#FUNCtion_PRBS_BRATe">FUNCtion:PRBS:BRATe</a>), and the channel's <b>Sync</b> pulse indicates the waveform's start. For example, if the PRBS uses PN23 with sample rate 500 Hz, the output begins with 46 ms of high output (23 x 2 ms).</li>
+            <li class="IndentTight" value="3">Unlike the APPLy:NOISe function, the APPLy:PRBS function operates with the <b>Sync</b> output enabled. The <b>Sync</b> function indicates the beginning of the Pseudo-random function sequence.</li>
+        </ul>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor58"></a><a name="APPLy_PULSe"></a>[SOURce[1|2]:]APPLy:PULSe [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a pulse wave with the specified frequency, amplitude, and DC offset. In addition, <a href="#APPLy">APPLy</a> performs the following operations:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Preserves either the 
+ current pulse width setting (FUNCtion:PULSe:WIDTh) or the current pulse duty cycle setting (FUNCtion:PULSe:DCYCle).</li>
+            <li class="IndentTight" value="2">Preserves the current 
+ transition time setting (FUNCtion:PULSe:TRANsition[:BOTH]).</li>
+            <li class="IndentTight" value="3">May cause instrument to override the pulse width or edge time setting to comply with 
+ the specified frequency or period (FUNCtion:PULSe:PERiod).</li>
+        </ul>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>frequency</i>&gt; in Hz, default 1 kHz</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.</p>
+                        <p>1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit. Default 100 mVpp into 50 &#937;</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output a 5 Vpp pulse wave at 1 kHz with a -2.5 V offset:<br />APPL:PULS 1 KHZ, 5.0 V, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">Frequency</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The APPLy command must be appropriate for the function. For example, APPL:PULS 300 
+ MHz results in a "Data out of range" error. In that case, the frequency 
+ would be set to the instrument's maximum frequency for a pulse.</li>
+        </ul>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor59"></a><a name="APPLy_RAMP"></a>[SOURce[1|2]:]APPLy:RAMP [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]<br /><br /><a name="kanchor60"></a><a name="APPLy_TRIangle"></a>[SOURce[1|2]:]APPLy:TRIangle [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a ramp wave or triangle wave with the specified frequency, amplitude, and DC offset. In addition, <a href="#APPLy">APPLy</a> performs the following operations:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">APPLy:RAMP overrides the current 
+ symmetry setting (<a href="FUNCtion_Subsystem.htm#FUNCtion_RAMP_SYMMetry">FUNCtion:RAMP:SYMMetry</a>), 
+ and sets 100% symmetry for the ramp waveform.</li>
+            <li class="IndentTight" value="2">APPLy:TRIangle is simply a special case of APPLy:RAMP. It is equivalent to a ramp waveform with 50% symmetry.</li>
+        </ul>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>frequency</i>&gt; in Hz, default 1 kHz</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.</p>
+                        <p>1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit. Default 100 mVpp into 50 &#937;</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p>Configure a 5 V ramp wave at 3 kHz with 0 V offset:<br />APPL:RAMP 3 KHZ, 5.0 V, 0 </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">Frequency</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The APPLy command must be appropriate for the function. For example, the command APPL:RAMP 5 MHz results in a "Data out of range" error. In that case, the frequency 
+ would be set to 200 kHz, which is the maximum for a ramp.</li>
+        </ul>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li style="margin-left: 24px;" class="CmdSyntax" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor61"></a><a name="APPLy_SINusoid"></a>[SOURce[1|2]:]APPLy:SINusoid [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a sine wave  with the specified 
+ frequency, amplitude, and DC offset.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>frequency</i>&gt; </p>
+                        <p> from 1 &#956;Hz to instrument's maximum frequency.</p>
+                        <p> Default 1 kHz</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.</p>
+                        <p>1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit. Default 100 mVpp into 50 &#937;.</p>
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Output 3 Vpp sine wave at 5 kHz with -2.5 V offset.<br />APPL:SIN 5 KHZ, 3.0 VPP, -2.5 V</td>
+                </tr>
+            </tbody>
+        </table>
+        <blockquote>
+            <p>
+            </p>
+        </blockquote>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li style="margin-left: 24px;" class="CmdSyntax" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor62"></a><a name="APPLy_SQUare"></a>[SOURce[1|2]:]APPLy:SQUare [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</h2>
+        <p class="IndentTight">Outputs a square wave with the specified frequency, amplitude, and DC offset. In addition, <a href="#APPLy">APPLy</a> performs the following operations:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Overrides the current duty cycle setting (FUNCtion:SQUare:DCYCle), 
+ and  sets a 50% duty cycle for the square wave.</li>
+        </ul>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>frequency</i>&gt;</p>
+                        <p> from 1 &#956;Hz to instrument's maximum frequency.</p>
+                        <p> Default 1 kHz.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="3">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>amplitude</i>&gt; Desired output amplitude in Vpp, Vrms or dBm, as specified by <a href="VOLTage_Subsystem.htm#VOLTage_UNIT">VOLTage:UNIT</a>.</p>
+                        <p>1 mVpp to 10 Vpp into 50 &#937;, or twice that into an open circuit. Default 100 mVpp (into 50 &#937;)</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>offset</i>&gt; is the DC offset voltage (default 0), from ±5 VDC into 50 &#937;, or from ±10 VDC into an open circuit.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Output 3 V square wave at 5 kHz with -2.5 V offset:<br />APPL:SQU 5 KHZ, 3.0 V, -2.5 V</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold;margin-left: 24px;">Frequency</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The APPLy command must be appropriate for the function. For example, APPL:SQU&#160;40&#160;MHz results in a "Data out of range" error and the instrument sets the frequency to its maximum frequency for a square wave.</li>
+        </ul>
+        <p style="margin-left: 24px;font-weight: bold;">Offset Voltage</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+        </ul>
+        
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="n" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <body>
+        <h1>FSKey Subsystem<a name="kanchor124"></a></h1>
+        <p>The FSKey subsystem configures a frequency-shift keying (FSK) waveform.</p>
+        <h2>Example</h2>
+        <p>This summarizes the steps required to generate  an FSK waveform.</p>
+        <ol style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="1">Use FUNCtion, FREQuency, VOLTage, and VOLTage:OFFSet commands to select the function, frequency, amplitude, and offset of the carrier waveform.</li>
+            <li class="IndentTight" value="2"><b>Select modulation source (internal, external, CH1, or CH2):</b><a href="01%20(Modulation)_SOURce.htm">FSK:SOURce</a>. For an external modulation source, skip steps 3 and 4.</li>
+            <li class="IndentTight" value="3"><b>Select alternate ("hop") frequency:</b> <a href="#FSKey_FREQuency">FSK:FREQuency</a></li>
+            <li class="IndentTight" value="4"><b>Set FSK rate:</b> <a href="#FSKey_INTernal_RATE">FSK:INTernal:RATE</a></li>
+            <li class="IndentTight" value="5"><b>Enable FSK Modulation:</b> <a href="02%20(Modulation)_STATe.htm">FSK:STATe ON</a></li>
+        </ol>
+        <p>The following code produces the oscilloscope image shown below.</p>
+        <p class="Shaded">FUNCtion SQU<br />FREQuency +1e6<br />VOLTage +1.0<br />VOLTage:OFFset 0.0<br />FSKey:SOURce INT<br />FSKey:FREQuency +5e5<br />FSKey:INTernal:RATE +8e4<br />FSKey:STATe 1<br />OUTPut1 1</p>
+        <p>
+            <img src="../_Graphics_/scope_5d.png" />
+        </p>
+        <h2><a name="kanchor125"></a><a name="FSKey_FREQuency"></a>[SOURce[1|2]:]FSKey:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FSKey:FREQuency?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the FSK alternate (or "hop") frequency.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 
+ &#956;Hz to maximum instrument frequency (200 kHz limit for ramps), default 100 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E-06</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set hop frequency to 10 kHz:<br />FSK:FREQ 10000</p>
+                        <p colspan="2">Set hop frequency to 1 &#956;Hz:<br />FSK:FREQ MIN</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor126"></a><a name="FSKey_INTernal_RATE"></a>[SOURce[1|2]:]FSKey:INTernal:RATE {&lt;<i>rate_in_Hz</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FSKey:INTernal:RATE?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the rate at which output frequency 
+ "shifts" between the carrier and hop frequency.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 mHz to 1 MHz, default 100 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E-03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set FSK rate to 10 kHz:<br />FSK:INT:RATE 10000</p>
+                        <p colspan="2">Set FSK rate to 1 mHz:<br />FSK:INT:RATE MIN</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The FSK rate is  used only with the internal source (<a href="01%20(Modulation)_SOURce.htm">FSK:SOURce INTernal</a>).</li>
+            <li class="IndentTight" value="2">The modulating waveform is a square  wave with a 50% duty cycle.</li>
+        </ul>
+        
+    </body>
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>FSKey Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <!-- <html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="FSK Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" 
+     -->
+</html>

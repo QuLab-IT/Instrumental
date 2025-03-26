@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="Command_Quick_Reference" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:check_list="Ran Smart Index" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Command Quick Reference</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="TOP"></a><a name="kanchor373"></a>Agilent 33500 Series Command Quick Reference<a name="kanchor374"></a></h1>
+        <p>See the <a href="../__I_SCPI/00%20scpi_introduction.htm#Syntax_SCPI_intro">Syntax Conventions</a> for SCPI.</p>
+        <h3><a name="APPLy"></a>APPLy Commands</h3>
+        <p>[SOURce[1|2]:]APPLy?</p>
+        <p>[SOURce[1|2]:]APPLy: ARBitrary [{&lt;<i>sample_rate</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:DC [{&lt;<i>frequency</i>&gt;|DEF} [,{&lt;<i>amplitude</i>&gt;|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:NOISe [{&lt;<i>frequency</i>&gt;|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:PRBS  [{&lt;<i>frequency</i>&gt;|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:PULSe [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:RAMP [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:SINusoid [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>[SOURce[1|2]:]APPLy:SQUare [{&lt;<i>frequency</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>amplitude</i>&gt;|MIN|MAX|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <h3><a name="DATA"></a>DATA Commands</h3>
+        <p>DATA:ARB2:FORMat {AABB|ABAB}</p>
+        <p>[SOURce[1|2]:]DATA:ARBitrary[1|2] {&lt;<i>arb_name</i>&gt;}, {&lt;binary_block&gt; | &lt;<i>value</i>&gt;, &lt;<i>value</i>&gt;, . . .}</p>
+        <p>[SOURce[1|2]:]DATA:ARBitrary[1|2]:DAC {&lt;<i>arb_name</i>&gt;}, {&lt;binary_block&gt; | &lt;<i>value</i>&gt;, &lt;<i>value</i>&gt;, . . .}</p>
+        <p>[SOURce[1|2]:]DATA:ATTRibute:AVERage?  [&lt;<i>arb_name</i>&gt;]</p>
+        <p>[SOURce[1|2]:]DATA:ATTRibute:CFACtor?  [&lt;<i>arb_name</i>&gt;]</p>
+        <p>[SOURce[1|2]:]DATA:ATTRibute:POINts?  [&lt;<i>arb_name</i>&gt;]</p>
+        <p>[SOURce[1|2]:]DATA:ATTRibute:PTPeak? [&lt;<i>arb_name</i>&gt;]</p>
+        <p>[SOURce[1|2]:]DATA:SEQuence &lt;<i>block_descriptor</i>&gt;</p>
+        <p>[SOURce[1|2]:]DATA:VOLatile:CATalog?</p>
+        <p>[SOURce[1|2]:]DATA:VOLatile:CLEar</p>
+        <p>[SOURce[1|2]:]DATA:VOLatile:FREE?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><a name="Output"></a>Output Configuration Commands</h3>
+        <p>[SOURce[1|2]:]FUNCtion &lt;<i>function</i>&gt;</p>
+        <p>[SOURce[1|2]:]FUNCtion?</p>
+        <p>
+        </p>
+        <p class="CmdQRG"><b>FREQUENCY CONTROL</b>
+        </p>
+        <p>[SOURce[1|2]:]FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FREQuency:CENTer {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FREQuency:CENTer? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:MODE &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:MODE?</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:OFFSet &lt;<i>frequency</i>&gt;</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:OFFSet?</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:RATio &lt;<i>ratio</i>&gt;</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle:RATio?</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle[:STATe] &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]FREQuency:COUPle[:STATe]?</p>
+        <p>[SOURce[1|2]:]FREQuency:MODE &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]FREQuency:MODE?</p>
+        <p>[SOURce[1|2]:]FREQuency:SPAN {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FREQuency:SPAN? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FREQuency:STARt {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FREQuency:STARt? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FREQuency:STOP {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FREQuency:STOP? [{MINimum|MAXimum}]</p>
+        <p class="CmdQRG" style="color: #0000ff;">&#160;</p>
+        <p class="CmdQRG"><b>FREQUENCY LIST MODE</b>
+        </p>
+        <p>[SOURce[1|2]:]LIST:DWELl {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]LIST:DWELl? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]LIST:FREQuency &lt;<i>freq1</i>&gt;[,&lt;<i>freq2</i>&gt;, etc.]</p>
+        <p>[SOURce[1|2]:]LIST:FREQuency?</p>
+        <p>[SOURce[1|2]:]LIST:FREQuency:POINts? [{MINimum|MAXimum}]</p>
+        <p>MMEMory:LOAD:LIST[1|2] &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:STORe:LIST &lt;<i>filename</i>&gt;</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <p class="CmdQRG"><b>VOLTAGE</b>
+        </p>
+        <p>[SOURce[1|2]:]VOLTage {&lt;<i>amplitude</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]VOLTage? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]VOLTage:COUPle[:STATe] &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]VOLTage:COUPle[:STATe]?</p>
+        <p>[SOURce[1|2]:]VOLTage:HIGH {&lt;<i>voltage</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:HIGH? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]VOLTage:LOW {&lt;<i>voltage</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:LOW? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:HIGH {&lt;<i>voltage</i>&gt;|MAXimum|MINimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:HIGH? {MAXimum|MINimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:LOW {&lt;<i>voltage</i>&gt;|MAXimum|MINimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:LOW? {MAXimum|MINimum}?</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]VOLTage:LIMit:STATe?</p>
+        <p>[SOURce[1|2]:]VOLTage:OFFSet {&lt;<i>offset</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]VOLTage:OFFSet? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]VOLTage:RANGe:AUTO &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]VOLTage:RANGe:AUTO?</p>
+        <p>[SOURce[1|2]:]VOLTage:UNIT &lt;units&gt;</p>
+        <p>[SOURce[1|2]:]VOLTage:UNIT?</p>
+        <p />
+        <p class="CmdQRG">&#160;</p>
+        <p class="CmdQRG"><b>SQUARE WAVE</b>
+        </p>
+        <p>[SOURce[1|2]:]FUNCtion:SQUare:DCYCle {&lt;percent&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:SQUare:DCYCle? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FUNCtion:SQUare:PERiod {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:SQUare:PERiod? [{MINimum|MAXimum}]</p>
+        <p class="CmdQRG" style="font-weight: normal;color: #0000ff;">&#160;</p>
+        <p class="CmdQRG"><b>RAMP</b>
+        </p>
+        <p>[SOURce[1|2]:]FUNCtion:RAMP:SYMMetry {&lt;<i>percent</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:RAMP:SYMMetry? [{MINimum|MAXimum}]</p>
+        <p>&#160;</p>
+        <p class="CmdQRG"><b>NOISE</b>
+        </p>
+        <p>[SOURce[1|2]:]FUNCtion:NOISe:BANDwidth {&lt;<i>bandwidth</i>&gt;| MINimum | MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:NOISe:BANDwidth? [{MINimum | MAXimum}]</p>
+        <p class="CmdQRG" style="font-weight: normal;color: #0000ff;">&#160;</p>
+        <p class="CmdQRG"><b>PRBS</b>
+        </p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:BRATe {&lt;<i>bit_rate</i>&gt;|MINimum|MAXimum&gt;}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:BRATe? {&lt;<i>bit_rate</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:DATA &lt;<i>sequence_type</i>&gt;</p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:DATA?</p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:TRANsition[:BOTH] {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PRBS:TRANsition[:BOTH]? [{MINimum|MAXimum}]</p>
+        <p class="CmdQRG" style="font-weight: normal;color: #0000ff;">&#160;</p>
+        <p class="CmdQRG"><b>ARBITRARY WAVEFORM</b>
+        </p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary {&lt;<i>filename</i>&gt;}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary?</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:ADVance &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:ADVance?</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:FILTer &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:FILTer?</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:FREQuency? {MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:PERiod {&lt;<i>period</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:PERiod? {MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:POINts?</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:SRATe {&lt;<i>sample_rate</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:ARBitrary:SRATe? {MINimum|MAXimum}</p>
+        <p>FUNCtion:ARBitrary:BALance[:STATe] &lt;<i>state</i>&gt; <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:BALance[:STATe]? <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:BALance:GAIN {&lt;<i>percent</i>&gt;|MINimum|MAXimum} <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:BALance:GAIN? [MINimum|MAXimum} <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:BALance:OFFSet[1|2]?{<i>volts</i>|MINimum|MAXimum} <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:BALance:OFFSet[1|2]? [MINimum|MAXimum] <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:SKEW[:STATe] &lt;<i>state</i>&gt; <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:SKEW[:STATe]? <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:SKEW:TIME &lt;<i>seconds</i>&gt; <b>(IQ&#160;Player option only)</b></p>
+        <p>FUNCtion:ARBitrary:SKEW:TIME? <b>(IQ&#160;Player option only)</b></p>
+        <p>[SOURce[1|2]:]RATE:COUPle:MODE &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]RATE:COUPle:MODE?</p>
+        <p>[SOURce[1|2]:]RATE:COUPle:OFFSet &lt;<i>sample_rate</i>&gt;</p>
+        <p>[SOURce[1|2]:]RATE:COUPle:OFFSet?</p>
+        <p>[SOURce[1|2]:]RATe:COUPle:RATio &lt;<i>ratio</i>&gt;</p>
+        <p>[SOURce[1|2]:]RATe:COUPle:RATio?</p>
+        <p>[SOURce[1|2]:]RATE:COUPle[:STATe] &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]RATE:COUPle[:STATe]?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <p class="CmdQRG" style="font-weight: normal;color: #0000ff;">&#160;</p>
+        <p class="CmdQRG"><b>OUTPUT</b>
+        </p>
+        <p>OUTPut[1|2]  &lt;<i>state</i>&gt;</p>
+        <p>OUTPut[1|2]?</p>
+        <p>OUTPut[1|2]:LOAD {&lt;ohms&gt;|INFinity|MINimum|MAXimum}</p>
+        <p>OUTPut[1|2]:LOAD? [{MINimum|MAXimum}]</p>
+        <p>OUTPut[1|2]:MODE &lt;<i>mode</i>&gt;</p>
+        <p>OUTPut[1|2]:MODE?</p>
+        <p>OUTPut[1|2]:POLarity  &lt;<i>polarity</i>&gt;</p>
+        <p>OUTPut[1|2]:POLarity?</p>
+        <p>OUTPut:SYNC  &lt;<i>state</i>&gt;</p>
+        <p>OUTPut:SYNC?</p>
+        <p>OUTPut[1|2]:SYNC:MODE  &lt;<i>mode</i>&gt;</p>
+        <p>OUTPut[1|2]:SYNC:MODE?</p>
+        <p>OUTPut[1|2]:SYNC:POLarity  &lt;<i>polarity</i>&gt;</p>
+        <p>OUTPut[1|2]:SYNC:POLarity?</p>
+        <p>OUTPut:SYNC:SOURce  &lt;<i>channel</i>&gt;</p>
+        <p>OUTPut:SYNC:SOURce?</p>
+        <p>OUTPut:TRIGger  &lt;<i>state</i>&gt;</p>
+        <p>OUTPut:TRIGger?</p>
+        <p>OUTPut:TRIGger:SLOPe  &lt;<i>slope</i>&gt;</p>
+        <p>OUTPut:TRIGger:SLOPe?</p>
+        <p>OUTPut:TRIGger:SOURce  &lt;<i>channel</i>&gt;</p>
+        <p>OUTPut:TRIGger:SOURce?</p>
+        <h3><a name="Pulse"></a>Pulse Configuration Commands</h3>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:DCYCle {&lt;<i>percent</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:DCYCle? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:HOLD &lt;<i>parameter</i>&gt;</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:HOLD?</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:PERiod {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:PERiod? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition[:BOTH] {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:LEADing {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:LEADing? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:TRAiling {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:TRAiling? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:WIDTh {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FUNCtion:PULSe:WIDTh? [{MINimum|MAXimum}]</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <p>
+        </p>
+        <h3><a name="Modulation"></a>Modulation Commands</h3>
+        <p class="CmdQRG"><b>&#160; &#160; &#160; </b>
+            <br class="Bold" /><b>AM</b>
+        </p>
+        <p>[SOURce[1|2]:]AM[:DEPTh] {&lt;depth_in_percent&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]AM[:DEPTh]? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]AM:DSSC  &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]AM:DSSC?</p>
+        <p>[SOURce[1|2]:]AM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]AM:INTernal:FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]AM:INTernal:FUNCtion &lt;<i>function</i>&gt;</p>
+        <p>[SOURce[1|2]:]AM:INTernal:FUNCtion?</p>
+        <p>[SOURce[1|2]:]AM:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]AM:SOURce?</p>
+        <p>[SOURce[1|2]:]AM:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]AM:STATe?</p>
+        <p class="CmdQRG" style="color: #0000ff;"><b>&#160; &#160; &#160; &#160; &#160; <br /><span style="color: #000000;">FM</span></b>
+        </p>
+        <p>[SOURce[1|2]:]FM[:DEViation] {&lt;<i>peak_deviation_in_Hz</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FM[:DEViation]? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FM:INTernal:FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FM:INTernal:FUNCtion &lt;<i>function</i>&gt;</p>
+        <p>[SOURce[1|2]:]FM:INTernal:FUNCtion?</p>
+        <p>[SOURce[1|2]:]FM:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]FM:SOURce?</p>
+        <p>[SOURce[1|2]:]FM:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]FM:STATe?</p>
+        <p class="CmdQRG">&#160;</p>
+        <p class="CmdQRG"><b>BPSK Commands</b>
+        </p>
+        <p>[SOURce[1|2]:]BPSK:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]BPSK:SOURce?</p>
+        <p>[SOURce[1|2]:]BPSK:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]BPSK:STATe?</p>
+        <p>[SOURce[1|2]:]BPSK:INTernal:RATE {&lt;<i>modulating_frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]BPSK:INTernal:RATE? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]BPSK[:PHASe] {&lt;angle&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]BPSK[:PHASe]? [{MINimum|MAXimum}]</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <p class="CmdQRG">&#160;</p>
+        <p class="CmdQRG"><b>PM</b>
+        </p>
+        <p>[SOURce[1|2]:]PM:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]PM:SOURce?</p>
+        <p>[SOURce[1|2]:]PM:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]PM:STATe?</p>
+        <p>[SOURce[1|2]:]PM:DEViation {&lt;deviation in degrees&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]PM:DEViation? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]PM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]PM:INTernal:FREQuency? [{MINimum|MAXimum}]</p>
+        <p class="CmdQRG">&#160;</p>
+        <p class="CmdQRG"><b>FSK</b>
+        </p>
+        <p>[SOURce[1|2]:]FSKey:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FSKey:FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FSKey:INTernal:RATE {&lt;rate_in_Hz&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]FSKey:INTernal:RATE? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]FSKey:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]FSKey:SOURce?</p>
+        <p>[SOURce[1|2]:]FSKey:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]FSKey:STATe?</p>
+        <p class="CmdQRG">&#160;</p>
+        <p class="CmdQRG"><b>PWM</b>
+        </p>
+        <p>[SOURce[1|2]:]PWM:DEViation {&lt;<i>deviation</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]PWM:DEViation? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]PWM:DEViation:DCYCle {&lt;<i>deviation_in_pct</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]PWM:DEViation:DCYCle? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]PWM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MAXimum|MINimum}</p>
+        <p>[SOURce[1|2]:]PWM:INTernal:FREQuency? [{MAXimum|MINimum}]</p>
+        <p>[SOURce[1|2]:]PWM:INTernal:FUNCtion &lt;<i>function</i>&gt;</p>
+        <p>[SOURce[1|2]:]PWM:INTernal:FUNCtion?</p>
+        <p>[SOURce[1|2]:]PWM:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]PWM:SOURce?</p>
+        <p>[SOURce[1|2]:]PWM:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]PWM:STATe?</p>
+        <p>
+        </p>
+        <p class="CmdQRG"><b>SUM</b>
+        </p>
+        <p>[SOURce[1|2]:]SUM:AMPLitude &lt;<i>amplitude</i>&gt;</p>
+        <p>[SOURce[1|2]:]SUM:AMPLitude? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]SUM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]SUM:INTernal:FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]SUM:INTernal:FUNCtion &lt;<i>function</i>&gt;</p>
+        <p>[SOURce[1|2]:]SUM:INTernal:FUNCtion?</p>
+        <p>[SOURce[1|2]:]SUM:SOURce &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]SUM:SOURce?</p>
+        <p>[SOURce[1|2]:]SUM:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]SUM:STATe?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><a name="Sweep"></a>Frequency Sweep</h3>
+        <p>[SOURce[1|2]:]SWEep:HTIMe {&lt;hold_time&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]SWEep:HTIMe? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]SWEep:RTIMe {&lt;return_time&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]SWEep:RTIMe? [ MINimum|MAXimum]</p>
+        <p>[SOURce[1|2]:]SWEep:SPACing &lt;<i>method</i>&gt;</p>
+        <p>[SOURce[1|2]:]SWEep:SPACing?</p>
+        <p>[SOURce[1|2]:]SWEep:TIME {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]SWEep:TIME? [{MINimum|MAXimum}]</p>
+        <p>
+        </p>
+        <h3><a name="Burst"></a>Burst Mode</h3>
+        <p>[SOURce[1|2]:]BURSt:GATE:POLarity &lt;<i>polarity</i>&gt;</p>
+        <p>[SOURce[1|2]:]BURSt:GATE:POLarity?</p>
+        <p>[SOURce[1|2]:]BURSt:INTernal:PERiod {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]BURSt:INTernal:PERiod? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]BURSt:MODE &lt;method&gt;</p>
+        <p>[SOURce[1|2]:]BURSt:MODE?</p>
+        <p>[SOURce[1|2]:]BURSt:NCYCles {&lt;num_cycles&gt;|INFinity|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]BURSt:NCYCles? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]BURSt:PHASe {&lt;angle&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]BURSt:PHASe? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]BURSt:STATe &lt;<i>state</i>&gt;</p>
+        <p>[SOURce[1|2]:]BURSt:STATe?</p>
+        <p class="CmdQRG" style="color: #0000ff;">&#160;</p>
+        <h3><b><a name="Triggering"></a>Trigger Setup</b>
+        </h3>
+        <p>TRIGger[1|2]</p>
+        <p>TRIGger[1|2]:COUNt &lt;<i>number</i>&gt;</p>
+        <p>TRIGger[1|2]:COUNt?</p>
+        <p>TRIGger[1|2]:DELay {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>TRIGger[1|2]:DELay?</p>
+        <p>TRIGger[1|2]:SLOPe &lt;slope&gt;</p>
+        <p>TRIGger[1|2]:SLOPe?</p>
+        <p>TRIGger[1|2]:SOURce &lt;<i>source</i>&gt;</p>
+        <p>TRIGger[1|2]:SOURce?</p>
+        <p>TRIGger[1|2]:TIMer {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}</p>
+        <p>TRIGger[1|2]:TIMer? {MINimum|MAXimum}</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><a name="State_storage"></a>State Storage</h3>
+        <p>MEMory:NSTates?</p>
+        <p>MEMory:STATe:CATalog?</p>
+        <p>MEMory:STATe:DELete &lt;<i>location</i>&gt;</p>
+        <p>MEMory:STATe:NAME {0|1|2|3|4} [,&lt;<i>name</i>&gt;]</p>
+        <p>MEMory:STATe:NAME? {0|1|2|3|4}</p>
+        <p>MEMory:STATe:RECall:AUTO &lt;<i>mode</i>&gt;</p>
+        <p>MEMory:STATe:RECall:AUTO?</p>
+        <p>MEMory:STATe:VALid? &lt;<i>location</i>&gt;</p>
+        <p class="CmdQRG" style="color: #0000ff;font-weight: bold;">&#160;</p>
+        <h3><a name="MassMemory"></a>Mass Memory</h3>
+        <p>MMEMory:CATalog[:ALL]? [&lt;<i>folder</i>&gt;]</p>
+        <p>MMEMory:CATalog:DATA:ARBitrary? [&lt;<i>folder</i>&gt;]</p>
+        <p>MMEMory:CATalog:STATe? [&lt;<i>folder</i>&gt;]</p>
+        <p>MMEMory:CDIRectory &lt;<i>folder</i>&gt;</p>
+        <p>MMEMory:MDIRectory &lt;<i>folder</i>&gt;</p>
+        <p>MMEMory:RDIRectory &lt;<i>folder</i>&gt;</p>
+        <p>MMEMory:COPY &lt;<i>file1</i>&gt;,&lt;<i>file2</i>&gt;</p>
+        <p>MMEMory:COPY:SEQuence &lt;<i>source</i>&gt;,&lt;destination&gt;</p>
+        <p>MMEMory:DELete &lt;<i>file</i>&gt;</p>
+        <p>MMEMory:DOWNload:DATA &lt;<i>binary_block</i>&gt;</p>
+        <p>MMEMory:DOWNload:FNAMe &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:LOAD:ALL &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:LOAD:DATA[1|2] &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:LOAD:LIST[1|2] &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:LOAD:STATe &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:MOVE &lt;<i>file1</i>&gt;,&lt;<i>file2</i>&gt;</p>
+        <p>MMEMory:STORe:ALL &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:STORe:DATA[1|2] &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:STORe:LIST &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:STORe:STATe &lt;<i>filename</i>&gt;</p>
+        <p>MMEMory:UPLoad? &lt;<i>filename</i>&gt;</p>
+        <p>
+        </p>
+        <h3><a name="System"></a>System</h3>
+        <p>DISPlay &lt;<i>mode</i>&gt;</p>
+        <p>DISPlay?</p>
+        <p>DISPlay:TEXT &lt;<i>string</i>&gt;</p>
+        <p>DISPlay:TEXT?</p>
+        <p>DISPlay:TEXT:CLEar</p>
+        <p>
+        </p>
+        <p>HCOPy:SDUMp:DATA?</p>
+        <p>HCOPy:SDUMp:DATA:FORMat &lt;<i>graphics_format</i>&gt;</p>
+        <p>HCOPy:SDUMp:DATA:FORMat?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><b><a name="LXI"></a>LXI</b>
+        </h3>
+        <p>LXI:IDENtify[:STATE] &lt;<i>state</i>&gt;</p>
+        <p>LXI:IDENtify[:STATE]?</p>
+        <p>LXI:MDNS:ENABle &lt;<i>state</i>&gt;</p>
+        <p>LXI:MDNS:ENABle?</p>
+        <p>LXI:MDNS:HNAMe:RESolved?</p>
+        <p>LXI:MDNS:SNAMe:DESired &lt;<i>name</i>&gt;</p>
+        <p>LXI:MDNS:SNAMe:DESired?</p>
+        <p>LXI:MDNS:SNAMe:RESolved?</p>
+        <p>LXI:RESet</p>
+        <p>LXI:RESTart</p>
+        <p>
+        </p>
+        <h3><a name="Interface_config"></a>Remote Interface Configuration</h3>
+        <p>SYSTem:BEEPer[:IMMediate]</p>
+        <p>SYSTem:BEEPer:STATe &lt;<i>mode</i>&gt;</p>
+        <p>SYSTem:BEEPer:STATe?</p>
+        <p>SYSTem:COMMunicate:ENABle &lt;<i>state</i>&gt;, &lt;interface&gt;</p>
+        <p>SYSTem:COMMunicate:ENABle? &lt;interface&gt;</p>
+        <p>SYSTem:COMMunicate:GPIB:ADDRess {&lt;<i>address</i>&gt;}</p>
+        <p>SYSTem:COMMunicate:GPIB:ADDRess?</p>
+        <p>SYSTem:COMMunicate:LAN:CONTrol?</p>
+        <p>SYSTem:COMMunicate:LAN:DHCP &lt;<i>state</i>&gt;</p>
+        <p>SYSTem:COMMunicate:LAN:DHCP?</p>
+        <p>SYSTem:COMMunicate:LAN:DNS[1|2] "&lt;<i>address</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:DNS[1|2]? [{CURRent | STATic}]</p>
+        <p>SYSTem:COMMunicate:LAN:DOMain?</p>
+        <p>SYSTem:COMMunicate:LAN:GATeway "&lt;<i>address</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:GATeway? [{CURRent | STATic}]</p>
+        <p>SYSTem:COMMunicate:LAN:HOSTname "&lt;<i>name</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:HOSTname? [{CURRent | STATic}]</p>
+        <p>SYSTem:COMMunicate:LAN:IPADdress "&lt;<i>address</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:IPADdress? [{CURRent | STATic}]</p>
+        <p>SYSTem:COMMunicate:LAN:MAC?</p>
+        <p>SYSTem:COMMunicate:LAN:SMASk "&lt;<i>mask</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:SMASk? [{CURRent | STATic}]</p>
+        <p>SYSTem:COMMunicate:LAN:TELNet:PROMpt "&lt;<i>string</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:TELNet:PROMpt?</p>
+        <p>SYSTem:COMMunicate:LAN:TELNet:WMESsage "&lt;<i>string</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:TELNet:WMESsage?</p>
+        <p>SYSTem:COMMunicate:LAN:UPDate</p>
+        <p>SYSTem:COMMunicate:LAN:WINS[1|2] "&lt;<i>address</i>&gt;"</p>
+        <p>SYSTem:COMMunicate:LAN:WINS[1|2]? [{CURRent | STATic}]</p>
+        <p>SYSTem:DATE &lt;<i>yyyy</i>&gt;, &lt;<i>mm</i>&gt;, &lt;<i>dd</i>&gt;</p>
+        <p>SYSTem:DATE?</p>
+        <p>SYSTem:ERRor?</p>
+        <p>SYSTem:LICense:CATalog?</p>
+        <p>SYSTem:LICense:DELete &lt;<i>option_name</i>&gt;</p>
+        <p>SYSTem:LICense:DELete:ALL</p>
+        <p>SYSTem:LICense:DESCription? "&lt;<i>option_name</i>&gt;"</p>
+        <p>SYSTem:LICense:ERRor?</p>
+        <p>SYSTem:LICense:ERRor:COUNt?</p>
+        <p>SYSTem:LICense:INSTall [{&lt;<span class="hcp1" style="font-style: italic;">folder</span>&gt; | &lt;<span class="hcp1" style="font-style: italic;">file</span><span>&gt;}</span>]</p>
+        <p>SYSTem:LICense:INSTall? &lt;<span class="hcp1" style="font-style: italic;">option</span>&gt;</p>
+        <p>SYSTem:LOCK:NAME?</p>
+        <p>SYSTem:LOCK:OWNer?</p>
+        <p>SYSTem:LOCK:RELease</p>
+        <p>SYSTem:LOCK:REQuest?</p>
+        <p>SYSTem:SECurity:IMMediate</p>
+        <p>SYSTem:TIME &lt;<i>hh</i>&gt;, &lt;<i>mm</i>&gt;, &lt;<i>ss</i>&gt;</p>
+        <p>SYSTem:TIME?</p>
+        <p>SYSTem:VERSion?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><a name="Phase_lock"></a>Phase-Lock</h3>
+        <p>[SOURce[1|2]:]PHASe {&lt;<i>angle</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]PHASe? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]PHASe:REFerence</p>
+        <p>[SOURce[1|2]:]PHASe:SYNChronize</p>
+        <p>[SOURce[1|2]:]PHASe:UNLock:ERRor:STATe &lt;<i>mode</i>&gt;</p>
+        <p>[SOURce[1|2]:]PHASe:UNLock:ERRor:STATe?</p>
+        <p>ROSCillator:SOURce &lt;<i>source</i>&gt;</p>
+        <p>ROSCillator:SOURce?</p>
+        <p>ROSCillator:SOURce:AUTO &lt;<i>state</i>&gt;</p>
+        <p>ROSCillator:SOURce:AUTO?</p>
+        <p>ROSCillator:SOURce:CURRent?</p>
+        <p>
+        </p>
+        <h3><a name="Calibration"></a>Calibration</h3>
+        <p>CALibration?</p>
+        <p>CALibration:COUNt?</p>
+        <p>CALibration:SECure:CODE &lt;<i>new_code</i>&gt;</p>
+        <p>CALibration:SECure:STATe  &lt;<i>mode</i>&gt;, &lt;<i>code</i>&gt;</p>
+        <p>CALibration:SECure:STATe?</p>
+        <p>CALibration:SETup  &lt;<i>step_number</i>&gt;</p>
+        <p>CALibration:SETup?</p>
+        <p>CALibration:STRing "&lt;<i>quoted_string</i>&gt;"</p>
+        <p>CALibration:STRing?</p>
+        <p>CALibration:VALue  &lt;<i>measurement</i>&gt;</p>
+        <p>CALibration:VALue?</p>
+        <p />
+        <h3><a name="IEEE_488"></a>IEEE-488 </h3>
+        <p>*CLS</p>
+        <p>*ESR?</p>
+        <p>*IDN?</p>
+        <p>*OPC</p>
+        <p>*OPC?</p>
+        <p>*OPT?</p>
+        <p>*PSC &lt;<i>mode</i>&gt;</p>
+        <p>*PSC?</p>
+        <p>*RCL &lt;<i>state_storage_location</i>&gt;</p>
+        <p>*RST</p>
+        <p>*SAV &lt;<i>state_storage_location</i>&gt;</p>
+        <p>*SRE &lt;<i>enable_value</i>&gt;</p>
+        <p>*SRE?</p>
+        <p>*STB?</p>
+        <p>*TRG</p>
+        <p>*TST?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        <h3><b><a name="Status"></a>Status</b>
+        </h3>
+        <p>STATus:OPERation:CONDition?</p>
+        <p>STATus:OPERation:ENABle &lt;<i>enable_value</i>&gt;</p>
+        <p>STATus:OPERation:ENABle?</p>
+        <p>STATus:OPERation[:EVENt]?</p>
+        <p>STATus:QUEStionable:CONDition?</p>
+        <p>STATus:QUEStionable:ENABle &lt;<i>enable_value</i>&gt;</p>
+        <p>STATus:QUEStionable:ENABle?</p>
+        <p class="CmdQRG">&#160;</p>
+        <h3><b><a name="Miscellaneous"></a>Miscellaneous</b>
+        </h3>
+        <p>ABORt</p>
+        <p>[SOURce[1|2]:]COMBine:FEED &lt;<i>source</i>&gt;</p>
+        <p>[SOURce[1|2]:]COMBine:FEED?</p>
+        <p>FORMat:BORDer &lt;<i>byte_order</i>&gt;</p>
+        <p>FORMat:BORDer?</p>
+        <p>INITiate[1|2]:CONTinuous &lt;<i>state</i>&gt;</p>
+        <p>INITiate[1|2]:CONTinuous?</p>
+        <p>INITiate:CONTinuous:ALL &lt;<i>state</i>&gt;</p>
+        <p>INITiate[1|2][:IMMediate]</p>
+        <p>INITiate:IMMediate:ALL</p>
+        <p>[SOURce[1|2]:]MARKer:CYCLe {&lt;<i>cycle_num</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]MARKer:CYCLe? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]MARKer:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]MARKer:FREQuency? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]MARKer:POINt {&lt;<i>sample_number</i>&gt;|MINimum|MAXimum}</p>
+        <p>[SOURce[1|2]:]MARKer:POINt? [{MINimum|MAXimum}]</p>
+        <p>[SOURce[1|2]:]TRACk &lt;<i>track_mode</i>&gt;</p>
+        <p>UNIT:ANGLe &lt;<i>units</i>&gt; UNIT:ANGLe?</p>
+        <p><a href="#TOP"><img src="../grey_top.gif" MadCap:conditions="Primary.NotPDF" alt="Arrow to top" /></a>
+        </p>
+        
+    </body>
+</html>

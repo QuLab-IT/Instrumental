@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="Enable_Register" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries|IEEE-488 Common Commands" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Enable Register</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor194"></a>Registers</h1>
+        <p>The instrument uses three different type of registers to enable, flag and track instrument features.</p>
+        <ul>
+            <li class="Indented1" value="1">An enable register defines which bits in the event register will be reported to the Status Byte register group. You can write to or read from an enable register.</li>
+            <li class="Indented1" value="2">A condition register continuously monitors the state of the instrument. The bits in the condition register are updated in real time and the bits are not latched or buffered.</li>
+            <li class="Indented1" value="3">An event register latches the various events from the condition register. There is no buffering in this register; while an event bit is set, subsequent events corresponding to that bit are ignored. This is a read-only register.</li>
+        </ul>
+        <p class="IndentTight" MadCap:conditions="Primary.NotPDF">
+        </p>
+        <p class="IndentTight" MadCap:conditions="Primary.NotPDF">&#160;</p>
+        
+    </body>
+</html>

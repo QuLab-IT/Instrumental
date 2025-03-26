@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Pulse Width Modulation (PWM)</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Pulse Width Modulation (PWM)<a name="kanchor429"></a></h1>
+        <p>This section discusses PWM, which stands for pulse-width modulation. PWM is only available for the Pulse waveform, and the pulse width varies according to the modulating signal. The amount by which the pulse width varies is called the width deviation, and it can be specified as a percentage of the waveform period (that is, duty cycle) or in units of time. For example, if you specify a pulse with 20% duty cycle and then enable PWM with a 5% deviation, the duty cycle varies from 15% to 25% under control of the modulating signal.  </p>
+        <p>The instrument accepts an internal or external modulation source.</p>
+        <h2><a name="To_Select_PWM_Modulation"></a>To Select PWM</h2>
+        <ul>
+            <li class="IndentTight" value="1">You cannot enable PWM when sweep or burst is enabled.</li>
+            <li class="IndentTight" value="2">To avoid multiple waveform changes, enable modulation after configuring the other modulation parameters.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM.png" alt="PWM softkey" /><br /><img src="../_Graphics_/Softkey%20-%20Modulate%20OFF%20On.png" alt="Modulate softkey (Off)" />&#160;&#160;&#160;<img src="../_Graphics_/SoftkeyNF%20-%20Modulate%20Off%20ON.png" alt="Modulate softkey (ON)" /><br /><br />The waveform is output using the present carrier and modulating waveform settings.</li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/02%20(Modulation)_STATe.htm">PWM:STATe {OFF|ON}</a></li>
+        </ul>
+        <h2><a name="Modulating_Waveform_Shape"></a>Modulating Waveform Shape</h2>
+        <p>The instrument accepts an internal or external modulation source.</p>
+        <ul>
+            <li class="IndentTight" value="1">The modulating waveform shape (internal source) may be:</li>
+            <li class="IndentTight2" value="2">Sine wave</li>
+            <li class="IndentTight2" value="3">Square with 50% duty cycle&#160;&#160;<img src="../_Graphics_/Modulation%20Square%2050.png" style="width: 44px;height: 22px;" alt="Modulation Square 50" /></li>
+            <li class="IndentTight2" value="4">UpRamp with 100% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20UpRamp%20100.png" style="width: 46px;height: 24px;" alt="Modulation UpRamp 100" /></li>
+            <li class="IndentTight2" value="5">Triangle with 50% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20Triangle%2050.png" style="width: 38px;height: 19px;" alt="Modulation Triangle 50" /></li>
+            <li class="IndentTight2" value="6">DnRamp with 0% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20DnRamp%200.png" style="width: 48px;height: 24px;" alt="Modulation DnRamp 0" /></li>
+            <li class="IndentTight2" value="7">Noise - white gaussian noise</li>
+            <li class="IndentTight2" value="8">PRBS - Pseudo Random Bit Sequence (polynomial PN7)</li>
+            <li class="IndentTight2" value="9">Arbitrary waveform</li>
+            <li class="IndentTight" value="10">You can use noise as the modulating waveshape, but you cannot use noise, arbitrary waveforms, or DC as the carrier.</li>
+            <li class="IndentTight" value="11"><b>Front-Panel:</b>
+                <br />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM.png" alt="PWM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Shape.png" alt="Shape softkey (Sine)" /></li>
+            <li class="IndentTight" value="12"><b>SCPI:</b> PWM:INTernal:FUNCtion {SIN|SQUare|RAMP|NRAMp| TRIangle|NOISe|PRBS|ARB}</li>
+        </ul>
+        <h2><a name="Modulating_Waveform_Frequency"></a>Modulating Waveform Frequency</h2>
+        <p>The instrument accepts an internal or external modulation source. The external modulation input has a -3dB bandwidth of 100 kHz.</p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating frequency (internal source): 1 µHz to 30 MHz. The default is 10 Hz.</li>
+            <li class="IndentTight" value="2"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM.png" alt="PWM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM%20Freq.png" alt="PWM Freq softkey" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b><a href="../__I_SCPI/PWM_Subsystem.htm#PWM_INTernal_FREQuency">[SOURce[1|2]:]PWM:INT:FREQ {&lt;freq&gt;|MIN|MAX}</a>
+            </li>
+        </ul>
+        <h2><a name="Width_or_Duty_Cycle_Deviation"></a>Width or Duty Cycle Deviation</h2>
+        <p>The PWM deviation setting is the peak variation in width of the modulated pulse waveform. You can set it in units of time or duty cycle.</p>
+        <ul>
+            <li class="IndentTight" value="1"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM.png" alt="PWM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Width%20Dev.png" alt="Width Dev softkey" /><br /><br />To set deviation in terms of duty cycle:<br /><img src="../_Graphics_/Button%20-%20Units.png" alt="Units key" /><img src="../_Graphics_/Softkey%20-%20WIDTH%20Duty%20Cyc.png" alt="Width / Duty Cycle softkey (Width)" />&#160;&#160;&#160;<img src="../_Graphics_/SoftkeyNF%20-%20Width%20DUTY%20CYC.png" alt="Width / Duty Cycle softkey (Duty Cycle)" /><br /><img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" /><img src="../_Graphics_/Softkey%20-%20Dty%20Cyc%20Dev.png" alt="Dty Cyc Dev softkey" /><br /></li>
+            <li class="IndentTight" value="2"><b>SCPI:</b> <a href="../__I_SCPI/PWM_Subsystem.htm#PWM_DEViation">PWM:DEViation {&lt;width or duty_cycle&gt;|MIN|MAX}</a></li>
+            <li class="IndentTight" value="3">The sum of the pulse width and deviation must satisfy the formula:<br /><br />Pulse Width + Deviation &lt; Period – 16 ns</li>
+            <li class="IndentTight" value="4">If necessary, the instrument will adjust the deviation to accommodate the specified period.</li>
+        </ul>
+        <h2><a name="Modulating_Source"></a>Modulating Source</h2>
+        <p>The instrument accepts an internal or external modulation source.</p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating source: Internal (default), Other Channel, or External. The External modulation source may be up to 100 kHz.</li>
+            <li class="IndentTight" value="2">If you select the <i>External</i> modulating source, the deviation is controlled by the ±5 V signal level on the rear-panel <b>Modulation In</b> connector. For example, if you have set the deviation to 1 µs, then a +5 V signal corresponds to a 1 µs increase in width. Lower signal levels produce less deviation.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Type%20AM.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;<img src="../_Graphics_/Softkey%20-%20PWM.png" alt="PWM softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Source.png" alt="Source softkey (Internal)" /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/01%20(Modulation)_SOURce.htm">PWM:SOURce {INTernal|EXTernal}</a></li>
+        </ul>
+        <h2><a name="Pulse_Waveform"></a>Pulse Waveform</h2>
+        <ul>
+            <li class="IndentTight" value="1">Pulse is the only waveform shape supported for PWM.</li>
+            <li class="IndentTight" value="2"><b>Front Panel:</b>
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+            </li>
+            <li class="IndentTight" value="3"><b>SCPI:</b> <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion">FUNCtion PULSe</a></li>
+        </ul>
+        <p>The <a href="../__I_SCPI/APPLY_Subsystem.htm#APPLy">APPLy</a> command configures a waveform with one command.</p>
+        <h2><a name="Pulse_Period"></a>Pulse Period</h2>
+        <p>The range for the pulse period is from the reciprocal of the instrument's maximum frequency up to 1,000,000 s (default 100 µs).</p>
+        <ul>
+            <li class="IndentTight" value="1"><b>Front-Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Waveform.png" alt="Waveforms key" />
+                <img src="../_Graphics_/Softkey%20-%20Pulse.png" alt="Pulse softkey" />
+                <br />
+                <img src="../_Graphics_/Button%20-%20Units.png" alt="Units key" />
+                <img src="../_Graphics_/Softkeys%20-%20FREQUENCY%20Period.png" alt="Frequency - Period softkey (Frequency)" /> <img src="../_Graphics_/SoftkeysNF%20-%20Frequency%20PERIOD.png" alt="Frequency / Period softkey (Period)" /><br /></li>
+            <li class="IndentTight" value="2"><b>SCPI:</b> <a href="../__I_SCPI/FUNCtion_Subsystem.htm#FUNCtion_PULSe_PERiod">FUNCtion:PULSe:PERiod {&lt;<i>seconds</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <p>Note that the waveform period limits the maximum deviation.</p>
+        
+    </body>
+</html>

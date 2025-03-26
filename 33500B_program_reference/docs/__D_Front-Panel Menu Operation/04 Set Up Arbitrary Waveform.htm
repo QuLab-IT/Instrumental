@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Set Up Arbitrary Waveform</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Set Up Arbitrary Waveform<a name="kanchor422"></a></h1>
+        <p>The instrument includes an embedded waveform editor that allows you to create and edit arbitrary waveforms. You can create these waveforms by editing voltage values directly or by using an combination of up to 12 different kinds of standard waveforms.</p>
+        <p>The following tutorial creates and edits a basic waveform.</p>
+        <h2><a name="Insert_Built-in_Waveforms"></a>Insert Built-in Waveforms</h2>
+        <ol>
+            <li class="IndentTight" value="1">Start the embedded waveform editor by pressing <b>[Waveforms] &gt; Arb &gt; Arbs</b>. Press <b>Edit New</b>, accept the default file name, and then <b>Start Editor</b>. You now have a 0 VDC waveform of exactly 8 points.<br /><img src="../_Graphics_/Default_Waveform.png" alt="Default waveform" /></li>
+            <li class="IndentTight" value="2">Press <b>Insert Built-in &gt; Choose Wave</b>. Use the knob or the arrows below the knob to select <b>D-Lorentz</b> and press <b>OK</b>. Use the keypad and the <b>V</b> softkey that appears when you start typing on the keypad to set the <b>Amplitude</b> to 2 V, and then press <b>OK</b>. The waveform now has 108 points, as the D-Lorentz waveform of 100	points was inserted in front of the initial 8 points.<br /><img src="../_Graphics_/AfterInsertingD-Lorentz.png" alt="After inserting D-Lorentz" /></li>
+            <li class="IndentTight" value="3">Suppose that you want to undo the change that you just made. Press <b>[System] &gt; Undo</b>. You are now back to the original 8 point, 0 V waveform.<br /><img src="../_Graphics_/AfterUndoingD-Lorentz.png" alt="After undoing D-Lorentz" /></li>
+            <li class="IndentTight" value="4">To put the D-Lorentz waveform back, press <b>Redo</b>. Then press <b>Done</b> to exit.<br /><img src="../_Graphics_/AfterRedoingD-Lorentz.png" alt="After redoing D-Lorentz" /></li>
+            <li class="IndentTight" value="5">Now we will insert a sine wave. Begin by pressing <b>Choose Wave</b>. Make sure Sine (the default) is highlighted, and press <b>OK</b>. For help in understanding the various parameters on the screen, press <b>Parameter Help</b>. Then press <b>Done</b> to exit the help screen.<br /><img src="../_Graphics_/SetUpSineParams.png" alt="Set up sine parameters" /></li>
+            <li class="IndentTight" value="6">Using the numeric keypad and the up and down arrow softkeys, set the <b>Amplitude</b> to 3.5 V, the <b>Cycles</b> to 4, and the <b>Points</b> to 200. Leave all other settings at their default values and press <b>OK</b>.<br /><img src="../_Graphics_/AfterInsertingSineWave.png" alt="After inserting sine wave" /><br /><br /></li>
+            <li class="IndentTight" value="7">Notice that the first softkey, <b>Select Point #</b> is highlighted. Put the marker on the 270th waveform point by using the numeric keypad to enter the number 270 and pressing <b>Enter</b>.<br /><img src="../_Graphics_/HighlightPoint270.png" alt="Highlight point 270" /></li>
+            <li class="IndentTight" value="8">Press <b>Choose Wave</b>, select <b>Square</b>, and then press <b>OK</b>. Set the Amplitude to 3 V, the Offset to -2 V, the Cycles to 8, and the Points to 100. Press <b>OK</b>. Notice that the 8 square wave cycles have been inserted, beginning at the marker. Press <b>Done</b>.<br /><img src="../_Graphics_/AfterInsertingSquareWave.png" alt="After inserting square wave" /></li>
+        </ol>
+        <h2><a name="Edit_Waveform_Characteristics"></a>Edit Waveform Characteristics</h2>
+        <ol>
+            <li class="IndentTight" value="1">Press <b>Edit Params</b> and then set the <b>Sampling Rate</b> to 100 Sa/s. Press <b>Cycle Period</b> and notice that it has been set to 4.08 seconds. This is because you have 408 sample points in the waveform, and the sample rate is 100 Sa/s.<br /><img src="../_Graphics_/SetSampRateTo100.png" alt="Set sample rate to 100" /><br /></li>
+            <li class="IndentTight" value="2">Change the <b>Cycle Period</b> to 2.04 seconds and then press <b>Sampling Rate</b>. It will now be set to 200 Sa/s in order to play the 408 point waveform in 2.04 seconds.<br /><img src="../_Graphics_/CutCyclePeriodInHalf.png" alt="Cut cycle period in half" /></li>
+            <li class="IndentTight" value="3">Press <b>Done</b> to exit the parameter editing screen. Press <b>Edit Points</b> and notice that the <b>Point #</b> softkey is highlighted. Enter the number 160 and press <b>Enter</b> to move the marker.<br /><img src="../_Graphics_/SetMarkerTo160.png" alt="Set marker to 160" /></li>
+            <li class="IndentTight" value="4">Press <b>Voltage</b> and change the voltage of the selected point to 4.2 V. Press <b>Point #</b> and change the point marker to 150 to move the marker off the point. When you press <b>Enter</b> to finish entering point 150, you will see the 4.2 V anomaly in the wave that you just created at point 160.<br /><img src="../_Graphics_/ChangeVoltageTo4pt2.png" alt="Change voltage to 4.2" /></li>
+        </ol>
+        <h2><a name="Zoom_and_Pan"></a>Zoom and Pan</h2>
+        <ol>
+            <li class="IndentTight" value="1">To see the point in detail, press <b>[System] &gt; Pan/Zoom Control</b>. Notice that the first softkey is set to <b>Horizontal</b>, meaning that the zooming that we are about to do will be along the horizontal (time) axis. Change the <b>Zoom</b> to 500%, and the sine wave anomaly will be more obvious.<br /><img src="../_Graphics_/SetHorizZoomTo500.png" alt="Set horizontal zoom to 500" /></li>
+            <li class="IndentTight" value="2">Now set the first softkey to <b>Vertical</b> to zoom vertically. Set the <b>Zoom</b> to 500%. Notice that we have zoomed in on the voltage axis, but we are too low to see the 4.2 V anomaly in the sine wave.<br /><img src="../_Graphics_/SetVerticZoomTo500.png" alt="Set vertical zoom to 500" /></li>
+            <li class="IndentTight" value="3">Press <b>Pan</b> and set the <b>Pan</b> to 3 V in order to move higher on the waveform. The 4.2 V point is now clearly visible.<br /><img src="../_Graphics_/PanTo3V.png" alt="Pan to 3 V" /></li>
+            <li class="IndentTight" value="4">To see the entire waveform again, press <b>Show All</b>. Then press <b>Done</b> and <b>Done</b> again to return to the <b>Edit Points</b> screen.<br /><img src="../_Graphics_/AfterShowAll.png" alt="After show all" /></li>
+        </ol>
+        <h2><a name="Insert,_Remove,_Copy_and_Paste_Points"></a>Insert, Remove, Copy and Paste Points</h2>
+        <ol>
+            <li class="IndentTight" value="1">Press <b>Insert Point</b> 15 times and watch the display carefully. You will see 15 new waveform points at the same voltage level.<br /><img src="../_Graphics_/InsertPoint15X.png" alt="Insert point 15 times" /></li>
+            <li class="IndentTight" value="2">Change the <b>Point #</b> to 220 and press <b>Remove Point</b> 20 times, watching the display carefully as you do so in order to see the points being removed from the waveform.<br /><img src="../_Graphics_/RemovePoint20X.png" alt="Remove point 20 times" /></li>
+            <li class="IndentTight" value="3">You can also edit points by using a table of voltages. Press <b>Advanced Edit &gt; Edit Via Table</b>. Set <b>Point #</b> to 200, and then set the <b>Voltage</b> for point 200 to 3 V. Use the knob to move between rows and set the <b>Voltage</b> for points 205 and 210 to 3 V. Press <b>Done</b>.<br /><img src="../_Graphics_/EditViaTable200-210a.png" alt="Edit via table 200-210" /></li>
+            <li class="IndentTight" value="4">Notice the three 3 V spikes that you just made in the waveform at points 200, 205, and 210.<br /><img src="../_Graphics_/EditViaTable200-210b.png" alt="Edit via table 200-210" /></li>
+            <li class="IndentTight" value="5">Press <b>Cut/Copy Paste</b>, and set <b>Marker</b> 1 to 150. Then press the first softkey and change the <b>Marker</b> to <b>Marker 2</b>. Set <b>Marker 2</b> to 300. The range defined by the markers is now highlighted in black.<br /><img src="../_Graphics_/SetCopyMarkers.png" alt="Set copy markers" /></li>
+            <li class="IndentTight" value="6">Press <b>Copy</b>, then <b>Paste</b>, and then <b>At Start</b>. Notice that section you copied is now duplicated at the beginning of the waveform.<br /><img src="../_Graphics_/PasteAtStart.png" alt="Paste at start" /></li>
+            <li class="IndentTight" value="7">Now press <b>Paste &gt; At End</b>. The same section of the waveform now also appears at the very end.<br /><img src="../_Graphics_/PasteAtEnd.png" alt="Paste at end" /><br /></li>
+            <li class="IndentTight" value="8">Now press <b>Paste</b> and change the <b>Point #</b> to 500. Then press <b>OK</b>, and the same portion of the waveform will be pasted in at point 500. Press <b>Done</b> to leave the <b>Cut/Copy Paste</b> menu.<br /><img src="../_Graphics_/PasteAt500.png" alt="Paste at 500" /></li>
+        </ol>
+        <h2><a name="Perform_Math"></a>Perform Math</h2>
+        <p>The embedded waveform editor allows you to perform mathematical operations on the waveform. First you set markers to define the range of the waveform that you want to modify. You can then add, subtract or multiply that portion of the waveform by another waveform, or you can transform the waveform in ways that do not involve other waveforms.</p>
+        <ol>
+            <li class="IndentTight" value="1">Press <b>Perform Math</b>. Set <b>Marker 1</b> to 400 and <b>Marker 2</b> to 500.<br /><img src="../_Graphics_/SetMarkersTo400And500.png" alt="Set markers to 400 and 500" /></li>
+            <li class="IndentTight" value="2">Press <b>Add</b>, then select <b>Haversine</b> and <b>OK</b>. Set the <b>Amplitude</b> to 3 V, the Offset to 0 V, and press <b>OK</b>. Notice that the highlighted section now rises in the middle as a result of the <b>Haversine</b> addition.<br /><img src="../_Graphics_/AddHaversine.png" alt="Add Haversine" /></li>
+            <li class="IndentTight" value="3">Now press <b>Multiply</b> and select the <b>Sine</b> wave (press <b>OK</b>). Set the <b>Cycles</b> to 2 and press <b>OK</b>.<br /><img src="../_Graphics_/MultiplyBySine.png" alt="Multiply by sine" /></li>
+            <li class="IndentTight" value="4">Now set <b>Marker 1</b> to 200 and <b>Marker 2</b> to 600.<br /><img src="../_Graphics_/SetMarkersTo200And600.png" alt="Set markers to 200 and 600" /></li>
+            <li class="IndentTight" value="5">Press <b>Advanced Math &gt; Mirror &gt; OK</b>.<br /><img src="../_Graphics_/AdvancedMathMirror.png" alt="Advanced math - mirror" /></li>
+            <li value="6">Continue learning about the interface by trying other <b>Advanced Math</b> features, such as <b>Invert</b>, <b>Absolute</b>, <b>Scale</b>, and so on. Press <b>Operation Help</b> for more information.</li>
+        </ol>
+        
+    </body>
+</html>

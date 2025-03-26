@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="TRIGger_Subsystem_Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>TRIGger Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>TRIGger Subsystem Introduction<a name="kanchor343"></a></h1>
+        <p>Configures triggering for sequence, list, burst, and sweep:</p>
+        <p class="IndentTight"><a href="#TRIGger">TRIGger[1|2]</a> - immediate trigger</p>
+        <p class="IndentTight"><a href="#TRIGger_COUNt">TRIGger[1|2]:COUNt</a> - trigger count</p>
+        <p class="IndentTight"><a href="#TRIGger_DELay">TRIGger[1|2]:DELay</a> - trigger delay</p>
+        <p class="IndentTight"><a href="#TRIGger_LEVel">TRIGger:LEVel</a> - trigger level</p>
+        <p class="IndentTight"><a href="#TRIGger_SLOPe">TRIGger[1|2]:SLOPe</a> - slope of trigger signal at the rear-panel <b>Ext Trig</b> connector</p>
+        <p class="IndentTight"><a href="#TRIGger_TIMer">TRIGger[1|2]:SOURce</a> - source (internal, external, timer, or bus) 
+ from which instrument accepts trigger</p>
+        <p class="IndentTight"><a href="#TRIGger_TIMer">TRIGger[1|2]:TIMer?</a> - timer used when <a href="#TRIGger_SOURce">TRIGger[1|2]:SOURce</a> is TIMer.</p>
+        <h2><a name="kanchor344"></a><a name="TRIGger"></a>TRIGger[1|2]</h2>
+        <p class="IndentTight">Forces immediate 
+ trigger to initiate sequence, sweep, list, or burst.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Send an immediate trigger on channel 2:<br />TRIG</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Can be used with IMMediate, EXTernal, or BUS trigger source (<a href="#TRIGger_SOURce">TRIGger[1|2]:SOURce</a>). For example, you can use  TRIGger to issue an immediate 
+ trigger while waiting for an external trigger.</li>
+            <li class="IndentTight" value="2">Intended as an override. For general, software controlled triggering, use <a href="IEEE-488_Subsystem.htm#TRG">*TRG</a>.</li>
+        </ul>
+        <h2><a name="kanchor345"></a><a name="TRIGger_COUNt"></a>TRIGger[1|2]:COUNt &lt;<i>number</i>&gt;<br />TRIGger[1|2]:COUNt?</h2>
+        <p class="IndentTight">Sets trigger count.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 to 1,000,000; default, 1</td>
+                    <td class="BodyD-Column1-Body1">10000</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set channel 2 trigger count to 10000:<br />TRIG2:COUN 10000</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Can be used with IMMediate, EXTernal, or BUS trigger source (<a href="#TRIGger_SOURce">TRIGger[1|2]:SOURce</a>).</li>
+            <li class="IndentTight" value="2">Applies only when INITiate[1|2]:CONTinuous is OFF.</li>
+        </ul>
+        <h2><a name="kanchor346"></a><a name="TRIGger_DELay"></a>TRIGger[1|2]:DELay &lt;<i>seconds</i>|MINimum|MAXimum&gt;<br />TRIGger[1|2]:DELay?</h2>
+        <p class="IndentTight">Sets trigger delay, (time from assertion of trigger to occurrence of triggered event).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 1000 s, in resolution of 4 ns; default 0</td>
+                    <td class="BodyD-Column1-Body1">+1.050000000000000E-01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set channel 1 trigger delay to 105 ms:<br />TRIG:DEL 105e-3</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Can be used with IMMediate, EXTernal, or BUS trigger source (<a href="#TRIGger_SOURce">TRIGger[1|2]:SOURce</a>).</li>
+        </ul>
+        <h2><a name="kanchor347"></a><a name="TRIGger_LEVel"></a>TRIGger[1:LEVel {&lt;level&gt;|MINimum|MAXimum}</h2>
+        <p>Sets the output trigger level and input trigger threshold in volts. The trigger threshold is one-half of trigger level.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&#160;</td>
+                    <td class="BodyD-Column1-Body1">+2.000000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the trigger level to 2 V:<br />TRIG:LEV 2</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor348"></a><a name="kanchor349"></a><a name="TRIGger_SLOPe"></a>TRIGger[1|2]:SLOPe {POSitive|NEGative}<br />TRIGger[1|2]:SLOPe?</h2>
+        <p class="IndentTight">Specifies polarity of
+ trigger signal on rear-panel <b>Trig 
+ In</b> connector for any externally-triggered mode. </p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{POSitive|NEGative}, default POS (rising edge)</td>
+                    <td class="BodyD-Column1-Body1">POS or NEG</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set trigger slope to falling edge:<br />TRIG:SLOP NEG</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor350"></a><a name="kanchor351"></a><a name="TRIGger_SOURce"></a>TRIGger[1|2]:SOURce {IMMediate|EXTernal|TIMer|BUS}<br />TRIGger[1|2]:SOURce?</h2>
+        <p class="IndentTight">Selects the trigger 
+ source for sequence, list, burst or sweep. The instrument accepts an immediate or timed internal trigger, an external hardware trigger from 
+ the rear-panel <b>Ext Trig</b> connector, or a software (bus) trigger.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{IMMediate|EXTernal|TIMer|BUS}, default IMMediate</td>
+                    <td class="BodyD-Column1-Body1">IMM, EXT, TIM, BUS</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Select external trigger source (trigger each time a low-true TTL pulse is received on the rear-panel 
+ trigger input):
+TRIG:SOUR EXT</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>In 
+ triggered burst mode:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The instrument outputs a waveform of the specified number of cycles 
+ (burst count) when a trigger received. After the specified number of cycles have been output, the instrument stops and waits for next trigger.</li>
+            <li class="IndentTight" value="2"><b>IMMediate (internal):</b> the instrument outputs continuously when burst mode is enabled. The rate at which the burst is generated is determined by <a href="BURSt_Subsystem.htm#BURSt_INTernal_PERiod">BURSt:INTernal:PERiod</a>.</li>
+            <li class="IndentTight" value="3"><b>EXTernal:</b> the instrument accepts a hardware trigger at the rear-panel 
+ <b>Ext Trig</b> connector. The instrument outputs one burst of the specified number of cycles each time <b>Ext Trig</b> receives a TTL pulse with 
+ the proper polarity (<a href="#TRIGger_SLOPe">TRIGger[1|2]:SLOPe</a>). External trigger signals during a burst are ignored.</li>
+            <li class="IndentTight" value="4"><b>BUS (software):</b> the instrument initiates one burst each time a bus trigger (<a href="IEEE-488_Subsystem.htm#TRG">*TRG</a>) is received. The front-panel <b>[Trigger]</b> key is illuminated when the instrument is waiting for a bus trigger.</li>
+            <li class="IndentTight" value="5"><b>EXTernal or BUS:</b> burst count and burst phase remain in effect, but burst period is ignored.</li>
+            <li class="IndentTight" value="6"><b>TIMer:</b> trigger events are spaced by a timer, with the first trigger as soon as <a href="INITiate_Subsystem.htm#INITiate_ALL">INIT</a> occurs.</li>
+        </ul>
+        <p>In 
+ frequency sweep mode:</p>
+        <ul type="disc" class="UL_Disc">
+            <ul type="disc" class="UL_Disc">
+                <li class="IndentTight" value="1"><b>IMMediate (internal):</b> the instrument outputs continuously when the sweep is enabled. The period at which the sweep is generated is the sweep time (<a href="SWEep_Subsystem.htm#SWEep_TIME">SWEep:TIME</a>) plus 1 ms.</li>
+            </ul>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <ul type="disc" class="UL_Disc">
+                <li class="IndentTight" value="1"><b>EXTERNAL:</b> the instrument accepts a hardware trigger at the rear-panel <b>Ext Trig</b> connector. The instrument initiates one sweep each time <b>Trig 
+ In</b> receives a TTL pulse of proper edge polarity (<a href="#TRIGger_SLOPe">TRIGger[1|2]:SLOPe</a>). The trigger 
+ period must be at least sweep time (<a href="SWEep_Subsystem.htm#SWEep_TIME">SWEep:TIME</a>) plus 1 ms.</li>
+                <li class="IndentTight" value="2"><b>BUS (software):</b> the instrument initiates one sweep each time a bus trigger (<a href="IEEE-488_Subsystem.htm#TRG">*TRG</a>) is received. The front-panel <b>[Trigger]</b> key is illuminated when the instrument is waiting for a bus trigger.</li>
+            </ul>
+            <li class="IndentTight" value="2"><a href="APPLY_Subsystem.htm#APPLy">APPLy</a> sets trigger source to IMMediate.</li>
+            <li class="IndentTight" value="3">To ensure synchronization with BUS source, send <a href="IEEE-488_Subsystem.htm#WAI">*WAI</a> (wait) so the instrument waits for all pending operations to complete before executing any additional commands. For example, the following command string guarantees that the 
+ first trigger is accepted and the operation is executed before second 
+ trigger is recognized.<br /><br />&#160;&#160;&#160;&#160;&#160;TRIG:SOUR BUS;*TRG;*WAI;*TRG;*WAI</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Use <a href="IEEE-488_Subsystem.htm#OPCQuest">*OPC?</a> or <a href="IEEE-488_Subsystem.htm#OPC">*OPC</a> 
+ to determine when the sweep or burst is complete. 
+ The *OPC? query returns 1 to the output buffer when the sweep or burst 
+ is complete. The *OPC command sets the Operation Complete bit (bit 0) 
+ in the Standard Event register when the sweep or burst is complete.</li>
+        </ul>
+        <h2><a name="kanchor352"></a><a name="TRIGger_TIMer"></a>TRIGger[1|2]:TIMer {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<i>&#160;</i>TRIGger[1|2]:TIMer? {MINimum|MAXimum}</h2>
+        <p class="IndentTight">Sets timer used when <a href="#TRIGger_SOURce">TRIGger[1|2]:SOURce</a> is TIMer.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 µs to 8,000 s</td>
+                    <td class="BodyD-Column1-Body1">+3.000000000000000E-01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set trigger timer to 300 ms on channel 2:<br />TRIG2:TIM 0.3</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">In triggered burst mode (<a href="BURSt_Subsystem.htm#BURSt_MODE">BURSt:MODE TRIG</a>), this command supersedes <a href="BURSt_Subsystem.htm#BURSt_INTernal_PERiod">BURSt:INTernal:PERiod</a>.</li>
+        </ul>
+        
+    </body>
+</html>

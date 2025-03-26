@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Block Diagram</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Block Diagram<a name="kanchor472"></a></h1>
+        <p>The instrument has four main assemblies:</p>
+        <ul>
+            <li class="IndentTight" value="1">Processor</li>
+            <li class="IndentTight" value="2">Main board</li>
+            <li class="IndentTight" value="3">Front panel</li>
+            <li class="IndentTight" value="4">Main power supply</li>
+        </ul>
+        <p>A <a href="#Block_Diagram">simplified block diagram</a> appears at the bottom of this section.</p>
+        <p>The processor is a single board computer that contains the CPU, RAM, ROM, and circuits used to drive the GPIB, LAN, and USB ports. The built in web interface is contained in the ROM. The processor circuitry is earth referenced.</p>
+        <p>When the power switch is pressed, the processor communicates with and loads the FPGA. This communication uses three asynchronous serial data lines and one serial clock line. These four lines are isolated.</p>
+        <p>The FPGA stores all waveforms except arbitrary waveforms. Arbitrary waveforms are loaded into SDRAM on the main board. All control of waveforms, triggers, sync signals, output path, attenuation, and offset is provided by the FPGA.</p>
+        <p>The main waveform for each channel (only one channel is shown in the <a href="#Block_Diagram">block diagram</a>) is loaded into the waveform DAC and clocked by the timebase. The DAC output passes through an elliptical filter before the main attenuators. There are three attenuators available in the path, -7.96 dB, -15.91 dB, and -23.87 dB.</p>
+        <p>The signal is applied to the output amplifier. The DC offset is summed at the output amplifier. A post amplifier -23.87 dB attenuator is available for low level signals. The table below show the attenuators that create the output signal amplitude.</p>
+        <table style="margin-left: 0;margin-right: auto;caption-side: top;mc-table-style: url('../RegTable.css');" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Output Range<br />DC Offset &lt; 320 mV</th>
+                    <th class="HeadE-Column1-Header1">-7.96 dB</th>
+                    <th class="HeadE-Column1-Header1">-15.91 dB</th>
+                    <th class="HeadE-Column1-Header1">-23.87 dB</th>
+                    <th class="HeadD-Column1-Header1">-23.87 dB<br />(post)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">10 Vpp - 3.6 Vpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">4 Vpp - 1.44 Vpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1.6 Vpp - 576 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">640 mVpp - 230 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">256 mVpp - 92 mVpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">102.4 mVpp - 36.86 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">40.96 mVpp - 14.75 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">16.38 mVpp - 5.90 mVpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">6.55 mVpp - 2.36 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">2.62 mVpp - 1.00 mVpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">In</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Output Range<br />DC Offset &#8805; 320 mV</td>
+                    <td class="BodyE-Column1-Body1">-7.96 dB</td>
+                    <td class="BodyE-Column1-Body1">-15.91 dB</td>
+                    <td class="BodyE-Column1-Body1">-23.87 dB</td>
+                    <td class="BodyD-Column1-Body1">-23.87 dB<br />(post)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">9.36 Vpp - 3.6 Vpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">4 Vpp - 1.44 Vpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1.6 Vpp - 576 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">640 mVpp - 230 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">256 mVpp - 92 mVpp</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">102.4 mVpp - 36.86 mVpp</td>
+                    <td class="BodyE-Column1-Body1">Out</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">Out</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">40.96 mVpp - 1.00 mVpp</td>
+                    <td class="BodyB-Column1-Body1">In</td>
+                    <td class="BodyB-Column1-Body1">In</td>
+                    <td class="BodyB-Column1-Body1">In</td>
+                    <td class="BodyA-Column1-Body1">Out</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The output relay when enabled provides the waveform to the front panel BNC connector. Additionally, this relay, when disabled, routes the signal to the Modulation ADC for internal self-test and calibration routines.</p>
+        <p>The output relay is controlled by the FPGA. Two circuits provide overvoltage and over current protection, primarily from an external circuit. The instrument can source very low output impedances.</p>
+        <p>The <b>Sync</b> output signal is generated as a waveform from the FPGA to the <b>Sync</b> DAC.</p>
+        <p>External trigger in and out is chassis referenced at the BNC connector but is isolated before the FPGA.</p>
+        <p>Modulation in is an isolated input to the A/D converter. The FPGA applies the modulation signal to the output waveform.</p>
+        <p>The instrument's clock generator employs a 10-MHz crystal oscillator and a phase-locked loop to generate the 250-MHz clocks used by the FPGA and Waveform DACs. When an external 10-MHz frequency reference is used, a digital phase-locked loop in the FPGA keeps the crystal oscillator in sync.</p>
+        <h2><a name="Block_Diagram"></a>Block Diagram<br /><img src="../_Graphics_/block1.png" /></h2>
+        
+    </body>
+</html>

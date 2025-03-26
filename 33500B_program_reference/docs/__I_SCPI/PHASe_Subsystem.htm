@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="PHASe Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>PHASe Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>PHASe Subsystem<a name="kanchor257"></a></h1>
+        <p>The PHASe subsystem allows you to adjust the waveform phase; this is useful in channel-to-channel and channel-to-Sync applications. This subsystem also allows you to use the <b>10 MHz Out</b> and <b>10 MHz In</b> rear-panel connectors to synchronize multiple instruments.</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a href="#PHASe">PHASe</a> - sets phase offset of output waveform (not available for arbitrary waveforms or noise)</li>
+            <li class="IndentTight" value="2"><a href="#PHASe_SYNChronize">PHASe:SYNChronize</a> - synchronizes phase of both internal channels on a two-channel instrument.</li>
+            <li class="IndentTight" value="3"><a href="#PHASe_REFerence">PHASe:REFerence</a> - sets new zero-phase reference point without changing instrument output</li>
+            <li class="IndentTight" value="4"><a href="#PHASe_UNLock_ERRor_STATe">PHASe:UNLock:ERRor:STATe</a> - specifies whether instrument generates an error upon losing phase-lock</li>
+        </ul>
+        <h2><a name="kanchor258"></a><a name="PHASe"></a>[SOURce[1|2]:]PHASe {&lt;<i>angle</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]PHASe?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets waveform's phase offset angle.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">-360 to +360 degrees, -2<span style="font-family: Symbol;">p</span> to +2<span style="font-family: Symbol;">p</span> radians, or -(period) to +(period), as specified by <a href="UNIT_ANGLe.htm">UNIT:ANGLe</a>. Default 0.</td>
+                    <td class="BodyD-Column1-Body1">+1.5000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set channel 1 phase offset to 15 degrees:<br />UNIT:ANGL DEG<br />PHAS 15</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Phase offset is independent of burst phase (<a href="BURSt_Subsystem.htm#BURSt_PHASe">BURSt:PHASe</a>).</li>
+            <li class="IndentTight" value="2">This command does not modify channel's primary phase generator; it simply adds phase offset.</li>
+            <li class="IndentTight" value="3">This command also useful for modifying phase relationship&#160;between channels in a two-channel instrument&#160;and between the channel and&#160;its sync signal.</li>
+            <li class="IndentTight" value="4">In a two-channel instrument, use <a href="#PHASe_SYNChronize">PHASe:SYNChronize</a> to synchronize the phases of the two internal channels. Each channel will retain its current phase offset, but the two channels will have a common reference point so the channel-to-channel phase difference will be known.</li>
+            <li class="IndentTight" value="5">When synchronizing the phase of multiple instruments (<a href="ROSCillator_Subsystem.htm">ROSC commands</a>), the phase command allows adjustment of the phase relationship between the instruments.</li>
+        </ul>
+        <h2><a name="kanchor259"></a><a name="PHASe_REFerence"></a>[SOURce[1|2]:]PHASe:REFerence</h2>
+        <p class="IndentTight">Simultaneously removes the offset set by <a href="#PHASe">PHASe</a> and adjusts the primary phase generator by an amount equivalent to the PHASe setting. This retains the phase relationship set with another instrument while realigning the sync signal with the output.  </p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Reset the zero-phase reference point for channel 1:<br />PHAS:REF</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The primary purpose of this command is to establish a zero-point between&#160;two connected instruments. For channel-to-channel operation on a two-channel instrument, use <a href="#PHASe_SYNChronize">PHASe:SYNChronize.</a></li>
+            <li class="IndentTight" value="2">Setting a new zero-phase reference point means 
+ that the value subsequently returned by a <a href="#PHASe">PHASe?</a> 
+ query command is reset to "0", but the output waveform itself 
+ does not change.</li>
+        </ul>
+        <h2><a name="kanchor260"></a><a name="PHASe_SYNChronize"></a>[SOURce[1|2]:]PHASe:SYNChronize</h2>
+        <p class="IndentTight">Simultaneously resets all phase generators in the instrument, including the modulation phase generators, to establish a common, internal phase zero reference point. This command does not affect <a href="#PHASe">PHASe</a> setting of either channel; it simply establishes phase difference between channels as the sum of <a href="#PHASe">SOUR1:PHAS</a> and <a href="#PHASe">SOUR2:PHAS</a> instead of an arbitrary amount.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Reset all phase generators:<br />PHAS:SYNC
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">SOURce1 and SOURce2 mean nothing for this command.</li>
+            <li class="IndentTight" value="2">This command breaks the phase relation with another instrument, because it resets the phase generators.</li>
+            <li class="IndentTight" value="3">In single channel instruments, this synchronizes the main channel with the internal modulation generator.</li>
+            <li class="IndentTight" value="4">
+                <p>You can synchronize the phase between the primary signal and the <b>SUM</b> signal by sending <a href="#PHASe_SYNChronize">SOURce[1|2]:PHASe:SYNChronize</a> after setting the functions for the primary signal and the <b>SUM</b> signal. Otherwise, the phase between the two signals is arbitrary.</p>
+            </li>
+        </ul>
+        <h2><a name="kanchor261"></a><a name="PHASe_UNLock_ERRor_STATe"></a>[SOURce[1|2]:]PHASe:UNLock:ERRor:STATe {ON|1|OFF|0}<br />[SOURce[1|2]:]PHASe:UNLock:ERRor:STATe?</h2>
+        <p class="IndentTight">Enables or disables the generation of an error if the phase-lock is ever lost by the instrument timebase. The instrument uses one timebase for both channels.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0},&#160;default&#160;OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable the generation of phase-lock errors:<br />PHASe:UNLock:ERRor:STATe ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">SOURce1 and SOURce2 mean nothing for this command.</li>
+            <li class="IndentTight" value="2">If the phase-lock is lost and the error is enabled, 
+ a "Reference phase-locked loop is unlocked" error is generated.</li>
+            <li class="IndentTight" value="3">Volatile setting, lost on power cycle.</li>
+            <li class="IndentTight" value="4">A faulty reference signal applied to the <b>10 MHz In</b> connector 
+ may generate many error messages.</li>
+        </ul>
+        
+    </body>
+</html>

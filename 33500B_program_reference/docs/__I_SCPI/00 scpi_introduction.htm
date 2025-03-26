@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:check_list="Ran Smart Index" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../NoteTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Introduction to SCPI Language</title>
+        <meta name="Originator" content="ImportMif" />
+        <meta name="OriginalFile" content="G:\temp_3\scpi_introduction.mif" />
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor7"></a>Introduction to the SCPI Language </h1>
+        <p>SCPI (Standard Commands for Programmable Instruments) is an ASCII-based 
+ instrument command language designed for test and measurement instruments. 
+ SCPI commands are based on a hierarchical structure, also known as a <i>tree system</i>. In this system, associated commands are grouped together under a common node or root, thus forming <i>subsystems</i>. 
+ A portion of the OUTPut subsystem is shown below to illustrate the tree system.</p>
+        <p class="CmdSyntax">OUTPut:<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SYNC <span class="PrimaryBooleanVals">{OFF|0|ON|1}</span><br /><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SYNC:<br />MODE 
+ {NORMal|CARRier} <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;POLarity 
+ {NORMal|INVerted}</p>
+        <p><b>OUTPut</b> is the root keyword, <b>SYNC</b> is a second-level keyword, and <b>MODE</b> and <b>POLarity</b> are third-level keywords. A colon ( <b>:</b> ) separates a command keyword from a lower-level keyword.</p>
+        <h2><a name="Syntax_SCPI_intro"></a><a name="kanchor8"></a>Syntax Conventions</h2>
+        <p>The format used to show commands is illustrated below:</p>
+        <p class="IndentTight">[SOURce[1|2]:]VOLTage:UNIT {VPP|VRMS|DBM}</p>
+        <p class="IndentTight">[SOURce[1|2]:]FREQuency:CENTer {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <p>The command syntax shows most commands (and some parameters) as a&#160;mixture 
+ of upper- and lower-case letters. The upper-case letters indicate the 
+ abbreviated spelling for the command. For shorter program lines, you can 
+ send the abbreviated form. For better program readability, you can send 
+ the long form.</p>
+        <p>For example, in the above syntax statement, VOLT and VOLTAGE are both 
+ acceptable forms. You can use upper- or lower-case letters. Therefore, 
+ VOLTAGE, volt, and Volt are all acceptable. Other forms, such as VOL and 
+ VOLTAG, are not valid and will generate an error.</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Braces ( <b>{ }</b> 
+ ) enclose the parameter choices for a given command string. The braces 
+ are not sent with the command string.</li>
+            <li class="IndentTight" value="2">A vertical bar ( <b>|</b> 
+ ) separates multiple parameter choices for a given command string. For 
+ example, {VPP|VRMS|DBM} in the above command indicates that you can specify 
+ &#160;"VPP", 
+ "VRMS", or "DBM". The bar is not sent with the command 
+ string.</li>
+            <li class="IndentTight" value="3">Triangle brackets in the second example ( <b>&lt; &gt;</b> ) indicate that you must specify 
+ a value for the enclosed parameter. For example, the above syntax statement shows the &lt;<i>frequency</i>&gt; parameter enclosed in triangle brackets. The brackets are not sent with the command 
+ string. You must specify a value for the parameter (for example 
+ "FREQ:CENT 1000") unless you select another option 
+ shown in the syntax (for example "FREQ:CENT MIN").</li>
+            <li class="IndentTight" value="4">Some syntax elements (for example nodes and parameters) 
+ are enclosed in square brackets ( <b>[ ]</b>). This indicates that the element is optional and can be omitted. The&#160;brackets 
+ are not sent with the command string. If you do&#160;not specify a value 
+ for an optional parameter, the instrument chooses a default value. In 
+ the examples above the "SOURce[1|2]" indicates that you may 
+ refer to source channel 1 either by "SOURce", or by "SOURce1", 
+ or by "SOUR1" or by "SOUR". In addition, since the 
+ whole SOURce node is optional (in brackets) you also may refer to channel 
+ 1 by entirely leaving out the SOURce node. This is because Channel 1 is 
+ the default channel for the SOURce language node. On the other hand, to 
+ refer to Channel 2, you must use either "SOURce2" or "SOUR2" 
+ in your program lines.</li>
+        </ul>
+        <h2><a name="Command_separators_SCPI_intro"></a><a name="kanchor9"></a>Command Separators </h2>
+        <p>A colon ( <b>:</b> ) is used to separate 
+ a command keyword from a lower-level keyword. You must insert a blank 
+ space to separate a parameter from a command keyword. If a command requires 
+ more than one parameter, you must separate adjacent parameters using a 
+ comma as shown below:</p>
+        <p class="Shaded">APPL:SIN 455E3,1.15,0.0</p>
+        <p>In this example, the APPLy &#160;command 
+ is specifying a Sine wave at a frequency of 455 KHz, with an amplitude 
+ of 1.15 volts, and a DC offset of 0.0 volts.</p>
+        <p>A semicolon ( <b>;</b> ) is used to 
+ separate commands within the same subsystem, and can also minimize typing. 
+ For example, sending the following command string:</p>
+        <p class="Shaded">TRIG:SOUR EXT<b>;</b> 
+ COUNT 10</p>
+        <p>is the same as sending the following two commands:</p>
+        <p class="Shaded">TRIG:SOUR EXT <br />TRIG:COUNT 10</p>
+        <h2><a name="min_max_SCPI_intro"></a><a name="kanchor10"></a>Using the MIN, MAX, and DEF Parameters 
+ </h2>
+        <p>For many commands, you can substitute "MIN" or "MAX" 
+ in place of a parameter. In some cases you may also substitute "DEF". 
+ For example, consider the following command:</p>
+        <p class="indented1">[SOURce[1|2]:]APPLy:DC [{&lt;<i>frequency</i>&gt;|DEF} 
+ [,{&lt;<i>amplitude</i>&gt;|DEF} [,{&lt;<i>offset</i>&gt;|MIN|MAX|DEF}]]]</p>
+        <p>Instead of selecting a specific value for the &lt;<i>offset</i>&gt; parameter, you can substitute MIN to set the offset to its minimum value, MAX to set the offset to its maximum value. You can also specify DEF to set the default value for each parameter: &lt;<i>frequency</i>&gt;, 
+ &lt;<i>amplitude</i>&gt;, and &lt;<i>offset</i>&gt;.</p>
+        <h2><a name="Querying_parameters_SCPI_intro"></a><a name="kanchor11"></a><a name="kanchor12"></a><a name="kanchor13"></a><a name="kanchor14"></a>Querying Parameter Settings 
+ </h2>
+        <p>You can query the current value of most parameters by adding a question&#160;mark 
+ (&#160;<b>?&#160;</b>) to the command. 
+ For example, the following command sets the trigger count to 10 readings: 
+</p>
+        <p class="Shaded">TRIG:COUN 10</p>
+        <p>You can then query the count value by sending:</p>
+        <p class="Shaded">TRIG:COUN?</p>
+        <p>You can also query the minimum or maximum count allowed as follows: 
+</p>
+        <p class="Shaded">TRIG:COUN? MIN<br />TRIG:COUN? MAX</p>
+        <h2><a name="terminators_SCPI_intro"></a><a name="kanchor15"></a>SCPI Command Terminators </h2>
+        <p><a name="kanchor16"></a>A command string sent to the instrument must terminate with a &lt;new 
+ line&gt; (&lt;NL&gt;) character. The IEEE-488 EOI (End-Or-Identify) message 
+ is interpreted as a &lt;NL&gt; character and can be used to terminate 
+ a command string in place of a &lt;NL&gt; character. A &lt;carriage return&gt; 
+ followed by a &lt;NL&gt; is also accepted. Command string termination 
+ will always reset the current SCPI command path to the root level.</p>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;margin-left: auto;margin-right: auto;mc-table-style: url('../NoteTable.css');" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                    <p><a name="kanchor17"></a>For every SCPI message that includes a query and is sent to the instrument, 
+ the instrument terminates the returned response with a &lt;NL&gt; or line-feed 
+ character (EOI). For example, if "DISP:TEXT?" &#160;is 
+ sent, the response is terminated with a &lt;NL&gt; after the string of 
+ data that is returned. If a SCPI message includes multiple queries separated 
+ by semicolons (for example "DISP?;DISP:TEXT?"), the returned 
+ response is again terminated by a &lt;NL&gt; after the response to the 
+ last query. In either case, the program must read this &lt;NL&gt; in the 
+ response before another command is sent to the instrument, or an error 
+ will occur.</p>
+                </td>
+            </tr>
+        </table>
+        <h2><a name="IEEE_488_SCPI_intro"></a>IEEE-488.2 Common Commands </h2>
+        <p>The IEEE-488.2 standard defines a set of common commands that perform 
+ functions such as reset, self-test, and status operations. Common commands 
+ always begin with an asterisk ( <b>*</b><a name="kanchor18"></a> 
+ ), are three characters in length, and may include one or more parameters. 
+ The&#160;command keyword is separated from the first parameter by a blank&#160;space. 
+ Use a semicolon ( <b>;</b> ) to separate 
+ multiple commands as shown below:</p>
+        <p class="Shaded">*RST<b>;</b><a name="kanchor19"></a> *CLS<b>;</b> *ESE 32<b>;</b><a name="kanchor20"></a> 
+ *OPC?</p>
+        <h2><a name="parameters_SCPI_intro"></a><a name="kanchor21"></a>SCPI Parameter Types </h2>
+        <p>The SCPI language defines several data formats to be used in program 
+ messages and response messages.</p>
+        <h3><a name="param_numeric_SCPI_intro"></a><a name="kanchor22"></a>Numeric Parameters</h3>
+        <p>Commands that require numeric parameters will accept all commonly used 
+ decimal representations of numbers including optional signs, decimal points, 
+ and scientific notation. Special values for numeric parameters such as 
+ MIN, MAX, and DEF are also accepted. You can also send engineering unit 
+ suffixes with numeric parameters (e.g., &#160;M, k, m, or u). If a command 
+ accepts only certain specific values, the instrument will automatically 
+ round the input numeric parameters to the accepted values. The following 
+ command requires a numeric parameter for the frequency value:</p>
+        <p class="CmdSyntax">[SOURce[1|2]:]FREQuency:CENTer {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}</p>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                    <p>Because the SCPI parser is case-insensitive, there is some confusion 
+ over the letter "M" (or "m"). For your convenience, 
+ the instrument interprets "mV" (or "MV") as millivolts, 
+ but "MHZ" (or "mhz") as megahertz. Likewise "M&#937;" 
+ (or "m&#937;") is interpreted as megohms. You can use the prefix 
+ "MA" for mega. For example, "MAV" is interpreted as 
+ megavolts.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="CmdSyntax">&#160;</p>
+        <h3><a name="param_discrete_SCPI_intro"></a><a name="kanchor23"></a>Discrete Parameters</h3>
+        <p><a name="kanchor24"></a><a name="kanchor25"></a><a name="kanchor26"></a>Discrete parameters are used to program settings that have a limited 
+ number of values (like IMMediate, EXTernal, or BUS). They may have a short 
+ form and a long form just like command keywords. You can mix upper- and 
+ lower-case letters. Query responses will always return the short form 
+ in all upper-case letters. The following command requires a discrete parameter 
+ for the voltage units:</p>
+        <p class="CmdSyntax">[SOURce[1|2]:]VOLTage:UNIT {VPP|VRMS|DBM}</p>
+        <h3><a name="param_bool_SCPI_intro"></a><a name="kanchor27"></a>Boolean Parameters</h3>
+        <p>Boolean parameters represent a single binary condition that is either 
+ true or false. For a false condition, the instrument will accept "OFF" 
+ or "0". For a true condition, the instrument will accept "ON" 
+ or "1". When you query a boolean setting, the&#160;instrument 
+ will always return "0" or "1". The following command 
+ requires a boolean parameter:</p>
+        <p class="CmdSyntax">DISPlay <span class="PrimaryBooleanVals">{OFF|0|ON|1}</span></p>
+        <h3><a name="param_string_SCPI_intro"></a><a name="kanchor28"></a>ASCII String Parameters</h3>
+        <p>String parameters can contain virtually any set of ASCII characters. A string must begin and end with matching quotes; either with a single quote or a double quote. You can include the quote delimiter as part of the string by typing it twice without any characters in between. The following command uses a string parameter:</p>
+        <p class="CmdSyntax">DISPlay:TEXT &lt;<i>quoted string</i>&gt;</p>
+        <p>For example, the following command displays the message "WAITING..." on the instrument's front panel (the quotes are not displayed).</p>
+        <p class="Shaded">DISP:TEXT "WAITING..."</p>
+        <p>You can also display the same message using  single quotes.</p>
+        <p class="Shaded">DISP:TEXT 'WAITING...'</p>
+        <h2><a name="device_clear_SCPI_intro"></a><a name="kanchor29"></a><a name="kanchor30"></a>Using Device Clear </h2>
+        <p>Device Clear is an IEEE-488 low-level bus message that you can use to 
+ return the instrument to a responsive state. Different programming languages 
+ and IEEE-488 interface cards provide access to this capability through 
+ their own unique commands. The status registers, the&#160;error queue, 
+ and all configuration states are left unchanged when a&#160;Device Clear 
+ message is received.</p>
+        <p>Device Clear performs the following actions:</p>
+        <ul type="disc" class="UL_Disc">
+            <li value="1">If 
+ a measurement is in progress, it is aborted.</li>
+            <li value="2">The 
+ instrument returns to the trigger "idle" state.</li>
+            <li value="3">The 
+ instrument's input and output buffers are cleared.</li>
+            <li value="4">The 
+ instrument is prepared to accept a new command string.</li>
+        </ul>
+        <p class="NormalTight">&#160;</p>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;margin-left: auto;margin-right: auto;mc-table-style: url('../NoteTable.css');" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                    <p>The <a href="ABORt.htm">ABORt</a> command is the recommended method to terminate an instrument 
+ operation.</p>
+                </td>
+            </tr>
+        </table>
+        
+    </body>
+</html>

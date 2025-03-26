@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../NoteTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Troubleshooting</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="kanchor474"></a>Troubleshooting</h1>
+        <p>A brief list of common failures appears below. Before troubleshooting or repairing the instrument, make sure the failure is in the instrument rather than any external connections. Also make sure that the instrument was accurately calibrated within the last year (see Calibration Interval). The instrument’s circuits allow troubleshooting and repair with basic test equipment.</p>
+        <h2><a name="Unit_is_Inoperative"></a>Unit is Inoperative</h2>
+        <p>  Verify that:</p>
+        <ul>
+            <li class="IndentTight" value="1">the AC power cord is securely connected to the instrument and plugged into a live outlet</li>
+            <li class="IndentTight" value="2">the front-panel Power On/Standby switch has been pushed</li>
+        </ul>
+        <h2><a name="Unit_Fails_Self-Test"></a>Unit Fails Self-Test</h2>
+        <p>Ensure that all connections (front and rear) are removed when self-test is performed. During self-test, errors may be induced by signals present on external wiring, such as long test leads that can act as  antennas.</p>
+        <table style="border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;left: 0px;top: 193px;caption-side: top;mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;" cellspacing="0" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 587px;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../caution.gif" alt="Caution" />
+                    </p>
+                </td>
+                <td style="padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" class="TableStyle_NoteTable_Body_0_0_ColEnd">DO NOT swap the motherboard, the processor board, or the front panel board from one instrument to another. These boards contain model number and serial number information that uniquely identifies a specific unit, and boards that are mismatched to the instrument may result in problems with its performance, licensing, serviceability, importability/exportability or warranty.</td>
+            </tr>
+        </table>
+        <h2><a name="Power_Supplies"></a>Power Supplies</h2>
+        <p>Verify the main power supply.</p>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%">
+                    <p>
+                        <img src="../warning.gif" alt="Warning" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%">Shock Hazard. To check the power supplies, remove the instrument cover as described in <a href="07%20Disassembly.htm">Disassembly</a>.</td>
+            </tr>
+        </table>
+        <p>The main power supply provides a +15 VDC (±0.3 VDC) supply to the main circuit board. All other supplies are derived from this supply. This supply is energized at all times while the line power cord is connected.</p>
+        <p>Test the supply at the connector to the main board. Note that the supply is not referenced to the chassis when disconnected from the main board.</p>
+        <ul>
+            <li class="IndentTight" value="1">Circuit failure can cause heavy supply loads which may pull down the supply output voltage. Disconnect the main supply from the main board to test.</li>
+            <li class="IndentTight" value="2">Always check the supply is free of oscillations using an oscilloscope.</li>
+            <li class="IndentTight" value="3">The main power supply contains a fuse. Replacing this fuse is not recommended. Replace the entire main power supply assembly. Note that power supply failures are often caused by other instrument failures.</li>
+        </ul>
+        <table style="border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;left: 0px;top: 193px;caption-side: top;mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;" cellspacing="0" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 587px;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../caution.gif" alt="Caution" />
+                    </p>
+                </td>
+                <td style="padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" class="TableStyle_NoteTable_Body_0_0_ColEnd">The heat sinks on the main board are at different potentials. Damage	may occur if any of the heat sinks are shorted together. Use care when probing the main board.</td>
+            </tr>
+        </table>
+        <p>Verify the power supplies listed in the table below and shown in the figure on page 146. Earth referenced supplies may be tested using the chassis as ground. Isolated supplied may be tested by using one of the heat sinks shown in the figure.</p>
+        <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../RegTable.css');" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadD-Column1-Header1" colspan="4">Supply</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">
+                        <p>+3.3 V ER*</p>
+                        <p>+5 ER</p>
+                    </td>
+                    <td class="BodyB-Column1-Body1">
+                        <p>+15 V Isolated</p>
+                        <p>-15 V Isolated</p>
+                    </td>
+                    <td class="BodyB-Column1-Body1">
+                        <p>+9 V Isolated</p>
+                        <p>-9 V Isolated</p>
+                    </td>
+                    <td class="BodyA-Column1-Body1">
+                        <p>	+3.3 V Isolated</p>
+                        <p>+5 V Isolated</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>* This supply is active whenever AC power is applied to the instrument.</p>
+        <p>
+            <img src="../_Graphics_/powersupplytest.bmp" style="width: 478px;height: 511px;" alt="Power supply test" />
+        </p>
+        <h2><a name="Self-TestErrors606-609"></a>Self-Test Errors 605 - 609</h2>
+        <p>Self-test errors 605-609 indicate that the processor board is unable to correctly program or communicate with the waveform FPGA (U1005) on the main board. In this case, further troubleshooting is required. The problem could be due to out of date firmware, or a failing or unseated processor board or main board. Before troubleshooting these errors, ensure that the instrument firmware is up to date. If the errors are still being reported, continue with the following procedure.</p>
+        <h3>Reseat the Boards</h3>
+        <p>Power off the unit, remove the cover. Reseat the processor board and the main board. Power up the unit and see if the errors 605-609 are still reported at power-on.</p>
+        <h3>Check Power Supplies</h3>
+        <p>Probe the system power supplies and verify they are operating within limits. If any of the power supplies are out of limit, diagnose the power supply. Otherwise, continue on to check SPI communications.</p>
+        <h3>Check SPI Communications</h3>
+        <p>If you still see errors after reseating the boards, the next step is to probe the SPI communications lines between the processor board and the main board. First, locate LED DS1001 on the main board as shown below. Cycle power on the unit, wait until it fully boots, and see whether the main board LED illuminates. The main board LED indicates whether the FPGA was successfully programmed. The following sections indicate which signal lines to probe on the main board connector (J201).</p>
+        <p>
+            <img src="../_Graphics_/led.pdf.bmp" style="width: 329px;height: 357px;" alt="LED" />
+        </p>
+        <h3>Main Board LED Lights up after Boot</h3>
+        <p>This indicates that the FPGA is programmed and running. Most likely there is a communications failure from the main board to the processor board. Probe the J201, pin 27 line with an oscilloscope, and cycle power on the unit (wait for full boot) to see if there is activity on the line. Activity should be +3.3 V pulses (isolated). Note that activity ceases once the instrument is booted.</p>
+        <ul>
+            <li class="IndentTight" value="1">If there is no activity on the line even after the LED lights up, then most likely the main board is the cause of the failure.</li>
+            <li class="IndentTight" value="2">If there is activity on the line, then the processor board is the most likely cause of the failure.</li>
+        </ul>
+        <p>
+            <img src="../_Graphics_/serialdatatest.bmp" style="width: 423px;height: 372px;" alt="Serial data test" />
+        </p>
+        <h3>Main Board LED Does not Light up after Boot</h3>
+        <p>This indicates that the processor was unable to program the FPGA. Most likely there is a communications failure from the processor board to the main board. Probe the following serial data lines at power up with an oscilloscope:</p>
+        <ul>
+            <li class="IndentTight" value="1">J201, pin 23</li>
+            <li class="IndentTight" value="2">J201, pin 24</li>
+            <li class="IndentTight" value="3">J201, pin 26</li>
+            <li class="IndentTight" value="4">J201, pin 32</li>
+        </ul>
+        <p>If all of the above SPI lines show activity during FPGA programming, then the main board is the most likely cause of the failure. Otherwise, the processor board is the most likely cause.</p>
+        <h2><a name="10_MHz_Out"></a>10 MHz Out</h2>
+        <p>If the power supplies are functional and self-test passes, check the 10 MHz output at the rear panel. This output is present whenever the instrument has powered on and the processor and main board are operational. If the 10 MHz is present, but the display is not working, suspect the front panel board or display assembly.</p>
+        
+    </body>
+</html>

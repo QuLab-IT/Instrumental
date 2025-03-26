@@ -436,9 +436,31 @@ class Keysight33500B(AgilentFuncGenerator):
     modulation_rate = SCPI_Facet('SOURce{channel}:MOD:RATE', convert=float, units='Hz')
     
     # Sweep settings
-    sweep_state = SCPI_Facet('SWE:STAT', convert=bool)
-    sweep_time = SCPI_Facet('SWE:TIME', convert=float, units='s')
-    sweep_spacing = SCPI_Facet('SWE:SPAC', convert=str)
+    sweep_state = SCPI_Facet('SOURce{channel}:SWE:STAT', convert=bool)
+    sweep_time = SCPI_Facet('SOURce{channel}:SWE:TIME', convert=float, units='s')
+    sweep_spacing = SCPI_Facet('SOURce{channel}:SWE:SPAC', convert=str)
+    
+    def set_sweep_frequency(self, start_freq, stop_freq, channel=1):
+        """Set sweep frequency range.
+        
+        Parameters
+        ----------
+        start_freq : float
+            Start frequency in Hz
+        stop_freq : float
+            Stop frequency in Hz
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+            
+        # Validate frequency range (1 µHz to 20 MHz)
+        if not (1e-6 <= start_freq <= 20e6) or not (1e-6 <= stop_freq <= 20e6):
+            raise ValueError("Frequency must be between 1 µHz and 20 MHz")
+            
+        self.write(f'SOURce{channel}:FREQ:STAR {start_freq}')
+        self.write(f'SOURce{channel}:FREQ:STOP {stop_freq}')
     
     def set_arbitrary_waveform(self, waveform_data, sample_rate=None, channel=1):
         """Load arbitrary waveform data.
@@ -470,10 +492,10 @@ class Keysight33500B(AgilentFuncGenerator):
         
         # Set sample rate if specified
         if sample_rate is not None:
-            self.write(f'FUNC:ARB:SRAT {sample_rate}, (@{channel})')
+            self.write(f'SOURce{channel}:FUNC:ARB:SRAT {sample_rate}')
             
         # Load waveform data
-        self.write(f'DATA:ARB:DAC16 {data_str}, (@{channel})')
+        self.write(f'SOURce{channel}:DATA:ARB:DAC16 {data_str}')
         
     def get_arbitrary_waveform(self, channel=1):
         """Retrieve current arbitrary waveform data.
@@ -501,7 +523,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        data_str = self.query(f'DATA:ARB:DAC16? (@{channel})')
+        data_str = self.query(f'SOURce{channel}:DATA:ARB:DAC16?')
         return [float(x) for x in data_str.split(',')]
     
     def save_arbitrary_waveform(self, name, waveform_data, sample_rate=None, channel=1):
@@ -536,10 +558,10 @@ class Keysight33500B(AgilentFuncGenerator):
         
         # Set sample rate if specified
         if sample_rate is not None:
-            self.write(f'FUNC:ARB:SRAT {sample_rate}, (@{channel})')
+            self.write(f'SOURce{channel}:FUNC:ARB:SRAT {sample_rate}')
             
         # Save waveform data
-        self.write(f'DATA:ARB:DAC16 {name},{data_str}, (@{channel})')
+        self.write(f'SOURce{channel}:DATA:ARB:DAC16 {name},{data_str}')
         
     def load_arbitrary_waveform(self, name, channel=1):
         """Load arbitrary waveform from internal memory.
@@ -564,7 +586,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        self.write(f'FUNC:ARB {name}, (@{channel})')
+        self.write(f'SOURce{channel}:FUNC:ARB {name}')
         
     def get_available_waveforms(self, channel=1):
         """Get list of available arbitrary waveforms.
@@ -592,7 +614,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        return self.query(f'DATA:ARB:CAT? (@{channel})').strip('"').split(',')
+        return self.query(f'SOURce{channel}:DATA:ARB:CAT?').strip('"').split(',')
         
     def delete_arbitrary_waveform(self, name, channel=1):
         """Delete arbitrary waveform from internal memory.
@@ -617,7 +639,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        self.write(f'DATA:ARB:DEL {name}, (@{channel})')
+        self.write(f'SOURce{channel}:DATA:ARB:DEL {name}')
         
     def set_phase(self, phase, channel=1):
         """Set the phase of the waveform.
@@ -637,7 +659,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        self.write(f'PHAS {phase}, (@{channel})')
+        self.write(f'SOURce{channel}:PHAS {phase}')
         
     def get_phase(self, channel=1):
         """Get the phase of the waveform.
@@ -660,7 +682,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        return float(self.query(f'PHAS? (@{channel})'))
+        return float(self.query(f'SOURce{channel}:PHAS?'))
         
     def set_duty_cycle(self, duty_cycle, channel=1):
         """Set the duty cycle of the waveform.
@@ -680,7 +702,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        self.write(f'FUNC:PULS:DCYC {duty_cycle}, (@{channel})')
+        self.write(f'SOURce{channel}:FUNC:PULS:DCYC {duty_cycle}')
         
     def get_duty_cycle(self, channel=1):
         """Get the duty cycle of the waveform.
@@ -703,7 +725,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        return float(self.query(f'FUNC:PULS:DCYC? (@{channel})'))
+        return float(self.query(f'SOURce{channel}:FUNC:PULS:DCYC?'))
         
     def set_ramp_symmetry(self, symmetry, channel=1):
         """Set the ramp symmetry.
@@ -723,7 +745,7 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        self.write(f'FUNC:RAMP:SYMM {symmetry}, (@{channel})')
+        self.write(f'SOURce{channel}:FUNC:RAMP:SYMM {symmetry}')
         
     def get_ramp_symmetry(self, channel=1):
         """Get the ramp symmetry.
@@ -746,4 +768,4 @@ class Keysight33500B(AgilentFuncGenerator):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
             
-        return float(self.query(f'FUNC:RAMP:SYMM? (@{channel})'))
+        return float(self.query(f'SOURce{channel}:FUNC:RAMP:SYMM?'))

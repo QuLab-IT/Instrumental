@@ -32,10 +32,10 @@ def _convert_enum(enum_type):
 
 class TriggerSource(Enum):
     bus = "BUS"
-    immediate = "IMMMEDIATE"
-    external = "EXT"
+    immediate = "IMMediate"
+    external = "EXTernal"
     key = "KEY"
-    timer = "TIMER"
+    timer = "TIMer"
     manual = "MAN"
 
 
@@ -447,9 +447,6 @@ class Keysight33500B(AgilentFuncGenerator):
         idn = self.query("*IDN?").strip().split(",")
         self.model = idn[1]  # Store model number for feature checking
 
-        # Set default channel to 1
-        self.write("SOURce1")
-
     def _check_arbitrary_capability(self):
         """Check if the model supports arbitrary waveforms.
 
@@ -466,97 +463,127 @@ class Keysight33500B(AgilentFuncGenerator):
         Returns
         -------
         bool
-            True if the model supports dual channel (33521B or 33522B)
+            True if the model supports dual channel (33521B, 33522B or 33512B)
         """
-        return self.model in ["33521B", "33522B"]
+        return self.model in ["33521B", "33522B", "33512B"]
 
     # Basic waveform parameters for channel 1
-    frequency1 = SCPI_Facet('SOURce1:FREQ', convert=float, units='Hz')
-    voltage1 = SCPI_Facet('SOURce1:VOLT', convert=float, units='V')
-    voltage_offset1 = SCPI_Facet('SOURce1:VOLT:OFFS', convert=float, units='V')
-    function1 = SCPI_Facet('SOURce1:FUNC', convert=str)
-    function_shape1 = SCPI_Facet('SOURce1:FUNC:SHAP', convert=str)
-    duty_cycle1 = SCPI_Facet('SOURce1:FUNC:PULS:DCYC', convert=float, units='%')
-    ramp_symmetry1 = SCPI_Facet('SOURce1:FUNC:RAMP:SYMM', convert=float, units='%')
-    phase1 = SCPI_Facet('SOURce1:PHAS', convert=float, units='deg')
-    
+    frequency1 = SCPI_Facet("SOURce1:FREQ", convert=float, units="Hz")
+    voltage1 = SCPI_Facet("SOURce1:VOLT", convert=float, units="V")
+    voltage_offset1 = SCPI_Facet("SOURce1:VOLT:OFFS", convert=float, units="V")
+    function1 = SCPI_Facet("SOURce1:FUNC", convert=str)
+    function_shape1 = SCPI_Facet("SOURce1:FUNC:SHAP", convert=str)
+    duty_cycle1 = SCPI_Facet("SOURce1:FUNC:PULS:DCYC", convert=float, units="%")
+    ramp_symmetry1 = SCPI_Facet("SOURce1:FUNC:RAMP:SYMM", convert=float, units="%")
+    phase1 = SCPI_Facet("SOURce1:PHAS", convert=float, units="deg")
+
     # Basic waveform parameters for channel 2
-    frequency2 = SCPI_Facet('SOURce2:FREQ', convert=float, units='Hz')
-    voltage2 = SCPI_Facet('SOURce2:VOLT', convert=float, units='V')
-    voltage_offset2 = SCPI_Facet('SOURce2:VOLT:OFFS', convert=float, units='V')
-    function2 = SCPI_Facet('SOURce2:FUNC', convert=str)
-    function_shape2 = SCPI_Facet('SOURce2:FUNC:SHAP', convert=str)
-    duty_cycle2 = SCPI_Facet('SOURce2:FUNC:PULS:DCYC', convert=float, units='%')
-    ramp_symmetry2 = SCPI_Facet('SOURce2:FUNC:RAMP:SYMM', convert=float, units='%')
-    phase2 = SCPI_Facet('SOURce2:PHAS', convert=float, units='deg')
-    
+    frequency2 = SCPI_Facet("SOURce2:FREQ", convert=float, units="Hz")
+    voltage2 = SCPI_Facet("SOURce2:VOLT", convert=float, units="V")
+    voltage_offset2 = SCPI_Facet("SOURce2:VOLT:OFFS", convert=float, units="V")
+    function2 = SCPI_Facet("SOURce2:FUNC", convert=str)
+    function_shape2 = SCPI_Facet("SOURce2:FUNC:SHAP", convert=str)
+    duty_cycle2 = SCPI_Facet("SOURce2:FUNC:PULS:DCYC", convert=float, units="%")
+    ramp_symmetry2 = SCPI_Facet("SOURce2:FUNC:RAMP:SYMM", convert=float, units="%")
+    phase2 = SCPI_Facet("SOURce2:PHAS", convert=float, units="deg")
+
     # Burst mode settings for channel 1
-    burst_mode1 = SCPI_Facet('SOURce1:BURS:MODE', convert=str)
-    burst_ncycles1 = SCPI_Facet('SOURce1:BURS:NCYC', convert=int)
-    burst_phase1 = SCPI_Facet('SOURce1:BURS:PHAS', convert=float, units='deg')
-    burst_delay1 = SCPI_Facet('SOURce1:BURS:TDEL', convert=float, units='s')
-    burst_gate_polarity1 = SCPI_Facet('SOURce1:BURS:GATE:POL', convert=str)
-    
+    burst_mode1 = SCPI_Facet("SOURce1:BURS:MODE", convert=str)
+    burst_ncycles1 = SCPI_Facet("SOURce1:BURS:NCYC", convert=int)
+    burst_phase1 = SCPI_Facet("SOURce1:BURS:PHAS", convert=float, units="deg")
+    burst_delay1 = SCPI_Facet("SOURce1:BURS:TDEL", convert=float, units="s")
+    burst_gate_polarity1 = SCPI_Facet("SOURce1:BURS:GATE:POL", convert=str)
+
     # Burst mode settings for channel 2
-    burst_mode2 = SCPI_Facet('SOURce2:BURS:MODE', convert=str)
-    burst_ncycles2 = SCPI_Facet('SOURce2:BURS:NCYC', convert=int)
-    burst_phase2 = SCPI_Facet('SOURce2:BURS:PHAS', convert=float, units='deg')
-    burst_delay2 = SCPI_Facet('SOURce2:BURS:TDEL', convert=float, units='s')
-    burst_gate_polarity2 = SCPI_Facet('SOURce2:BURS:GATE:POL', convert=str)
-    
+    burst_mode2 = SCPI_Facet("SOURce2:BURS:MODE", convert=str)
+    burst_ncycles2 = SCPI_Facet("SOURce2:BURS:NCYC", convert=int)
+    burst_phase2 = SCPI_Facet("SOURce2:BURS:PHAS", convert=float, units="deg")
+    burst_delay2 = SCPI_Facet("SOURce2:BURS:TDEL", convert=float, units="s")
+    burst_gate_polarity2 = SCPI_Facet("SOURce2:BURS:GATE:POL", convert=str)
+
     # Modulation settings for channel 1
-    modulation_state1 = SCPI_Facet('SOURce1:MOD:STAT', convert=bool)
-    modulation_type1 = SCPI_Facet('SOURce1:MOD:TYP', convert=str)
-    modulation_depth1 = SCPI_Facet('SOURce1:MOD:DEPT', convert=float)
-    modulation_rate1 = SCPI_Facet('SOURce1:MOD:RATE', convert=float, units='Hz')
-    modulation_source1 = SCPI_Facet('SOURce1:MOD:SOUR', convert=str)
-    modulation_freq_dev1 = SCPI_Facet('SOURce1:MOD:FM:DEV', convert=float, units='Hz')
-    modulation_phase_dev1 = SCPI_Facet('SOURce1:MOD:PM:DEV', convert=float, units='deg')
-    modulation_pulse_width1 = SCPI_Facet('SOURce1:MOD:PWM:WIDT', convert=float, units='%')
-    
+    modulation_state1 = SCPI_Facet("SOURce1:MOD:STAT", convert=bool)
+    modulation_type1 = SCPI_Facet("SOURce1:MOD:TYP", convert=str)
+    modulation_depth1 = SCPI_Facet("SOURce1:MOD:DEPT", convert=float)
+    modulation_rate1 = SCPI_Facet("SOURce1:MOD:RATE", convert=float, units="Hz")
+    modulation_source1 = SCPI_Facet("SOURce1:MOD:SOUR", convert=str)
+    modulation_freq_dev1 = SCPI_Facet("SOURce1:MOD:FM:DEV", convert=float, units="Hz")
+    modulation_phase_dev1 = SCPI_Facet("SOURce1:MOD:PM:DEV", convert=float, units="deg")
+    modulation_pulse_width1 = SCPI_Facet(
+        "SOURce1:MOD:PWM:WIDT", convert=float, units="%"
+    )
+
     # Modulation settings for channel 2
-    modulation_state2 = SCPI_Facet('SOURce2:MOD:STAT', convert=bool)
-    modulation_type2 = SCPI_Facet('SOURce2:MOD:TYP', convert=str)
-    modulation_depth2 = SCPI_Facet('SOURce2:MOD:DEPT', convert=float)
-    modulation_rate2 = SCPI_Facet('SOURce2:MOD:RATE', convert=float, units='Hz')
-    modulation_source2 = SCPI_Facet('SOURce2:MOD:SOUR', convert=str)
-    modulation_freq_dev2 = SCPI_Facet('SOURce2:MOD:FM:DEV', convert=float, units='Hz')
-    modulation_phase_dev2 = SCPI_Facet('SOURce2:MOD:PM:DEV', convert=float, units='deg')
-    modulation_pulse_width2 = SCPI_Facet('SOURce2:MOD:PWM:WIDT', convert=float, units='%')
-    
+    modulation_state2 = SCPI_Facet("SOURce2:MOD:STAT", convert=bool)
+    modulation_type2 = SCPI_Facet("SOURce2:MOD:TYP", convert=str)
+    modulation_depth2 = SCPI_Facet("SOURce2:MOD:DEPT", convert=float)
+    modulation_rate2 = SCPI_Facet("SOURce2:MOD:RATE", convert=float, units="Hz")
+    modulation_source2 = SCPI_Facet("SOURce2:MOD:SOUR", convert=str)
+    modulation_freq_dev2 = SCPI_Facet("SOURce2:MOD:FM:DEV", convert=float, units="Hz")
+    modulation_phase_dev2 = SCPI_Facet("SOURce2:MOD:PM:DEV", convert=float, units="deg")
+    modulation_pulse_width2 = SCPI_Facet(
+        "SOURce2:MOD:PWM:WIDT", convert=float, units="%"
+    )
+
     # Sweep settings for channel 1
-    sweep_state1 = SCPI_Facet('SOURce1:SWE:STAT', convert=bool)
-    sweep_time1 = SCPI_Facet('SOURce1:SWE:TIME', convert=float, units='s')
-    sweep_spacing1 = SCPI_Facet('SOURce1:SWE:SPAC', convert=str)
-    sweep_mode1 = SCPI_Facet('SOURce1:SWE:MODE', convert=str)
-    sweep_return1 = SCPI_Facet('SOURce1:SWE:RTIM', convert=float, units='s')
-    
+    sweep_state1 = SCPI_Facet("SOURce1:SWE:STAT", convert=bool)
+    sweep_time1 = SCPI_Facet("SOURce1:SWE:TIME", convert=float, units="s")
+    sweep_spacing1 = SCPI_Facet("SOURce1:SWE:SPAC", convert=str)
+    sweep_mode1 = SCPI_Facet("SOURce1:SWE:MODE", convert=str)
+    sweep_return1 = SCPI_Facet("SOURce1:SWE:RTIM", convert=float, units="s")
+
     # Sweep settings for channel 2
-    sweep_state2 = SCPI_Facet('SOURce2:SWE:STAT', convert=bool)
-    sweep_time2 = SCPI_Facet('SOURce2:SWE:TIME', convert=float, units='s')
-    sweep_spacing2 = SCPI_Facet('SOURce2:SWE:SPAC', convert=str)
-    sweep_mode2 = SCPI_Facet('SOURce2:SWE:MODE', convert=str)
-    sweep_return2 = SCPI_Facet('SOURce2:SWE:RTIM', convert=float, units='s')
-    
+    sweep_state2 = SCPI_Facet("SOURce2:SWE:STAT", convert=bool)
+    sweep_time2 = SCPI_Facet("SOURce2:SWE:TIME", convert=float, units="s")
+    sweep_spacing2 = SCPI_Facet("SOURce2:SWE:SPAC", convert=str)
+    sweep_mode2 = SCPI_Facet("SOURce2:SWE:MODE", convert=str)
+    sweep_return2 = SCPI_Facet("SOURce2:SWE:RTIM", convert=float, units="s")
+
     # Trigger settings
-    trigger_source = SCPI_Facet('TRIG:SOUR', convert=str)
-    trigger_slope = SCPI_Facet('TRIG:SLOP', convert=str)
-    trigger_delay = SCPI_Facet('TRIG:DEL', convert=float, units='s')
-    trigger_count = SCPI_Facet('TRIG:COUN', convert=int)
-    
+    trigger_source = SCPI_Facet("TRIG:SOUR", convert=str)
+    trigger_slope = SCPI_Facet("TRIG:SLOP", convert=str)
+    trigger_delay = SCPI_Facet("TRIG:DEL", convert=float, units="s")
+    trigger_count = SCPI_Facet("TRIG:COUN", convert=int)
+
     # Output settings
-    output1 = SCPI_Facet('OUTP1', convert=bool)
-    output2 = SCPI_Facet('OUTP2', convert=bool)
-    output_impedance1 = SCPI_Facet('OUTP1:IMP', convert=float, units='ohm')
-    output_impedance2 = SCPI_Facet('OUTP2:IMP', convert=float, units='ohm')
-    output_polarity1 = SCPI_Facet('OUTP1:POL', convert=str)
-    output_polarity2 = SCPI_Facet('OUTP2:POL', convert=str)
-    
+    output1 = SCPI_Facet("OUTP1", convert=bool)
+    output2 = SCPI_Facet("OUTP2", convert=bool)
+    output_impedance1 = SCPI_Facet("OUTP1:LOAD", convert=float, units="ohm")
+    output_impedance2 = SCPI_Facet("OUTP2:LOAD", convert=float, units="ohm")
+    output_polarity1 = SCPI_Facet("OUTP1:POL", convert=str)
+    output_polarity2 = SCPI_Facet("OUTP2:POL", convert=str)
+
     # System settings
-    system_error = SCPI_Facet('SYST:ERR', convert=str)
-    system_version = SCPI_Facet('SYST:VERS', convert=str)
-    system_date = SCPI_Facet('SYST:DATE', convert=str)
-    system_time = SCPI_Facet('SYST:TIME', convert=str)
+    system_error = SCPI_Facet("SYST:ERR", convert=str)
+    system_version = SCPI_Facet("SYST:VERS", convert=str)
+    system_date = SCPI_Facet("SYST:DATE", convert=str)
+    system_time = SCPI_Facet("SYST:TIME", convert=str)
+
+    @property
+    def combined(self):
+        """Get the combined output state.
+
+        Returns
+        -------
+        bool
+            True if channels are combined, False otherwise
+        """
+        if not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return self.query("COMBine:FEED?") == "CH2"
+
+    @combined.setter
+    def combined(self, val):
+        """Set the combined output state.
+
+        Parameters
+        ----------
+        val : bool
+            True to combine channels (combines channel 2 into channel 1), False to separate
+        """
+        if not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        self.write(f"COMBine:FEED {'CH2' if val else 'NONE'}")
 
     def set_sweep_frequency(self, start_freq, stop_freq, channel=1):
         """Set sweep frequency range.
@@ -909,7 +936,9 @@ class Keysight33500B(AgilentFuncGenerator):
             Trigger source (IMM, EXT, BUS, KEY, TIM, MAN)
         """
         if source not in [s.value for s in TriggerSource]:
-            raise ValueError(f"Invalid trigger source. Must be one of {[s.value for s in TriggerSource]}")
+            raise ValueError(
+                f"Invalid trigger source. Must be one of {[s.value for s in TriggerSource]}"
+            )
         self.write(f"TRIG:SOUR {source}")
 
     def get_trigger_source(self):
@@ -931,7 +960,9 @@ class Keysight33500B(AgilentFuncGenerator):
             Trigger slope (POS, NEG, EITH)
         """
         if slope not in [s.value for s in TriggerSlope]:
-            raise ValueError(f"Invalid trigger slope. Must be one of {[s.value for s in TriggerSlope]}")
+            raise ValueError(
+                f"Invalid trigger slope. Must be one of {[s.value for s in TriggerSlope]}"
+            )
         self.write(f"TRIG:SLOP {slope}")
 
     def get_trigger_slope(self):
@@ -985,26 +1016,6 @@ class Keysight33500B(AgilentFuncGenerator):
             Current trigger count (INF or integer)
         """
         return self.query("TRIG:COUN?")
-
-    def set_output_impedance(self, impedance, channel=1):
-        """Set the output impedance.
-
-        Parameters
-        ----------
-        impedance : float
-            Output impedance in ohms
-        channel : int, optional
-            Channel number (1 or 2). For 33521B and 33522B only.
-
-        Raises
-        ------
-        ValueError
-            If dual channel operation is not available and channel=2
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-
-        self.write(f"OUTP{channel}:IMP {impedance}")
 
     def get_output_impedance(self, channel=1):
         """Get the output impedance.
@@ -1127,10 +1138,10 @@ class Keysight33500B(AgilentFuncGenerator):
         """
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
-            
+
         if polarity not in ["NORM", "INV"]:
             raise ValueError("Polarity must be either NORM or INV")
-            
+
         self.write(f"OUTP{channel}:POL {polarity}")
 
     def get_polarity(self, channel=1):
@@ -1148,7 +1159,7 @@ class Keysight33500B(AgilentFuncGenerator):
         """
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
-            
+
         return self.query(f"OUTP{channel}:POL?")
 
     def set_trigger_source(self, source):
@@ -1160,7 +1171,9 @@ class Keysight33500B(AgilentFuncGenerator):
             Trigger source (IMM, EXT, BUS, KEY, TIM, MAN)
         """
         if source not in [s.value for s in TriggerSource]:
-            raise ValueError(f"Invalid trigger source. Must be one of {[s.value for s in TriggerSource]}")
+            raise ValueError(
+                f"Invalid trigger source. Must be one of {[s.value for s in TriggerSource]}"
+            )
         self.write(f"TRIG:SOUR {source}")
 
     def get_trigger_source(self):
@@ -1182,7 +1195,9 @@ class Keysight33500B(AgilentFuncGenerator):
             Trigger slope (POS, NEG, EITH)
         """
         if slope not in [s.value for s in TriggerSlope]:
-            raise ValueError(f"Invalid trigger slope. Must be one of {[s.value for s in TriggerSlope]}")
+            raise ValueError(
+                f"Invalid trigger slope. Must be one of {[s.value for s in TriggerSlope]}"
+            )
         self.write(f"TRIG:SLOP {slope}")
 
     def get_trigger_slope(self):
@@ -1200,78 +1215,47 @@ class Keysight33500B(AgilentFuncGenerator):
 
         Parameters
         ----------
-        delay : float
-            The delay in seconds
-        channel : int
-            The channel number (1 or 2)
+        delay: pint.Quantity
+            The new delay in nanosecond-compatible units
+
+        channel: int
+            The channel number
         """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-            
-        self.write(f"SOURce{channel}:BURS:TDEL {delay}")
-
-    def set_out_impedance(self, imp, channel=1):
-        """Set the output impedance of a channel.
-
-        Parameters
-        ----------
-        imp : float
-            The impedance value in ohms
-        channel : int
-            The channel number (1 or 2)
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-            
-        self.write(f"OUTP{channel}:IMP {imp}")
-
-    def get_out_impedance(self, channel=1):
-        """Get the output impedance of a channel.
-
-        Parameters
-        ----------
-        channel : int
-            The channel number (1 or 2)
-
-        Returns
-        -------
-        float
-            The impedance value in ohms
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-            
-        return float(self.query(f"OUTP{channel}:IMP?"))
+        val = Q_(delay)
+        mag = val.to("ns").magnitude
+        self.write("PULS:DEL{:d} {}NS", channel, mag)
 
     def set_width(self, width, channel=1):
-        """Set the pulse width.
+        """Set the width.
 
         Parameters
         ----------
-        width : float
-            The pulse width in seconds
-        channel : int
-            The channel number (1 or 2)
+        width : pint.Quantity
+            The new width in nanosecond-compatible units
+
+        channel: int
+            Channel number
         """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-            
-        self.write(f"SOURce{channel}:FUNC:PULS:WIDT {width}")
+        val = Q_(width)
+        mag = val.to("ns").magnitude
+        self.write("PULS:WIDTh{:d} {:f}NS", channel, mag)
 
     def set_high(self, high, channel=1):
         """Set the high voltage level.
 
+        This changes the high level while keeping the low level fixed.
+
         Parameters
         ----------
-        high : float
-            The high voltage level in volts
-        channel : int
-            The channel number (1 or 2)
+        high : pint.Quantity
+            The new high level in volt-compatible units
+
+        channel: int
+            Channel number
         """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-            
-        self.write(f"SOURce{channel}:VOLT:HIGH {high}")
+        high = Q_(high)
+        mag = high.to("V").magnitude
+        self.write("VOLT{:d}:HIGH {:5.2f}V", channel, mag)
 
     def set_low(self, low, channel=1):
         """Set the low voltage level.
@@ -1285,7 +1269,7 @@ class Keysight33500B(AgilentFuncGenerator):
         """
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
-            
+
         self.write(f"SOURce{channel}:VOLT:LOW {low}")
 
     @property
@@ -1335,78 +1319,3 @@ class Keysight33500B(AgilentFuncGenerator):
         if not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
         self.write(f"OUTP2 {'ON' if val else 'OFF'}")
-
-    @property
-    def combined(self):
-        """Get the combined output state.
-
-        Returns
-        -------
-        bool
-            True if channels are combined, False otherwise
-        """
-        if not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        return self.query("CHAN:MATH?") == "PLUS"
-
-    @combined.setter
-    def combined(self, val):
-        """Set the combined output state.
-
-        Parameters
-        ----------
-        val : bool
-            True to combine channels, False to separate
-        """
-        if not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        self.write(f"CHAN:MATH {'PLUS' if val else 'OFF'}")
-
-    @property
-    def trigger_level(self):
-        """Get the trigger level.
-
-        Returns
-        -------
-        float
-            Trigger level in volts
-        """
-        return float(self.query("TRIG:LEV?"))
-
-    @trigger_level.setter
-    def trigger_level(self, val):
-        """Set the trigger level.
-
-        Parameters
-        ----------
-        val : float
-            Trigger level in volts
-        """
-        self.write(f"TRIG:LEV {val}")
-
-    def get_all_errors(self):
-        """Get all errors from the error queue.
-
-        Returns
-        -------
-        list
-            List of (error_code, error_message) tuples
-        """
-        errors = []
-        while True:
-            error = self.query("SYST:ERR?")
-            code, message = error.split(",")
-            code = int(code)
-            message = message.strip('"')
-            if code == 0:  # No error
-                break
-            errors.append((code, message))
-        return errors
-
-    def clear_error_queue(self):
-        """Clear the error queue by reading all errors."""
-        while True:
-            error = self.query("SYST:ERR?")
-            code = int(error.split(",")[0])
-            if code == 0:  # No error
-                break

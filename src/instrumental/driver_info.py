@@ -2,6 +2,11 @@
 from collections import OrderedDict
 
 driver_info = OrderedDict([
+    ('cameras.basler', {
+        'params': ['model', 'name', 'serial'],
+        'classes': ['BaslerCamera'],
+        'imports': ['pypylon'],
+    }),
     ('cameras.picam', {
         'params': ['model', 'serial'],
         'classes': ['PicamCamera'],

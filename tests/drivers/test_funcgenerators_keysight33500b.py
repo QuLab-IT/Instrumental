@@ -99,7 +99,7 @@ Dependencies:
 
 import time
 from typing import NoReturn
-from instrumental.drivers.funcgenerators.agilent.keysight33500b import (
+from instrumental.drivers.funcgenerators.keysight33500b import (
     Keysight33500B,
     WaveformShape,
     BurstMode,

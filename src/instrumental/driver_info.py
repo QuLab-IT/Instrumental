@@ -1,4 +1,4 @@
-# Auto-generated 2025-03-28T17:16:45.825524
+# Auto-generated 2025-03-28T19:50:09.739082
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -27,7 +27,7 @@ driver_info = OrderedDict([
         'classes': ['NIDAQ'],
         'imports': ['nicelib >= 0.5'],
     }),
-    ('funcgenerators.agilent.agilent', {
+    ('funcgenerators.agilent', {
         'params': ['visa_address'],
         'classes': ['Agilent33250A', 'Agilent81110A', 'AgilentE4400B', 'AgilentMXG', 'Keysight81160A'],
         'imports': [],
@@ -39,10 +39,10 @@ driver_info = OrderedDict([
             'Keysight81160A': ('Agilent Technologies', ['81160A']),
         },
     }),
-    ('funcgenerators.agilent.keysight33500b', {
+    ('funcgenerators.keysight33500b', {
         'params': ['visa_address'],
         'classes': ['Keysight33500B'],
-        'imports': ['instrumental'],
+        'imports': [],
         'visa_info': {
             'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B']),
         },

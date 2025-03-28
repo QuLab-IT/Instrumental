@@ -3,9 +3,9 @@
 from enum import Enum
 from typing import List, Tuple, Union, Optional, Any
 
-from .... import u, Q_
-from ... import VisaMixin
-from .. import FunctionGenerator
+from . import FunctionGenerator
+from ... import u, Q_
+from .. import VisaMixin
 
 
 class WaveformShape(Enum):

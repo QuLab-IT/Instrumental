@@ -8,3 +8,4 @@ Create :py:class:`~instrumental.drivers.funcgenerators.FunctionGenerator` object
     :maxdepth: 1
 
     tek-funcgens
+    keysight33500b

@@ -1,10 +1,9 @@
 """Driver for Keysight 33500B Series Waveform Generators."""
 
 from enum import Enum
-from typing import List, Tuple, Union, Optional, Any
+from typing import List, Tuple, Union, Optional
 
 from . import FunctionGenerator
-from ... import u, Q_
 from .. import VisaMixin
 
 
@@ -33,32 +32,6 @@ class SweepSpacing(Enum):
 
     LIN = "LIN"
     LOG = "LOG"
-
-
-class SweepMode(Enum):
-    """Available sweep modes."""
-
-    AUTO = "AUTO"
-    MANUAL = "MAN"
-    STEP = "STEP"
-
-
-class SweepDirection(Enum):
-    """Available sweep directions."""
-
-    UP = "UP"
-    DOWN = "DOWN"
-    BIDIRECTIONAL = "BID"
-
-
-class ModulationType(Enum):
-    """Available modulation types."""
-
-    AM = "AM"
-    FM = "FM"
-    PM = "PM"
-    FSK = "FSK"
-    PWM = "PWM"
 
 
 class TriggerSource(Enum):

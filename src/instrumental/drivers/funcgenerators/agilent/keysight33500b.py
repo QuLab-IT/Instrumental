@@ -3,7 +3,6 @@
 from enum import Enum
 from typing import List, Tuple, Union, Optional, Any
 
-from instrumental.drivers.util import convert_enum
 from .... import u, Q_
 from ... import VisaMixin
 from .. import FunctionGenerator
@@ -24,9 +23,9 @@ class WaveformShape(Enum):
 
 class BurstMode(Enum):
     """Available burst modes."""
+
     TRIGGERED = "TRIG"  # Triggered burst mode (default)
     GATED = "GAT"  # External gated burst mode
-
 
 
 class SweepSpacing(Enum):

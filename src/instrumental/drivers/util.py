@@ -71,21 +71,6 @@ def as_enum(enum_type, arg):
         raise ValueError("{} is not a valid {} enum".format(arg, enum_type.__name__))
 
 
-def convert_enum(enum_type):
-    """Check if arg is an instance or key of enum_type, and return that enum
-
-    Strings are converted to lowercase first, so enum fields must be lowercase.
-    """
-    def convert(arg):
-        if isinstance(arg, enum_type):
-            return arg
-        try:
-            return enum_type[arg]
-        except (KeyError, AttributeError):
-            raise ValueError("{} is not a valid {} enum".format(arg, enum_type.__name__))
-    return convert
-
-
 def check_units(*pos, **named):
     """Decorator to enforce the dimensionality of input args and return values.
 

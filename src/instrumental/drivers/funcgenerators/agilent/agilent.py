@@ -6,9 +6,9 @@ Driver module for Agilent signal generators.
 MXG driver was initially developed for and tested on the N5181A.
 """
 from enum import Enum
-from . import FunctionGenerator
-from .. import VisaMixin, SCPI_Facet
-from ... import u, Q_
+from .. import FunctionGenerator
+from ... import VisaMixin, SCPI_Facet
+from .... import u, Q_
 
 
 def _convert_enum(enum_type):

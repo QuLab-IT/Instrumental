@@ -318,7 +318,7 @@ class ManualFacet(Facet):
         return None  # FIXME
 
 
-def MessageFacet(get_msg=None, set_msg=None, convert=None, **kwds):
+def MessageFacet(get_msg=None, set_msg=None, convert=None, get_convert=None, set_convert=None, **kwds):
     """Convenience function for creating message-based Facets.
 
     Creates `fget` and `fset` functions that are passed to `Facet`, based on message templates.
@@ -335,27 +335,37 @@ def MessageFacet(get_msg=None, set_msg=None, convert=None, **kwds):
     set_msg : str, optional
         Message used to set the facet's value. This string is filled in with
         `set_msg.format(value)`, where value is the user-given value being set.
-    convert : function or callable
-        Function that converts both the string returned by querying the instrument and the set-value
-        before it is passed to `str.format()`. Usually something like `int` or `float`.
+    convert : function or callable, optional
+        Legacy parameter. If provided, used for both getting and setting. Superseded by
+        `get_convert` and `set_convert` if they are provided.
+    get_convert : function or callable, optional
+        Function that converts the string returned by querying the instrument into the desired
+        Python type. If not provided and `convert` is provided, `convert` will be used.
+    set_convert : function or callable, optional
+        Function that converts the Python value into the format expected by the instrument before
+        it is passed to `str.format()`. If not provided and `convert` is provided, `convert` will be used.
     **kwds :
         Any other keywords are passed along to the `Facet` constructor
     """
+    # Handle legacy convert parameter
+    if convert is not None and get_convert is None and set_convert is None:
+        get_convert = convert
+        set_convert = convert
 
     if get_msg is None:
         fget = None
-    elif convert:
+    elif get_convert:
         def fget(obj):
-            return convert(obj.query(get_msg))
+            return get_convert(obj.query(get_msg))
     else:
         def fget(obj):
             return obj.query(get_msg)
 
     if set_msg is None:
         fset = None
-    elif convert:
+    elif set_convert:
         def fset(obj, value):
-            obj.write(set_msg.format(convert(value)))
+            obj.write(set_msg.format(set_convert(value)))
     else:
         def fset(obj, value):
             obj.write(set_msg.format(value))
@@ -363,7 +373,7 @@ def MessageFacet(get_msg=None, set_msg=None, convert=None, **kwds):
     return Facet(fget, fset, **kwds)
 
 
-def SCPI_Facet(msg, convert=None, readonly=False, **kwds):
+def SCPI_Facet(msg, convert=None, get_convert=None, set_convert=None, readonly=False, **kwds):
     """Facet factory for use in VisaMixin subclasses that use SCPI messages
 
     Parameters
@@ -372,9 +382,15 @@ def SCPI_Facet(msg, convert=None, readonly=False, **kwds):
         Base message used to create SCPI get- and set-messages. For example, if `msg='voltage'`, the
         get-message is `'voltage?'` and the set-message becomes `'voltage {}'`, where `{}` gets
         filled in by the value being set.
-    convert : function or callable
-        Function that converts both the string returned by querying the instrument and the set-value
-        before it is passed to `str.format()`. Usually something like `int` or `float`.
+    convert : function or callable, optional
+        Legacy parameter. If provided, used for both getting and setting. Superseded by
+        `get_convert` and `set_convert` if they are provided.
+    get_convert : function or callable, optional
+        Function that converts the string returned by querying the instrument into the desired
+        Python type. If not provided and `convert` is provided, `convert` will be used.
+    set_convert : function or callable, optional
+        Function that converts the Python value into the format expected by the instrument before
+        it is passed to `str.format()`. If not provided and `convert` is provided, `convert` will be used.
     readonly : bool, optional
         Whether the Facet should be read-only.
     **kwds :
@@ -382,4 +398,4 @@ def SCPI_Facet(msg, convert=None, readonly=False, **kwds):
     """
     get_msg = msg + '?'
     set_msg = None if readonly else msg + ' {}'
-    return MessageFacet(get_msg, set_msg, convert=convert, **kwds)
+    return MessageFacet(get_msg, set_msg, convert=convert, get_convert=get_convert, set_convert=set_convert, **kwds)

@@ -1,4 +1,4 @@
-# Auto-generated 2025-03-21T16:47:15.247449
+# Auto-generated 2025-03-28T17:16:45.825524
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -27,17 +27,24 @@ driver_info = OrderedDict([
         'classes': ['NIDAQ'],
         'imports': ['nicelib >= 0.5'],
     }),
-    ('funcgenerators.agilent', {
+    ('funcgenerators.agilent.agilent', {
         'params': ['visa_address'],
-        'classes': ['Agilent33250A', 'Agilent81110A', 'AgilentE4400B', 'AgilentMXG', 'Keysight33500B', 'Keysight81160A'],
+        'classes': ['Agilent33250A', 'Agilent81110A', 'AgilentE4400B', 'AgilentMXG', 'Keysight81160A'],
         'imports': [],
         'visa_info': {
             'Agilent33250A': ('Agilent Technologies', ['33250A']),
             'Agilent81110A': ('HEWLETT-PACKARD', ['HP81110A']),
             'AgilentE4400B': ('Hewlett-Packard', ['ESG-1000B']),
             'AgilentMXG': ('Agilent Technologies', ['N5181A']),
-            'Keysight33500B': ('Agilent Technologies', ['33511B', '33512B', '33521B', '33522B']),
             'Keysight81160A': ('Agilent Technologies', ['81160A']),
+        },
+    }),
+    ('funcgenerators.agilent.keysight33500b', {
+        'params': ['visa_address'],
+        'classes': ['Keysight33500B'],
+        'imports': ['instrumental'],
+        'visa_info': {
+            'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B']),
         },
     }),
     ('funcgenerators.rigol', {

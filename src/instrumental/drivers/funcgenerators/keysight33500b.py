@@ -107,6 +107,21 @@ class AngleUnit(Enum):
     RADIANS = "RAD"
 
 
+class ArbitraryAdvance(Enum):
+    """Available arbitrary waveform advance methods."""
+
+    TRIGGER = "TRIG"  # Advance on trigger
+    SAMPLE_RATE = "SRAT"  # Advance at sample rate
+
+
+class ArbitraryFilter(Enum):
+    """Available arbitrary waveform filter settings."""
+
+    NORMAL = "NORM"  # Normal filtering
+    STEP = "STEP"  # Step filtering
+    OFF = "OFF"  # No filtering
+
+
 class Keysight33500B(FunctionGenerator, VisaMixin):
     """Driver for Keysight 33500B Series Waveform Generators.
 
@@ -367,67 +382,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             raise ValueError("Dual channel operation not available on this model")
         self.write(f"SOURce{channel}:VOLT:OFFS {self._format_float(offset)}")
 
-    def get_function(self, channel: int = 1) -> WaveformShape:
-        """Get the output function.
-
-        Parameters
-        ----------
-        channel : int, optional
-            Channel number (1 or 2)
-
-        Returns
-        -------
-        WaveformShape
-            Current waveform shape
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        return WaveformShape(self.query(f"SOURce{channel}:FUNC?"))
-
-    def set_function(self, function: WaveformShape, channel: int = 1) -> None:
-        """Set the output function.
-
-        Parameters
-        ----------
-        function : WaveformShape
-            Waveform shape to set
-        channel : int, optional
-            Channel number (1 or 2)
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        self.write(f"SOURce{channel}:FUNC {function.value}")
-
-    def get_function_shape(self, channel: int = 1) -> WaveformShape:
-        """Get the output function shape.
-
-        Parameters
-        ----------
-        channel : int, optional
-            Channel number (1 or 2)
-
-        Returns
-        -------
-        WaveformShape
-            Current waveform shape
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        return WaveformShape(self.query(f"SOURce{channel}:FUNC:SHAP?"))
-
-    def set_function_shape(self, shape: WaveformShape, channel: int = 1) -> None:
-        """Set the output function shape.
-
-        Parameters
-        ----------
-        shape : WaveformShape
-            Waveform shape to set
-        channel : int, optional
-            Channel number (1 or 2)
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        self.write(f"SOURce{channel}:FUNC:SHAP {shape.value}")
 
     def get_duty_cycle(self, channel: int = 1) -> float:
         """Get the pulse duty cycle.
@@ -459,37 +413,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         if channel == 2 and not self._check_dual_channel():
             raise ValueError("Dual channel operation not available on this model")
         self.write(f"SOURce{channel}:FUNC:PULS:DCYC {self._format_float(duty_cycle)}")
-
-    def get_ramp_symmetry(self, channel: int = 1) -> float:
-        """Get the ramp symmetry.
-
-        Parameters
-        ----------
-        channel : int, optional
-            Channel number (1 or 2)
-
-        Returns
-        -------
-        float
-            Ramp symmetry in percent
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        return float(self.query(f"SOURce{channel}:FUNC:RAMP:SYMM?"))
-
-    def set_ramp_symmetry(self, symmetry: float, channel: int = 1) -> None:
-        """Set the ramp symmetry.
-
-        Parameters
-        ----------
-        symmetry : float
-            Ramp symmetry in percent
-        channel : int, optional
-            Channel number (1 or 2)
-        """
-        if channel == 2 and not self._check_dual_channel():
-            raise ValueError("Dual channel operation not available on this model")
-        self.write(f"SOURce{channel}:FUNC:RAMP:SYMM {self._format_float(symmetry)}")
 
     def get_phase(self, channel: int = 1) -> float:
         """Get the output phase.
@@ -1998,3 +1921,680 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             Angle unit to set (DEGREES or RADIANS)
         """
         self.write(f"UNIT:ANGLe {unit.value}")
+    
+    def get_function(self, channel: int = 1) -> WaveformShape:
+        """Get the output function.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        WaveformShape
+            Current waveform shape
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return WaveformShape(self.query(f"SOURce{channel}:FUNC?"))
+
+    def set_function(self, function: WaveformShape, channel: int = 1) -> None:
+        """Set the output function.
+
+        Parameters
+        ----------
+        function : WaveformShape
+            Waveform shape to set
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        self.write(f"SOURce{channel}:FUNC {function.value}")
+
+    # Arbitrary Waveform Commands
+    def get_arbitrary_waveform(self, channel: int = 1) -> str:
+        """Get the current arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        str
+            Current arbitrary waveform filename
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return self.query(f"SOURce{channel}:FUNC:ARB?").strip()
+
+    def set_arbitrary_waveform(self, filename: str, channel: int = 1) -> None:
+        """Set the arbitrary waveform.
+
+        Parameters
+        ----------
+        filename : str
+            Name of arbitrary waveform file to load
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB {filename}")
+
+    def get_arbitrary_advance(self, channel: int = 1) -> ArbitraryAdvance:
+        """Get the method for advancing to next arbitrary waveform data point.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        ArbitraryAdvance
+            Advance method (TRIGGER or SAMPLE_RATE)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return ArbitraryAdvance(self.query(f"SOURce{channel}:FUNC:ARB:ADV?").strip())
+
+    def set_arbitrary_advance(self, method: ArbitraryAdvance, channel: int = 1) -> None:
+        """Set the method for advancing to next arbitrary waveform data point.
+
+        Parameters
+        ----------
+        method : ArbitraryAdvance
+            Advance method (TRIGGER or SAMPLE_RATE)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:ADV {method.value}")
+
+    def get_arbitrary_filter(self, channel: int = 1) -> ArbitraryFilter:
+        """Get the filter setting for arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        ArbitraryFilter
+            Filter setting (NORMAL, STEP, or OFF)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return ArbitraryFilter(self.query(f"SOURce{channel}:FUNC:ARB:FILT?").strip())
+
+    def set_arbitrary_filter(self, filter_setting: ArbitraryFilter, channel: int = 1) -> None:
+        """Set the filter setting for arbitrary waveform.
+
+        Parameters
+        ----------
+        filter_setting : ArbitraryFilter
+            Filter setting (NORMAL, STEP, or OFF)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:FILT {filter_setting.value}")
+
+    def get_arbitrary_frequency(self, channel: int = 1) -> float:
+        """Get the frequency for arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Frequency in Hz
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:ARB:FREQ?"))
+
+    def set_arbitrary_frequency(self, frequency: float, channel: int = 1) -> None:
+        """Set the frequency for arbitrary waveform.
+
+        Parameters
+        ----------
+        frequency : float
+            Frequency in Hz (1 µHz to 31.25 MHz, limited by points and filter setting)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:FREQ {self._format_float(frequency)}")
+
+    def get_arbitrary_period(self, channel: int = 1) -> float:
+        """Get the period for arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Period in seconds
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:ARB:PER?"))
+
+    def set_arbitrary_period(self, period: float, channel: int = 1) -> None:
+        """Set the period for arbitrary waveform.
+
+        Parameters
+        ----------
+        period : float
+            Period in seconds
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:PER {this._format_float(period)}")
+
+    def get_arbitrary_points(self, channel: int = 1) -> int:
+        """Get the number of points in the current arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        int
+            Number of points in the waveform
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return int(self.query(f"SOURce{channel}:FUNC:ARB:POIN?"))
+
+    def get_arbitrary_peak_to_peak(self, channel: int = 1) -> float:
+        """Get the peak-to-peak voltage for arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Peak-to-peak voltage in volts
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:ARB:PTP?"))
+
+    def set_arbitrary_peak_to_peak(self, voltage: float, channel: int = 1) -> None:
+        """Set the peak-to-peak voltage for arbitrary waveform.
+
+        Parameters
+        ----------
+        voltage : float
+            Peak-to-peak voltage in volts (10 Vpp into 50 Ω, 20 Vpp into open circuit)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:PTP {this._format_float(voltage)}")
+
+    def get_arbitrary_sample_rate(self, channel: int = 1) -> float:
+        """Get the sample rate for arbitrary waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Sample rate in samples per second
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:ARB:SRAT?"))
+
+    def set_arbitrary_sample_rate(self, sample_rate: float, channel: int = 1) -> None:
+        """Set the sample rate for arbitrary waveform.
+
+        Parameters
+        ----------
+        sample_rate : float
+            Sample rate in samples per second (max 250 MSa/s, 62.5 MSa/s with filter OFF)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write(f"SOURce{channel}:FUNC:ARB:SRAT {this._format_float(sample_rate)}")
+
+    def synchronize_arbitrary_waveforms(self) -> None:
+        """Restart arbitrary waveforms simultaneously on both channels.
+
+        This command requires dual channel capability and arbitrary waveform support.
+        """
+        if not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not self._check_arbitrary_capability():
+            raise ValueError("Arbitrary waveform capability not available on this model")
+        self.write("FUNC:ARB:SYNC")
+
+    def get_noise_bandwidth(self, channel: int = 1) -> float:
+        """Get the bandwidth for noise waveform.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Bandwidth in Hz (1 Hz to 20 MHz)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:NOIS:BAND?"))
+
+    def set_noise_bandwidth(self, bandwidth: float, channel: int = 1) -> None:
+        """Set the bandwidth for noise waveform.
+
+        Parameters
+        ----------
+        bandwidth : float
+            Bandwidth in Hz (1 Hz to 20 MHz)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (1 <= bandwidth <= 20e6):
+            raise ValueError("Bandwidth must be between 1 Hz and 20 MHz")
+        self.write(f"SOURce{channel}:FUNC:NOIS:BAND {self._format_float(bandwidth)}")
+
+    def get_prbs_bit_rate(self, channel: int = 1) -> float:
+        """Get the bit rate for pseudo-random binary sequence.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Bit rate in bits per second (1 b/s to 50 Mb/s)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:PRBS:BRAT?"))
+
+    def set_prbs_bit_rate(self, bit_rate: float, channel: int = 1) -> None:
+        """Set the bit rate for pseudo-random binary sequence.
+
+        Parameters
+        ----------
+        bit_rate : float
+            Bit rate in bits per second (1 b/s to 50 Mb/s)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (1 <= bit_rate <= 50e6):
+            raise ValueError("Bit rate must be between 1 b/s and 50 Mb/s")
+        self.write(f"SOURce{channel}:FUNC:PRBS:BRAT {this._format_float(bit_rate)}")
+
+    def get_prbs_data(self, channel: int = 1) -> str:
+        """Get the sequence type for PRBS.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        str
+            PRBS sequence type (PRBS7, PRBS9, PRBS11, PRBS15, PRBS20, PRBS23, PRBS29, PRBS31)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return self.query(f"SOURce{channel}:FUNC:PRBS:DATA?").strip()
+
+    def set_prbs_data(self, sequence: str, channel: int = 1) -> None:
+        """Set the sequence type for PRBS.
+
+        Parameters
+        ----------
+        sequence : str
+            PRBS sequence type (PRBS7, PRBS9, PRBS11, PRBS15, PRBS20, PRBS23, PRBS29, PRBS31)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        valid_sequences = ["PRBS7", "PRBS9", "PRBS11", "PRBS15", "PRBS20", "PRBS23", "PRBS29", "PRBS31"]
+        if sequence not in valid_sequences:
+            raise ValueError(f"Sequence must be one of {valid_sequences}")
+        self.write(f"SOURce{channel}:FUNC:PRBS:DATA {sequence}")
+
+    def get_prbs_transition(self, channel: int = 1) -> float:
+        """Get the edge transition time for PRBS.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Edge transition time in seconds (5 ns to 100 µs)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:PRBS:TRAN?"))
+
+    def set_prbs_transition(self, time: float, channel: int = 1) -> None:
+        """Set the edge transition time for PRBS.
+
+        Parameters
+        ----------
+        time : float
+            Edge transition time in seconds (5 ns to 100 µs)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (5e-9 <= time <= 100e-6):
+            raise ValueError("Transition time must be between 5 ns and 100 µs")
+        self.write(f"SOURce{channel}:FUNC:PRBS:TRAN {this._format_float(time)}")
+
+    def get_pulse_hold(self, channel: int = 1) -> str:
+        """Get whether pulse width or duty cycle is held constant.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        str
+            Hold mode (WIDTh or DCYC)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return self.query(f"SOURce{channel}:FUNC:PULS:HOLD?").strip()
+
+    def set_pulse_hold(self, mode: str, channel: int = 1) -> None:
+        """Set whether pulse width or duty cycle is held constant.
+
+        Parameters
+        ----------
+        mode : str
+            Hold mode (WIDTh or DCYC)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if mode not in ["WIDTh", "DCYC"]:
+            raise ValueError("Mode must be either 'WIDTh' or 'DCYC'")
+        self.write(f"SOURce{channel}:FUNC:PULS:HOLD {mode}")
+
+    def get_pulse_period(self, channel: int = 1) -> float:
+        """Get the period for a pulse.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Period in seconds (100 ns to 1000 s)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:PULS:PER?"))
+
+    def set_pulse_period(self, period: float, channel: int = 1) -> None:
+        """Set the period for a pulse.
+
+        Parameters
+        ----------
+        period : float
+            Period in seconds (100 ns to 1000 s)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (100e-9 <= period <= 1000):
+            raise ValueError("Period must be between 100 ns and 1000 s")
+        self.write(f"SOURce{channel}:FUNC:PULS:PER {this._format_float(period)}")
+
+    def get_pulse_transition(self, edge: str = "BOTH", channel: int = 1) -> float:
+        """Get the edge transition time for pulse.
+
+        Parameters
+        ----------
+        edge : str, optional
+            Edge to get (LEADing, TRAiling, or BOTH)
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Edge transition time in seconds (5 ns to 100 µs)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if edge not in ["LEAD", "TRA", "BOTH"]:
+            raise ValueError("Edge must be either 'LEAD', 'TRA', or 'BOTH'")
+        return float(self.query(f"SOURce{channel}:FUNC:PULS:TRAN{':BOTH' if edge == 'BOTH' else ':' + edge}?"))
+
+    def set_pulse_transition(self, time: float, edge: str = "BOTH", channel: int = 1) -> None:
+        """Set the edge transition time for pulse.
+
+        Parameters
+        ----------
+        time : float
+            Edge transition time in seconds (5 ns to 100 µs)
+        edge : str, optional
+            Edge to set (LEADing, TRAiling, or BOTH)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if edge not in ["LEAD", "TRA", "BOTH"]:
+            raise ValueError("Edge must be either 'LEAD', 'TRA', or 'BOTH'")
+        if not (5e-9 <= time <= 100e-6):
+            raise ValueError("Transition time must be between 5 ns and 100 µs")
+        self.write(f"SOURce{channel}:FUNC:PULS:TRAN{':BOTH' if edge == 'BOTH' else ':' + edge} {this._format_float(time)}")
+
+    def get_pulse_width(self, channel: int = 1) -> float:
+        """Get the pulse width.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Pulse width in seconds (20 ns to 1000 s)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:PULS:WIDT?"))
+
+    def set_pulse_width(self, width: float, channel: int = 1) -> None:
+        """Set the pulse width.
+
+        Parameters
+        ----------
+        width : float
+            Pulse width in seconds (20 ns to 1000 s)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (20e-9 <= width <= 1000):
+            raise ValueError("Pulse width must be between 20 ns and 1000 s")
+        self.write(f"SOURce{channel}:FUNC:PULS:WIDT {this._format_float(width)}")
+
+    def get_square_period(self, channel: int = 1) -> float:
+        """Get the period for square wave.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Period in seconds (100 ns to 1000 s)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:SQU:PER?"))
+
+    def set_square_period(self, period: float, channel: int = 1) -> None:
+        """Set the period for square wave.
+
+        Parameters
+        ----------
+        period : float
+            Period in seconds (100 ns to 1000 s)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (100e-9 <= period <= 1000):
+            raise ValueError("Period must be between 100 ns and 1000 s")
+        self.write(f"SOURce{channel}:FUNC:SQU:PER {this._format_float(period)}")
+
+    def get_ramp_symmetry(self, channel: int = 1) -> float:
+        """Get the ramp symmetry.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Ramp symmetry in percent
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:RAMP:SYMM?"))
+
+    def set_ramp_symmetry(self, symmetry: float, channel: int = 1) -> None:
+        """Set the ramp symmetry.
+
+        Parameters
+        ----------
+        symmetry : float
+            Ramp symmetry in percent
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        self.write(f"SOURce{channel}:FUNC:RAMP:SYMM {self._format_float(symmetry)}")
+
+    def get_square_duty_cycle(self, channel: int = 1) -> float:
+        """Get the square wave duty cycle.
+
+        Parameters
+        ----------
+        channel : int, optional
+            Channel number (1 or 2)
+
+        Returns
+        -------
+        float
+            Duty cycle in percent (20% to 80%)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        return float(self.query(f"SOURce{channel}:FUNC:SQU:DCYC?"))
+
+    def set_square_duty_cycle(self, duty_cycle: float, channel: int = 1) -> None:
+        """Set the square wave duty cycle.
+
+        Parameters
+        ----------
+        duty_cycle : float
+            Duty cycle in percent (20% to 80%)
+        channel : int, optional
+            Channel number (1 or 2)
+        """
+        if channel == 2 and not self._check_dual_channel():
+            raise ValueError("Dual channel operation not available on this model")
+        if not (20 <= duty_cycle <= 80):
+            raise ValueError("Duty cycle must be between 20% and 80%")
+        self.write(f"SOURce{channel}:FUNC:SQU:DCYC {self._format_float(duty_cycle)}")

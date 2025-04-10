@@ -1,0 +1,4203 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ScpiDefinition xmlns="http://www.agilent.com/schemas/SCPIDL/2008" documentVersion="1.0" friendlyName="Unknown Instrument" schemaVersion="1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.agilent.com/schemas/SCPIDL/2008 ScpiDefinitionLanguage.xsd">
+	<GlobalDefinitions>
+		<Enum langTypeName="MinMaxDef" name="enum_33250A_enumMinMaxDef">
+			<Member aliases="MIN" mnemonic="MINimum" value="1" />
+			<Member aliases="MAX" mnemonic="MAXimum" value="2" />
+			<Member aliases="DEF" mnemonic="DEFault" value="5" />
+		</Enum>
+		<Enum langTypeName="MinMax" name="enum_33250A_std_num_enums">
+			<Member aliases="MIN" mnemonic="MINimum" value="1" />
+			<Member aliases="MAX" mnemonic="MAXimum" value="2" />
+		</Enum>
+		<Enum name="form_border_command_parameter_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="SWAP" mnemonic="SWAPped" value="1" />
+		</Enum>
+		<Enum name="form_border_query_response_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="SWAP" mnemonic="SWAPped" value="1" />
+		</Enum>
+		<Enum langTypeName="enumMinMaxDefInf" name="enum_33250A_enumMinMaxDefInf">
+			<Member aliases="MIN" mnemonic="MINimum" value="1" />
+			<Member aliases="MAX" mnemonic="MAXimum" value="2" />
+			<Member aliases="DEF" mnemonic="DEFault" value="5" />
+			<Member aliases="INF" mnemonic="INFinity" value="7" />
+		</Enum>
+		<Enum name="outp_polarity_command_parameter_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="INV" mnemonic="INVerted" value="1" />
+		</Enum>
+		<Enum name="outp_polarity_query_response_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="INV" mnemonic="INVerted" value="1" />
+		</Enum>
+		<Enum name="outp_trig_slope_command_parameter_1">
+			<Member aliases="POS" mnemonic="POSitive" value="1" />
+			<Member aliases="NEG" mnemonic="NEGative" value="2" />
+		</Enum>
+		<Enum name="outp_trig_slope_query_response_1">
+			<Member aliases="POS" mnemonic="POSitive" value="1" />
+			<Member aliases="NEG" mnemonic="NEGative" value="2" />
+		</Enum>
+		<Enum name="sour_am_int_func_shape_command_parameter_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member aliases="TRI" mnemonic="TRIangle" value="2" />
+			<Member mnemonic="RAMP" value="3" />
+			<Member aliases="NRAM" mnemonic="NRAMp" value="4" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="5" />
+			<Member mnemonic="USER" value="6" />
+		</Enum>
+		<Enum name="sour_am_int_func_shape_query_response_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member aliases="TRI" mnemonic="TRIangle" value="2" />
+			<Member mnemonic="RAMP" value="3" />
+			<Member aliases="NRAM" mnemonic="NRAMp" value="4" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="5" />
+			<Member mnemonic="USER" value="6" />
+		</Enum>
+		<Enum name="sour_am_source_command_parameter_1">
+			<Member aliases="INT BOTH" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_am_source_query_response_1">
+			<Member aliases="INT BOTH" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_burs_gate_polarity_command_parameter_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="INV" mnemonic="INVerted" value="1" />
+		</Enum>
+		<Enum name="sour_burs_gate_polarity_query_response_1">
+			<Member aliases="NORM" mnemonic="NORMal" value="0" />
+			<Member aliases="INV" mnemonic="INVerted" value="1" />
+		</Enum>
+		<Enum name="sour_burs_mode_command_parameter_1">
+			<Member aliases="TRIG" mnemonic="TRIGgered" value="0" />
+			<Member aliases="GAT" mnemonic="GATed" value="1" />
+		</Enum>
+		<Enum name="sour_burs_mode_query_response_1">
+			<Member aliases="TRIG" mnemonic="TRIGgered" value="0" />
+			<Member aliases="GAT" mnemonic="GATed" value="1" />
+		</Enum>
+		<Enum name="sour_fm_int_func_shape_command_parameter_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member aliases="TRI" mnemonic="TRIangle" value="2" />
+			<Member mnemonic="RAMP" value="3" />
+			<Member aliases="NRAM" mnemonic="NRAMp" value="4" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="5" />
+			<Member mnemonic="USER" value="6" />
+		</Enum>
+		<Enum name="sour_fm_int_func_shape_query_response_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member aliases="TRI" mnemonic="TRIangle" value="2" />
+			<Member mnemonic="RAMP" value="3" />
+			<Member aliases="NRAM" mnemonic="NRAMp" value="4" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="5" />
+			<Member mnemonic="USER" value="6" />
+		</Enum>
+		<Enum name="sour_fm_source_command_parameter_1">
+			<Member aliases="INT" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_fm_source_query_response_1">
+			<Member aliases="INT" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_fsk_source_command_parameter_1">
+			<Member aliases="INT" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_fsk_source_query_response_1">
+			<Member aliases="INT" mnemonic="INTernal" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+		</Enum>
+		<Enum name="sour_func_shape_command_parameter_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member mnemonic="RAMP" value="2" />
+			<Member aliases="PULS" mnemonic="PULSe" value="3" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="4" />
+			<Member mnemonic="USER" value="5" />
+			<Member mnemonic="DC" value="6" />
+		</Enum>
+		<Enum name="sour_func_shape_query_response_1">
+			<Member aliases="SIN" mnemonic="SINusoid" value="0" />
+			<Member aliases="SQU" mnemonic="SQUare" value="1" />
+			<Member mnemonic="RAMP" value="2" />
+			<Member aliases="PULS" mnemonic="PULSe" value="3" />
+			<Member aliases="NOIS" mnemonic="NOISe" value="4" />
+			<Member mnemonic="USER" value="5" />
+			<Member mnemonic="DC" value="6" />
+		</Enum>
+		<Enum name="sour_swe_spacing_command_parameter_1">
+			<Member aliases="LIN" mnemonic="LINear" value="0" />
+			<Member aliases="LOG" mnemonic="LOGarithmic" value="1" />
+		</Enum>
+		<Enum name="sour_swe_spacing_query_response_1">
+			<Member aliases="LIN" mnemonic="LINear" value="0" />
+			<Member aliases="LOG" mnemonic="LOGarithmic" value="1" />
+		</Enum>
+		<Enum name="sour_volt_lev_imm_unit_voltage_command_parameter_1">
+			<Member mnemonic="VPP" value="0" />
+			<Member mnemonic="VRMS" value="1" />
+			<Member mnemonic="DBM" value="2" />
+		</Enum>
+		<Enum name="sour_volt_lev_imm_unit_voltage_query_response_1">
+			<Member aliases="DEFault DEF" mnemonic="VPP" value="0" />
+			<Member mnemonic="VRMS" value="1" />
+			<Member mnemonic="DBM" value="2" />
+		</Enum>
+		<Enum name="sour_volt_rang_auto_command_parameter_1">
+			<Member mnemonic="OFF" value="0" />
+			<Member mnemonic="ON" value="1" />
+			<Member mnemonic="ONCE" value="2" />
+		</Enum>
+		<Enum name="trac_data_command_parameter_1">
+			<Member mnemonic="VOLATILE" value="0" />
+		</Enum>
+		<Enum name="trac_data_dac_command_parameter_1">
+			<Member mnemonic="VOLATILE" value="0" />
+		</Enum>
+		<Enum name="trig_seq_slope_command_parameter_1">
+			<Member aliases="POS" mnemonic="POSitive" value="0" />
+			<Member aliases="NEG" mnemonic="NEGative" value="1" />
+		</Enum>
+		<Enum name="trig_seq_slope_query_response_1">
+			<Member aliases="POS" mnemonic="POSitive" value="0" />
+			<Member aliases="NEG" mnemonic="NEGative" value="1" />
+		</Enum>
+		<Enum name="trig_seq_source_command_parameter_1">
+			<Member aliases="IMM" mnemonic="IMMediate" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+			<Member mnemonic="BUS" value="2" />
+		</Enum>
+		<Enum name="trig_seq_source_query_response_1">
+			<Member aliases="IMM" mnemonic="IMMediate" value="0" />
+			<Member aliases="EXT" mnemonic="EXTernal" value="1" />
+			<Member mnemonic="BUS" value="2" />
+		</Enum>
+		<Enum name="unit_angle_command_parameter_1">
+			<Member aliases="DEG" mnemonic="DEGree" value="0" />
+			<Member aliases="RAD" mnemonic="RADian" value="1" />
+		</Enum>
+		<Enum name="unit_angle_query_response_1">
+			<Member aliases="DEG DEFault DEF" mnemonic="DEGree" value="0" />
+			<Member aliases="RAD" mnemonic="RADian" value="1" />
+		</Enum>
+		<Enum langTypeName="Boolean" name="enum_33250A_boolean">
+			<Member mnemonic="ON" value="1" />
+			<Member mnemonic="OFF" value="0" />
+		</Enum>
+		<FormatCommandList name="BinaryBlock">
+			<FormatCommand>FORMat:BORDer SWAPped</FormatCommand>
+		</FormatCommandList>
+	</GlobalDefinitions>
+	<CommonCommands>
+		<CommonCommand mnemonic="CLS">
+			<Synopsis>Clear the event register in all register groups. This command also clears the error queue and cancels a *OPC operation. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":CLS" url="33250A-CLS.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax />
+			</CommandSyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="ESE">
+			<Synopsis>Enable bits in the Standard Event Status Register to be reported in the Status Byte. The selected bits are summarized in the "Standard Event" bit (bit 5) of the Status Byte Register. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":ESE" url="33250A-ESE_enable_value_ESE.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax>
+					<Parameters>
+						<Parameter name="enableValue" semanticType="Integer" description="The selected bits to be enabled in the Standard Event Status Register to be reported in the Status Byte.">
+							<ParameterType>
+								<DecimalNumeric />
+								<NonDecimalNumeric />
+							</ParameterType>
+						</Parameter>
+					</Parameters>
+				</CommandSyntax>
+			</CommandSyntaxes>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="ese" semanticType="Integer" description="The selected bits enabled in the Standard Event Status Register to be reported in the Status Byte.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="ESR">
+			<Synopsis>Query the Standard Event Status Register. Once a bit is set, it remains set until cleared by a *CLS (clear status) command or queried by this command. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":ESR" url="33250A-ESR.html" />
+			</HelpLinks>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="esr" semanticType="Integer" description="A decimal value which corresponds to the binary-weighted sum of all bits set in the Standard Event Status register.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="IDN">
+			<Synopsis>Read the function generator's identification string which contains four fields separated by commas. The first field is the manufacturer's name, the second field is the model number, the third field is the serial number, and the fourth field is a revision code which contains four numbers separated by dashes. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":IDN" url="33250A-IDN.html" />
+			</HelpLinks>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="idn" semanticType="String" description="The function generator's identification string.  The first field is the manufacturer's name, the second field is the model number, the third field is the serial number, and the fourth field is a revision code which contains four numbers separated by dashes. ">
+							<ResponseType>
+								<ArbitraryAscii />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="LRN">
+			<Synopsis>Query the function generator and return a string of SCPI commands containing the current settings (learn string). You can then send the string back to the instrument to restore this state at a later time. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":LRN" url="33250A-LRN.html" />
+			</HelpLinks>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="lrnString" semanticType="String" description="A string of SCPI commands containing the current settings (learn string).">
+							<ResponseType>
+								<ArbitraryAscii />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="OPC">
+			<Synopsis>Set the "Operation Complete" bit (bit 0) in the Standard Event register after the previous commands have completed. When used with a bus-triggered sweep or burst, you may have the opportunity to execute commands after the *OPC command and before the "Operation Complete" bit is set in the register. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":OPC" url="33250A-OPC.html" />
+				<HelpLink name=":OPC?" url="33250A-OPCqf.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax />
+			</CommandSyntaxes>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="opc" semanticType="Boolean" description="The &quot;Operation Complete&quot; bit (bit 0) in the Standard Event register.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="PSC">
+			<Synopsis>Power-On Status Clear. Clear the Standard Event enable register and Status Byte condition register at power on (*PSC 1). When *PSC 0 is in effect, these two registers are not cleared at power on. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":PSC" url="33250A-PSC_01_PSC.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax>
+					<Parameters>
+						<Parameter name="psc" semanticType="Integer" description="0|1">
+							<ParameterType>
+								<DecimalNumeric />
+								<NonDecimalNumeric />
+							</ParameterType>
+						</Parameter>
+					</Parameters>
+				</CommandSyntax>
+			</CommandSyntaxes>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="psc" semanticType="Boolean" description="The present setting of the power-on status clear. Returns &quot;0&quot; (do not clear at power on) or &quot;1&quot; (clear at power on). ">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="RCL">
+			<Synopsis>Recall the instrument state stored in the specified non-volatile storage location. You cannot recall the instrument state from a storage location that is empty. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":RCL" url="33250A-RCL_01234.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax>
+					<Parameters>
+						<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+							<ParameterType>
+								<DecimalNumeric />
+								<NonDecimalNumeric />
+							</ParameterType>
+						</Parameter>
+					</Parameters>
+				</CommandSyntax>
+			</CommandSyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="RST">
+			<Synopsis>Reset the function generator to its factory default state.</Synopsis>
+			<HelpLinks>
+				<HelpLink name=":RST" url="33250A-RST.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax />
+			</CommandSyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="SAV">
+			<Synopsis>Store (save) the current instrument state in the specified non-volatile storage location. Any state previously stored in the same location will be overwritten (and no error will be generated). </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":SAV" url="33250A-SAV_01234.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax>
+					<Parameters>
+						<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+							<ParameterType>
+								<DecimalNumeric />
+								<NonDecimalNumeric />
+							</ParameterType>
+						</Parameter>
+					</Parameters>
+				</CommandSyntax>
+			</CommandSyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="SRE">
+			<Synopsis>Enable bits in the Status Byte to generate a Service Request. The selected bits are summarized in the "Master Summary" bit (bit 6) of the Status Byte Register. If any of the selected bits change from "0" to "1", a Service Request signal is generated. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":SRE" url="33250A-SRE_enable_value__SRE.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax>
+					<Parameters>
+						<Parameter name="enableValue" semanticType="Integer" description="The selected bits to be enabled in the Status Byte to generate a Service Request.">
+							<ParameterType>
+								<DecimalNumeric />
+								<NonDecimalNumeric />
+							</ParameterType>
+						</Parameter>
+					</Parameters>
+				</CommandSyntax>
+			</CommandSyntaxes>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="sre" semanticType="Integer" description="A decimal value which corresponds to the binary-weighted sum of all bits enabled by the *SRE command.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="STB">
+			<Synopsis>Query the summary (condition) register in this register group. This command is similar to a Serial Poll but it is processed like any other instrument command. This command returns the same result as a Serial Poll but the "Master Summary" bit (bit 6) is not cleared by the *STB? command. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":STB" url="33250A-STB.html" />
+			</HelpLinks>
+			<QuerySyntaxes>
+				<QuerySyntax>
+					<Responses>
+						<Response name="stb" semanticType="Integer" description="The summary (condition) register in this register group.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="TRG">
+			<Synopsis>Trigger a sweep or burst from the remote interface only if the bus (software) trigger source is currently selected (TRIG:SOUR BUS command). </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":TRG" url="33250A-TRG.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax />
+			</CommandSyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="TST">
+			<Synopsis>Perform a complete self-test of the function generator. Returns "+0" (PASS) or "+1" (FAIL). If the test fails, one or more error messages will be generated to provide additional information on the failure. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":TST" url="33250A-TST.html" />
+			</HelpLinks>
+			<QuerySyntaxes>
+				<QuerySyntax timeout="30000">
+					<Responses>
+						<Response name="tst" semanticType="Integer" description="&quot;+0&quot; (PASS) or &quot;+1&quot; (FAIL) indicating the result of the complete self-test.">
+							<ResponseType>
+								<NR1Numeric />
+							</ResponseType>
+						</Response>
+					</Responses>
+				</QuerySyntax>
+			</QuerySyntaxes>
+		</CommonCommand>
+		<CommonCommand mnemonic="WAI">
+			<Synopsis>Wait for all pending operations to complete before executing any additional commands over the interface. </Synopsis>
+			<HelpLinks>
+				<HelpLink name=":WAI" url="33250A-WAI.html" />
+			</HelpLinks>
+			<CommandSyntaxes>
+				<CommandSyntax />
+			</CommandSyntaxes>
+		</CommonCommand>
+	</CommonCommands>
+	<SubsystemCommands>
+		<RootNode aliases="APPL" mnemonic="APPLy">
+			<SubsystemCommand>
+				<Synopsis>Query the function generator's current configuration and return a quoted string.</Synopsis>
+				<HelpLinks>
+					<HelpLink name=":APPLy" url="33250A-APPLy.html" />
+				</HelpLinks>
+				<QuerySyntaxes>
+					<QuerySyntax>
+						<Responses>
+							<Response name="configuration" semanticType="String" description="The function generator's current function, frequency, amplitude, and offset.">
+								<ResponseType>
+									<String />
+								</ResponseType>
+							</Response>
+						</Responses>
+					</QuerySyntax>
+				</QuerySyntaxes>
+			</SubsystemCommand>
+			<Node mnemonic="DC">
+				<SubsystemCommand>
+					<Synopsis>Output a dc voltage with the level specified by the offset parameter. The dc voltage is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:DC" url="33250A-APPLyDC_frequencyDEFault_amplitudeDEFault_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="DEFault">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="DEFault">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="Any value between ±5 Vdc into 50 ohms or ±10 Vdc.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="NOIS" mnemonic="NOISe">
+				<SubsystemCommand>
+					<Synopsis>Output Gaussian noise with the specified amplitude and dc offset. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:NOISe" url="33250A-APPLyNOISe_frequencyDEFault_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output Gaussian noise.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output Gaussian noise.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified dc offset of the output Gaussian noise.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="PULS" mnemonic="PULSe">
+				<SubsystemCommand>
+					<Synopsis>Output a pulse wave with the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:PULSe" url="33250A-APPLyPULSe_frequency_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output pulse wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output pulse wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified offset of the output pulse wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node mnemonic="RAMP">
+				<SubsystemCommand>
+					<Synopsis>Output a ramp wave with the specified frequency, amplitude, and dc offset. This command overrides the current symmetry setting and automatically selects 100%. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:RAMP" url="33250A-APPLyRAMP_frequency_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output ramp wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output ramp wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified offset of the output ramp wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="SIN" mnemonic="SINusoid">
+				<SubsystemCommand>
+					<Synopsis>Output a sine wave with the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:SINusoid" url="33250A-APPLySINusoid_frequency_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output sine wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output ramp wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified offset of the output ramp wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="SQU" mnemonic="SQUare">
+				<SubsystemCommand>
+					<Synopsis>Output a square wave with the specified frequency, amplitude, and dc offset. This command overrides the current duty cycle setting and automatically selects 50%. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:SQUare" url="33250A-APPLySQUare_frequency_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output square wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output square wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified offset of the output square wave.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node mnemonic="USER">
+				<SubsystemCommand>
+					<Synopsis>Output the arbitrary waveform currently selected by the FUNC:USER command. The waveform is output using the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":APPLy:USER" url="33250A-APPLyUSER_frequency_amplitude_offset.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="frequency" optional="true" semanticType="Real" description="The specified frequency of the output arbitrary waveform.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MHZ" />
+												<CustomSuffix default="true" unit="HZ" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="amplitude" optional="true" semanticType="Real" description="The specified amplitude of the output arbitrary waveform.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VPP" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="offset" optional="true" semanticType="Real" description="The specified offset of the output arbitrary waveform.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDef" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+		<RootNode aliases="CAL" mnemonic="CALibrate">
+			<Node default="true" mnemonic="ALL">
+				<SubsystemCommand>
+					<Synopsis>Perform a calibration of the instrument using the specified calibration value (CAL:VAL command). Before you can calibrate the function generator, you must unsecure it by entering the correct security code. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":CALibration[:ALL]" url="33250A-CALibration.html" />
+					</HelpLinks>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="cal" semanticType="Integer" description="Returns &quot;0&quot; (PASS) or &quot;1&quot; (FAIL).">
+									<ResponseType>
+										<NR1Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="COUN" mnemonic="COUNt">
+				<SubsystemCommand>
+					<Synopsis>Query the instrument to determine the number of times it has been calibrated. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":CALibration:COUNt" url="33250A-CALibrationCOUNt.html" />
+					</HelpLinks>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="count" semanticType="Integer" description="The number of times the instrument has been calibrated.">
+									<ResponseType>
+										<NR1Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="SEC" mnemonic="SECure">
+				<Node mnemonic="CODE">
+					<SubsystemCommand>
+						<Synopsis>Enter a new security code. To change the security code, you must first unsecure the function generator using the old security code, and then enter a new code. The security code is stored in non-volatile memory. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":CALibration:SECure:CODE" url="33250A-CALibrationSECureCODE_new_code.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="newCode" semanticType="String" description="The calibration code may contain up to 12 characters. The first character must be a letter (A-Z), but the remaining characters can be letters, numbers (0-9), or the underscore character (&quot; _ &quot;). You do not have to use all 12 characters, but the first character must always be a letter. ">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Unsecure or secure the instrument for calibration. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":CALibration:SECure:STATe" url="33250A-CALibrationSECureSTATe_OFFONcode_CALibrationSECureSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="The secure state of the instrument.">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+									<Parameter name="code" semanticType="String" description="Calibration code may contain up to 12 characters.">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The secure state of the instrument.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="SET" mnemonic="SETup">
+				<SubsystemCommand>
+					<Synopsis>Configure the function generator's internal state for each of the calibration steps to be performed. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":CALibration:SETup" url="33250A-CALibrationSETup_0123_._._._115_CALibrationSETup.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="setup" semanticType="Integer" description="0|1|2|3| . . . |115">
+									<ParameterType>
+										<DecimalNumeric />
+										<NonDecimalNumeric />
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="setup" semanticType="Integer" description="The function generator's internal state for each of the calibration steps to be performed.">
+									<ResponseType>
+										<NR1Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="STR" mnemonic="STRing">
+				<SubsystemCommand>
+					<Synopsis>Store a message in non-volatile calibration memory. Storing a message will overwrite any message previously stored in memory. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":CALibration:STRing" url="33250A-CALibrationSTRing_quoted_string_CALibrationSTRing.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="quotedString" semanticType="String" description="The calibration message may contain up to 40 characters (additional characters are truncated).">
+									<ParameterType>
+										<String />
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="string" semanticType="String" description="The present calibration message.">
+									<ResponseType>
+										<String />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="VAL" mnemonic="VALue">
+				<SubsystemCommand>
+					<Synopsis>Specify the value of the known calibration signal as outlined in the calibration procedures in the Agilent 33250A Service Guide. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":CALibration:VALue" url="33250A-CALibrationVALue_value__CALibrationVALue.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="value" semanticType="Real" description="The value of the known calibration signal as outlined in the calibration procedures in the Agilent 33250A Service Guide.">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix default="true" unit="V" />
+												<CustomSuffix unit="VRMS" />
+												<CustomSuffix unit="DBM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="value" semanticType="Real" description="The value of the known calibration signal as outlined in the calibration procedures in the Agilent 33250A Service Guide.">
+									<ResponseType>
+										<NR3Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+		<RootNode aliases="DISP" mnemonic="DISPlay">
+			<Node aliases="WIND" default="true" mnemonic="WINDow">
+				<Node aliases="STAT" default="true" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the function generator front-panel display. When it is disabled, the front-panel display is blanked (however, the bulb used to backlight the display remains enabled). </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DISPlay[:WINDow][:STATe]" url="33250A-DISPlay_OFFON_DISPlay.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The state of the function generator front-panel display.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="TEXT">
+					<Node aliases="CLE" mnemonic="CLEar">
+						<SubsystemCommand>
+							<Synopsis>Clear the text message currently shown on the function generator's front-panel display. </Synopsis>
+							<HelpLinks>
+								<HelpLink name=":DISPlay[:WINDow]:TEXT:CLEar" url="33250A-DISPlayTEXTCLEar.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax />
+							</CommandSyntaxes>
+						</SubsystemCommand>
+					</Node>
+					<Node default="true" mnemonic="DATA">
+						<SubsystemCommand>
+							<Synopsis>Display a text message on the function generator's front-panel display. Sending a text message to the display overrides the display state as set by the DISP command. </Synopsis>
+							<HelpLinks>
+								<HelpLink name=":DISPlay[:WINDow]:TEXT[:DATA]" url="33250A-DISPlayTEXT_quoted_string__DISPlayTEXT.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="quotedString" semanticType="String" description="You can use upper- or lower-case letters (A-Z), numbers (0-9), and any other character on a standard computer keyboard. Depending on the number of characters you specify in the string, the function generator will choose one of two font sizes to display the message. You can display approximately 12 characters in a large font and approximately 40 characters in a small font. ">
+											<ParameterType>
+												<String />
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Responses>
+										<Response name="text" semanticType="String" description="The text message shown on the function generator's front-panel display.">
+											<ResponseType>
+												<String />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode aliases="FORM" mnemonic="FORMat">
+			<Node aliases="BORD" mnemonic="BORDer">
+				<SubsystemCommand>
+					<Synopsis>Used for binary block transfers only. Select the byte order for binary transfers in the block mode using the DATA:DAC command. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":FORMat:BORDer" url="33250A-FORMatBORDer_NORMalSWAPped__FORMatBORDer.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="bOrder" semanticType="String" description="NORMal|SWAPped">
+									<ParameterType>
+										<Character>
+											<EnumRef name="form_border_command_parameter_1" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="bOrder" semanticType="String" description="The byte order for binary transfers in the block mode using the DATA:DAC command.">
+									<ResponseType>
+										<Character>
+											<EnumRef name="form_border_query_response_1" />
+										</Character>
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+		<RootNode aliases="MEM" mnemonic="MEMory">
+			<Node aliases="NST" mnemonic="NSTates">
+				<SubsystemCommand>
+					<Synopsis>Query the total number of memory locations available for state storage. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":MEMory:NSTates" url="33250A-MEMoryNSTates.html" />
+					</HelpLinks>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="nStates" semanticType="Integer" description="The total number of memory locations available for state storage. Always returns &quot;5&quot; (memory location &quot;0&quot; is included).">
+									<ResponseType>
+										<NR1Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="STAT" mnemonic="STATe">
+				<Node aliases="DEL" mnemonic="DELete">
+					<SubsystemCommand>
+						<Synopsis>Delete the contents of the specified storage location. If you have assigned a user-defined name to a location (MEM:STAT:NAME command), this command also removes the name that you assigned and restores the default name ("AUTO_RECALL", "STATE_1", "STATE_2", etc.). </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":MEMory:STATe:DELete" url="33250A-MEMorySTATeDELete_01234.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+										<ParameterType>
+											<DecimalNumeric />
+											<NonDecimalNumeric />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="NAME">
+					<SubsystemCommand>
+						<Synopsis>Assign a custom name to the specified storage location.</Synopsis>
+						<HelpLinks>
+							<HelpLink name=":MEMory:STATe:NAME" url="33250A-MEMorySTATeNAME_01234_name__MEMorySTATeNAME_01234.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+										<ParameterType>
+											<DecimalNumeric />
+											<NonDecimalNumeric />
+										</ParameterType>
+									</Parameter>
+									<Parameter name="name" optional="true" semanticType="String" description="The name can contain up to 12 characters. The first character must be a letter (A-Z), but the remaining characters can be letters, numbers (0-9), or the underscore character (&quot; _ &quot;). Blank spaces are not allowed. An error is generated if you specify a name with more than 12 characters.">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+										<ParameterType>
+											<DecimalNumeric />
+											<NonDecimalNumeric />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="name" semanticType="String" description="The custom name of the specified storage location.">
+										<ResponseType>
+											<String />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="REC" mnemonic="RECall">
+					<Node mnemonic="AUTO">
+						<SubsystemCommand>
+							<Synopsis>Disable or enable the automatic recall of the power-down state from storage location "0" when power is turned on. </Synopsis>
+							<HelpLinks>
+								<HelpLink name=":MEMory:STATe:RECall:AUTO" url="33250A-MEMorySTATeRECallAUTO_OFFON_MEMorySTATeRECallAUTO.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="auto" semanticType="Boolean" description="OFF|ON">
+											<ParameterType>
+												<DecimalNumeric>
+													<EnumRef name="enum_33250A_boolean" />
+												</DecimalNumeric>
+												<Character>
+													<EnumRef name="enum_33250A_boolean" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Responses>
+										<Response name="auto" semanticType="Boolean" description="The present automatic recall state of the power-down state from storage location &quot;0&quot; when power is turned on.">
+											<ResponseType>
+												<NR1Numeric>
+													<EnumRef name="enum_33250A_boolean" />
+												</NR1Numeric>
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+				<Node aliases="VAL" mnemonic="VALid">
+					<SubsystemCommand>
+						<Synopsis>Query the specified storage location to determine if a valid state is currently stored in that location. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":MEMory:STATe:VALid" url="33250A-MEMorySTATeVALid_01234.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="location" semanticType="Integer" description="0|1|2|3|4">
+										<ParameterType>
+											<DecimalNumeric />
+											<NonDecimalNumeric />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="valid" semanticType="Boolean" description="Whether a valid state is stored in the specified storage location. &quot;0&quot; if no state has been stored or if it has been deleted, &quot;1&quot; if a valid state is stored in the specified location. ">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode aliases="OUTP" mnemonic="OUTPut">
+			<Node mnemonic="LOAD">
+				<SubsystemCommand>
+					<Synopsis>Select the desired output termination (i.e., the impedance of the load attached to the output of the Agilent 33250A). The specified value is used for amplitude, offset, and high/low level settings. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":OUTPut:LOAD" url="33250A-OUTPutLOAD_ohmsINFinityMINimumMAXimum__OUTPutLOAD_MINimumMAXimum.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="ohms" semanticType="Real" description="MINimum | MAXimum | DEFault | INFinity">
+									<ParameterType>
+										<DecimalNumeric>
+											<Suffix>
+												<CustomSuffix unit="MOHM" />
+												<CustomSuffix default="true" unit="OHM" />
+											</Suffix>
+										</DecimalNumeric>
+										<NonDecimalNumeric />
+										<Character>
+											<EnumRef name="enum_33250A_enumMinMaxDefInf" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Parameters>
+								<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+									<ParameterType>
+										<Character>
+											<EnumRef name="enum_33250A_std_num_enums" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+							<Responses>
+								<Response name="load" semanticType="Real" description="The desired output termination (i.e., the impedance of the load attached to the output of the Agilent 33250A). ">
+									<ResponseType>
+										<NR3Numeric />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="POL" mnemonic="POLarity">
+				<SubsystemCommand>
+					<Synopsis>Invert the waveform relative to the offset voltage. In the normal mode (default), the waveform goes positive during the first part of the cycle. In the inverted mode, the waveform goes negative during the first part of the cycle. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":OUTPut:POLarity" url="33250A-OUTPutPOLarity_NORMalINVerted__OUTPutPOLarity.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="polarity" semanticType="String" description="NORMal|INVerted">
+									<ParameterType>
+										<Character>
+											<EnumRef name="outp_polarity_command_parameter_1" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="polarity" semanticType="String" description="The polarity setting of the waveform.">
+									<ResponseType>
+										<Character>
+											<EnumRef name="outp_polarity_query_response_1" />
+										</Character>
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="STAT" default="true" mnemonic="STATe">
+				<SubsystemCommand>
+					<Synopsis>Disable or enable the front-panel Output connector. The default is "OFF". </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":OUTPut[:STATe]" url="33250A-OUTPut_OFFON__OUTPut.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+									<ParameterType>
+										<DecimalNumeric>
+											<EnumRef name="enum_33250A_boolean" />
+										</DecimalNumeric>
+										<Character>
+											<EnumRef name="enum_33250A_boolean" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="state" semanticType="Boolean" description="The present output setting.">
+									<ResponseType>
+										<NR1Numeric>
+											<EnumRef name="enum_33250A_boolean" />
+										</NR1Numeric>
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node mnemonic="SYNC">
+				<Node aliases="STAT" default="true" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the front-panel Sync connector. At lower amplitudes, you can reduce output distortion by disabling the Sync signal. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":OUTPut:SYNC[:STATe]" url="33250A-OUTPutSYNC_OFFON__OUTPutSYNC.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present setting of the Sync signal.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="TRIG" mnemonic="TRIGger">
+				<Node aliases="SLOP" mnemonic="SLOPe">
+					<SubsystemCommand>
+						<Synopsis>Select a rising or falling edge for the "trigger out" signal. When enabled using the OUTP:TRIG command (see below), a TTL-compatible square waveform with the specified edge is output from the rear-panel Trig Out connector at the beginning of the sweep or burst. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":OUTPut:TRIGger:SLOPe" url="33250A-OUTPutTRIGgerSLOPe_POSitiveNEGative_OUTPutTRIGgerSLOPe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="slope" semanticType="String" description="POSitive|NEGative">
+										<ParameterType>
+											<Character>
+												<EnumRef name="outp_trig_slope_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="slope" semanticType="String" description="The current selection between the rising or falling edge for the &quot;trigger out&quot; signal.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="outp_trig_slope_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" default="true" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the "trigger out" signal (used for sweep and burst only). When enabled, a TTL-compatible square waveform with the specified edge (OUTP:TRIG:SLOP command) is output from the rear-panel Trig Out connector at the beginning of the sweep or burst. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":OUTPut:TRIGger[:STATe]" url="33250A-OUTPutTRIGger_OFFON__OUTPutTRIGger.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present setting of the &quot;trigger out&quot; signal.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode aliases="SOUR" default="true" mnemonic="SOURce">
+			<Node mnemonic="AM">
+				<Node aliases="DEPT" default="true" mnemonic="DEPTh">
+					<SubsystemCommand>
+						<Synopsis>Set the internal modulation depth (or "percent modulation") in percent. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:AM[:DEPTh]" url="33250A-AMDEPTh_depth_in_percentMINimumMAXimum__AMDEPTh_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="depthInPercent" semanticType="Real" description="0% to 120%. The default is 100%. MIN = 0%. MAX = 120%. ">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="PCT" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="depth" semanticType="Real" description="The present internal modulation depth (or &quot;percent modulation&quot;) in percent. ">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="INT" mnemonic="INTernal">
+					<Node aliases="FREQ" mnemonic="FREQuency">
+						<SubsystemCommand>
+							<Synopsis>Set the frequency of the modulating waveform. Used only when the Internal modulation source is selected (AM:SOUR INT command). </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:AM:INTernal:FREQuency" url="33250A-AMINTernalFREQuency_frequencyMINimumMAXimum__AMINTernalFREQuency.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="frequency" semanticType="Real" description="2 mHz to 20 kHz. The default is 100 Hz. MIN = 2 mHz. MAX = 20 kHz.">
+											<ParameterType>
+												<DecimalNumeric>
+													<Suffix>
+														<CustomSuffix unit="MHZ" />
+														<CustomSuffix default="true" unit="HZ" />
+													</Suffix>
+												</DecimalNumeric>
+												<NonDecimalNumeric />
+												<Character>
+													<EnumRef name="enum_33250A_enumMinMaxDef" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Parameters>
+										<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+											<ParameterType>
+												<Character>
+													<EnumRef name="enum_33250A_std_num_enums" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+									<Responses>
+										<Response name="frequency" semanticType="Real" description="The frequency of the modulating waveform.">
+											<ResponseType>
+												<NR3Numeric />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+					<Node aliases="FUNC" mnemonic="FUNCtion">
+						<Node aliases="SHAP" default="true" mnemonic="SHAPe">
+							<SubsystemCommand>
+								<Synopsis>Select the shape of the modulating waveform. Used only when the Internal modulation source is selected (AM:SOUR INT command). </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:AM:INTernal:FUNCtion[:SHAPe]" url="33250A-AMINTernal___FUNCtion_SINusoidSQUareRAMPNRAMpTRIangleNOISeUSER.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="shape" semanticType="String" description="SINusoid|SQUare|RAMP|NRAMp|TRIangle|NOISe|USER">
+												<ParameterType>
+													<Character>
+														<EnumRef name="sour_am_int_func_shape_command_parameter_1" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Responses>
+											<Response name="shape" semanticType="String" description="The shape of the modulating waveform.">
+												<ResponseType>
+													<Character>
+														<EnumRef name="sour_am_int_func_shape_query_response_1" />
+													</Character>
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+					</Node>
+				</Node>
+				<Node aliases="SOUR" mnemonic="SOURce">
+					<SubsystemCommand>
+						<Synopsis>Select the source of the modulating signal. The function generator will accept an internal or external modulation source. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:AM:SOURce" url="33250A-AMSOURce_INTernalEXTernal__AMSOURce.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="source" semanticType="String" description="INTernal|EXTernal">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_am_source_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="source" semanticType="String" description="The source of the modulating signal.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_am_source_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable AM. To avoid multiple waveform changes, you can enable AM after you have set up the other modulation parameters. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:AM:STATe" url="33250A-AMSTATe_OFFON__AMSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present AM state.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node mnemonic="BURSt">
+				<Node mnemonic="GATE">
+					<Node aliases="POL" mnemonic="POLarity">
+						<SubsystemCommand>
+							<Synopsis>Select whether the function generator uses true-high or true-low logic levels on the rear-panel Trig In connector for an externally-gated burst. </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:BURSt:GATE:POLarity" url="33250A-BURStGATEPOLarity_NORMalINVerted_BURStGATEPOLarityon.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="polarity" semanticType="String" description="Whether the function generator uses true-high or true-low logic levels on the rear-panel Trig In connector for an externally-gated burst.">
+											<ParameterType>
+												<Character>
+													<EnumRef name="sour_burs_gate_polarity_command_parameter_1" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Responses>
+										<Response name="polarity" semanticType="String" description="Returns the current value of whether the function generator uses true-high or true-low logic levels on the rear-panel Trig In connector for an externally-gated burst.">
+											<ResponseType>
+												<Character>
+													<EnumRef name="sour_burs_gate_polarity_query_response_1" />
+												</Character>
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+				<Node aliases="INT" mnemonic="INTernal">
+					<Node aliases="PER" mnemonic="PERiod">
+						<SubsystemCommand>
+							<Synopsis>Set the burst period for internally-triggered bursts. </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:BURSt:INTernal:PERiod" url="33250A-BURStINTernalPERiod_secondsMINimumMAXimum__BURStINTernalPERiod_M.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="period" semanticType="Real" description="The burst period for internally-triggered bursts.">
+											<ParameterType>
+												<DecimalNumeric>
+													<Suffix>
+														<CustomSuffix default="true" unit="S" />
+													</Suffix>
+												</DecimalNumeric>
+												<NonDecimalNumeric />
+												<Character>
+													<EnumRef name="enum_33250A_enumMinMaxDef" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Parameters>
+										<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+											<ParameterType>
+												<Character>
+													<EnumRef name="enum_33250A_std_num_enums" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+									<Responses>
+										<Response name="period" semanticType="Real" description="Returns the current value of the burst period for internally-triggered bursts.">
+											<ResponseType>
+												<NR3Numeric />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+				<Node mnemonic="MODE">
+					<SubsystemCommand>
+						<Synopsis>Select the burst mode.</Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:BURSt:MODE" url="33250A-BURStMODE_TRIGgeredGATed__BURStMODE.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="mode" semanticType="String" description="The burst mode.">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_burs_mode_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="mode" semanticType="String" description="Returns the current value of the burst mode.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_burs_mode_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="NCYC" mnemonic="NCYCles">
+					<SubsystemCommand>
+						<Synopsis>Set the number of cycles to be output per burst (triggered burst mode only).</Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:BURSt:NCYCles" url="33250A-BURStNCYCles__cyclesINFinityMINimumMAXimum__BURStNCYCles_MINimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="cycles" semanticType="Real" description="The number of cycles to be output per burst">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDefInf" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="cycles" semanticType="Real" description="Returns the current value of the number of cycles to be output per burst">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="PHAS" mnemonic="PHASe">
+					<SubsystemCommand>
+						<Synopsis>Set the starting phase for the burst in degrees or radians as specified by the previous UNIT:ANGL command. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:BURSt:PHASe" url="33250A-BURStPHASe_angleMINimumMAXimum_BURStPHASe_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="angle" semanticType="Real" description="The starting phase for the burst in degrees or radians as specified by the previous UNIT:ANGL command.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="PHI" />
+													<CustomSuffix unit="RAD" />
+													<CustomSuffix unit="DEG" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="angle" semanticType="Real" description="Returns the current value of the starting phase for the burst in degrees or radians as specified by the previous UNIT:ANGL command.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the burst mode. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:BURSt:STATe" url="33250A-BURStSTATe_OFFON__BURStSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="Disable or enable the burst mode.">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="Returns the current value of the burst mode.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node mnemonic="FM">
+				<Node aliases="DEV" default="true" mnemonic="DEViation">
+					<SubsystemCommand>
+						<Synopsis>Set the peak frequency deviation in hertz. This value represents the peak variation in frequency of the modulated waveform from the carrier frequency. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FM[:DEViation]" url="33250A-FMDEViation_peak_deviation_in_HzMINimumMAXimum__FMDEViation_MINi.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="peakDeviationInHz" semanticType="Real" description="5 Hz to 40.05 MHz (limited to 550 kHz for ramps and 12.55 MHz for arbitrary waveforms). The default is 100 Hz. MIN = 5 Hz. MAX = based on the frequency of the carrier waveform.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="deviation" semanticType="Real" description="The peak frequency deviation in hertz.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="INT" mnemonic="INTernal">
+					<Node aliases="FREQ" mnemonic="FREQuency">
+						<SubsystemCommand>
+							<Synopsis>Set the frequency of the modulating waveform. Used only when the Internal modulation source is selected (FM:SOUR INT command). </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:FM:INTernal:FREQuency" url="33250A-FMINTernalFREQuency_frequencyMINimumMAXimum__FMINTernalFREQuency.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="frequency" semanticType="Real" description="2 mHz to 20 kHz. The default is 10 Hz. MIN = 2 mHz. MAX = 20 kHz.">
+											<ParameterType>
+												<DecimalNumeric>
+													<Suffix>
+														<CustomSuffix unit="MHZ" />
+														<CustomSuffix default="true" unit="HZ" />
+													</Suffix>
+												</DecimalNumeric>
+												<NonDecimalNumeric />
+												<Character>
+													<EnumRef name="enum_33250A_enumMinMaxDef" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Parameters>
+										<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+											<ParameterType>
+												<Character>
+													<EnumRef name="enum_33250A_std_num_enums" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+									<Responses>
+										<Response name="frequency" semanticType="Real" description="The frequency of the modulating waveform.">
+											<ResponseType>
+												<NR3Numeric />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+					<Node aliases="FUNC" mnemonic="FUNCtion">
+						<Node aliases="SHAP" default="true" mnemonic="SHAPe">
+							<SubsystemCommand>
+								<Synopsis>Select the shape of the modulating waveform. Used only when the Internal modulation source is selected (FM:SOUR INT command). </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:FM:INTernal:FUNCtion[:SHAPe]" url="33250A-FMINTernal___FUNCtion_SINusoidSQUareRAMPNRAMpTRIangleNOISeUSER.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="shape" semanticType="String" description="SINusoid|SQUare|RAMP|NRAMp|TRIangle|NOISe|USER">
+												<ParameterType>
+													<Character>
+														<EnumRef name="sour_fm_int_func_shape_command_parameter_1" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Responses>
+											<Response name="shape" semanticType="String" description="The shape of the modulating waveform.">
+												<ResponseType>
+													<Character>
+														<EnumRef name="sour_fm_int_func_shape_query_response_1" />
+													</Character>
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+					</Node>
+				</Node>
+				<Node aliases="SOUR" mnemonic="SOURce">
+					<SubsystemCommand>
+						<Synopsis>Select the source of the modulating signal. The function generator will accept an internal or external modulation source. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FM:SOURce" url="33250A-FMSOURce_INTernalEXTernal__FMSOURce.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="source" semanticType="String" description="INTernal|EXTernal">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_fm_source_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="source" semanticType="String" description="The source of the modulating signal.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_fm_source_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable FM. To avoid multiple waveform changes, you can enable FM after you have set up the other modulation parameters. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FM:STATe" url="33250A-FMSTATe_OFFON__FMSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present FM state.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="FREQ" mnemonic="FREQuency">
+				<Node aliases="CENT" mnemonic="CENTer">
+					<SubsystemCommand>
+						<Synopsis>Set the center frequency (used in conjunction with the frequency span). </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FREQuency:CENTer" url="33250A-FREQuencyCENTer_frequencyMINimumMAXimum__FREQuencyCENTer_MINimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz for arbitrary waveforms). The default is 550 Hz. MIN = 1 uHz. MAX = based on the frequency span and maximum frequency for the selected function.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="frequency" semanticType="Real" description="The center frequency (used in conjunction with the frequency span).">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="FIXed" default="true" mnemonic="CW">
+					<SubsystemCommand>
+						<Synopsis>Set the output frequency. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FREQuency[:CW]" url="33250A-FREQuency_frequencyMINimumMAXimum_FREQuency_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="See table for the maximum and minimum frequencies allowed.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="frequency" semanticType="Real" description="The output frequency.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="SPAN">
+					<SubsystemCommand>
+						<Synopsis>Set the frequency span (used in conjunction with the center frequency). </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FREQuency:SPAN" url="33250A-FREQuencySPAN_frequencyMINimumMAXimum_FREQuencySPAN_MINimumMAXi.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="0 Hz to 80 MHz (limited to 1 MHz for ramps and 25 MHz for arbitrary waveforms). The default is 900 Hz. MIN = 0 Hz. MAX = based on the center frequency and maximum frequency for the selected function. ">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="span" semanticType="Real" description="The frequency span (used in conjunction with the center frequency).">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAR" mnemonic="STARt">
+					<SubsystemCommand>
+						<Synopsis>Set the start frequency (used in conjunction with the stop frequency). </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FREQuency:STARt" url="33250A-FREQuencySTARt_frequencyMINimumMAXimum__FREQuencySTARt_MINimumMA.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz &#xD;&#xA;for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="startFreq" semanticType="Real" description="The start frequency (used in conjunction with the stop frequency).">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="STOP">
+					<SubsystemCommand>
+						<Synopsis>Set the stop frequency (used in conjunction with the start frequency).</Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FREQuency:STOP" url="33250A-FREQuencySTOP_frequencyMINimumMAXimum_FREQuencySTOP_MINimumMAXim.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz for arbitrary waveforms). The default is 1 kHz. MIN = 1 uHz. MAX = 80 MHz. ">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="stopFreq" semanticType="Real" description="The stop frequency (used in conjunction with the start frequency).">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="FSK" mnemonic="FSKey">
+				<Node aliases="FREQ" mnemonic="FREQuency">
+					<SubsystemCommand>
+						<Synopsis>Set the FSK alternate (or "hop") frequency. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FSKey:FREQuency" url="33250A-FSKeyFREQuency_frequencyMINimumMAXimum__FSKeyFREQuency_MINimumMA.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz. ">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="fskFreq" semanticType="Real" description="The FSK alternate (or &quot;hop&quot;) frequency. ">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="INT" mnemonic="INTernal">
+					<Node mnemonic="RATE">
+						<SubsystemCommand>
+							<Synopsis>Set the rate at which the output frequency "shifts" between the carrier and hop frequency. </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:FSKey:INTernal:RATE" url="33250A-FSKeyINTernalRATE_rate_in_HzMINimumMAXimum__FSKeyINTernalRATE_MI.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="rate" semanticType="Real" description="2 mHz to 100 kHz. The default is 10 Hz. MIN = 2 mHz. MAX = 100 kHz.">
+											<ParameterType>
+												<DecimalNumeric>
+													<Suffix>
+														<CustomSuffix unit="MHZ" />
+														<CustomSuffix default="true" unit="HZ" />
+													</Suffix>
+												</DecimalNumeric>
+												<NonDecimalNumeric />
+												<Character>
+													<EnumRef name="enum_33250A_enumMinMaxDef" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Parameters>
+										<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+											<ParameterType>
+												<Character>
+													<EnumRef name="enum_33250A_std_num_enums" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+									<Responses>
+										<Response name="rate" semanticType="Real" description="The rate at which the output frequency &quot;shifts&quot; between the carrier and hop frequency.">
+											<ResponseType>
+												<NR3Numeric />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+				<Node aliases="SOUR" mnemonic="SOURce">
+					<SubsystemCommand>
+						<Synopsis>Select an internal or external FSK source. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FSKey:SOURce" url="33250A-FSKeySOURce_INTernalEXTernal__FSKeySOURce.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="source" semanticType="String" description="INTernal|EXTernal">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_fsk_source_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="source" semanticType="String" description="The present selection of the internal or external FSK source.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_fsk_source_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable FSK modulation. To avoid multiple waveform changes, you can enable FSK after you have set up the other modulation parameters. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FSKey:STATe" url="33250A-FSKeySTATe_OFFON_FSKeySTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present state of the FSK modulation.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="FUNC" mnemonic="FUNCtion">
+				<Node aliases="SHAP" default="true" mnemonic="SHAPe">
+					<SubsystemCommand>
+						<Synopsis>Select the output function. The selected waveform is output using the previously selected frequency, amplitude, and offset voltage settings. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:FUNCtion[:SHAPe]" url="33250A-FUNCtion_SINusoidSQUareRAMPPULSeNOISeDCUSER_FUNCtion.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="function" semanticType="String" description="SINusoid|SQUare|RAMP|PULSe|NOISe|DC|USER">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_func_shape_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="function" semanticType="String" description="The output function.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_func_shape_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+					<Node mnemonic="RAMP">
+						<Node aliases="SYMM" mnemonic="SYMMetry">
+							<SubsystemCommand>
+								<Synopsis>Set the symmetry percentage for ramp waves. Symmetry represents the amount of time per cycle that the ramp wave is rising (assuming that the waveform polarity is not inverted). </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:FUNCtion[:SHAPe]:RAMP:SYMMetry" url="33250A-FUNCtionRAMPSYMMetry_percentMINimumMAXimum__FUNCtionRAMPSYMMetry.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="percent" semanticType="Real" description="0% to 100%. The default is 100%. MIN = 0%. MAX = 100%.">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="PCT" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="symmetry" semanticType="Real" description="The symmetry percentage for ramp waves.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+					</Node>
+					<Node aliases="SQU" mnemonic="SQUare">
+						<Node aliases="DCYC" mnemonic="DCYCle">
+							<SubsystemCommand>
+								<Synopsis>Set the duty cycle percentage for square waves. Duty cycle represents the amount of time per cycle that the square wave is at a high level (assuming that the waveform polarity is not inverted). </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:FUNCtion[:SHAPe]:SQUare:DCYCle" url="33250A-FUNCtionSQUareDCYCle_percentMINimumMAXimum_FUNCtionSQUareDCYCle.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="percent" semanticType="Real" description="20% to 80% (frequency &lt; 25 MHz)&#xD;&#xA;40% to 60% (25 MHz &lt; frequency &lt; 50 MHz)&#xD;&#xA;50% (frequency &gt; 50 MHz) ">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="PCT" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="dCycle" semanticType="Real" description="The duty cycle percentage for square waves.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+					</Node>
+					<Node mnemonic="USER">
+						<SubsystemCommand>
+							<Synopsis>Select one of the five built-in arbitrary waveforms, one of four user-defined waveforms, or the waveform currently downloaded to volatile memory. </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:FUNCtion[:SHAPe]:USER" url="33250A-FUNCtionUSER_arb_nameVOLATILE__FUNCtionUSER.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="arbName" semanticType="String" description="Select one of the five built-in arbitrary waveforms, one of four user-defined waveforms, or the waveform currently downloaded to volatile memory. ">
+											<ParameterType>
+												<Character />
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Responses>
+										<Response name="waveform" semanticType="String" description="&quot;EXP_RISE&quot;, &quot;EXP_FALL&quot;, &quot;NEG_RAMP&quot;, &quot;SINC&quot;, &quot;CARDIAC&quot;, &quot;VOLATILE&quot;, or the name of any user-defined waveforms in non-volatile memory.">
+											<ResponseType>
+												<ArbitraryAscii />
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+			</Node>
+			<Node aliases="MARK" mnemonic="MARKer">
+				<Node aliases="FREQ" mnemonic="FREQuency">
+					<SubsystemCommand>
+						<Synopsis>Set the marker frequency. This is the frequency at which the signal on the front-panel Sync connector goes to a logic low during the sweep. The Sync signal always goes from low to high at the beginning of the sweep. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:MARKer:FREQuency" url="33250A-MARKerFREQuency_frequencyMINimumMAXimum__MARKerFREQuency_MINimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="frequency" semanticType="Real" description="1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz for arbitrary waveforms). The default is 500 Hz. MIN = 1 uHz. MAX = the start frequency or stop frequency (whichever is higher).">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix unit="MHZ" />
+													<CustomSuffix default="true" unit="HZ" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="frequency" semanticType="Real" description="The marker frequency.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" default="true" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the frequency marker. When the frequency marker is disabled, the signal output from the Sync connector is the normal Sync signal for the carrier waveform.</Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:MARKer[:STATe]" url="33250A-MARKer_OFFON_MARKer.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="marker" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="marker" semanticType="Boolean" description="The present state of the frequency marker.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="PHAS" mnemonic="PHASe">
+				<Node aliases="ADJ" default="true" mnemonic="ADJust">
+					<SubsystemCommand>
+						<Synopsis>Adjust the phase offset of the output waveform in degrees or radians as specified by the previous UNIT:ANGL command </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:PHASe[:ADJust]" url="33250A-PHASe_angleMINimumMAXimum_PHASe_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="angle" semanticType="Real" description="The phase offset of the output waveform in degrees or radians as specified by the previous UNIT:ANGL command.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="PHI" />
+													<CustomSuffix unit="RAD" />
+													<CustomSuffix unit="DEG" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="angle" semanticType="Real" description="The query returns the phase offset in degrees or radians.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="REF" mnemonic="REFerence">
+					<SubsystemCommand>
+						<Synopsis>Immediately sets a new zero-phase reference point without changing the output of the function generator. That is, this command resets the phase value returned by the PHAS? command but does not affect the output waveform.</Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:PHASe:REFerence" url="33250A-PHASeREFerence.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax />
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="UNL" mnemonic="UNLock">
+					<Node aliases="ERR" mnemonic="ERRor">
+						<Node aliases="STAT" default="true" mnemonic="STATe">
+							<SubsystemCommand>
+								<Synopsis>Disable or enable the function generator from generating an error if the phase-lock is ever lost. </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:PHASe:UNLock:ERRor[:STATe]" url="33250A-PHASeUNLockERRorSTATe_OFFON_PHASeUNLockERRorSTATe.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+												<ParameterType>
+													<DecimalNumeric>
+														<EnumRef name="enum_33250A_boolean" />
+													</DecimalNumeric>
+													<Character>
+														<EnumRef name="enum_33250A_boolean" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Responses>
+											<Response name="state" semanticType="Boolean" description="The present state of the error generating on the function generator if the phase-lock is ever lost.">
+												<ResponseType>
+													<NR1Numeric>
+														<EnumRef name="enum_33250A_boolean" />
+													</NR1Numeric>
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+					</Node>
+				</Node>
+			</Node>
+			<Node aliases="PULS" mnemonic="PULSe">
+				<Node aliases="PER" mnemonic="PERiod">
+					<SubsystemCommand>
+						<Synopsis>Set the period for pulses. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:PULSe:PERiod" url="33250A-PULSePERiod_secondsMINimumMAXimum__PULSePERiod_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="seconds" semanticType="Real" description="200 ns to 2000 seconds. The default is 1 ms. MIN = 200 ns. MAX = 2000 seconds.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="S" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="period" semanticType="Real" description="The period for pulses.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="WIDT" mnemonic="WIDTh">
+					<SubsystemCommand>
+						<Synopsis>Set the pulse width in seconds. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:PULSe:WIDTh" url="33250A-PULSeWIDTh_secondsMINimumMAXimum_PULSeWIDTh_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="seconds" semanticType="Real" description="Set the pulse width in seconds.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="S" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="seconds" semanticType="Real" description="Returns the current value of set the pulse width in seconds.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="SWE" mnemonic="SWEep">
+				<Node aliases="SPAC" mnemonic="SPACing">
+					<SubsystemCommand>
+						<Synopsis>Select linear or logarithmic spacing for the sweep. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:SWEep:SPACing" url="33250A-SWEepSPACing_LINearLOGarithmic__SWEepSPACing.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="spacing" semanticType="String" description="LINear|LOGarithmic">
+										<ParameterType>
+											<Character>
+												<EnumRef name="sour_swe_spacing_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="spacing" semanticType="String" description="The present selection of the sweep spacing.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="sour_swe_spacing_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the sweep mode. To avoid multiple waveform changes, you can enable the sweep mode after you have set up the other sweep parameters. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:SWEep:STATe" url="33250A-SWEepSTATe_OFFON_SWEepSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present state of the sweep mode.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="TIME">
+					<SubsystemCommand>
+						<Synopsis>Set the number of seconds required to sweep from the start frequency to the stop frequency. </Synopsis>
+						<HelpLinks>
+							<HelpLink name="[:SOURce]:SWEep:TIME" url="33250A-SWEepTIME_secondsMINimumMAXimum__SWEepTIME_MINimumMAXimum.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="seconds" semanticType="Real" description="The number of seconds required to sweep from the start frequency to the stop frequency.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="S" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="sweepTime" semanticType="Real" description="1 ms to 500 seconds. The default is 1 second. MIN = 1 ms. MAX = 500 seconds.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="VOLT" mnemonic="VOLTage">
+				<Node aliases="LEV" default="true" mnemonic="LEVel">
+					<Node aliases="IMM" default="true" mnemonic="IMMediate">
+						<Node aliases="AMPL" default="true" mnemonic="AMPLitude">
+							<SubsystemCommand>
+								<Synopsis>Set the output amplitude. The default amplitude is 100 mVpp (into 50W) for all functions.</Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:VOLTage[:LEVel][:IMMediate][:AMPLitude]" url="33250A-VOLTage_amplitudeMINimumMAXimum__VOLTage_MINimumMAXimum.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="amplitude" semanticType="Real" description="The default amplitude is 100 mVpp (into 50 Ohms) for all functions. MIN selects the smallest amplitude (1 mVpp into 50 Ohms). MAX selects the largest amplitude for the selected function (at most 10 Vpp into 50 Ohms depending on the selected function and offset voltage). ">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="V" />
+															<CustomSuffix unit="VPP" />
+															<CustomSuffix unit="VRMS" />
+															<CustomSuffix unit="DBM" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="amplitude" semanticType="Real" description="The output amplitude.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+						<Node mnemonic="HIGH">
+							<SubsystemCommand>
+								<Synopsis>Set the high voltage level. </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:VOLTage[:LEVel][:IMMediate]:HIGH" url="33250A-VOLTage__HIGH_voltageMINimumMAXimum__HIGH_MINimumMAXimum__LOW_vo.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="highVoltage" semanticType="Real" description="The default high level is +50 mV. MIN selects the most negative voltage level for the selected function and MAX selects the largest voltage level.">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="V" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="highVoltage" semanticType="Real" description="The high voltage level.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+						<Node mnemonic="LOW">
+							<SubsystemCommand>
+								<Synopsis>Set the low voltage level.</Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:VOLTage[:LEVel][:IMMediate]:LOW" url="33250A-VOLTage__HIGH_voltageMINimumMAXimum__HIGH_MINimumMAXimum__LOW_vo.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="lowVoltage" semanticType="Real" description="The default low level is -50 mV. MIN selects the most negative voltage level for the selected function and MAX selects the largest voltage level. ">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="V" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="lowVoltage" semanticType="Real" description="The low voltage level.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+						<Node aliases="OFFS" mnemonic="OFFSet">
+							<SubsystemCommand>
+								<Synopsis>Set the dc offset voltage. </Synopsis>
+								<HelpLinks>
+									<HelpLink name="[:SOURce]:VOLTage[:LEVel][:IMMediate]:OFFSet" url="33250A-VOLTageOFFSet_offsetMINimumMAXimum__VOLTageOFFSet_MINimumMAXimum.html" />
+								</HelpLinks>
+								<CommandSyntaxes>
+									<CommandSyntax>
+										<Parameters>
+											<Parameter name="offset" semanticType="Real" description="The default offset is 0 volts for all functions. MIN selects the most negative dc offset voltage for the selected function and amplitude. MAX selects the largest dc offset for the selected function and amplitude.">
+												<ParameterType>
+													<DecimalNumeric>
+														<Suffix>
+															<CustomSuffix default="true" unit="V" />
+														</Suffix>
+													</DecimalNumeric>
+													<NonDecimalNumeric />
+													<Character>
+														<EnumRef name="enum_33250A_enumMinMaxDef" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+									</CommandSyntax>
+								</CommandSyntaxes>
+								<QuerySyntaxes>
+									<QuerySyntax>
+										<Parameters>
+											<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+												<ParameterType>
+													<Character>
+														<EnumRef name="enum_33250A_std_num_enums" />
+													</Character>
+												</ParameterType>
+											</Parameter>
+										</Parameters>
+										<Responses>
+											<Response name="offset" semanticType="Real" description="The dc offset voltage.">
+												<ResponseType>
+													<NR3Numeric />
+												</ResponseType>
+											</Response>
+										</Responses>
+									</QuerySyntax>
+								</QuerySyntaxes>
+							</SubsystemCommand>
+						</Node>
+						<Node mnemonic="UNIT">
+							<Node aliases="VOLT" default="true" mnemonic="VOLTage">
+								<SubsystemCommand>
+									<Synopsis>Select the units for output amplitude (does not affect offset voltage or high/low levels).</Synopsis>
+									<HelpLinks>
+										<HelpLink name="[:SOURce]:VOLTage[:LEVel][:IMMediate]:UNIT[:VOLTage]" url="33250A-VOLTageUNIT_VPPVRMSDBM__VOLTageUNIT.html" />
+									</HelpLinks>
+									<CommandSyntaxes>
+										<CommandSyntax>
+											<Parameters>
+												<Parameter name="unit" semanticType="String" description="VPP|VRMS|DBM">
+													<ParameterType>
+														<Character>
+															<EnumRef name="sour_volt_lev_imm_unit_voltage_command_parameter_1" />
+														</Character>
+													</ParameterType>
+												</Parameter>
+											</Parameters>
+										</CommandSyntax>
+									</CommandSyntaxes>
+									<QuerySyntaxes>
+										<QuerySyntax>
+											<Responses>
+												<Response name="unit" semanticType="String" description="The units for output amplitude (does not affect offset voltage or high/low levels).">
+													<ResponseType>
+														<Character>
+															<EnumRef name="sour_volt_lev_imm_unit_voltage_query_response_1" />
+														</Character>
+													</ResponseType>
+												</Response>
+											</Responses>
+										</QuerySyntax>
+									</QuerySyntaxes>
+								</SubsystemCommand>
+							</Node>
+						</Node>
+					</Node>
+				</Node>
+				<Node aliases="RANG" mnemonic="RANGe">
+					<Node mnemonic="AUTO">
+						<SubsystemCommand>
+							<Synopsis>Disable or enable voltage autoranging for all functions. In the default mode, autoranging is enabled ("ON") and the function generator automatically selects the optimal settings for the output amplifier and attenuators. </Synopsis>
+							<HelpLinks>
+								<HelpLink name="[:SOURce]:VOLTage:RANGe:AUTO" url="33250A-VOLTageRANGeAUTO_OFFONONCE_VOLTageRANGeAUTO.html" />
+							</HelpLinks>
+							<CommandSyntaxes>
+								<CommandSyntax>
+									<Parameters>
+										<Parameter name="auto" semanticType="Integer" description="OFF|ON|ONCE">
+											<ParameterType>
+												<DecimalNumeric />
+												<Character>
+													<EnumRef name="sour_volt_rang_auto_command_parameter_1" />
+												</Character>
+											</ParameterType>
+										</Parameter>
+									</Parameters>
+								</CommandSyntax>
+							</CommandSyntaxes>
+							<QuerySyntaxes>
+								<QuerySyntax>
+									<Responses>
+										<Response name="auto" semanticType="Boolean" description="The present state of the voltage autoranging for all functions.">
+											<ResponseType>
+												<NR1Numeric>
+													<EnumRef name="enum_33250A_boolean" />
+												</NR1Numeric>
+											</ResponseType>
+										</Response>
+									</Responses>
+								</QuerySyntax>
+							</QuerySyntaxes>
+						</SubsystemCommand>
+					</Node>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode aliases="STAT" mnemonic="STATus">
+			<Node mnemonic="QUEStionable">
+				<Node aliases="COND" mnemonic="CONDition">
+					<SubsystemCommand>
+						<Synopsis>Query the condition register in this group. This is a read-only register and bits are not cleared when you read the register. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":STATus:QUEStionable:CONDition" url="33250A-STATusQUEStionableCONDition.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="condition" semanticType="Integer" description="A query of this register returns a decimal value which corresponds to the binary-weighted sum of all bits set in the register.">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="ENAB" mnemonic="ENABle">
+					<SubsystemCommand>
+						<Synopsis>Enable bits in the enable register in this register group. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":STATus:QUEStionable:ENABle" url="33250A-STATusQUEStionableENABle_enable_value_STATusQUEStionableENABle.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="enableValue" semanticType="Integer" description="The binary-weighted sum of all bits to be enabled.">
+										<ParameterType>
+											<DecimalNumeric />
+											<NonDecimalNumeric />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="enableValue" semanticType="Integer" description="The query returns a decimal value which corresponds to the binary-weighted sum of all bits enabled by the STAT:QUES:ENAB command. ">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="EVEN" default="true" mnemonic="EVENt">
+					<SubsystemCommand>
+						<Synopsis>Query the event register in this register group. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":STATus:QUEStionable[:EVENt]" url="33250A-STATusQUEStionableEVENt.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="event" semanticType="Integer" description="A query of this register returns a decimal value which corresponds to the binary-weighted sum of all bits set in the register.">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="PRES" mnemonic="PRESet">
+				<SubsystemCommand>
+					<Synopsis>Clear all bits in the Questionable Data enable register and the Standard Operation enable register. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":STATus:PRESet" url="33250A-STATusPRESet.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax />
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+		<RootNode aliases="SYST" mnemonic="SYSTem">
+			<Node aliases="BEEP" mnemonic="BEEPer">
+				<Node aliases="IMM" default="true" mnemonic="IMMediate">
+					<SubsystemCommand>
+						<Synopsis>Issue a single beep immediately. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":SYSTem:BEEPer[:IMMediate]" url="33250A-SYSTemBEEPer.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax />
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="STAT" mnemonic="STATe">
+					<SubsystemCommand>
+						<Synopsis>Disable or enable the tone heard when an error is generated from the front-panel or over the remote interface. The current selection is stored in non-volatile memory. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":SYSTem:BEEPer:STATe" url="33250A-SYSTemBEEPerSTATe_OFFON_SYSTemBEEPerSTATe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="state" semanticType="Boolean" description="ON | OFF">
+										<ParameterType>
+											<DecimalNumeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</DecimalNumeric>
+											<Character>
+												<EnumRef name="enum_33250A_boolean" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="state" semanticType="Boolean" description="The present state of the beeper, the tone heard when an error is generated from the front-panel or over the remote interface.">
+										<ResponseType>
+											<NR1Numeric>
+												<EnumRef name="enum_33250A_boolean" />
+											</NR1Numeric>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="ERR" mnemonic="ERRor">
+				<Node default="true" mnemonic="NEXT">
+					<SubsystemCommand>
+						<Synopsis>Read and clear one error from the function generator's error queue. A record of up to 20 command syntax or hardware errors can be stored in the error queue.</Synopsis>
+						<HelpLinks>
+							<HelpLink name=":SYSTem:ERRor[:NEXT]" url="33250A-SYSTemERRor.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="errNum" semanticType="Integer" description="The number of the error cleared from the error queue.">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+									<Response name="errString" semanticType="String" description="The text of the error cleared from the error queue.">
+										<ResponseType>
+											<String />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="LOC" mnemonic="LOCal">
+				<SubsystemCommand>
+					<Synopsis>Sets the instrument state to local (the normal power-on default state). Removes any annunciator and unlocks the front panel keyboard. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":SYSTem:LOCal" url="33250A-SYSTemLOCal.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax />
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="RWL" mnemonic="RWLock">
+				<SubsystemCommand>
+					<Synopsis>Sets the instrument state to remote with lock. Displays the rwl annunciator and locks the keyboard.</Synopsis>
+					<HelpLinks>
+						<HelpLink name=":SYSTem:RWLock" url="33250A-SYSTemRWLock.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax />
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node aliases="VERS" mnemonic="VERSion">
+				<SubsystemCommand>
+					<Synopsis>Query the function generator to determine the present SCPI version. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":SYSTem:VERSion" url="33250A-SYSTemVERSion.html" />
+					</HelpLinks>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="version" semanticType="String" description="A string in the form &quot;YYYY.V&quot;, where &quot;YYYY&quot; represents the year of the version, and &quot;V&quot; represents a version number for that year (e.g., 1999.0).">
+									<ResponseType>
+										<ArbitraryAscii />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+		<RootNode aliases="TRACe" mnemonic="DATA">
+			<Node aliases="ATTR" mnemonic="ATTRibute">
+				<Node aliases="AVER" mnemonic="AVERage">
+					<SubsystemCommand>
+						<Synopsis>Query the arithmetic average of all data points for the specified arbitrary waveform. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:ATTRibute:AVERage" url="33250A-DATAATTRibuteAVERage_arb_name.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="arbName" optional="true" semanticType="String" description="The name of the arbitrary waveform currently active (selected with FUNC:USER command).">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="average" semanticType="Real" description="The arithmetic average of all data points for the specified arbitrary waveform.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="CFAC" mnemonic="CFACtor">
+					<SubsystemCommand>
+						<Synopsis>Query the crest factor of all data points for the specified arbitrary waveform. Crest factor is the ratio of the peak value to the RMS value of the waveform. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:ATTRibute:CFACtor" url="33250A-DATAATTRibuteCFACtor_arb_name.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="arbName" optional="true" semanticType="String" description="The name of the arbitrary waveform currently active (selected with FUNC:USER command).">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="cFactor" semanticType="Real" description="The crest factor of all data points for the specified arbitrary waveform. Crest factor is the ratio of the peak value to the RMS value of the waveform.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="POIN" mnemonic="POINts">
+					<SubsystemCommand>
+						<Synopsis>Query the number of points in the specified arbitrary waveform. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:ATTRibute:POINts" url="33250A-DATAATTRibutePOINts_arb_name.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="arbName" optional="true" semanticType="String" description="The name of the arbitrary waveform currently active (selected with FUNC:USER command).">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="points" semanticType="Integer" description="The number of points in the specified arbitrary waveform.">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="PTP" mnemonic="PTPeak">
+					<SubsystemCommand>
+						<Synopsis>Query the peak-to-peak value of all data points for the specified arbitrary waveform. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:ATTRibute:PTPeak" url="33250A-DATAATTRibutePTPeak_arb_name.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="arbName" optional="true" semanticType="String" description="The name of the arbitrary waveform currently active (selected with FUNC:USER command).">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="ptPeak" semanticType="Real" description="The peak-to-peak value of all data points for the specified arbitrary waveform.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="CAT" mnemonic="CATalog">
+				<SubsystemCommand>
+					<Synopsis>List the names of all waveforms currently available for selection. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":DATA:CATalog" url="33250A-DATACATalog.html" />
+					</HelpLinks>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="waveforms" semanticType="String" description="The names of all waveforms currently available for selection." repeat="*">
+									<ResponseType>
+										<String />
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node mnemonic="COPY">
+				<SubsystemCommand>
+					<Synopsis>Copy the waveform from volatile memory to the specified name in 
+non-volatile memory. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":DATA:COPY" url="33250A-DATACOPY_destination_arb_name_VOLATILE.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="destinationArbName" semanticType="String" description="The arb name may contain up to 12 characters. The first character must be a letter (A-Z), but the remaining characters can be numbers (0-9) or the underscore character (&quot; _ &quot;). Blank spaces are not allowed. If you specify a name with more than 12 characters, a &quot;Program mnemonic too long&quot; error is generated.">
+									<ParameterType>
+										<Character />
+									</ParameterType>
+								</Parameter>
+								<Parameter name="volatile" optional="true" semanticType="String" description="VOLATILE">
+									<ParameterType>
+										<Character>
+											<EnumRef name="trac_data_command_parameter_1" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+			</Node>
+			<Node default="true" mnemonic="DATA">
+				<SubsystemCommand>
+					<Synopsis>Download floating-point values from -1 to +1 into volatile memory. You can download from 1 to 65,536 (64K) points per waveform. The function generator takes the specified number of points and expands them to fill waveform memory. </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":DATA[:DATA]" url="33250A-DATA_VOLATILE_value_value_._._..html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="volatile" semanticType="String" description="VOLATILE">
+									<ParameterType>
+										<Character>
+											<EnumRef name="trac_data_command_parameter_1" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+								<Parameter name="value" repeat="*" semanticType="Real" description="The values -1 and +1 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the amplitude to 10 Vpp (0V offset), &quot;+1&quot; corresponds to +5V and &quot;-1&quot; corresponds to -5V.">
+									<ParameterType>
+										<DecimalNumeric />
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+				</SubsystemCommand>
+				<Node mnemonic="DAC">
+					<SubsystemCommand>
+						<Synopsis>Download binary or decimal integer values from -8191 to +8191 into volatile memory. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA[:DATA]:DAC" url="33250A-DATADAC_VOLATILE_binary_blockvalue_value_._._..html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax name="ValueList">
+								<Parameters>
+									<Parameter name="volatile" semanticType="String" description="VOLATILE">
+										<ParameterType>
+											<Character>
+												<EnumRef name="trac_data_dac_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+									<Parameter name="value" repeat="*" semanticType="Integer" description="The values -2047 and +2047 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the output amplitude to 10 Vpp, &quot;+2047&quot; corresponds to +5V and &quot;-2047&quot; corresponds to -5V. ">
+										<ParameterType>
+											<DecimalNumeric />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+							<CommandSyntax name="BinaryBlock">
+								<FormatCommandsRef name="BinaryBlock" />
+								<Parameters>
+									<Parameter name="volatile" semanticType="String" description="VOLATILE">
+										<ParameterType>
+											<Character>
+												<EnumRef name="trac_data_dac_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+									<Parameter name="value" semanticType="1-D Array" description="The values -2047 and +2047 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the output amplitude to 10 Vpp, &quot;+2047&quot; corresponds to +5V and &quot;-2047&quot; corresponds to -5V. ">
+										<ParameterType>
+											<ArbitraryBlock>
+												<Element format="BinaryLittleEndian" type="Int16" />
+											</ArbitraryBlock>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="DEL" mnemonic="DELete">
+				<Node mnemonic="ALL">
+					<SubsystemCommand>
+						<Synopsis>Delete all user-defined arbitrary waveforms from memory. This command deletes the waveform in volatile memory and all user-defined waveforms in non-volatile memory. The five built-in waveforms in non-volatile memory are not deleted. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:DELete:ALL" url="33250A-DATADELeteALL.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax />
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node default="true" mnemonic="NAME">
+					<SubsystemCommand>
+						<Synopsis>Delete the specified arbitrary waveform from memory. You can delete the waveform in volatile memory or any of the four user-defined waveforms in non-volatile memory. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:DELete[:NAME]" url="33250A-DATADELete_arb_name.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="arbName" semanticType="String" description="The name of the arbitrary waveform to be deleted from memory. You can delete the waveform in volatile memory or any of the four user-defined waveforms in non-volatile memory. ">
+										<ParameterType>
+											<Character />
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+			<Node aliases="USER" mnemonic="NVOLatile">
+				<Node aliases="CAT" mnemonic="CATalog">
+					<SubsystemCommand>
+						<Synopsis>List the names of all user-defined arbitrary waveforms downloaded to non-volatile memory. Returns the names of up to four waveforms. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:NVOLatile:CATalog" url="33250A-DATANVOLatileCATalog.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="catalog" semanticType="String" description="The names of all user-defined arbitrary waveforms downloaded to non-volatile memory. " repeat="*">
+										<ResponseType>
+											<String />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node mnemonic="FREE">
+					<SubsystemCommand>
+						<Synopsis>Query the number of non-volatile memory slots available to store user-defined waveforms. Returns the number of memory slots available to store user-defined waveforms.</Synopsis>
+						<HelpLinks>
+							<HelpLink name=":DATA:NVOLatile:FREE" url="33250A-DATANVOLatileFREE.html" />
+						</HelpLinks>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="freeSlots" semanticType="Integer" description="The number of non-volatile memory slots available to store user-defined waveforms.">
+										<ResponseType>
+											<NR1Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode aliases="TRIG" mnemonic="TRIGger">
+			<Node aliases="SEQ" default="true" mnemonic="SEQuence">
+				<Node aliases="DEL" mnemonic="DELay">
+					<SubsystemCommand>
+						<Synopsis>Insert a time delay between the receipt of the trigger and the start of the burst waveform </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":TRIGger[:SEQuence]:DELay" url="33250A-TRIGgerDELay_secondsMINimumMAXimum__TRIGgerDELay_MINimumMAXimumol.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="seconds" semanticType="Real" description="The time delay between the receipt of the trigger and the start of the burst waveform.">
+										<ParameterType>
+											<DecimalNumeric>
+												<Suffix>
+													<CustomSuffix default="true" unit="S" />
+												</Suffix>
+											</DecimalNumeric>
+											<NonDecimalNumeric />
+											<Character>
+												<EnumRef name="enum_33250A_enumMinMaxDef" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Parameters>
+									<Parameter name="minMax" optional="true" semanticType="String" description="MINimum | MAXimum">
+										<ParameterType>
+											<Character>
+												<EnumRef name="enum_33250A_std_num_enums" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+								<Responses>
+									<Response name="seconds" semanticType="Real" description="Returns the current value of the time delay between the receipt of the trigger and the start of the burst waveform.">
+										<ResponseType>
+											<NR3Numeric />
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="IMM" default="true" mnemonic="IMMediate">
+					<SubsystemCommand>
+						<Synopsis>Trigger a sweep or burst from the remote interface. This command can be used with any of the available trigger sources (TRIG:SOUR command). </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":TRIGger[:SEQuence][:IMMediate]" url="33250A-TRIGger.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax />
+						</CommandSyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="SLOP" mnemonic="SLOPe">
+					<SubsystemCommand>
+						<Synopsis>Select whether the function generator uses the rising edge or falling edge of the trigger signal on the rear-panel Trig In connector. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":TRIGger[:SEQuence]:SLOPe" url="33250A-TRIGgerSLOPe_POSitiveNEGative_TRIGgerSLOPe.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="slope" semanticType="String" description="POSitive|NEGative">
+										<ParameterType>
+											<Character>
+												<EnumRef name="trig_seq_slope_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="slope" semanticType="String" description="Whether the function generator uses the rising edge or falling edge of the trigger signal on the rear-panel Trig In connector for an externally-triggered sweep.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="trig_seq_slope_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+				<Node aliases="SOUR" mnemonic="SOURce">
+					<SubsystemCommand>
+						<Synopsis>Select the source from which the function generator will accept a trigger. </Synopsis>
+						<HelpLinks>
+							<HelpLink name=":TRIGger[:SEQuence]:SOURce" url="33250A-TRIGgerSOURce_IMMediateEXTernalBUS__TRIGgerSOURce.html" />
+						</HelpLinks>
+						<CommandSyntaxes>
+							<CommandSyntax>
+								<Parameters>
+									<Parameter name="source" semanticType="String" description="IMMediate|EXTernal|BUS">
+										<ParameterType>
+											<Character>
+												<EnumRef name="trig_seq_source_command_parameter_1" />
+											</Character>
+										</ParameterType>
+									</Parameter>
+								</Parameters>
+							</CommandSyntax>
+						</CommandSyntaxes>
+						<QuerySyntaxes>
+							<QuerySyntax>
+								<Responses>
+									<Response name="source" semanticType="String" description="The source from which the function generator will accept a trigger.">
+										<ResponseType>
+											<Character>
+												<EnumRef name="trig_seq_source_query_response_1" />
+											</Character>
+										</ResponseType>
+									</Response>
+								</Responses>
+							</QuerySyntax>
+						</QuerySyntaxes>
+					</SubsystemCommand>
+				</Node>
+			</Node>
+		</RootNode>
+		<RootNode mnemonic="UNIT">
+			<Node aliases="ANGL" mnemonic="ANGLe">
+				<SubsystemCommand>
+					<Synopsis>Select degrees or radians to set the phase offset value using the PHAS command (remote interface only). </Synopsis>
+					<HelpLinks>
+						<HelpLink name=":UNIT:ANGLe" url="33250A-UNITANGLe_DEGreeRADian_UNITANGLe.html" />
+					</HelpLinks>
+					<CommandSyntaxes>
+						<CommandSyntax>
+							<Parameters>
+								<Parameter name="angle" semanticType="String" description="DEGree|RADian">
+									<ParameterType>
+										<Character>
+											<EnumRef name="unit_angle_command_parameter_1" />
+										</Character>
+									</ParameterType>
+								</Parameter>
+							</Parameters>
+						</CommandSyntax>
+					</CommandSyntaxes>
+					<QuerySyntaxes>
+						<QuerySyntax>
+							<Responses>
+								<Response name="angle" semanticType="String" description="Degrees or radians to set the starting phase for the burst with the BURS:PHAS command (remote interface only).">
+									<ResponseType>
+										<Character>
+											<EnumRef name="unit_angle_query_response_1" />
+										</Character>
+									</ResponseType>
+								</Response>
+							</Responses>
+						</QuerySyntax>
+					</QuerySyntaxes>
+				</SubsystemCommand>
+			</Node>
+		</RootNode>
+	</SubsystemCommands>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<DigestValue>XFJIOOTdnSpxq5dMLtAyP/GCJ2U=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>hzPqt9hxnTneQAHn/ZSUBuLaUFbce4evOoh4JWj/US9Ymy3lSP76dwYtpXSLtP+EKhkeYDY/3FroOjsbZOZNmWZb/dAeqrhSFrU5UPFqL+674lOK2wSF3BKlf0bU6+o9Rvnnle43DPa3LiUXJonz4bXO+UK8ktjyhd2XbewKjB4=</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIIFEDCCA/igAwIBAgIQYEN0A9s0AdIYm9dovjx8rzANBgkqhkiG9w0BAQUFADCBtjELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQLExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2UgYXQgaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYSAoYykwOTEwMC4GA1UEAxMnVmVyaVNpZ24gQ2xhc3MgMyBDb2RlIFNpZ25pbmcgMjAwOS0yIENBMB4XDTA5MDgxNzAwMDAwMFoXDTEyMDgxNjIzNTk1OVowgc0xCzAJBgNVBAYTAlVTMREwDwYDVQQIEwhDb2xvcmFkbzERMA8GA1UEBxMITG92ZWxhbmQxKzApBgNVBAoUIkFnaWxlbnQgVGVjaG5vbG9naWVzLCBJbmNvcnBvcmF0ZWQxPjA8BgNVBAsTNURpZ2l0YWwgSUQgQ2xhc3MgMyAtIE1pY3Jvc29mdCBTb2Z0d2FyZSBWYWxpZGF0aW9uIHYyMSswKQYDVQQDFCJBZ2lsZW50IFRlY2hub2xvZ2llcywgSW5jb3Jwb3JhdGVkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcN4JYiK+rRtAgPfYwlp3ez1zmMbd7uCCXEmS/2tN+dt5yUE4tY/UYE4yf3UGezrkgQq5BBY3a/p5VdXoppOru+hjSPwKb62vclwMH8qzr+ZYajL80ilXHW9713TDzdVbAkNrFiyBmuRt+SvDRx1/EcyBWIavr60uGlQIrHBcUKwIDAQABo4IBgzCCAX8wCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCB4AwRAYDVR0fBD0wOzA5oDegNYYzaHR0cDovL2NzYzMtMjAwOS0yLWNybC52ZXJpc2lnbi5jb20vQ1NDMy0yMDA5LTIuY3JsMEQGA1UdIAQ9MDswOQYLYIZIAYb4RQEHFwMwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYTATBgNVHSUEDDAKBggrBgEFBQcDAzB1BggrBgEFBQcBAQRpMGcwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLnZlcmlzaWduLmNvbTA/BggrBgEFBQcwAoYzaHR0cDovL2NzYzMtMjAwOS0yLWFpYS52ZXJpc2lnbi5jb20vQ1NDMy0yMDA5LTIuY2VyMB8GA1UdIwQYMBaAFJfQa6gmcMihP5QfCC3ENZukoR7yMBEGCWCGSAGG+EIBAQQEAwIEEDAWBgorBgEEAYI3AgEbBAgwBgEBAAEB/zANBgkqhkiG9w0BAQUFAAOCAQEAL3Et0IuzRaEHt7W+5MebgmQSZhc6G8JZNtT+JJBbc+p5s/9/hFRRus36chIje5AhuxBYijNAe2gW4Ezx9czdZmuCJYOJIDoLa/5+ezHCC72vTjD2O3Ynrw4TwiivhSz91wbgjc+eWV2CeUojDdE0E60D6iAVgcnCUKjM9RXOmIbIZvyxzOt/qaWoZtCkwXL/J7VkppUjjge0ylzNOUi5eaP4ipfddePxu9j7aC/5CD2yHbRlI/O6pXhmDrXNirGKsu/K9+euhlocpldLSOq2l/Uew2KquzwEKzkCJ2IbI8ALePqg7NkNBbrh/yjgQRZ0Ao5ROvDkrEWISZm5BoPyOg==</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</ScpiDefinition>

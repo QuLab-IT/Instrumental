@@ -5,6 +5,7 @@
 *.swp
 .idea/*
 .dir-locals.el
+.venv/
 
 _*lib.py
 !_*midlib.py

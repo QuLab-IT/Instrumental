@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="FUNCtion Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:ignoredWords="n" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../NoteTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>FUNCtion Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>FUNCtion Subsystem<a name="kanchor127"></a></h1>
+        <p class="Body">The FUNCtion subsystem configures the instrument's output function:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a href="#FUNCtion">FUNCtion</a> - output waveform</li>
+            <li class="IndentTight" value="2"><a href="#FUNCtion_ARBitrary">FUNCtion:ARBitrary</a> - arbitrary waveform (.arb/barb) or sequence (.seq)  that has previously been loaded into volatile memory with <a href="MMEMory_Subsystem.htm#MMEMory_LOAD_DATA">MMEMory:LOAD:DATA[1|2]</a>.</li>
+            <li class="IndentTight" value="3"><a href="#FUNCtion_ARBitrary_ADVance">FUNCtion:ARBitrary:ADVance</a> - method for advancing to next arbitrary waveform data point.</li>
+            <li class="IndentTight" value="4"><a href="#FUNCtion_ARBitrary_BALance">FUNCtion:ARBitrary:BALance</a> - <b>(IQ&#160;Player option only)</b> state (on/off) for dual arbitrary waveform channel balancing</li>
+            <li class="IndentTight" value="5"><a href="#FUNCtion_ARBitrary_BALance_GAIN">FUNCtion:ARBitrary:BALance:GAIN</a> - <b>(IQ&#160;Player option only)</b> gain balance ratio for dual arbitrary waveforms</li>
+            <li class="IndentTight" value="6"><a href="#FUNCtion_ARBitrary_BALance_OFFSet">FUNCtion:ARBitrary:BALance:OFFSet[1|2]</a> - <b>(IQ&#160;Player option only)</b> offset for individual channels of dual arbitrary waveforms</li>
+            <li class="IndentTight" value="7"><a href="#FUNCtion_ARBitrary_FILTer">FUNCtion:ARBitrary:FILTer</a> - filter for arbitrary waveform</li>
+            <li class="IndentTight" value="8"><a href="#FUNCtion_ARBitrary_FREQuency">FUNCtion:ARBitrary:FREQuency</a> - frequency of arbitrary waveform<br /><a href="#FUNCtion_ARBitrary_PERiod">FUNCtion:ARBitrary:PERiod</a> - period of arbitrary waveform</li>
+            <li class="IndentTight" value="9"><a href="#FUNCtion_ARBitrary_POINts">FUNCtion:ARBitrary:POINts</a> - number of points (samples) in the current arbitrary waveform</li>
+            <li class="IndentTight" value="10"><a href="#FUNCtion_DATA_PTPeak">FUNCtion:ARBitrary:PTPeak</a> - peak-to-peak voltage for an arbitrary waveform</li>
+            <li class="IndentTight" value="11"><a href="#FUNCtion_ARBitrary_SKEW">FUNCtion:ARBitrary:SKEW</a> - <b>(IQ&#160;Player option only)</b> state (on/off) for dual arbitrary waveform skew</li>
+            <li class="IndentTight" value="12"><a href="#FUNCtion_ARBitrary_SKEW_TIME">FUNCtion:ARBitrary:SKEW:TIME</a> - <b>(IQ&#160;Player option only)</b> skew time in seconds</li>
+            <li class="IndentTight" value="13"><a href="#FUNCtion_ARBitrary_SRATe">FUNCtion:ARBitrary:SRATe</a> - sample rate for arbitrary waveform</li>
+            <li class="IndentTight" value="14"><a href="#FUNCtion_ARBitrary_SYNCh">FUNCtion:ARBitrary:SYNCh</a> - restarts arbitrary waveforms at first sample simultaneously on both waveforms</li>
+            <li class="IndentTight" value="15"><a href="#FUNCtion_NOISe_BANDwidth">FUNCtion:NOISe:BANDwidth</a> - bandwidth for NOISe waveform</li>
+            <li class="IndentTight" value="16"><a href="#FUNCtion_PRBS_BRATe">FUNCtion:PRBS:BRATe</a> - bit rate for pseudo-random binary sequence (PRBS)</li>
+            <li class="IndentTight" value="17"><a href="#FUNCtion_PRBS_DATA">FUNCtion:PRBS:DATA</a> - sequence type for PRBS</li>
+            <li class="IndentTight" value="18"><a href="#FUNCtion_PRBS_TRANsition">FUNCtion:PRBS:TRANsition[:BOTH]</a> - edge transition time for both edges of PRBS</li>
+            <li class="IndentTight" value="19"><a href="#FUNCtion_PULSe_DCYCle">FUNCtion:PULSe:DCYCle</a> - pulse duty cycle for pulse</li>
+            <li class="IndentTight" value="20"><a href="#FUNCtion_PULSe_HOLD">FUNCtion:PULSe:HOLD</a> - whether pulse width or duty cycle is held constant 
+ as other parameters vary</li>
+            <li class="IndentTight" value="21"><a href="#FUNCtion_PULSe_PERiod">FUNCtion:PULSe:PERiod</a> - period for a pulse</li>
+            <li class="IndentTight" value="22"><a href="#FUNCtion_PULSe_TRANsition">FUNCtion:PULSe:TRANsition:LEADing<br />FUNCtion:PULSe:TRANsition:TRAiling<br />FUNCtion:PULSe:TRANsition[:BOTH])</a> - edge time for pulse</li>
+            <li class="IndentTight" value="23"><a href="#FUNCtion_PULSe_WIDTh">FUNCtion:PULSe:WIDTh</a> - pulse width</li>
+            <li class="IndentTight" value="24"><a href="#FUNCtion_RAMP_SYMMetry">FUNCtion:RAMP:SYMMetry</a> - symmetry percentage for ramp</li>
+            <li class="IndentTight" value="25"><a href="#FUNCtion_SQUare_DCYCle">FUNCtion:SQUare:DCYCle</a> - duty cycle percentage for square</li>
+            <li class="IndentTight" value="26"><a href="#FUNCtion_SQUare_PERiod">FUNCtion:SQUare:PERiod</a> - period for square</li>
+        </ul>
+        <h2><a name="kanchor128"></a><a name="FUNCtion"></a>[SOURce[1|2]:]FUNCtion &lt;<i>function</i>&gt;<br />[SOURce[1|2]:]FUNCtion?</h2>
+        <p class="IndentTight">Selects output function.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{SINusoid | SQUare | TRIangle | RAMP | PULSe | PRBS | NOISe | ARB | DC}, default&#160;SINusoid</td>
+                    <td class="BodyD-Column1-Body1">SIN, SQU, TRI, RAMP, PULS, PRBS, NOIS, ARB, or DC</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output on channel 2 to sine:<br />SOUR2:FUNC SIN</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The selected waveform (other than an arbitrary waveform) is output using the previously selected frequency, amplitude, and offset voltage settings. Arbitrary waveforms are played according to the settings specified in the arbitrary waveform file. Brand new arbitrary waveforms inherit the current arbitrary waveform settings.</li>
+            <li class="IndentTight" value="2">NOISe generates white gaussian noise 
+ with adjustable bandwidth and crest factor about 3.5.</li>
+            <li class="IndentTight" value="3">PRBS generates pseudo-random 
+ noise using Linear Feedback Shift Register (LFSR) user selectable methods.</li>
+            <li class="IndentTight" value="4">ARB generates the arbitrary waveform currently selected by <a href="#FUNCtion">FUNCtion:ARBitrary</a>.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Function Limitations:</i> If you change to a function whose maximum frequency is less than that of the current function, the frequency is adjusted to the maximum 
+ for the new function. For example, if you change a high frequency sine wave to the ramp function, the instrument will adjust the output frequency to 200 kHz (the upper limit for ramps)From the remote interface, a "Settings conflict" error will also be generated.d.</li>
+            <li class="IndentTight" value="2"><i>Amplitude Limitations:</i> If you change to a function whose maximum amplitude is less than that of the current function, the amplitude is  
+ adjusted to the maximum for the new function. This may occur when the output units are <i>Vrms</i> or <i>dBm</i> due to the differences in crest factor for the various output functions For example, if you change a 5 Vrms square wave (into 50 &#937;) to a sine wave, the instrument will adjust the amplitude to 3.536 Vrms (the upper limit for sine in Vrms). The remote interface will also generate a "Settings conflict" error.</li>
+        </ul>
+        <h2><a name="kanchor129"></a><a name="FUNCtion_ARBitrary"></a>[SOURce[1|2]:]FUNCtion:ARBitrary {&lt;<i>filename</i>&gt;}<br />[SOURce[1|2]:]FUNCtion:ARBitrary?</h2>
+        <p class="IndentTight">Selects an arbitrary waveform (.arb/.barb) or sequence (.seq)  that has previously been loaded into volatile memory for the channel specified with <a href="MMEMory_Subsystem.htm#MMEMory_LOAD_DATA">MMEMory:LOAD:DATA[1|2]</a> or <a href="DATA_Subsystem.htm#DATA_ARBitrary">DATA:ARBitrary</a>. Several waveforms can be in volatile memory simultaneously.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">See MMEMory:LOAD:DATA[1|2], for valid &lt;<i>filename</i>&gt; formats. </td>
+                    <td class="BodyD-Column1-Body1">"INT:\MyArb103.arb"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Select an arbitrary waveform in memory on channel 2:<br />FUNC:ARB "INT:\MyArb103.arb"</p>
+                        <p>Load an arbitrary waveform from the internal drive into volatile memory.  Then select and play the waveform:<br />MMEM:LOAD:DATA "INT:\BUILTIN\Sinc.arb"<br />FUNCtion:ARBitrary "INT:\BUILTIN\Sinc.arb"<br />FUNCtion ARB</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" style="font-style: normal;" value="1">The &lt;<i>filename</i>&gt; should match the filename used to load the arbitrary waveform or sequence into volatile memory with <a href="MMEMory_Subsystem.htm#MMEMory_LOAD_DATA">MMEMory:LOAD:DATA[1|2]</a>, <a href="DATA_Subsystem.htm#DATA_ARBitrary">DATA:ARBitrary</a>,  <a href="DATA_Subsystem.htm#DATA_ARBitrary_DAC">DATA:ARBitrary:DAC</a>, or <a href="DATA_Subsystem.htm#DATA_SEQuence">DATA:SEQuence</a>.</li>
+            <li class="IndentTight" style="font-style: normal;" value="2">When you store an arbitrary waveform segment or sequence (<a href="MMEMory_Subsystem.htm#MMEMory_STORe_DATA">MMEMory:STORe:DATA[1|2]</a>), the instrument's current settings (voltage values, sample rate, filter type, and so on) are stored in the segment or sequence file. When you play the file for the first time with <a href="#FUNCtion_ARBitrary">FUNCtion:ARBitrary</a>, these settings are loaded and override the instrument's current settings. If you have manually edited a segment or sequence file such that the instrument settings have been removed, the instrument settings will not be changed when you execute <a href="#FUNCtion_ARBitrary">FUNCtion:ARBitrary</a>.</li>
+            <li class="IndentTight" style="font-style: normal;" value="3">When you store an arbitrary waveform segment or sequence (<a href="MMEMory_Subsystem.htm#MMEMory_STORe_DATA">MMEMory:STORe:DATA[1|2]</a>), the instrument's current settings (voltage values, sample rate, filter type, and so on) are stored in the segment or sequence file. When you play the file for the first time with <a href="#FUNCtion_ARBitrary">FUNCtion:ARBitrary</a>, these settings are loaded and override the instrument's current settings. If you have manually edited a segment or sequence file such that the instrument settings have been removed, the instrument settings will not be changed when you execute <a href="#FUNCtion_ARBitrary">FUNCtion:ARBitrary</a>.</li>
+        </ul>
+        <h2><a name="kanchor130"></a><a name="FUNCtion_ARBitrary_ADVance"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:ADVance {TRIGger|SRATe}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:ADVance?</h2>
+        <p class="IndentTight">Specifies the method for advancing to the next arbitrary waveform data point for the specified channel.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{TRIGger|SRATe},&#160;default&#160;TRIG</td>
+                    <td class="BodyD-Column1-Body1">TRIG&#160;or&#160;SRAT</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set advance methord to trigger:<br />FUNC:ARB:ADV TRIG</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">TRIGger causes instrument to advance to next data point with each trigger received and forces <a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce</a> to EXTernal.</li>
+            <li class="IndentTight" value="2">SRATe causes instrument to advance to next data point at the sample rate set by <a href="#FUNCtion_ARBitrary_SRATe">FUNCtion:ARBitrary:SRATe</a>.</li>
+        </ul>
+        <h2><a name="FUNCtion_ARBitrary_FILTer"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:FILTer {NORMal|STEP|OFF}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:FILTer?</h2>
+        <p class="IndentTight">Specifies the filter setting for an arbitrary waveform.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{NORMal|STEP|OFF},&#160;default&#160;STEP</td>
+                    <td class="BodyD-Column1-Body1">NORMal,&#160;STEP, or&#160;OFF</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set filter to NORMal:<br />FUNCtion:ARBitrary:FILTer NORM<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><b>NORMal</b> filters the data points with the filter that provides the flattest frequency response.  This effectively smoothes the signal, but sharp transitions will have pre-shoot and overshoot.</li>
+            <li class="IndentTight" value="2"><b>STEP</b> filters the data points in a way that effectively smoothes the signal while minimizing the pre-shoot and overshoot.  However, this setting has a narrower bandwidth than the NORMal setting.</li>
+            <li class="IndentTight" value="3"><b>OFF</b> steps from point to point at the sample rate.  Moves between data points are accomplished as quickly as possible with no smoothing.  If the &lt;<i>mode</i>&gt; is set to OFF, the instrument uses a filter whose bandwidth limit restricts the maximum sample rate for the arbitrary waveform to 62.5 MSa/s.</li>
+        </ul>
+        <h2><a name="kanchor131"></a><a name="FUNCtion_ARBitrary_FREQuency"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:FREQuency? {MINimum|MAXimum}<br /><br /><a name="kanchor132"></a><a name="FUNCtion_ARBitrary_PERiod"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:PERiod {&lt;<i>period</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:PERiod? {MINimum|MAXimum}</h2>
+        <p class="IndentTight">Sets the frequency or period for the arbitrary waveform.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&lt;<i>frequency</i>&gt;&#160;(Hz):&#160;Limited by&#160;the number of waveform points; default based on 40 kSa/s sample rate.</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>&lt;<i>period</i>&gt; (seconds): Limited by&#160;the number of waveform points; default based on 40 kSa/s sample rate.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E-03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set arbitrary waveform frequency to 1000 Hz.<br />FUNC:ARB:FREQ 1000</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">With <a href="#FUNCtion_ARBitrary_FILTer">FUNCtion:ARBitrary:FILTer&#160;OFF</a>,&#160;the&#160;arbitrary waveform sample rate is limited to 1/4 of the maximum sample rate.</li>
+            <li class="IndentTight" value="2">The &lt;<i>frequency</i>&gt; ranges from 1 µHz to (Max Sample Rate(250 MSa/s) / ( 8 points), or 31.25 MHz. Frequency is also limited by the Filter setting.  With  <a href="#FUNCtion_ARBitrary_FILTer">FUNCtion:ARBitrary:FILTer OFF</a>, the arbitrary waveform sample rate is limited to 62.5 MSa/s, or 1/4 of the 250 MSa/s rate. Therefore, frequency is also reduced to 7.8125 MHz for an eight point waveform.</li>
+            <li class="IndentTight" value="3">The arbitrary waveform sample rate and frequency are not coupled to <a href="FREQuency_Subsystem.htm#FREQuency">SOUR:FREQ</a>, which applies to only non-arbitrary waveforms.</li>
+            <li class="IndentTight" value="4">The arbitrary waveform plays at a speed specified by the sample rate. When setting the frequency or period of an arbitrary waveform, the instrument changes the sample rate based on the number of points in the waveform and the new frequency or period setting. The new frequency or period may be altered slightly to meet the restrictions of Sample Rate resolution and the number of points. In other words, frequency will be recalculated from the new sample rate and number of points to ensure compatibility between the coupled parameters. This is due to math resolution of 15 digits in combination with a sample rate that can also be 15 digits.
+            </li>
+            <li class="IndentTight" value="5">Changing the number of points in the waveform, or changing the sample rate with <a href="#FUNCtion_ARBitrary_SRATe">FUNCtion:ARBitrary:SRATe</a>, changes the frequency and period settings.</li>
+        </ul>
+        <h2><a name="kanchor133"></a><a name="FUNCtion_ARBitrary_POINts"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:POINts?</h2>
+        <p class="IndentTight">Returns the number of points in the currently selected arbitrary waveform.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+100000</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return the number of points in the current arbitrary waveform on channel 1:<br />FUNC:ARB:POIN?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The maximum number of points depends on the instrument's memory, which is based on the <a href="../__A_Preliminary%20Information/02%20Models_and_Options.htm">model and options</a>.</li>
+        </ul>
+        <h2><a name="kanchor134"></a>
+            <br /><a name="FUNCtion_DATA_PTPeak"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:PTPeak {&lt;<i>voltage</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:PTPeak?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets peak to peak voltage.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">10&#160;VDC&#160;into&#160;50&#160;&#937;,&#160;20&#160;VDC&#160;into&#160;an&#160;open circuit; default 100 mV</td>
+                    <td class="BodyD-Column1-Body1">+4.000000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set peak to peak voltage to 4 V:<br />FUNC:ARBitrary:PTPeak 4</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Limits Due to Amplitude:</i> You can set the voltage levels to a positive or negative value with the restrictions shown below. Vpp is the maximum peak-to-peak amplitude for the selected output termination (10 Vpp  into 50 &#937; or 20 Vpp into an open circuit).<br /><br />&#160;&#160;&#160;&#160;&#160;V<sub>high</sub> 
+ – V<sub>low</sub><span style="font-family: Symbol, serif;">£</span> 
+ Vpp (max) <b>and</b> V<sub>high</sub>, 
+ V<sub>low</sub><span style="font-family: Symbol, serif;">£ 
+ </span>Vpp (max)/2</li>
+            <li class="IndentTight" value="2"><i>Differences between remote and front panel operation:&#160;</i>
+            </li>
+            <li class="IndentTight2" value="3"><b>Remote Interface:</b> Setting the high or low level from the remote interface can change the high level or low level to achieve the desired setting.  In this case either a "Data out of range" or "Settings conflict" error will occur.  If the high level is set below the low level, the instrument will set the low level 1 mV less than the high level.  If the high level is set below the LOW limit or the instrument output specifications, the low level will be set to the LOW limit or instrument output specification and the high level will be set 1 mV above  the low level. A similar set of rules applies if the low level is set incorrectly.</li>
+            <li class="IndentTight2" value="4">Similarly, the low level can be set above the high level from the remote interface. In this case the instrument will  set the high level 1 mV larger than the low level.  If the low level is set higher than the HIGH limit or the instrument output specifications, the high level will be set to the HIGH limit or instrument output specification and the low level will be set 1 mV below  the high level.</li>
+            <li class="IndentTight2" value="5"><b>Front Panel:</b> Setting the high or low level from the front panel may clip that level setting in order to achieve the desired level setting, and a "Data out of range" error will be generated. The high level cannot be set below the low level from the front panel.</li>
+            <li class="IndentTight" value="6">Note that when you set the high and low levels, you are also setting the amplitude and offset of the waveform. For example, if you set the high level to +2 V and the low level to -3 V, the resulting amplitude is 5 Vpp, with a -500 mV offset.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: If you change the output termination setting, the displayed voltage levels will be  adjusted (and no error 
+ will be generated). For example, if you set the high level to +100 mVDC and then change the output termination from 50 &#937; to "high impedance", the amplitude displayed on the front panel will double to +200 mVDC. If you change from "high impedance" to 50 &#937;, the displayed amplitude will be halved. Changing the output termination setting does not change the voltage present at the output terminals of the instrument. This only changes the displayed values on the front panel and the values queried from the remote interface. The voltage present at the instrument's output depends on the load connected to the instrument. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details.</li>
+            <li class="IndentTight" value="2">Limits due to <a style="font-style: italic;">VOLTage:LIMit:STATe</a><i>  command:</i> If the voltage limits are enabled, the level settings are checked against the specified limits (<a href="VOLTage_Subsystem.htm#VOLTage_LIMit_HIGH">VOLTage:LIMit:HIGH</a>, <a href="VOLTage_Subsystem.htm#VOLTage_LIMit_LOW">VOLTage:LIMit:LOW</a>) before a change in level is executed. If a change in output level would exceed a LIMIT setting, the level is clipped to the maximum (or minimum) value allowed that will not exceed the LIMit setting and a "Settings conflict" error will be generated.&#160;</li>
+            <li class="IndentTight" value="3">Limits due to Output Coupling: If two channels are coupled, limitations of setting the levels of both channels will be checked before a change in level is executed. In this case, if a change in level would exceed a LIMIT setting, or instrument output specifications for either channel, the level is clipped to the maximum (or minimum) allowable value and a "Settings conflict" error will be generated.</li>
+            <li class="IndentTight" value="4">To invert the waveform relative to the offset voltage, use <a href="OUTPut_Subsystem.htm#OUTPut_POLarity">OUTPut[1|2]:POLarity</a>.</li>
+        </ul>
+        <h2><a name="kanchor135"></a><a name="kanchor136"></a><a name="FUNCtion_ARBitrary_SRATe"></a>[SOURce[1|2]:]FUNCtion:ARBitrary:SRATe {&lt;<i>sample_rate</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:ARBitrary:SRATe? {MINimum|MAXimum}</h2>
+        <p class="IndentTight">Sets the sample rate for the arbitrary waveform.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 µSa/s to 250 MSa/s, default 40 kSa/s. Limited to 62.5 MSa/s if FUNCtion:ARBitrary:FILTer is OFF.</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+04</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sample rate to 10 kSa/s:<br />FUNC:ARB:SRAT 1e4</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The sample rate and frequency parameter are not coupled when playing an arbitrary waveform segment.  The concept of frequency does not apply for arbitrary waveform sequences.</li>
+            <li class="IndentTight" value="2">Setting a sample rate when not in the ARB mode will not change the frequency. For example, if the current function is sine, setting sample rate has no effect until the function changes to ARB.</li>
+            <li class="IndentTight" value="3">The maximum sample rate depends on the filter applied to the arbitrary waveform. See <a href="#FUNCtion_ARBitrary_FILTer">FUNCtion:ARBitrary:FILTer</a> for details.</li>
+        </ul>
+        <h2><a name="kanchor137"></a><a name="FUNCtion_ARBitrary_SYNCh"></a>[SOURce]:FUNCtion:ARBitrary:SYNCh</h2>
+        <p class="Indented1">Causes two independent arbitrary waveforms to synchronize to first point of each waveform (two-channel instruments only).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Load an internal haversine waveform into channel 1 and a custom arbitrary waveform from a USB drive into channel 2. Set both sample rates to 100 kSa/s and then synchronizes both channels to the first point of each waveform:<br /><p>MMEM:LOAD:DATA "Int:\Builtin\HAVERSINE.arb"<br />FUNC:ARB "Int:\Builtin\HAVERSINE.ARB"<br />FUNC ARB<br />FUNC:ARB:SRATE 1E+05<br /><br />MMEM:LOAD:DATA2&#160;"USB:\MyFiles\TestDUT3.arb"<br />SOUR2:FUNC:ARB "USB:\MyFiles\TestDUT3.arb"<br />SOUR2:FUNC ARB<br />SOUR2:FUNC:ARB:SRAT 1E+05<br /><br />FUNC:ARB:SYNC</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="Indented1" value="1">This command stops and restarts the arbitrary waveforms on both channels at whatever sample rates they happen to be set.</li>
+            <li class="Indented1" value="2">If the two arbitrary waveforms have the same number of points, they will remain synchronized over multiple repetitions; otherwise, they will only be synchronized at the beginning and after numbers of repetitions that happen to be multiples of the number of points in both waveforms. For example, if you synchronize an 8-point waveform and a 10-point waveform, they will re-synchronize after 40, 80, and 120 repetitions.</li>
+            <li class="Indented1" value="3">This functionality is similar to using burst mode, but it operates in continuous wave mode.</li>
+            <li class="Indented1" value="4">This command also works with burst, sweep, and modulation, when trying to synchronize two arbitrary waveforms.</li>
+        </ul>
+        <h2><a name="kanchor138"></a><a name="FUNCtion_NOISe_BANDwidth"></a>[SOURce[1|2]:]FUNCtion:NOISe:BANDwidth {&lt;<i>bandwidth</i>&gt;| MINimum | MAXimum}<br />[SOURce[1|2]:]FUNCtion:NOISe:BANDwidth? [{MINimum | MAXimum}]</h2>
+        <p class="IndentTight">Sets bandwidth of noise function.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 mHz to instrument's maximum frequency, default 100 kHz</td>
+                    <td class="BodyD-Column1-Body1">+6.000000000000000E+03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set bandwidth to 20 kHZ:<br />FUNC:NOISe:BWIDth 20000</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="IndentTight">The Noise function produces white gaussian noise with 
+ a Crest Factor of 4.6.</p>
+        <p class="IndentTight">The noise bandwidth  is continuously adjustable 
+ to place more noise energy in the frequency range from 0 Hz to the specified 
+ noise bandwidth frequency.</p>
+        <h2><a name="kanchor139"></a><a name="FUNCtion_PRBS_BRATe"></a>[SOURce[1|2]:]FUNCtion:PRBS:BRATe {&lt;<i>bit_rate</i>&gt; | 
+ MINimum | MAXimum}<br />[SOURce[1|2]:]FUNCtion:PRBS:BRATe? {&lt;<i>bit_rate</i>&gt;| 
+ MINimum | MAXimum}</h2>
+        <p class="IndentTight">Sets the pseudo-random binary sequence (PRBS) bit rate.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 mbit/s to 50 Mbits/s, default 1000 bit/s</td>
+                    <td class="BodyD-Column1-Body1">+1.920000000000000E+04</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set bit rate to 19,200 bits per second<br />FUNC:PRBS:BRATe 19200</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">A PRBS waveform using polynomial PN<b><i>x</i></b> is generated by a shift register of <b><i>x</i></b> bits, and the output waveform begins with <b><i>x</i></b> sample periods of high output. Sample period is the reciprocal of the sample rate (<a href="#FUNCtion_PRBS_BRATe">FUNCtion:PRBS:BRATe</a>), and the channel's <b>Sync</b> pulse indicates the waveform's start. For example, if the PRBS uses PN23 with sample rate 500 Hz, the output begins with 46 ms of high output (23 x 2 ms).</li>
+            <li class="IndentTight" value="2">The bit rate is independent of the data sequence length.</li>
+        </ul>
+        <h2><a name="kanchor140"></a><a name="FUNCtion_PRBS_DATA"></a>[SOURce[1|2]:]FUNCtion:PRBS:DATA &lt;<i>sequence_type</i>&gt;<br />[SOURce[1|2]:]FUNCtion:PRBS:DATA?</h2>
+        <p class="IndentTight">Sets the pseudo-random binary sequence (PRBS)&#160;type.  Setting the sequence type sets the length and feedback values as shown below.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">335xx: {PN7|PN9|PN11|PN15|PN20|PN23}<br />336xx: PN3 through PN32 (all 30 possible values from 3 to 32)<br />Value after PN corresponds to maximum shift register length in bits.<br />Default is PN7.</td>
+                    <td class="BodyD-Column1-Body1">PN# (PN3 through PN9) or PN## (PN10 through PN32), where each # is one digit.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set data format to PN23:<br />FUNC:PRBS:DATA PN23</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">SYNC Output may be active during a PRBS function, 
+ unlike the <a href="#FUNCtion_NOISe_BANDwidth">NOISe</a> function.</li>
+            <li class="IndentTight" value="2">A PRBS waveform using polynomial PN<b><i>x</i></b> is generated by a shift register of <b><i>x</i></b> bits, and the output waveform begins with <b><i>x</i></b> sample periods of high output. Sample period is the reciprocal of the sample rate (<a href="#FUNCtion_PRBS_BRATe">FUNCtion:PRBS:BRATe</a>), and the channel's <b>Sync</b> pulse indicates the waveform's start. For example, if the PRBS uses PN23 with sample rate 500 Hz, the output begins with 46 ms of high output (23 x 2 ms). The polynomials are shown below.<br /><br /></li>
+            <br />
+            <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Sequence Type</th>
+                        <th class="HeadE-Column1-Header1">Polynomial</th>
+                        <th class="HeadD-Column1-Header1">Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN3</td>
+                        <td class="BodyE-Column1-Body1">x<sup>3</sup> + x<sup>2</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">3</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN4</td>
+                        <td class="BodyE-Column1-Body1">x<sup>4</sup> + x<sup>3</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">4</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN5</td>
+                        <td class="BodyE-Column1-Body1">x<sup>5</sup> + x<sup>3</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">5</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN6</td>
+                        <td class="BodyE-Column1-Body1">x<sup>6</sup> + x<sup>5</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">6</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN7</td>
+                        <td class="BodyE-Column1-Body1">x<sup>7</sup> + x<sup>6</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">7</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN8</td>
+                        <td class="BodyE-Column1-Body1">x<sup>8</sup> + x<sup>6</sup> + x<sup>5</sup> + x<sup>4</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">8</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN9</td>
+                        <td class="BodyE-Column1-Body1">x<sup>9</sup> + x<sup>5</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">9</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN10</td>
+                        <td class="BodyE-Column1-Body1">x<sup>10</sup> + x<sup>7</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">10</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN11</td>
+                        <td class="BodyE-Column1-Body1">x<sup>11</sup> + x<sup>9</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">11</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN12</td>
+                        <td class="BodyE-Column1-Body1">x<sup>12</sup> + x<sup>6</sup> + x<sup>4</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">12</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN13</td>
+                        <td class="BodyE-Column1-Body1">x<sup>13</sup> + x<sup>4</sup> + x<sup>3</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">13</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN14</td>
+                        <td class="BodyE-Column1-Body1">x<sup>14</sup> + x<sup>5</sup> + x<sup>3</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">14</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN15</td>
+                        <td class="BodyE-Column1-Body1">x<sup>15</sup> + x<sup>14</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">15</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN16</td>
+                        <td class="BodyE-Column1-Body1">x<sup>16</sup> + x<sup>15</sup> + x<sup>13</sup> + x<sup>4</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">16</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN17</td>
+                        <td class="BodyE-Column1-Body1">x<sup>17</sup> + x<sup>14</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">17</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN18</td>
+                        <td class="BodyE-Column1-Body1">x<sup>18</sup> + x<sup>11</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">18</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN19</td>
+                        <td class="BodyE-Column1-Body1">x<sup>19</sup> + x<sup>6</sup> + x<sup>2</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">19</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN20</td>
+                        <td class="BodyE-Column1-Body1">x<sup>20</sup> + x<sup>17</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">20</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN21</td>
+                        <td class="BodyE-Column1-Body1">x<sup>21</sup> + x<sup>19</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">21</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN22</td>
+                        <td class="BodyE-Column1-Body1">x<sup>22</sup> + x<sup>21</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">22</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN23</td>
+                        <td class="BodyE-Column1-Body1">x<sup>23</sup> + x<sup>18</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">23</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN24</td>
+                        <td class="BodyE-Column1-Body1">x<sup>24</sup> + x<sup>23</sup> + x<sup>22</sup> + x<sup>17</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">24</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN25</td>
+                        <td class="BodyE-Column1-Body1">x<sup>25</sup> + x<sup>22</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">25</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN26</td>
+                        <td class="BodyE-Column1-Body1">x<sup>26</sup> + x<sup>6</sup> + x<sup>2</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">26</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN27</td>
+                        <td class="BodyE-Column1-Body1">x<sup>27</sup> + x<sup>5</sup> + x<sup>2</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">27</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN28</td>
+                        <td class="BodyE-Column1-Body1">x<sup>28</sup> + x<sup>25</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">28</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN29</td>
+                        <td class="BodyE-Column1-Body1">x<sup>29</sup> + x<sup>27</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">29</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN30</td>
+                        <td class="BodyE-Column1-Body1">x<sup>30</sup> + x<sup>6</sup> + x<sup>4</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">30</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">PN31</td>
+                        <td class="BodyE-Column1-Body1">x<sup>31</sup> + x<sup>28</sup> + 1</td>
+                        <td class="BodyD-Column1-Body1">31</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">PN32</td>
+                        <td class="BodyB-Column1-Body1">x<sup>32</sup> + x<sup>22</sup> + x<sup>2</sup> + x<sup>1</sup> + 1</td>
+                        <td class="BodyA-Column1-Body1">32</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ul>
+        <h2><a name="kanchor141"></a><a name="kanchor142"></a><a name="FUNCtion_PRBS_TRANsition"></a>[SOURce[1|2]:]FUNCtion:PRBS:TRANsition[:BOTH] {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PRBS:TRANsition[:BOTH]? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets PRBS transition edge time on both edges of a PRBS transition.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">8.4 ns (default) to 1 &#956;sec, limited as described below</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E-08</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set edge time to 10 ns for the leading and trailing edges (two methods):<br />FUNC:PRBS:TRAN 10 ns<br />FUNC:PRBS:TRAN .000000010</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">The default "BOTH" keyword is optional and allows simultaneous control of the leading and trailing edges of the PRBS waveform.</li>
+            <li class="IndentTight" value="2">The edge time applies to both the rising and falling edges, and represents the time between the 10% and 90% thresholds of each edge.&#160;</li>
+            <li class="IndentTight" value="3">The specified edge time must fit within the specified period. The instrument will limit the edge time as needed to accommodate the specified bit rate. From the remote interface, a "Settings conflict" error will also be generated.</li>
+        </ul>
+        <h2><a name="kanchor143"></a><a name="kanchor144"></a><a name="FUNCtion_PULSe_DCYCle"></a>[SOURce[1|2]:]FUNCtion:PULSe:DCYCle {&lt;<i>percent</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PULSe:DCYCle?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets pulse duty cycle.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 100, limited as described below; default 10</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set duty cycle to 50%:<br />FUNC:PULS:DCYC 50</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The  <a href="#FUNCtion_PULSe_DCYCle">FUNCtion:PULSe:DCYCle</a> and <a href="#FUNCtion_PULSe_WIDTh">FUNCtion:PULSe:WIDTh</a> commands affect the same parameter. In some applications, it is natural to adjust pulse width directly (in seconds); in others, adjusting duty cycle seems more natural. When frequency is adjusted, if pulse width was most recently adjusted as duty cycle on the front panel, then duty cycle will be kept constant as frequency or period changes. However, if pulse width was the last setting, then pulse width will be kept constant as frequency or period changes. See <a href="#FUNCtion_PULSe_HOLD">FUNCtion:PULSe:HOLD</a>.</li>
+            <li class="IndentTight" value="2">The pulse duty cycle is defined as:<br /><br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;Duty Cycle = 100 x Pulse Width ÷ Period<br /><br />Pulse width is the time from the 50% threshold of a pulse's rising edge to the 50% threshold of the next falling edge.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The pulse duty cycle range is 0 percent to 100 percent. However, the pulse duty cycle is limited by <i>minimum pulse width</i> and <i>edge time</i> 
+ restrictions, which prevent you from setting exactly 0 percent or 100 
+ percent. For example, for a 1 kHz pulse waveform, you are typically restricted 
+ to pulse duty cycles in the range 0.002 percent to 99.998 percent, limited 
+ by the minimum pulse width of 16 ns.</li>
+            <li class="IndentTight" value="2"><i>Restrictions Based on Pulse Width:</i> The specified pulse duty cycle must conform to the following restrictions determined by the <i>minimum pulse width</i> 	(Wmin). The instrument will adjust pulse duty cycle as needed to accommodate the specified period. <i>From the remote interface, a "Settings conflict" error will also be generated.</i></li>
+        </ul>
+        <p style="margin-left: 80px;">Duty Cycle <span style="font-family: Symbol, serif;">³</span> 
+ (Wmin / Period) X 100</p>
+        <p style="margin-left: 40px;">and</p>
+        <p style="margin-left: 80px;">Duty Cycle <span style="font-family: Symbol, serif;">£</span> 
+ (1 – Wmin / Period) X 100</p>
+        <p style="margin-left: 40px;">where Wmin = 20 ns</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Restrictions Based On and Affecting Edge Time:</i> The specified pulse duty cycle may affect the edge time. The edge time is adjusted first, and then the duty cycle is adjusted to accommodate the specified period, conforming to the following restriction. From the remote interface, a "Settings conflict" error will also be generated.</li>
+        </ul>
+        <p style="margin-left: 80px;font-style: normal;">Duty Cycle <span style="font-family: Symbol, serif;">³</span> 
+ [(0.8 x Leading Edge Time) +&#160;(0.8 x Trailing Edge Time) ]/ Period x 100<br /><br />and</p>
+        <p style="margin-left: 80px;font-style: normal;">Duty Cycle <span style="font-family: Symbol, serif;">£</span> 
+ [1 – [(0.8 x Leading Edge Time) +&#160;(0.8 x Trailing Edge Time) ]/ Period] x 100</p>
+        <h2><a name="kanchor145"></a><a name="FUNCtion_PULSe_HOLD"></a>[SOURce[1|2]:]FUNCtion:PULSe:HOLD {WIDTh|DCYCle}<br />[SOURce[1|2]:]FUNCtion:PULSe:HOLD?</h2>
+        <p class="IndentTight">Sets the pulse waveform parameter (either pulse width or duty cycle) to be held constant as other parameters are varied.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{WIDTh|DCYCle}, default WIDTh</td>
+                    <td class="BodyD-Column1-Body1">WIDT or DCYC</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the instrument to hold duty cycle for pulse waveforms:<br />FUNC:PULS:HOLD DCYC</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="2"><b>WIDTh:</b> the instrument 
+ holds the pulse width setting (in seconds) constant as the period is varied. 
+ &#160;If a command 
+ to set a duty cycle value is received, the duty cycle is converted to 
+ the equivalent pulse width. If pulse width modulation (PWM) 
+ is turned on, the pulse width and width deviation are held as the 
+ period is varied. Duty cycle deviation commands are converted to width 
+ deviations.<br /><br />Minimum width and edge time restrictions 
+ still apply. May cause a change in the selected edge times, pulse width, or both.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><b>DCYCle:</b> the instrument holds the pulse duty cycle setting (in percent) constant as the period 
+ is varied. If a command to set a pulse width value is received, the width 
+ is converted to the equivalent duty cycle. If pulse width modulation 
+ (PWM) is turned on, the pulse duty cycle and 
+ the duty cycle deviation are held as the period is varied. Width deviation 
+ commands are converted to duty cycle deviation values.<br /><br />Minimum width and edge time restrictions 
+ still apply. May cause a change in the selected edge times, duty cycle, or both.</li>
+        </ul>
+        <table style="width: 100%;border-left-width: 0px;border-left-style: Solid;border-top-width: 0px;border-top-style: Solid;border-right-width: 0px;border-right-style: Solid;border-bottom-width: 0px;border-bottom-style: Solid;border-spacing: 0px;border-spacing: 0px;margin-left: auto;margin-right: auto;mc-table-style: url('../NoteTable.css');" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+            <col style="width: 11.684%;" />
+            <col style="width: 88.316%;" />
+            <tr valign="top">
+                <td style="width: 11.684%;padding-right: 10px;padding-left: 10px;border-left-color: #000000;border-left-style: Solid;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-right-width: 0px;border-left-width: 0px;border-top-width: 0px;border-bottom-width: 0px;" width="11.684%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                    <p>
+                        <img src="../note.gif" alt="Note" />
+                    </p>
+                </td>
+                <td style="width: 88.316%;padding-right: 10px;padding-left: 10px;border-top-color: #000000;border-top-style: Solid;border-right-color: #000000;border-right-style: Solid;border-bottom-color: #000000;border-bottom-style: Solid;border-top-width: 0px;border-bottom-width: 0px;border-right-width: 0px;" width="88.316%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                    <p>The FUNCtion:PULSe:HOLD command does not limit period settings. The pulse width or duty cycle may be adjusted if necessary to accommodate a new period setting.</p>
+                </td>
+            </tr>
+        </table>
+        <h2><a name="kanchor146"></a><a name="FUNCtion_PULSe_PERiod"></a>[SOURce[1|2]:]FUNCtion:PULSe:PERiod {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PULSe:PERiod?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the period for pulse waveforms. This command is paired with the <a href="FREQuency_Subsystem.htm#FREQuency">FREQuency</a> command; the one executed last overrides the other, as frequency and period specify the same parameter.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">From reciprocal of instrument's maximum frequency up to 1,000,000 s. Default 1 ms</td>
+                    <td class="BodyD-Column1-Body1">+2.000000000000000E-07</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the period to 500 ms:<br />FUNC:PULS:PER .5<br />or<br />FUNC:PULS:PER 500 ms</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The specified period must be greater than the sum of the pulse width and the edge time. The instrument will adjust edge time and 
+ pulse width as needed to accommodate the specified period. From the remote interface, a "Settings conflict" error will also be generated. The edge time is minimized first, and then the width (or duty cycle) is adjusted as shown below.<br /><br />&#160;&#160;&#160;&#160;&#160;Period <span style="font-family: Symbol, serif;">³</span> 
+  [Pulse Width + ((Lead Edge Time + Trail Edge Time) * 0.625)]<br /></li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">This command affects the period (and frequency) for all waveform functions (not just pulse). For example, if you select a period using FUNCtion:PULSe:PERiod and then change the output function to sine wave, the specified period will be used for the new function.</li>
+            <li class="IndentTight" value="2">Function Limitations: If you change to a function whose minimum period exceeds the value set by this command, the period is adjusted to the new function's minimum pulse. For example, if you set a period of 2 µs and then change to the ramp function, the instrument adjusts the period to 5 µs (the minimum for ramps). From the remote interface, a "Settings conflict" error will also be generated.</li>
+        </ul>
+        <h2><a name="kanchor147"></a><a name="kanchor148"></a><a name="kanchor149"></a><a name="kanchor150"></a><a name="FUNCtion_PULSe_TRANsition"></a>[SOURce[1|2]:]FUNCtion:PULSe:TRANsition[:BOTH] {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br /><br />[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:LEADing {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:LEADing?  [{MINimum|MAXimum}]<br /><br />[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:TRAiling {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PULSe:TRANsition:TRAiling?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets the pulse edge time on the leading, trailing, or both edges of a pulse.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">8.4 ns to 1 µs, limited as described below; default 10 ns</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E-08</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set leading edge time to 10 ns (two methods):
+<br />FUNC:PULS:TRAN:LEADing 10 ns<br />FUNC:PULS:TRAN:LEADing .000000010</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The leading edge time applies to rising edge, and represents the time from the 10% threshold to the 90% threshold of the edge; the trailing edge represents the time from the 90% threshold to the 10% threshold.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The specified edge time must fit within the specified pulse width and period. The instrument will limit the edge time to accommodate the specified pulse width or duty cycle. From the remote interface, a "Settings conflict" error will also be generated.</li>
+        </ul>
+        <h2><a name="kanchor151"></a><a name="FUNCtion_PULSe_WIDTh"></a>[SOURce[1|2]:]FUNCtion:PULSe:WIDTh {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:PULSe:WIDTh?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets pulse width.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">16 ns to approximately 1,000,000 s, limited as described below; default 100 µs</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E-03</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set pulse width to 5 ms (two methods):<br />FUNC:PULS:WIDT 5 ms<br />FUNC:PULS:WIDT .005</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The  <a href="#FUNCtion_PULSe_DCYCle">FUNCtion:PULSe:DCYCle</a> and <a href="#FUNCtion_PULSe_WIDTh">FUNCtion:PULSe:WIDTh</a> commands affect the same parameter. In some applications, it is natural to adjust pulse width directly (in seconds); in others, adjusting duty cycle seems more natural. When frequency is adjusted, if pulse width was most recently adjusted as duty cycle on the front panel, then duty cycle will be kept constant as frequency or period changes. However, if pulse width was the last setting, then pulse width will be kept constant as frequency or period changes. See <a href="#FUNCtion_PULSe_HOLD">FUNCtion:PULSe:HOLD</a>.</li>
+            <li class="IndentTight" value="2">Pulse width is the time from the 50% threshold of a pulse's rising edge to the 50% threshold of the next falling edge.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The specified pulse width must be less than the difference between the <i>period</i> 
+ and the <i>minimum pulse width</i> as shown below. The instrument will adjust pulse edge time first and then limit pulse width as needed to accommodate the period.From the remote interface, a "Settings conflict" error will also be generated.<br /><br />&#160;&#160;&#160;&#160;&#160;Pulse Width <span style="font-family: Symbol, serif;">£</span> 
+ Period – Wmin</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The specified pulse width must also be less than the difference between the <i>period</i> and the <i>edge time</i> as shown below. 
+ The instrument will adjust pulse edge time first and then limit pulse width as needed to accommodate the period.<i>From the remote interface, a "Settings conflict" error will also be generated.</i><br /><br />&#160;&#160;&#160;&#160;&#160;Pulse Width <span style="font-family: Symbol, serif;">£</span> 
+ [Period - ((Leading Edge Time + Trailing Edge Time) * 0.625)]</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The pulse width must also be greater than the 
+ total time of one edge as shown below.<br /><br />&#160;&#160;&#160;&#160;&#160;Pulse Width <span style="font-family: Symbol, serif;">³</span> [(Leading Edge Time + Trailing Edge Time) * 0.625]</li>
+        </ul>
+        <h2><a name="kanchor152"></a><a name="FUNCtion_RAMP_SYMMetry"></a>[SOURce[1|2]:]FUNCtion:RAMP:SYMMetry {&lt;<i>percent</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:RAMP:SYMMetry?  [{MINimum|MAXimum}] 
+</h2>
+        <p class="IndentTight">Sets the symmetry percentage for ramp waves.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 100, default 100</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set symmetry to 50%:<br />FUNC:RAMP:SYMM 50<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Symmetry represents the amount of time per cycle that the ramp wave is <i>rising</i> (assuming that the waveform polarity is not inverted).<br /><br /></li>
+            <table style="mc-table-style: url('../NoteTable.css');margin-left: auto;margin-right: auto;caption-side: top;width: 50%;" class="TableStyle_NoteTable" cellspacing="0">
+                <col style="width: 196px;" />
+                <col style="width: 209px;" />
+                <tbody>
+                    <tr>
+                        <td class="TableStyle_NoteTable_Body_0_0_RowEnd_ColSep">
+                            <img src="../symmetry_0.bmp" style="width: 150px;height: 75px;" alt="Symmetry 0" />
+                            <p>Symmetry 0%</p>
+                        </td>
+                        <td class="TableStyle_NoteTable_Body_0_0_RowEnd_ColEnd">
+                            <img src="../symmetry_100.bmp" style="width: 150px;height: 75px;" alt="Symmetry 100" />
+                            <p>Symmetry 100%</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">For ramp waveforms, the <a href="APPLY_Subsystem.htm#APPLy_RAMP">APPLy:RAMP</a> 
+ command overrides the current symmetry setting and  selects 
+ 100%. To set a symmetry other than 100%, select the ramp waveform &#160;output 
+ with the <a href="#FUNCtion">FUNCtion RAMP</a> command, then use FUNCtion:RAMP:SYMMetry 
+ to set the symmetry.</li>
+            <li class="IndentTight" value="2">The symmetry setting is remembered when you change 
+ from ramp wave to another function. When you return to the ramp wave function, 
+ the previous symmetry is used.</li>
+            <li class="IndentTight" value="3">When ramp is the modulating waveform for AM, FM, PM, or PWM, the symmetry setting does not apply. The instrument always uses a ramp waveform with 100% symmetry.</li>
+        </ul>
+        <h2><a name="kanchor153"></a><a name="kanchor154"></a><a name="FUNCtion_SQUare_DCYCle"></a>[SOURce[1|2]:]FUNCtion:SQUare:DCYCle {&lt;<i>percent</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:SQUare:DCYCle? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets duty cycle percentage for square wave.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0.01 to 99.99, subject to limitation of 16 ns minimum pulse width; default 50</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set duty cycle to 30%:<br />FUNC:SQU:DCYC 30<p>Sets the duty cycle to 8%, if output frequency is 5 MHz:<br />FUNC:SQU:DCYC MIN</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Duty cycle represents the amount of time per cycle 
+ that the square wave is at a high level (assuming normal polarity).</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">For square waveforms, <a href="APPLY_Subsystem.htm#APPLy_SQUare">APPLy:SQUare</a> 
+replaces the current duty cycle setting with 50%. To set a duty cycle other than 50%, select the square wave 
+ with <a href="#FUNCtion">FUNCtion SQUare</a>, then use FUNCtion:SQUare:DCYCle.</li>
+            <li class="IndentTight" value="2">The duty cycle setting is remembered when you change from square wave to another function. When you return to square wave, the previous duty cycle is used.</li>
+            <li class="IndentTight" value="3"><i>Limits Due to Frequency:&#160;</i>As frequency is increased, minimum and maximum duty cycle limits are adjusted to maintain a minimum pulse width of 16 ns. For example, at 1 MHz the minimum duty cycle is 1.60% and maximum duty cycle is 98.40%. At 10 MHz, the minimum duty cycle is 16.00% and the maximum duty cycle is 84.00%.</li>
+            <li class="IndentTight" value="4">If you select a square waveform as the modulating waveform for AM, FM, PM, or PWM, the instrument always uses a square wave with 50% duty cycle.</li>
+        </ul>
+        <h2><a name="kanchor155"></a><a name="FUNCtion_SQUare_PERiod"></a>[SOURce[1|2]:]FUNCtion:SQUare:PERiod {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]FUNCtion:SQUare:PERiod?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets period for square wave.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">33.3 ns to 1,000,000 s, default 1 ms</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E-01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set period to 500 ms (two methods):<br />FUNC:SQUare:PER .5<br />FUNC:SQUare:PER 500 ms<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Function Limitations: If you change to a function whose minimum period exceeds the value set by this command, the period is adjusted to the new function's minimum pulse. For example, if you set a period of 2 µs and then change to the ramp function, the instrument adjusts the period to 5 µs (the minimum for ramps). From the remote interface, a "Settings conflict" error will also be generated.<i>From the remote interface, a "Settings conflict" error will also be generated.</i></li>
+        </ul>
+        <p class="IndentTight"><span style="font-size: 14pt; font-weight: bold;">The commands shown below all require the IQ&#160;player option.</span>
+        </p>
+        <h2><a name="kanchor156"></a><a name="FUNCtion_ARBitrary_BALance"></a>FUNCtion:ARBitrary:BALance[:STATe] &lt;<i>state</i>&gt;<br />FUNCtion:ARBitrary:BALance:[:STATe]?</h2>This command requires the IQ Player option.<p class="Indented1">Enables or disables channel balancing for dual arbitrary waveforms (<a href="#FUNCtion_ARBitrary_BALance_GAIN">FUNCtion:ARBitrary:BALance:GAIN</a> and <a href="#FUNCtion_ARBitrary_BALance_OFFSet">FUNCtion:ARBitrary:BALance:OFFSet</a>).</p><table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0"><col class="Column-Column1" /><col class="Column-Column1" /><thead><tr class="Head-Header1"><th class="HeadE-Column1-Header1">Parameter</th><th class="HeadD-Column1-Header1">Typical Return</th></tr></thead><tbody><tr class="Body-Body1"><td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td><td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td></tr><tr class="Body-Body1"><td class="BodyA-Column1-Body1" colspan="2"><p colspan="2">Load an arbitrary waveform from the USB drive and set up the balance gain (channel 2 down by 1.02%) and balance offsets (120 mV for channel 1 and -38 mV for channel 2):</p><p colspan="2">FUNC:ARB "USB:\qam32.barb"<br />FUNC:ARB:BAL:GAIN 1.02<br />FUNC:ARB:BAL:OFFS1 0.12<br style="font-weight: normal;" />FUNC:ARB:BAL:OFFS2 -0.038<br />FUNC:ARB:BAL ON</p></td></tr></tbody></table><ul type="disc" class="UL_Disc"><li class="Indented1" value="1">This feature can be used to compensate for minor variations in the load impedances on the two channels, or for minor differences between the two channels of information in the original dual arbitrary waveform file.</li><li class="Indented1" value="2">When the &lt;<i>state</i>&gt; is on, both channels must stay on the same amplifier range.</li><li class="Indented1" value="3">This setting is stored as part of the instrument state, and it is affected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>.</li></ul><h2><a name="kanchor157"></a><a name="FUNCtion_ARBitrary_BALance_GAIN"></a>FUNCtion:ARBitrary:BALance:GAIN {&lt;<i>percent</i>&gt;|MAXimum|MINimum}<br />FUNCtion:ARBitrary:BALance:GAIN? {MAXimum|MINimum}</h2>This command requires the IQ Player option.<p class="Indented1">Sets the gain balance ratio for dual arbitrary waveforms.</p><table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0"><col class="Column-Column1" /><col class="Column-Column1" /><thead><tr class="Head-Header1"><th class="HeadE-Column1-Header1">Parameter</th><th class="HeadD-Column1-Header1">Typical Return</th></tr></thead><tbody><tr class="Body-Body1"><td class="BodyE-Column1-Body1">-30 to +30</td><td class="BodyD-Column1-Body1">+1.02000000E+000</td></tr><tr class="Body-Body1"><td class="BodyA-Column1-Body1" colspan="2"><p colspan="2">Load an arbitrary waveform from the USB drive and set up the balance gain (channel 2 down by 1.02%) and balance offsets (120 mV for channel 1 and -38 mV for channel 2):</p><p colspan="2">FUNC:ARB "USB:\qam32.barb"<br />FUNC:ARB:BAL:GAIN 1.02<br />FUNC:ARB:BAL:OFFS1 0.12<br style="font-weight: normal;" />FUNC:ARB:BAL:OFFS2 -0.038<br />FUNC:ARB:BAL ON</p></td></tr></tbody></table><ul type="disc" class="UL_Disc"><li class="Indented1" value="1">Both channels must stay on the same amplifier range.</li><li class="Indented1" value="2">A value of 0 means that both channels use their current amplitude. A positive value  means that the amplitude of channel 2 is pushed down, while the amplitude of channel 1 remains constant, a negative value pushes channel 1 down while holding channel 2 constant. See the following table for examples.</li><li value="3"><table style="margin-left: 0;margin-right: auto;"><col /><col /><col /><thead><tr><th>&lt;<i>percent</i>&gt;</th><th>Channel 1<br />Amplitude %</th><th>Channel 2<br />Amplitude %</th></tr></thead><tbody><tr><td style="text-align: center;">-20</td><td style="text-align: center;">80</td><td style="text-align: center;">100</td></tr><tr><td style="text-align: center;">-10</td><td style="text-align: center;">90</td><td style="text-align: center;">100</td></tr><tr><td style="text-align: center;">0</td><td style="text-align: center;">100</td><td style="text-align: center;">100</td></tr><tr><td style="text-align: center;">10</td><td style="text-align: center;">100</td><td style="text-align: center;">90</td></tr><tr><td style="text-align: center;">20</td><td style="text-align: center;">100</td><td style="text-align: center;">80</td></tr></tbody></table></li><li class="Indented1" value="4">This command is enabled by <a href="#FUNCtion_ARBitrary_BALance">FUNCtion:ARBitrary:BALance ON</a>.</li><li class="Indented1" value="5">This setting is stored as part of the instrument state, and it is affected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>.</li></ul><h2><a name="kanchor158"></a><a name="FUNCtion_ARBitrary_BALance_OFFSet"></a>FUNCtion:ARBitrary:BALance:OFFSet[1|2] {&lt;<i>volts</i>&gt;|MAXimum|MINimum}<br />FUNCtion:ARBitrary:BALance:OFFSet[1|2]? {MAXimum|MINimum}</h2>This command requires the IQ Player option.<p class="Indented1">Specifies the offset (in volts) added to the dual arbitrary waveform offset for the specified channel.</p><table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0"><col class="Column-Column1" /><col class="Column-Column1" /><thead><tr class="Head-Header1"><th class="HeadE-Column1-Header1">Parameter</th><th class="HeadD-Column1-Header1">Typical Return</th></tr></thead><tbody><tr class="Body-Body1"><td class="BodyE-Column1-Body1">A floating point value, limited by the dual arbitrary waveform amplitude.</td><td class="BodyD-Column1-Body1">+1.00000000E+000</td></tr><tr class="Body-Body1"><td class="BodyA-Column1-Body1" colspan="2"><p colspan="2">Load an arbitrary waveform from the USB drive and set up the balance gain (channel 2 down by 1.02%) and balance offsets (120 mV for channel 1 and -38 mV for channel 2):</p><p colspan="2">FUNC:ARB "USB:\qam32.barb"<br />FUNC:ARB:BAL:GAIN 1.02<br />FUNC:ARB:BAL:OFFS1 0.12<br style="font-weight: normal;" />FUNC:ARB:BAL:OFFS2 -0.038<br />FUNC:ARB:BAL ON</p></td></tr></tbody></table><ul type="disc" class="UL_Disc"><li class="Indented1" value="1">Both channels must stay on the same amplifier range.</li><li class="Indented1" value="2">This command is enabled by <a href="#FUNCtion_ARBitrary_BALance">FUNCtion:ARBitrary:BALance ON</a>.</li><li class="Indented1" value="3">This setting is stored as part of the instrument state, and it is affected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>.</li></ul><h2><a name="kanchor159"></a><a name="FUNCtion_ARBitrary_SKEW"></a>FUNCtion:ARBitrary:SKEW[:STATe] &lt;<i>state</i>&gt;<br />FUNCtion:ARBitrary:SKEW[:STATe]?</h2>This command requires the IQ Player option.<p class="Indented1">Enables or disables skew time compensation (<a href="#FUNCtion_ARBitrary_SKEW_TIME">FUNCtion:ARBitrary:SKEW:TIME</a>). This is always OFF&#160;for modulated signals, sweeps, lists, and bursts.</p><table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0"><col class="Column-Column1" /><col class="Column-Column1" /><thead><tr class="Head-Header1"><th class="HeadE-Column1-Header1">Parameter</th><th class="HeadD-Column1-Header1">Typical Return</th></tr></thead><tbody><tr class="Body-Body1"><td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td><td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td></tr><tr class="Body-Body1"><td class="BodyA-Column1-Body1" colspan="2">Set the skew time to compensate for channel 1 being behind channel 2 by 140 picoseconds:<br />FUNCtion:ARBitrary:SKEW:TIME 1.4e-10<br />FUNCtion:ARBitrary:SKEW ON</td></tr></tbody></table><ul type="disc" class="UL_Disc"><li class="Indented1" value="1">Skew compensation is typically determined empirically, using an oscilloscope and then set one time. That one-time setup will then be valid until the DUT or test equipment configuration changes.</li><li class="Indented1" value="2">The value specified by this command is not stored in the instrument state. It is stored in non-volatile memory and is not affected by <a href="IEEE-488_Subsystem.htm#RST">*RST.</a><a href="IEEE-488_Subsystem.htm#RST">  <![CDATA[ ]]></a></li></ul><h2><a name="kanchor160"></a><a name="FUNCtion_ARBitrary_SKEW_TIME"></a>FUNCtion:ARBitrary:SKEW:TIME [{&lt;<i>time</i>&gt;|MINimum|MAXimum}]<br />FUNCtion:ARBitrary:SKEW:TIME? [{MINimum|MAXimum}]</h2>This command requires the IQ Player option.<p class="Indented1">Sets a small time difference between the channels to compensate for minor variations in timing at the connector output plane or at the device under test (DUT). Note than <a href="#FUNCtion_ARBitrary_SKEW">FUNC:ARB:SKEW[:STATe] OFF</a>&#160;for modulated signals, sweeps, lists, and bursts.</p><table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0"><col class="Column-Column1" /><col class="Column-Column1" /><thead><tr class="Head-Header1"><th class="HeadE-Column1-Header1">Parameter</th><th class="HeadD-Column1-Header1">Typical Return</th></tr></thead><tbody><tr class="Body-Body1"><td class="BodyE-Column1-Body1">A floating point value in the range of ±4 ns. Default 0.</td><td class="BodyD-Column1-Body1">+1.40000000E-010</td></tr><tr class="Body-Body1"><td class="BodyA-Column1-Body1" colspan="2"><p class="Indented1">Set the skew time to compensate for channel 1 being behind channel 2 by 140 picoseconds:<br />FUNCtion:ARBitrary:SKEW:TIME 1.4e-10<br />FUNCtion:ARBitrary:SKEW ON</p></td></tr></tbody></table><ul type="disc" class="UL_Disc"><li class="Indented1" value="1">Channels may exhibit slight timing variations at the output connector plane due to variations in internal circuitry between the two channels. They may exhibit slight timing variations at the device under test (DUT) due to variations in signal paths, including such things as switches and cable lengths.</li><li class="Indented1" value="2">A positive value delays channel 2, and a negative value delays channel 1.</li><li class="Indented1" value="3">The value specified by this command is not stored in the instrument state. It is stored in non-volatile memory and is not affected by <a href="IEEE-488_Subsystem.htm#RST">*RST.</a></li></ul></body>
+</html>

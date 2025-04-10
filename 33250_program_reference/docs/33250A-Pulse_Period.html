@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:00:29" />
+    <title>Pulse Period</title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Pulse_Waveforms.html" />
+<link rel="next" title="Next" href="33250A-Pulse_Width.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1050750"> </a><h2 class="pHeading1">
+Pulse Period
+</h2>
+<a name="wp1050751"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Pulse period:&#160;20 ns to 2000 seconds. <span style="font-style: italic">The default is 1 ms</span>. 
+</div>
+<a name="wp1060660"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The specified period must be greater than the sum of the <span style="font-style: italic">pulse width</span> and the <span style="font-style: italic">edge time</span> as shown below. The function generator will adjust the pulse width and edge time as needed to accommodate the specified period.<br /><br />&#160;&#160;Period &#160;<span style="text-decoration: underline">&gt;</span> &#160;Pulse Width &#160;+ &#160;(1.6 X Edge Time)
+</div>
+<a name="wp1050927"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Function Limitations</span>:&#160;If you change to a function whose minimum period is greater than that for a pulse waveform, the period is adjusted to the minimum value allowed for the new function. For&#160;example, if you output a pulse waveform with a period of 50 ns and then change to the ramp function, the function generator will automatically adjust the period to 1 <span style="font-family: Symbol">m</span>s (the lower limit for ramps). 
+</div>
+<a name="wp1072243"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Front-Panel Operation</span>:&#160;After selecting the pulse function, press the <span style="font-weight: bold">Freq</span> softkey again to toggle to the <span style="font-weight: bold">Period</span> softkey. Then use the knob or numeric keypad to enter the desired pulse period. 
+</div>
+<a name="wp1050838"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Remote Interface Operation</span>:<br /><br />&#160;<span style="font-style: normal">PULSe:PERiod {&lt;</span><span style="font-style: italic">seconds</span>&gt;|MINimum|MAXimum} <br />
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

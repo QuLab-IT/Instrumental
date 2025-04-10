@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>BURSt:INTernal:PERiod {&lt;seconds&gt;|MINimum|MAXimum}  BURSt:INTernal:PERiod? [MINimum|MAXimum] </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-BURStNCYCles__cyclesINFinityMINimumMAXimum__BURStNCYCles_MINimum.html" />
+<link rel="next" title="Next" href="33250A-BURStPHASe_angleMINimumMAXimum_BURStPHASe_MINimumMAXimum.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1264365"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">BURSt:INTernal:PERiod </span>{&lt;<span style="font-style: italic">seconds</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>} <br /><span style="font-weight: bold">BURSt:INTernal:PERiod? </span>[<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>] 
+</h2>
+<a name="wp1139058"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the burst period for internally-triggered bursts. The burst period defines time from the start of one burst to the start of the next burst. Select from 1&#160;µs to&#160;500 seconds. The default is 10 ms. MIN = 1 µs. <br />MAX = based on the burst count and waveform frequency as shown below. The&#160;:PER? query returns the burst period in seconds. 
+</div>
+<a name="wp1139059"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The burst period setting is used only when <span style="font-style: italic">Immediate</span> triggering is enabled (TRIG:SOUR IMM command). The burst period is ignored when manual or external triggering is enabled (or when the <span style="font-style: italic">gated</span> burst mode is selected).
+</div>
+<a name="wp1294283"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	It <span style="font-style: italic">is not</span> possible to specify a burst period which is too short for the function generator to output with the specified burst count and frequency (see below). If the burst period is too short, the&#160;function generator will automatically adjust it as needed to continuously <br />re-trigger the burst. <span style="font-style: italic">From the remote interface, a &quot;Data out of range&quot; error will be generated and the burst period will be&#160;adjusted as described. <br /></span><br />&#160;&#160;Burst Period&#160;&#160;&gt;&#160;&#160;<img src="images/33250-BURStINTernalPERiod_secondsMINimumMAXimum__BURStINTernalPERiod_M.jpg" height="34" width="137" id="wp1294285" border="0" hspace="0" vspace="0"/> + 200 ns<br />
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

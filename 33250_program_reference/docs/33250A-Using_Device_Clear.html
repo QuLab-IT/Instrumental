@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>Using Device Clear </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-String_Parameters.html" />
+<link rel="next" title="Next" href="IX.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    <table id="SummaryNotReq1" width="220" border="0" align="right" cellpadding="0" cellspacing="0">
+      <tr> 
+        <td>
+<a accesskey="1" href="TOC.html"><img id="LongDescNotReq1" src="images/toc.gif" border="0" alt="Table of Contents" /></a><a accesskey="4" href="33250A-String_Parameters.html"><img id="LongDescNotReq2" src="images/prev.gif" border="0" alt="Previous" /></a><a accesskey="5" href="IX.html"><img id="LongDescNotReq3" src="images/next.gif" border="0" alt="Next" /></a><a accesskey="2" href="IX.html"><img id="LongDescNotReq4" src="images/index.gif" border="0" alt="Index" /></a>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <img id="LongDescNotReq5" src="images/wwplogo.gif" width="122" height="63" alt="Put your logo here!" />
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1044559"> </a><h2 class="pHeading1">
+Using Device Clear 
+</h2>
+<a name="wp1044560"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Device Clear is an IEEE-488 low-level bus message that you can use to return the function generator to a responsive state. Different programming languages and IEEE-488 interface cards provide access to this capability through their own unique commands. The status registers, the&#160;error queue, and all configuration states are left unchanged when a&#160;Device Clear message is received. Device Clear performs the following actions.
+</div>
+<a name="wp1044561"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The function generator&#39;s input and output buffers are cleared. 
+</div>
+<a name="wp1044562"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The function generator is prepared to accept a new command string. 
+</div>
+<a name="wp1044564"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	For RS-232 operation, sending the &lt;<span style="font-style: italic">Break</span>&gt; character will perform the equivalent operations of the IEEE-488 Device Clear message.
+</div>
+<a name="wp1382328"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	An overlapped command, if any, will be terminated with no &quot;Operation Complete&quot; indication (applies to the *TRG command). Any&#160;sweep or burst in progress will be aborted immediately. 
+</div>
+<a name="wp1246986"> </a><p class="pBody">
+If you are a first-time user of the SCPI language, please refer to these sections to become familiar with the language before attempting to program the function generator. 
+</p>
+<a name="wp1189058"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275631"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275635"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275656"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275639"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1396839"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275643"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275668"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275647"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+<a name="wp1275672"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 8pt; margin-right: 14pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: -8pt; text-transform: none">
+Parameters shown in <span style="font-style: normal; font-weight: bold">bold</span> are selected following a <span style="font-style: normal">*RST</span> (reset) command. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    <table id="SummaryNotReq2" align="right" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="right"><font size="1">
+          <a href="http://www.webworks.com"><img id="LongDescNotReq6" src="images/webworks.gif" width="150" height="20" border="0"></a><br>
+            Quadralay Corporation<br>
+            http://www.webworks.com<br>
+            Voice: (512) 719-3399<br>
+            Fax: (512) 719-3606<br>
+          <a href="mailto:sales@webworks.com">sales@webworks.com</a><br>
+        </font></td>
+      </tr>   
+    </table>
+
+    <table id="SummaryNotReq3" width="220" border="0" cellpadding="0" cellspacing="0">
+      <tr> 
+        <td>
+<a accesskey="1" href="TOC.html"><img id="LongDescNotReq7" src="images/toc.gif" border="0" alt="Table of Contents" /></a><a accesskey="4" href="33250A-String_Parameters.html"><img id="LongDescNotReq8" src="images/prev.gif" border="0" alt="Previous" /></a><a accesskey="5" href="IX.html"><img id="LongDescNotReq9" src="images/next.gif" border="0" alt="Next" /></a><a accesskey="2" href="IX.html"><img id="LongDescNotReq10" src="images/index.gif" border="0" alt="Index" /></a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

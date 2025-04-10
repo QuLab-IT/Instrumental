@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>DATA:COPY &lt;destination arb name&gt; [,VOLATILE] </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-FORMatBORDer_NORMalSWAPped__FORMatBORDer.html" />
+<link rel="next" title="Next" href="33250A-FUNCtionUSER_arb_nameVOLATILE__FUNCtionUSER.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1219723"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">DATA:COPY </span>&lt;<span style="font-style: italic">destination arb name</span>&gt;<span style="font-weight: bold"> </span>[<span style="font-weight: bold">,VOLATILE</span>]<span style="font-weight: bold"> </span>
+</h2>
+<a name="wp1219724"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Copy the waveform from volatile memory to the specified name in <br />non-volatile memory. The source for the copy is always &quot;volatile&quot;. You&#160;cannot copy <span style="font-style: italic; font-weight: bold">from</span> any other source and you cannot copy <span style="font-style: italic; font-weight: bold">to</span> &quot;volatile&quot;. 
+</div>
+<a name="wp1414825"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The arb name may contain up to 12 characters. The first character <span style="font-style: italic">must</span> be a letter (A-Z), but the remaining characters can be numbers (0-9) or the underscore character (&quot; _ &quot;). Blank spaces are not allowed. If you specify a name with more than 12 characters, a &quot;Program mnemonic too long&quot; error is generated. 
+</div>
+<a name="wp1246003"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The VOLATILE parameter is optional and can be omitted. Note that the keyword &quot;VOLATILE&quot; <span style="font-style: italic">does not</span> have a short form. 
+</div>
+<a name="wp1299046"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The following built-in waveform names are reserved and cannot be used with the DATA:COPY command: &#160;&quot;EXP_RISE&quot;, &quot;EXP_FALL&quot;, &quot;NEG_RAMP&quot;, &quot;SINC&quot;, and &quot;CARDIAC&quot;. If you specify one of the built-in waveforms, a &quot;Cannot overwrite a built-in waveform&quot; error is generated. 
+</div>
+<a name="wp1219757"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The function generator does not distinguish between upper- and lower-case letters. Therefore, <span style="font-weight: bold">ARB_1</span> and <span style="font-weight: bold">arb_1</span> are the same name. All characters are converted to upper case. 
+</div>
+<a name="wp1221518"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you copy to a waveform name that already exists, the previous waveform is overwritten (and no error will be generated). However,&#160;you cannot overwrite any of the five built-in waveforms. 
+</div>
+<a name="wp1221519"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Up to four user-defined waveforms can be stored in non-volatile memory. If memory is full and you try to copy a new waveform to non-volatile memory, a &quot;Not enough memory&quot; error is generated. Use the DATA:DEL command to delete the waveform in volatile memory or any of the four user-defined waveforms in non-volatile memory. Use&#160;the DATA:CAT? command to list all waveforms currently stored in volatile and non-volatile memory. 
+</div>
+<a name="wp1221516"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The following statement shows how to use the DATA:COPY command to copy the VOLATILE waveform into named storage &quot;ARB_1&quot;. <br /><br />&#160;DATA:COPY ARB_1, VOLATILE
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

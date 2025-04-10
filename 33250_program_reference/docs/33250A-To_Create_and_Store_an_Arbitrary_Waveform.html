@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:00:29" />
+    <title>To Create and Store an Arbitrary Waveform </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Arbitrary_Waveforms.html" />
+<link rel="next" title="Next" href="33250A-gw.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1046352"> </a><h2 class="pHeading1">
+To Create and Store an Arbitrary Waveform 
+</h2>
+<a name="wp1046353"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+This section gives an example which shows you how to create and store an arbitrary waveform from the front panel. To download an arbitrary waveform from the remote interface, see <a href="33250A-Arbitrary_Waveform_Commands.html">&quot;Arbitrary Waveform Commands&quot;</a> starting on page <a href="33250A-Arbitrary_Waveform_Commands.html">198</a>. For this example, you will create and store the ramp waveform shown below using four waveform points.
+</div>
+<a name="wp1046354"> </a><p class="pBodyRelative">
+<img src="images/Dump_arb_ex.jpg" height="907" width="1757" id="wp1067157" border="0" hspace="0" vspace="0"/>
+</p>
+<a name="wp1067182"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	1	Select the arbitrary waveform function.
+</div>
+<a name="wp1067190"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+When you press<img src="images/arb_keyjh.jpg" height="26" width="36" id="wp1073343" border="0" hspace="0" vspace="0"/>to select the arbitrary function, a temporary message is displayed indicating which waveform is currently selected. 
+</div>
+<a name="wp1067211"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	2	Start the arbitrary waveform editor.
+</div>
+<a name="wp1067212"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Create New</span> softkey to start the waveform editor. While in the waveform editor, you define the waveform by specifying time and voltage values for each point in the waveform. When creating a new waveform, the previous waveform in volatile memory is overwritten. 
+</div>
+<a name="wp1067198"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	3	Set the waveform period. 
+</div>
+<a name="wp1067224"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Cycle Period</span> softkey to set the <span style="font-style: italic">time</span> boundaries for the waveform. The time value of the last point that can be defined in the waveform must be <span style="font-style: italic">less</span> than the specified cycle period. 
+</div>
+<a name="wp1067857"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-style: italic">For this example, set the period of the waveform to&#160;10 ms. <br /></span><img src="images/arb_period.jpg" height="81" width="273" id="wp1067890" border="0" hspace="0" vspace="0"/>
+</div>
+<a name="wp1067947"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	4	Set the waveform voltage limits.
+</div>
+<a name="wp1068013"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">High V Limit</span> and <span style="font-weight: bold">Low V Limit</span> softkeys to set the upper and lower voltage levels that can be reached while editing the waveform. The&#160;upper limit <span style="font-style: italic">must</span> be greater than the lower limit. By&#160;default, Point&#160;#1 is set equal to the upper limit and Point #2 is set equal to the lower limit. 
+</div>
+<a name="wp1068035"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For this example, set the upper limit to 3.0 V and the lower limit to 0 V.<br /><img src="images/arb_voltage.jpg" height="81" width="273" id="wp1068054" border="0" hspace="0" vspace="0"/>
+</div>
+<a name="wp1067948"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	5	Select the interpolation method.
+</div>
+<a name="wp1068064"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Interp</span> softkey to enable or disable linear interpolation between waveform points (this feature is available from the front panel only). With interpolation enabled (default), the waveform editor makes a straight-line connection between points. With interpolation disabled, the&#160;waveform editor maintains a constant voltage level between points and creates a &quot;step-like&quot; waveform. 
+</div>
+<a name="wp1068075"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For this example, turn on linear interpolation. 
+</div>
+<a name="wp1068132"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	6	Set the initial number of waveform points.
+</div>
+<a name="wp1068105"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+You can create an arbitrary waveform with up to 65,536 (64K) points. The waveform editor initially builds a waveform with two points and automatically connects the last point of the waveform to the voltage level of the first point to create a continuous waveform. Press the <span style="font-weight: bold">Init # Points</span> softkey to specify the initial number of waveform points (you can add or remove points later if necessary). 
+</div>
+<a name="wp1068146"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For this example, set the initial number of points to &quot;4&quot;. 
+</div>
+<a name="wp1068147"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	7	Start the point-by-point editing process.
+</div>
+<a name="wp1068270"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Edit Points</span> softkey to accept the initial waveform settings and begin point-by-point editing. The status line at the top of the display window shows the point number in <span style="font-style: italic">yellow</span>, the time value of the current point in <span style="font-style: italic">green</span>, and the voltage value of the current point in <span style="font-style: italic">magenta</span>.
+</div>
+<a name="wp1068274"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	8	Define the first waveform point.
+</div>
+<a name="wp1068228"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Voltage</span> softkey to set the voltage level for Point #1 (this point is fixed at a time of 0 seconds). By&#160;default, Point&#160;#1 is set equal to the upper limit.
+</div>
+<a name="wp1068287"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For this example, set the voltage level of Point #1 to 0 V.<br /><img src="images/Arb_set_voltage_1.jpg" height="81" width="273" id="wp1068303" border="0" hspace="0" vspace="0"/>
+</div>
+<a name="wp1068305"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The waveform editor performs all amplitude calculations using Vpp, rather than Vrms or dBm. 
+</div>
+<a name="wp1068790"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	9	Define the next waveform point.
+</div>
+<a name="wp1068185"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">Point #</span> softkey and then turn the knob to move to Point #2. Press the<span style="font-weight: bold"> Time</span> softkey to set the time for the current point (this softkey is not available for Point #1). Press the <span style="font-weight: bold">Voltage</span> softkey to set the voltage level for the current point.
+</div>
+<a name="wp1068434"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For this example, set the time to 2 ms and the voltage level to 3.0 V.<br /><img src="images/Arb_set_time_2.jpg" height="81" width="273" id="wp1068482" border="0" hspace="0" vspace="0"/>
+</div>
+<a name="wp1069267"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	10	Define the remaining waveform points.
+</div>
+<a name="wp1068608"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Using the <span style="font-weight: bold">Time</span> and <span style="font-weight: bold">Voltage</span> softkeys, define the remaining waveform points using the values shown in the table below. </div>
+<div align="left">
+<table border="1" id="wp1068715table1068687">
+  <caption></caption>
+  <tr align="left">    <td><a name="wp1068715"> </a><div class="pCellBody">
+Point
+</div>
+</td>
+    <td><a name="wp1068717"> </a><div class="pCellBody">
+Time Value
+</div>
+</td>
+    <td><a name="wp1068719"> </a><div class="pCellBody">
+Voltage Value
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1068707"> </a><div class="pCellBody">
+1
+</div>
+</td>
+    <td><a name="wp1068689"> </a><div class="pCellBody">
+0 s
+</div>
+</td>
+    <td><a name="wp1068691"> </a><div class="pCellBody">
+0 V
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1068709"> </a><div class="pCellBody">
+2
+</div>
+</td>
+    <td><a name="wp1068693"> </a><div class="pCellBody">
+2 ms
+</div>
+</td>
+    <td><a name="wp1068695"> </a><div class="pCellBody">
+3 V
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1068711"> </a><div class="pCellBody">
+3
+</div>
+</td>
+    <td><a name="wp1068697"> </a><div class="pCellBody">
+4 ms
+</div>
+</td>
+    <td><a name="wp1068699"> </a><div class="pCellBody">
+1 V
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1068713"> </a><div class="pCellBody">
+4
+</div>
+</td>
+    <td><a name="wp1068701"> </a><div class="pCellBody">
+7 ms
+</div>
+</td>
+    <td><a name="wp1068703"> </a><div class="pCellBody">
+0 V
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+
+</div>
+<a name="wp1068755"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The time value of the last point that can be defined in the waveform must be <span style="font-style: italic">less</span> than the specified cycle period. 
+</div>
+<a name="wp1068996"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The waveform editor automatically connects the last waveform point to the voltage level of first point to create a continuous waveform. 
+</div>
+<a name="wp1068777"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	To insert additional points after the current waveform point, press the <span style="font-weight: bold">Insert Point</span> softkey. The new point is inserted midway between the current point and the next defined point.
+</div>
+<a name="wp1069003"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	To remove the current waveform point, press the <span style="font-weight: bold">Remove Point</span> softkey. The remaining points are joined using the interpolation method currently selected. You cannot remove Point #1 since the waveform must have a defined initial value. 
+</div>
+<a name="wp1069004"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	11	Store the arbitrary waveform in memory. 
+</div>
+<a name="wp1069005"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Press the <span style="font-weight: bold">End&#160;&#160;/&#160;&#160;Store</span> softkey to store the new waveform in memory. Then&#160;press the <span style="font-weight: bold">DONE</span> softkey to store the waveform in <span style="font-style: italic">volatile</span> memory <span style="font-style: italic; font-weight: bold">or</span> press the <span style="font-weight: bold">Store in Non-Vol</span> softkey to store the waveform in one of four <span style="font-style: italic">non-volatile</span> memory locations. 
+</div>
+<a name="wp1069139"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+You can assign a custom name to the four non-volatile memory locations. 
+</div>
+<a name="wp1069145"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The custom name can contain up to 12 characters. The first character must be a letter but the remaining characters can be letters, numbers, or the underscore character (&quot; _ &quot;). 
+</div>
+<a name="wp1069487"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	To add additional characters, press the right-arrow key until the cursor is to the right of the existing name and then turn the knob. 
+</div>
+<a name="wp1069491"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	To delete all characters to the right of the cursor, press the<img src="images/plus-minus_keyjj.jpg" height="21" width="31" id="wp1069489" border="0" hspace="0" vspace="0"/>key.
+</div>
+<a name="wp1069492"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-style: italic; font-weight: normal">For this example, assign the name &quot;RAMP_NEW&quot; to memory location 1 and then press the </span><span style="font-style: normal; font-weight: bold">STORE ARB</span><span style="font-style: italic"> softkey to store the waveform.<br /></span><img src="images/arb_rename.jpg" height="81" width="273" id="wp1069494" border="0" hspace="0" vspace="0"/><br />
+</div>
+<a name="wp1069499"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The waveform is now stored in non-volatile memory and is currently being output from the function generator. The name that you used to store the waveform should now appear in the list of stored waveforms (under the <span style="font-weight: bold">Stored Wform</span> softkey). 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

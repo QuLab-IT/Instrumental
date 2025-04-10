@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>*SRE &lt;enable value&gt;  *SRE? </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-STB.html" />
+<link rel="next" title="Next" href="33250A-STATusQUEStionableCONDition.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1228730"> </a><h2 class="pHeading1">
+*SRE <span style="font-style: normal; font-weight: normal">&lt;</span><span style="font-style: italic; font-weight: normal">enable value</span><span style="font-weight: normal">&gt;</span> <br />*SRE? 
+</h2>
+<a name="wp1228767"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Enable bits in the Status Byte to generate a Service Request. To enable specific bits, you must write a decimal value which corresponds to the binary-weighted sum of the bits in the register. The selected bits are summarized in the &quot;Master Summary&quot; bit (bit 6) of the Status Byte Register. If any of the selected bits change from &quot;0&quot; to &quot;1&quot;, a Service Request signal is generated. The *SRE? query returns a decimal value which corresponds to the binary-weighted sum of all bits enabled by the *SRE command.
+</div>
+<a name="wp1319507"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	A *CLS (clear&#160;status) <span style="font-style: italic">does not</span> clear the enable register but it does clear all bits in&#160;the event register. 
+</div>
+<a name="wp1319521"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	A STATus:PRESet <span style="font-style: italic">does not</span> clear the bits in the Status Byte enable&#160;register.
+</div>
+<a name="wp1319522"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	A *PSC 0 preserves the contents of the enable register through power&#160;cycles. 
+</div>
+<a name="wp1319600"> </a><p class="pBodyRelative">
+</p>
+<div align="left">
+<table border="1" id="wp1319599table1319597">
+  <caption></caption>
+  <tr align="left">    <td><a name="wp1319599"> </a><div style="color: #000000; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 0pt; margin-left: 4pt; margin-right: 4pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Questionable Data Register Commands
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p class="pBodyRelative">
+
+</p>
+<a name="wp1319604"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 12pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+See the table on page <a href="33250A-The_Questionable_Data_Register.html#wp1227295">231</a> for the register bit definitions.
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

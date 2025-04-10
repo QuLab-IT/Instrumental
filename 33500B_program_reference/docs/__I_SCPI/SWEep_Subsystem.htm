@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <body>
+        <h1>SWEep Subsystem Introduction<a name="kanchor301"></a></h1>
+        <p>To generate a frequency sweep:</p>
+        <ol style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="1"><b>Select the waveform shape, amplitude and offset:</b> Use <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> or the  equivalent <a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion</a>, <a href="FREQuency_Subsystem.htm#FREQuency">FREQuency</a>, <a href="VOLTage_Subsystem.htm#VOLTage">VOLTage</a>, and <a href="VOLTage_Subsystem.htm#VOLTage_OFFSet">VOLTage:OFFSet</a> commands to select the function, frequency, amplitude, and offset. You can select a sine, square, ramp, pulse, or arbitrary waveform (noise, PRBS, and DC are not allowed).</li>
+            <li class="IndentTight" value="2"><b>Select sweep's frequency boundaries:</b>  FREQuency:STARt and FREQuency:STOP , or FREQuency:CENTer and FREQuency:SPAN</li>
+        </ol>
+        <ol start="3" style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="3"><b>Select linear or logarithmic sweep mode:</b> SWEep:SPACing</li>
+            <li class="IndentTight" value="4"><b>Set sweep time:</b> SWEep:TIME</li>
+            <li class="IndentTight" value="5"><b>Set sweep hold and return times:</b> SWEep:HTIMe  and SWEep:RTIMe</li>
+            <li class="IndentTight" value="6"><b>Select  sweep trigger source: </b>TRIGger[1|2]:SOURce</li>
+            <li class="IndentTight" value="7"><b>Set 
+ the marker frequency (optional):</b>MARKer:FREQuency</li>
+            <li class="IndentTight" value="8"><b>Enable sweep:</b> SWEep:STATe ON</li>
+        </ol>
+        <p>The following code produces the waveform shown below.</p>
+        <p class="Shaded">SOURce1:FUNCtion SINE<br />SOURce1:FREQuency +2.0E+03<br />SOURce1:FREQuency:STARt +2.0E+03<br />SOURce1:FREQuency:STOP +6.0E+03<br />SOURce1:VOLTage +1.0<br />SOURce1:VOLTage:OFFS +0.0<br />SOURce1:SWEep:TIME +5.0E-03<br />TRIGger1:SOURce IMM<br />SOURce1:FREQuency:MODE SWE<br />OUTPut1 1</p>
+        <p>
+        </p>
+        <p>
+            <img src="../Sweeping%20Waveforms.png" style="width: 516px;height: 225px;" alt="Sweeping waveforms" />
+        </p>
+        <p />
+        <h2><a name="kanchor302"></a><a name="SWEep_HTIMe"></a>[SOURce[1|2]:]SWEep:HTIMe {&lt;<i>hold_time</i>&gt; | MINimum | MAXimum}<br />[SOURce[1|2]:]SWEep:HTIMe?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets number of seconds the sweep holds (pauses) at the stop frequency before returning to the start frequency.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 3600, default 0</td>
+                    <td class="BodyD-Column1-Body1">+3.400000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep hold time to 
+ 3.4 seconds:<br />SWE:HTIM 3.4</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor303"></a><a name="SWEep_RTIMe"></a>[SOURce[1|2]:]SWEep:RTIMe {&lt;<i>return_time</i>&gt; | MINimum | MAXimum}<br />[SOURce[1|2]:]SWEep:RTIMe? [ MINimum | MAXimum ]</h2>
+        <p class="IndentTight">Sets number of seconds the sweep 
+ takes to return from stop frequency to start frequency.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 3600, default 0</td>
+                    <td class="BodyD-Column1-Body1">+5.600000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep return time to 5.6 s:<br />SWE:RTIM 5.6<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The return sweep is always a linear sweep, 
+ regardless of the setting of <a href="#SWEep_SPACing">SWEep:SPACing</a>.</li>
+        </ul>
+        <h2><a name="kanchor304"></a><a name="SWEep_SPACing"></a>[SOURce[1|2]:]SWEep:SPACing {LINear|LOGarithmic}<br />[SOURce[1|2]:]SWEep:SPACing?</h2>
+        <p class="IndentTight">Selects linear or logarithmic spacing 
+ for sweep.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{LINear|LOGarithmic}, default LIN</td>
+                    <td class="BodyD-Column1-Body1">LIN or LOG</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set logarithmic sweep spacing:<br />SWE:SPAC LIN</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><b>LINear:</b> output frequency varies linearly (from start frequency to stop frequency) during sweep.</li>
+            <li class="IndentTight" value="2"><b>LOGarithmic:</b> output frequency varies logarithmically (from start frequency to stop frequency) during sweep.</li>
+        </ul>
+        <h2><a name="kanchor305"></a><a name="SWEep_STATe"></a>[SOURce[1|2]:]SWEep:STATe {ON|1|OFF|0}<br />[SOURce[1|2]:]SWEep:STATe?</h2>
+        <p class="IndentTight">Enables or disables the sweep.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable sweep:<br />SWE:STAT ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor306"></a><a name="SWEep_TIME"></a>[SOURce[1|2]:]SWEep:TIME {&lt;<i>seconds</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]SWEep:TIME?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets time (seconds) to sweep from start frequency to stop frequency.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>1 ms to 250,000 s for linear sweep, up to 500 s for logarithmic sweep; default 1 s</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">+2.500000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set sweep time to 25 s:<br />SWE:TIME 25</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The number of discrete frequency points in the 
+ sweep is  calculated based 
+ on the sweep time.</li>
+        </ul>
+        
+    </body>
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>SWEep Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <!-- <html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="SWEep Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" 
+     -->
+</html>

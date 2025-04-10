@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../NoteTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>IEEE-488 Common Commands</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>IEEE-488 Common Commands<a name="kanchor164"></a></h1>
+        <p class="IndentTight">This subsystem contains commands and queries associated with the IEEE-488 standards:</p>
+        <p class="IndentTight"><a href="#CLS">*CLS</a> - Clear status</p>
+        <p class="IndentTight"><a href="#ESE">*ESE/*ESE?</a> - Event status enable</p>
+        <p class="IndentTight"><a href="#ESR">*ESR?</a> - Event status register query</p>
+        <p class="IndentTight"><a href="#IDN">*IDN?</a> - Instrument identification</p>
+        <p class="IndentTight"><a href="#OPC">*OPC</a> - Set operation complete bit</p>
+        <p class="IndentTight"><a href="#OPCQuest">*OPC?</a> - Wait for current operation to complete</p>
+        <p class="IndentTight"><a href="#OPT">*OPT?</a> - Show installed options</p>
+        <p class="IndentTight"><a href="#PSC">*PSC/*PSC?</a> - Power-on status clear</p>
+        <p class="IndentTight"><a href="#RCL">*RCL/*SAV</a> - Recall/save instrument state</p>
+        <p class="IndentTight"><a href="#RST">*RST</a> - Reset instrument to <a href="../_Home_Page/Factory_Reset_State.htm">factory defaults</a></p>
+        <p class="IndentTight"><a href="#SRE">*SRE/*SRE?</a> - Service request enable (enable bits in enable register of Status Byte Register group</p>
+        <p class="IndentTight"><a href="#STB">*STB?</a> - Read status byte</p>
+        <p class="IndentTight"><a href="#TRG">*TRG</a> - Trigger command</p>
+        <p class="IndentTight"><a href="#TST">*TST?</a> - Self-test</p>
+        <p class="IndentTight"><a href="#WAI">*WAI</a> - Wait for all pending operations to complete</p>
+        <h2>Registers</h2>
+        <p>Some of the IEEE-488 commands are associated with various registers in the instrument. These registers are described below.</p>
+        <h3>Standard Event Register</h3>
+        <p class="IndentTight"><a name="StandardEventRegister"></a>The following table describes the Standard Event Register. </p>
+        <ul type="disc" class="UL_Disc">
+            <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Bit Number</th>
+                        <th class="HeadE-Column1-Header1">Bit Name</th>
+                        <th class="HeadE-Column1-Header1">Decimal Value</th>
+                        <th class="HeadD-Column1-Header1">Definition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">0</td>
+                        <td class="BodyE-Column1-Body1">Operation Complete</td>
+                        <td colspan="1" rowspan="1" style="border-right-width: 1px;border-right-color: #000000;border-right-style: Solid;border-bottom-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;padding-right: 10px;padding-left: 10px;" class="BodyE-Column1-Body1">
+                            <p>1</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" class="BodyD-Column1-Body1">
+                            <p>All commands before and including <a href="#OPC">*OPC</a> have been executed.</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">1</td>
+                        <td class="BodyE-Column1-Body1">(not used)</td>
+                        <td colspan="1" rowspan="1" style="border-right-width: 1px;border-right-color: #000000;border-right-style: Solid;border-bottom-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;padding-right: 10px;padding-left: 10px;" class="BodyE-Column1-Body1">
+                            <p>2</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">2</td>
+                        <td class="BodyE-Column1-Body1">Query Error</td>
+                        <td colspan="1" rowspan="1" style="border-right-width: 1px;border-right-color: #000000;border-right-style: Solid;border-bottom-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;padding-right: 10px;padding-left: 10px;" class="BodyE-Column1-Body1">
+                            <p>4</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" class="BodyD-Column1-Body1">
+                            <p>The instrument tried to read the output buffer but it 
+ was empty. Or, a new command line was received before a previous query 
+ has been read. Or, both the input and output buffers are full.</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">3</td>
+                        <td class="BodyE-Column1-Body1">Device-Specific Error</td>
+                        <td colspan="1" rowspan="1" style="border-right-width: 1px;border-right-color: #000000;border-right-style: Solid;border-bottom-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;padding-right: 10px;padding-left: 10px;" class="BodyE-Column1-Body1">
+                            <p>8</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" class="BodyD-Column1-Body1">
+                            <p>A device-specific error, including a self-test error, 
+ calibration error or other device-specific error occurred. See <a href="../_Home_Page/SCPI_Error_Messages.htm">Error Messages</a>.</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">4</td>
+                        <td class="BodyE-Column1-Body1">Execution Error</td>
+                        <td colspan="1" rowspan="1" style="border-right-width: 1px;border-right-color: #000000;border-right-style: Solid;border-bottom-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;padding-right: 10px;padding-left: 10px;" class="BodyE-Column1-Body1">
+                            <p>16</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" class="BodyD-Column1-Body1">
+                            <p>An execution error occurred. <a href="../_Home_Page/SCPI_Error_Messages.htm">Error Messages</a></p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">5</td>
+                        <td class="BodyE-Column1-Body1">Command</td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;" class="BodyE-Column1-Body1">
+                            <p>32</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" class="BodyD-Column1-Body1">
+                            <p>A command syntax error occurred. <a href="../_Home_Page/SCPI_Error_Messages.htm">Error Messages</a></p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">6</td>
+                        <td class="BodyE-Column1-Body1">(not used)</td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;" class="BodyE-Column1-Body1">
+                            <p>64</p>
+                        </td>
+                        <td colspan="1" rowspan="1" style="padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">7</td>
+                        <td class="BodyB-Column1-Body1">Power On</td>
+                        <td style="padding-right: 10px;padding-left: 10px;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;" class="BodyB-Column1-Body1">128</td>
+                        <td style="padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" class="BodyA-Column1-Body1">Power has been cycled since the last time the event 
+ register was read or cleared.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ul>
+        <h3>Status Byte Register</h3>
+        <p class="IndentTight"><a name="StatusByteRegister"></a>The following table describes the Status Byte Register. </p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Bit Number</th>
+                    <th class="HeadE-Column1-Header1">Bit Name</th>
+                    <th class="HeadE-Column1-Header1">Decimal Value</th>
+                    <th class="HeadD-Column1-Header1">Definition</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0</td>
+                    <td class="BodyE-Column1-Body1">(not used)</td>
+                    <td class="BodyE-Column1-Body1">1</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1</td>
+                    <td class="BodyE-Column1-Body1">(not used)</td>
+                    <td class="BodyE-Column1-Body1">2</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">2</td>
+                    <td class="BodyE-Column1-Body1">Error Queue</td>
+                    <td class="BodyE-Column1-Body1">4</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" width="50.923%" class="BodyD-Column1-Body1">
+                        <p>One or more errors in the Error Queue. 
+ Use <a href="SYSTem_Subsystem.htm#SYSTem_ERRor">SYSTem:ERRor?</a> to read and delete errors.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">3</td>
+                    <td class="BodyE-Column1-Body1">Questionable Data Summary</td>
+                    <td class="BodyE-Column1-Body1">8</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" width="50.923%" class="BodyD-Column1-Body1">
+                        <p>One or more bits are set in the Questionable Data Register 
+ (bits must be enabled, see <a href="STATus_Subsystem.htm#STATus_QUEStionable_ENABle">STATus:QUEStionable:ENABle</a> 
+).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">4</td>
+                    <td class="BodyE-Column1-Body1">Message Available</td>
+                    <td class="BodyE-Column1-Body1">16</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-right-style: Solid;border-right-color: #000000;border-right-width: 1px;border-bottom-width: 1px;border-bottom-color: #000000;border-bottom-style: Solid;" width="50.923%" class="BodyD-Column1-Body1">
+                        <p>Data is available in the instrument's output buffer.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">5</td>
+                    <td class="BodyE-Column1-Body1">Standard Event Summary</td>
+                    <td class="BodyE-Column1-Body1">32</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" width="50.923%" class="BodyD-Column1-Body1">
+                        <p>One or more bits are set in the Standard Event Register 
+ (bits must be enabled, see <a href="#ESE">*ESE</a>).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">6</td>
+                    <td class="BodyE-Column1-Body1">Master Summary</td>
+                    <td class="BodyE-Column1-Body1">64</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" width="50.923%" class="BodyD-Column1-Body1">
+                        <p>One or more bits are set in the Status Byte Register 
+ and may generate a Request for Service (RQS). Bits must be enabled using 
+ <a href="#SRE">*SRE</a>.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">7</td>
+                    <td class="BodyB-Column1-Body1">Operation Register</td>
+                    <td class="BodyB-Column1-Body1">128</td>
+                    <td colspan="1" rowspan="1" style="width: 50.923%;padding-right: 10px;padding-left: 10px;border-bottom-color: #000000;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #000000;border-right-width: 1px;border-right-style: Solid;" width="50.923%" class="BodyA-Column1-Body1">One or more bits are set in the Operation Status Register. Bits are enabled using <a href="STATus_Subsystem.htm#STATus_OPERation_ENABle">STATus:OPERation:ENABle</a>.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor165"></a><a name="CLS"></a>*CLS</h2>
+        <p class="IndentTight"><i>Clear Status Command</i>. Clears the event registers in all register groups. Also clears the error queue.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Clear event register bits and error queue:<br />*CLS<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor166"></a><a name="ESE"></a>*ESE &lt;<i>enable_value</i>&gt;<br />*ESE?</h2>
+        <p class="IndentTight"><i>Event Status Enable Command and Query</i>. Enables bits in the <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../_Home_Page/Registers.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">enable register</a></span> 
+ for the <a href="#StandardEventRegister">Standard Event Register</a>  group. The selected bits are then reported to bit 5 of the Status Byte Register.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Decimal sum of the bits in the register (table below), default 0. For example, to enable bit 2 (value 4), bit 3 (value 8), and bit 7 (value 128), the decimal sum would be 140 (4 + 8 + 128). Default 0.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">+48</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable bit 4 (value 16) and bit 5 (value 32) in the enable register:<br />*ESE 48<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Use <a href="#PSC">*PSC</a> to control whether the Standard Event enable register is cleared at power 
+ on. For example, <a href="#PSC">*PSC 0</a> preserves the enable register contents
+ through power cycles.</li>
+            <li class="IndentTight" value="2"><a href="#CLS">*CLS</a> 
+ does not clear enable register, does clear event register.</li>
+        </ul>
+        <h2><a name="kanchor167"></a><a name="ESR"></a>*ESR?</h2>
+        <p class="IndentTight"><i>Standard Event Status Register Query</i>. Queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">event register</a></span> for the <a href="#StandardEventRegister">Standard Event Register</a> group. Register is read-only; bits not cleared when read.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+24</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Read the event register (bits 3 and 4 are set).<br />*ESR<br /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Any or all conditions can be reported 
+ to the Standard Event summary bit through the enable register. To set 
+ the enable register mask, write a decimal value to the register 
+ using <a href="#ESE">*ESE</a>.</li>
+            <li class="IndentTight" value="2">Once a bit is set, it remains set until cleared 
+ by this query or <a href="#CLS">*CLS</a>.</li>
+        </ul>
+        <h2><a name="kanchor168"></a><a name="IDN"></a>*IDN?</h2>
+        <p class="IndentTight"><i>Identification Query</i>. Returns instruments identification string.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">Agilent Technologies,33522B,XXXXXXXXXX,0.179-1.19-8.88-52-00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return the instrument's identification string:<br />*IDN?<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">Identification string contains four comma separated fields:<ul><li class="IndentTight" style="margin-bottom: 5pt;margin-top: 5pt;" value="1">Manufacturer name</li><li class="IndentTight" style="margin-bottom: 5pt;margin-top: 5pt;" value="2">Model 
+ number</li><li class="IndentTight" style="margin-bottom: 5pt;margin-top: 5pt;" value="3">Serial number</li><li class="IndentTight" style="margin-bottom: 5pt;margin-top: 5pt;" value="4">Revision code</li></ul></li>
+            <li class="IndentTight" value="2">Identification string is in the following format:</li>
+        </ul>
+        <p class="CmdSyntax">Agilent Technologies,[Model Number],[10-char Serial Number],A.aaa-B.bb-C.cc-DD-EE<b> &#160;&#160;&#160;</b></p>
+        <blockquote>
+            <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;margin-left: auto;margin-right: auto;mc-table-style: url('../NoteTable.css');" cellspacing="0" width="100%" class="TableStyle_NoteTable">
+                <col style="width: 6.079%;" />
+                <col style="width: 93.921%;" />
+                <tr valign="top">
+                    <td style="width: 6.079%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;border-left-style: None;border-top-style: None;" width="6.079%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p><b>A.aaa</b>
+                        </p>
+                    </td>
+                    <td style="width: 93.921%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-top-style: None;border-right-style: None;" width="93.921%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>= Firmware revision</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width: 6.079%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;border-left-style: None;" width="6.079%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p><b>B.bb</b>
+                        </p>
+                    </td>
+                    <td style="width: 93.921%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;" width="93.921%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>= Front panel FW revision</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width: 6.079%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;border-left-style: None;" width="6.079%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p><b>C.cc</b>
+                        </p>
+                    </td>
+                    <td style="width: 93.921%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;" width="93.921%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>= Power supply controller FW revision</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width: 6.079%;padding-right: 10px;padding-left: 10px;border-right-style: None;border-left-style: None;border-bottom-style: None;" width="6.079%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p><b>DD</b>
+                        </p>
+                    </td>
+                    <td style="width: 93.921%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;" width="93.921%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>= FPGA revision</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td style="width: 6.079%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;border-left-style: None;" width="6.079%" class="TableStyle_NoteTable_Body_0_0_ColSep">
+                        <p><b>EE</b>
+                        </p>
+                    </td>
+                    <td style="width: 93.921%;padding-right: 10px;padding-left: 10px;border-bottom-style: None;border-right-style: None;" width="93.921%" class="TableStyle_NoteTable_Body_0_0_ColEnd">
+                        <p>= PCBA revision</p>
+                    </td>
+                </tr>
+            </table>
+        </blockquote>
+        <h2><a name="kanchor169"></a><a name="OPC"></a>*OPC</h2>
+        <p class="IndentTight">Sets "Operation Complete" (bit 0) in the Standard Event register at the completion of the current 
+ operation.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set Operation Complete bit:<br />*OPC<br /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The purpose of this command is to synchronize 
+ your application with the instrument.</li>
+            <li class="IndentTight" value="2">Used in triggered sweep, 
+ triggered burst, list, or arbitrary waveform sequence modes to provide a way to poll or interrupt the computer 
+ when the <a href="#TRG">*TRG</a> or <a href="INITiate_Subsystem.htm#INITiate_IMMediate">INITiate[:IMMediate]</a> is complete.</li>
+            <li class="IndentTight" value="3">Other commands may be executed before Operation Complete bit is set.</li>
+            <li class="IndentTight" value="4">The difference between <a href="#OPC">*OPC</a> and <a href="#OPCQuest">*OPC?</a> is that *OPC? returns "1" 
+ to the output buffer when the current operation completes.</li>
+        </ul>
+        <h2><a name="kanchor170"></a><a name="OPCQuest"></a>*OPC?</h2>
+        <p class="IndentTight">Returns 1 to the output buffer after 
+ all pending commands complete.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">1</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Return 1 when all previous commands complete:<br />*OPC?<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The purpose of this command is to synchronize 
+ your application with the instrument.</li>
+            <li class="IndentTight" value="2">Other commands cannot  
+ be executed until this command completes.</li>
+            <li class="IndentTight" value="3">The difference between <a href="#OPC">*OPC</a> and <a href="#OPCQuest">*OPC?</a> is that *OPC? returns "1" 
+ to the output buffer when the current operation completes.</li>
+        </ul>
+        <h2><a name="kanchor171"></a><a name="OPT"></a>*OPT?</h2>
+        <p class="IndentTight">Returns a quoted string identifying any <a href="SYSTem_Subsystem.htm#Licensed_Options">installed options</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">"0,MEM,SEC,IQP"</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Returns installed options (example: standard timebase, extended memory, security, IQ player)<br />*OPT?<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor172"></a><a name="kanchor173"></a><a name="PSC"></a>*PSC {0|1}<br />*PSC?</h2>
+        <p class="IndentTight"><i><a name="kanchor174"></a>Power-On Status Clear</i><a name="kanchor175"></a><a name="kanchor176"></a>. Enables (1) or disables (0) clearing of two specific registers at power on:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Standard Event enable register (<a href="#ESE">*ESE</a>).</li>
+            <li class="IndentTight" value="2">Status Byte condition register (<a href="#SRE">*SRE</a>).</li>
+            <li class="IndentTight" value="3">Questionable Data Register</li>
+            <li class="IndentTight" value="4">Standard Operation Register</li>
+        </ul>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{0|1}, default 1</td>
+                    <td class="BodyD-Column1-Body1">0 or 1</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Disables power-on clearing 
+ of affected registers:<br />*PSC 0<br /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor177"></a><a name="RCL"></a>*RCL {0|1|2|3|4}<br /><a name="kanchor178"></a><a name="SAV"></a>*SAV {0|1|2|3|4}</h2>
+        <p class="IndentTight">Recalls (*RCL) or saves (*SAV) instrument state in specified non-volatile location. Previously stored state in location is overwritten (no error is generated).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{0|1|2|3|4}</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Recall state from location 1:<br />*RCL 1<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The instrument has five non-volatile storage locations to store instrument states. Location 0 
+ holds the instrument power down state. Use locations 1, 2, 3, and 4 to store other states. You can configure 
+ the instrument to recall the power-down state when power is restored (<a href="MEMory_Subsystem.htm#MEMory_STATe_RECall_AUTO">MEM:STAT:REC:AUTO</a>).</li>
+            <li class="IndentTight" value="2">State storage "remembers" the selected function (including arbitrary waveforms), frequency, amplitude, DC offset, 
+ duty cycle, symmetry, as well as any modulation parameters in use. Also remembers front-panel display state (<a href="DISPlay_Subsystem.htm#DISPlay">DISP</a>).</li>
+            <li class="IndentTight" value="3">When shipped from the factory, locations 
+ 1 through 4 are empty, and location 0 has  power-on state.</li>
+            <li class="IndentTight" value="4">From the remote interface only, you can use location 
+ 0 to store a fifth instrument state (you cannot store to this location 
+ from the front panel). However, location 0 is 
+ overwritten when power is cycled.</li>
+            <li class="IndentTight" value="5">You can <a href="MEMory_Subsystem.htm#MEMory_STATe_NAME">assign a user-defined name</a> to each of 
+ locations 0 through 4.</li>
+            <li class="IndentTight" value="6">States stored in memory are not affected by <a href="#RST">*RST</a>.</li>
+            <li class="IndentTight" value="7">If you delete an arbitrary waveform from non-volatile 
+ memory after storing the instrument state, the waveform data is lost and 
+ the instrument will not   
+ output the waveform when the state is recalled; it will output the built-in "exponential 
+ rise" instead.</li>
+            <li class="IndentTight" value="8">The front panel uses <a href="MMEMory_Subsystem.htm">MMEMory subsystem</a> for state storage.</li>
+        </ul>
+        <h2><a name="kanchor179"></a><a name="RST"></a>*RST</h2>
+        <p class="IndentTight">Resets instrument to <a href="../_Home_Page/Factory_Reset_State.htm">factory default state</a>, independent of <a href="MEMory_Subsystem.htm#MEMory_STATe_RECall_AUTO">MEMory:STATe:RECall:AUTO</a> setting.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Reset the instrument:<br />*RST<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Does not affect stored instrument states, stored arbitrary waveforms, or I/O settings; these are stored in non-volatile memory.</li>
+            <li class="IndentTight" value="2">Aborts a sweep or burst in progress.</li>
+        </ul>
+        <h2><a name="kanchor180"></a><a name="kanchor181"></a><a name="kanchor182"></a><a name="SRE"></a>*SRE &lt;<i>enable_value</i>&gt;<br />*SRE?</h2>
+        <p class="IndentTight"><i>Service Request Enable</i>. This command enables bits in the <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../_Home_Page/Registers.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">enable register</a></span> 
+ for the <a href="#StatusByteRegister">Status Byte Register</a> group.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Decimal sum of the bits in the register (table below), default 0. For example, to enable bit 2 (value 4), bit 3 (value 8), and bit 7 (value 128), the decimal sum would be 140 (4 + 8 + 128). Default 0.</td>
+                    <td class="BodyD-Column1-Body1">+24</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable bits 3 and 4 in the enable register:<br />*SRE 24<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a name="kanchor183"></a><a name="kanchor184"></a><a name="kanchor185"></a>To enable specific bits, specify the decimal value corresponding to the binary-weighted sum of the bits in the register. The selected bits are summarized in the "Master Summary" bit (bit 6) of the Status Byte Register. If any of the selected bits change from 0 to 1, the instrument generates a Service Request signal.</li>
+            <li class="IndentTight" value="2"><a href="#CLS">*CLS</a> clears the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">event register</a></span>, but not the enable register.</li>
+            <li class="IndentTight" value="3"><a href="#PSC">*PSC</a> (power-on status clear) determines whether Status Byte enable register is cleared at power on. For example, <a href="#PSC">*PSC 0</a> preserves the contents of the enable register through power cycles.</li>
+            <li class="IndentTight" value="4">Status Byte enable register is not cleared by <a href="#RST">*RST</a>.</li>
+        </ul>
+        <h2><a name="kanchor186"></a><a name="kanchor187"></a><a name="kanchor188"></a><a name="STB"></a>*STB?</h2>
+        <p class="IndentTight"><i>Read Status Byte Query</i>. This command queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">condition 
+ register</a></span> for the <a href="#StatusByteRegister">Status Byte Register</a>  group.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+40</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Read condition register (with bits 3 and 5 set):<br />*STB?<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><a name="kanchor189"></a>Similar to a Serial Poll, but processed like any other instrument command. Register is read-only; bits not cleared when read.</li>
+            <li class="IndentTight" value="2"><a name="kanchor190"></a>Returns same result as a Serial Poll, but "Master Summary" bit (bit 6) is not cleared by *STB?.</li>
+            <li class="IndentTight" value="3">Power cycle or <a href="#RST">*RST</a> clears all bits in condition register.</li>
+            <li class="IndentTight" value="4">Returns a decimal value that corresponds to the binary-weighted sum of all bits set in the register. For example, with bit 3 (
+ value 8) and bit 5 (value 32) set (and corresponding 
+ bits enabled), the query returns +40. 
+</li>
+        </ul>
+        <h2><a name="kanchor191"></a><a name="TRG"></a>*TRG</h2>
+        <p class="IndentTight"><i>Trigger Command</i>. Triggers a sweep, burst, arbitrary&#160;waveform advance, or <a href="LIST_Subsystem.htm">LIST</a> advance from the remote interface 
+ if the bus (software) trigger source is currently selected (<a href="TRIGger_Subsystem.htm#TRIGger_SOURce">TRIGger[1|2]:SOURce 
+ BUS</a>).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Send immediate trigger to initiate a burst:<br />BURS:STAT ON<br />BURS:MODE TRIG<br />TRIG:SOUR BUS<br />*TRG<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor192"></a><a name="TST"></a>*TST?</h2>
+        <p class="IndentTight"><i>Self-Test Query</i>. Performs a complete instrument self-test. If test fails, one or more error messages will provide 
+ additional information. Use <a href="SYSTem_Subsystem.htm#SYSTem_ERRor">SYSTem:ERRor?</a> to read error queue.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+0 (pass) or +1 (one or more tests failed)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Perform self-test:<br />*TST?<br /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">A  power-on self-test occurs  when you turn on the instrument. This limited test assures you that the instrument is operational.</li>
+            <li class="IndentTight" value="2">A complete self-test (<a href="#TST">*TST?</a>) takes approximately 15 seconds. If all tests pass, you have high confidence that the instrument is fully operational.</li>
+            <li class="IndentTight" value="3">Passing <a href="#TST">*TST</a> displays "Self-Test 
+ Passed" on the front panel. Otherwise, it displays "Self-Test 
+ Failed" and an error number. See  <a href="../__H_Block%20Diag%20Svc%20Rep/01%20Service%20and%20Repair%20-%20Introduction.htm">Service and Repair - Introduction</a> for instructions on contacting support or returning the instrument 
+ for service.</li>
+        </ul>
+        <h2><a name="kanchor193"></a><a name="WAI"></a>*WAI</h2>
+        <p class="IndentTight">Configures the instrument to wait for all pending operations to complete before executing any additional commands over the interface.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Wait until all pending operations complete.<br />*WAI<br /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </body>
+</html>

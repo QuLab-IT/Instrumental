@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>Burst Mode Overview </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Burst_Mode_Commands.html" />
+<link rel="next" title="Next" href="33250A-Burst_Mode_Commandsnp.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1139021"> </a><h2 class="pHeading1">
+Burst Mode Overview 
+</h2>
+<a name="wp1139022"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The following is an overview of the steps required to generate a burst. You can use burst in one of two modes as described below. The&#160;function generator enables one burst mode at a time based on the <span style="font-style: italic">trigger source</span> and <span style="font-style: italic">burst source</span> that you select (see the table below). 
+</div>
+<a name="wp1139023"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Triggered Burst Mode</span>:&#160;In this mode (default), the function generator outputs a&#160;waveform with a specified number of cycles (<span style="font-style: italic">burst count</span>) each time a trigger is received. After the specified number of cycles have been output, the function generator stops and waits for the next trigger. You can configure the function generator to use an internal trigger to initiate the burst or you can provide an external trigger by pressing the front-panel<img src="images/trigger_keytp.jpg" height="26" width="36" id="wp1271145" border="0" hspace="0" vspace="0"/>key, by applying a trigger signal to the rear-panel <span style="font-style: italic">Trig In </span>connector, or by sending a software trigger command from the remote interface. 
+</div>
+<a name="wp1360211"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">External Gated Burst Mode</span>:&#160;In this mode, the output waveform is either &quot;on&quot; or &quot;off&#160;&#160;&quot; based on the level of the external signal applied <br />to the rear-panel <span style="font-style: italic">Trig In</span> connector. When the gate signal is <span style="font-style: italic">true</span>, the&#160;function generator outputs a continuous waveform. When the gate signal goes <span style="font-style: italic">false</span>, the current waveform cycle is completed and then the function generator stops while remaining at the voltage level corresponding to the starting burst phase of the selected waveform. </div>
+<div align="left">
+<table border="1" id="wp1396749table1153933">
+  <caption></caption>
+  <tr align="center">    <th>&#160;</th>
+    <th><a name="wp1396749"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-weight: bold">Burst Mode<br /></span>(BURS:MODE)
+</div>
+</th>
+    <th><a name="wp1396751"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-weight: bold">Burst Count<br /></span>(BURS:NCYC)
+</div>
+</th>
+    <th><a name="wp1396753"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-weight: bold">Burst Period<br /></span>(BURS:INT:PER)
+</div>
+</th>
+    <th><a name="wp1396755"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-weight: bold">Burst Phase<br /></span>(BURS:PHAS)
+</div>
+</th>
+    <th><a name="wp1396787"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+<span style="font-weight: bold">Trigger Source<br /></span>(TRIG:SOUR)
+</div>
+</th>
+</tr>
+  <tr align="left">    <td><a name="wp1396757"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Triggered Burst Mode:&#160;<br /><span style="font-weight: normal">Internal Trigger</span>
+</div>
+</td>
+    <td><a name="wp1396759"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+TRIGgered
+</div>
+</td>
+    <td><a name="wp1396761"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396763"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396765"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396789"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+IMMediate
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1396767"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Triggered Burst Mode:<br /><span style="font-weight: normal">External Trigger</span>
+</div>
+</td>
+    <td><a name="wp1396769"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+TRIGgered
+</div>
+</td>
+    <td><a name="wp1396771"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396773"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Not Used
+</div>
+</td>
+    <td><a name="wp1396775"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396791"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+EXTernal, BUS
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1396777"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Gated Burst Mode:<br /><span style="font-weight: normal">External Trigger</span>
+</div>
+</td>
+    <td><a name="wp1396779"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+GATed
+</div>
+</td>
+    <td><a name="wp1396781"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Not Used
+</div>
+</td>
+    <td><a name="wp1396783"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Not Used
+</div>
+</td>
+    <td><a name="wp1396785"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Available
+</div>
+</td>
+    <td><a name="wp1396793"> </a><div style="color: #000000; font-size: 9pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none">
+Not Used
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+
+</div>
+<a name="wp1153983"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	1	Configure the burst waveform. 
+</div>
+<a name="wp1413857"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Use the APPLy command or the equivalent FUNC, FREQ, VOLT, and VOLT:OFFS commands to select the function, frequency, amplitude, and&#160;offset of the waveform. You can select a sine, square, ramp, pulse, or&#160;arbitrary waveform (noise is allowed only in the gated burst mode and&#160;dc&#160;is not allowed). For internally-triggered bursts, the minimum frequency is 2 mHz. For sine and square waveforms, frequencies above 25&#160;MHz are allowed only with an &quot;infinite&quot; burst count.
+</div>
+<a name="wp1361284"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	2	Select the &quot;triggered&quot; or &quot;gated&quot; burst mode.
+</div>
+<a name="wp1361286"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Select the <span style="font-style: italic">triggered</span> burst mode or external <span style="font-style: italic">gated</span> burst mode using the BURS:MODE command.
+</div>
+<a name="wp1139030"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	3	Set the burst count. 
+</div>
+<a name="wp1139031"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the burst count (the number of cycles per burst) to any value between 1&#160;and 1,000,000 cycles (or infinite) using the BURS:NCYC command. <span style="font-style: italic">Used&#160;in the triggered burst mode only.</span>
+</div>
+<a name="wp1139032"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	4	Set the burst period. 
+</div>
+<a name="wp1322908"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the burst period (the interval at which internally-triggered bursts are&#160;generated) to any value from 1 µs to 500 seconds using the BURS:INT:PER command. <span style="font-style: italic">Used only in the triggered burst mode with an internal trigger source. </span>
+</div>
+<a name="wp1322909"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	5	Set the burst starting phase. 
+</div>
+<a name="wp1293107"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the starting phase of the burst to any value from -360 degrees to +360 degrees using the BURS:PHAS command. 
+</div>
+<a name="wp1293108"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	6	Select the trigger source.
+</div>
+<a name="wp1245866"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Select the trigger source using the TRIG:SOUR command. <span style="font-style: italic">Used in the triggered burst mode only.</span>
+</div>
+<a name="wp1139041"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: bold; margin-bottom: 6pt; margin-left: 96pt; margin-right: 0pt; margin-top: 12pt; text-align: left; text-decoration: none; text-indent: -96pt; text-transform: none">
+	7	Enable the burst mode. 
+</div>
+<a name="wp1139042"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+After you have set up the other burst parameters, use the BURS:STAT ON command to enable the burst mode. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

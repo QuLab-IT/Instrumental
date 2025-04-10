@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:00:29" />
+    <title>Firmware Revision Query </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Number_Format.html" />
+<link rel="next" title="Next" href="33250A-SCPI_Language_Version_Query.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1058494"> </a><h2 class="pHeading1">
+Firmware Revision Query 
+</h2>
+<a name="wp1046508"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+You can query the function generator to determine which revision of firmware is currently installed. The revision code contains five numbers in the form &quot;<span style="font-weight: bold">m.mm</span><span style="font-weight: normal">-</span><span style="font-weight: bold">l.ll</span><span style="font-weight: normal">-</span><span style="font-weight: bold">f.ff</span><span style="font-weight: normal">-</span><span style="font-weight: bold">gg</span><span style="font-weight: normal">-</span><span style="font-weight: bold">p</span></div>
+<div align="left">
+<table border="1" id="wp1074193table1058011">
+  <caption></caption>
+  <tr align="left">    <td><a name="wp1074193"> </a><div class="pCellBody">
+m.mm
+</div>
+</td>
+    <td><a name="wp1074195"> </a><div class="pCellBody">
+= &#160;Main firmware revision number
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1074197"> </a><div class="pCellBody">
+l.ll 
+</div>
+</td>
+    <td><a name="wp1074199"> </a><div class="pCellBody">
+=&#160; Loader firmware revision number
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1074201"> </a><div class="pCellBody">
+f.ff 
+</div>
+</td>
+    <td><a name="wp1074203"> </a><div class="pCellBody">
+=&#160; I/O processor firmware revision number
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1074205"> </a><div class="pCellBody">
+gg 
+</div>
+</td>
+    <td><a name="wp1074207"> </a><div class="pCellBody">
+= &#160;Gate array revision number
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1074209"> </a><div class="pCellBody">
+p 
+</div>
+</td>
+    <td><a name="wp1074211"> </a><div class="pCellBody">
+= &#160;Printed circuit board revision number
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+&quot;. 
+</div>
+<a name="wp1046510"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Front-Panel Operation</span>:&#160;Press<img src="images/utility_keyjw.jpg" height="26" width="36" id="wp1058116" border="0" hspace="0" vspace="0"/>and then select the <span style="font-weight: bold">Cal Info </span>softkey from the &quot;Test&#160;&#160;/&#160;&#160;Cal&quot; menu. The revision code is listed as one of the messages on the front-panel display.
+</div>
+<a name="wp1046511"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Remote Interface Operation</span>:&#160;Use the following command to read the function generator&#39;s firmware revision numbers (be sure to dimension a string variable with at least 50 characters). <br /><br />&#160;*IDN? <br /><br />This command returns a string in the form:<br /><br />&#160;<span style="font-weight: normal">Agilent Technologies,33250A,0,</span><span style="font-weight: bold">m.mm</span><span style="font-weight: normal">-</span><span style="font-weight: bold">l.ll</span><span style="font-weight: normal">-</span><span style="font-weight: bold">f.ff</span><span style="font-weight: normal">-</span><span style="font-weight: bold">gg</span><span style="font-weight: normal">-</span><span style="font-weight: bold">p</span> <br />
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

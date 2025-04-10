@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>PULSe:TRANsition {&lt;seconds&gt;|MINimum|MAXimum} PULSe:TRANsition? [MINimum|MAXimum]</title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-PULSeWIDTh_secondsMINimumMAXimum_PULSeWIDTh_MINimumMAXimum.html" />
+<link rel="next" title="Next" href="33250A-Amplitude_Modulation_(AM)_Commands.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1130314"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">PULSe:TRANsition</span> {&lt;<span style="font-style: italic">seconds</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>}<br /><span style="font-weight: bold">PULSe:TRANsition? </span>[<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>]
+</h2>
+<a name="wp1102248"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the edge time in seconds for <span style="font-style: italic">both</span> the rising and falling edges. The&#160;edge time represents the time from the 10% threshold to the 90% threshold of each edge. You can vary the edge time from 5&#160;ns to 1&#160;ms (<span style="font-style: italic">see&#160;restrictions below</span>). The default edge time is 5 ns. MIN = 5 ns. <br />MAX = 1&#160;ms. The&#160;:TRAN? query returns the edge time in&#160;seconds.
+</div>
+<a name="wp1103000"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The specified edge time must fit within the specified pulse width as shown below. The function generator will adjust the edge time as needed to accommodate the specified pulse width. <span style="font-style: italic">From the remote interface, a&#160;&quot;Data out of range&quot; error will be generated and the edge&#160;time will be&#160;adjusted as described. <br /></span><br />&#160;&#160;Edge Time &#160;<span style="text-decoration: underline">&lt;</span> &#160;0.625 &#160;X&#160; Pulse Width
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

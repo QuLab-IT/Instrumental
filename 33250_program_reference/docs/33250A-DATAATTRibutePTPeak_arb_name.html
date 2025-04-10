@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>DATA:ATTRibute:PTPeak? [&lt;arb name&gt;] </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-DATAATTRibutePOINts_arb_name.html" />
+<link rel="next" title="Next" href="33250A-State_Storage_Commands.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1221229"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">DATA:ATTRibute:PTPeak? </span>[&lt;<span style="font-style: italic">arb name</span>&gt;]<span style="font-weight: bold"> </span>
+</h2>
+<a name="wp1221230"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Query the <span style="font-style: italic">peak-to-peak</span> value of all data points for the specified arbitrary waveform. The default <span style="font-style: italic">arb name</span> is the arbitrary waveform currently active (selected with FUNC:USER command). 
+</div>
+<a name="wp1221231"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	This command returns a value from &quot;0&quot; to &quot;+1.0&quot;, with &quot;+1.0&quot; indicating full amplitude available. 
+</div>
+<a name="wp1221232"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The maximum amplitude will be limited if the data points do not span the full range of the output DAC (Digital-to-Analog Converter). For example, the built-in &quot;Sinc&quot; waveform does not use the full range of binary values between ±1 and therefore its maximum amplitude is 6.087 Vpp (into 50 ohms). 
+</div>
+<a name="wp1221233"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you query a waveform that is not currently stored in memory, a&#160;&quot;Specified arb waveform does not exist&quot; error is generated. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

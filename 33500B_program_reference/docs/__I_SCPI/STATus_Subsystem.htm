@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="Status_Subsystem_Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>STATus Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>STATus Subsystem Introduction<a name="kanchor286"></a></h1>
+        <p>The instrument's SCPI status system records 
+ various instrument conditions and states in several register groups. </p>
+        <p>In this subsystem, an event is something that occurred, even though it may not still be occurring. A condition is something that is currently present. A condition will appear in the event register, but the event register is read destructive; it is cleared (set to 0) when read.</p>
+        <p><b>The STATus commands</b>manipulate bits in two of the enable registers. You can:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Enable bits in the <b><i>Questionable Data enable</i></b> register (<a href="#STATus_QUEStionable_ENABle">STATus:QUEStionable:ENABle</a>). </li>
+            <li class="IndentTight" value="2">Enable bits in the <b><i>Operation enable</i></b> register (<a href="#STATus_OPERation_ENABle">STATus:OPERation:ENABle</a>). Query: <a href="#STATus_OPERation_ENABle">STATus:OPERation:ENABle?</a></li>
+            <li class="IndentTight" value="3">Clear all bits in the <b style="font-style: italic;">Questionable Data</b> enable register and the Standard Operation enable register (<a href="#STATus_PRESet">STATus:PRESet</a>).</li>
+        </ul>
+        <p><b>The STATus <i>queries</i></b> accesses information about the status bits in the <b><i>Questionable Data</i></b> registers, including:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The binary-weighted sum of all bits enabled in the Questionable Data <b><i>condition</i></b> register ( <a href="#STATus_QUEStionable_CONDition">STATus:QUEStionable:CONDition?</a>)</li>
+            <li class="IndentTight" value="2">The binary-weighted sum of all bits enabled in the Questionable Data <b><i>event</i></b> register (<a href="#STATus_QUEStionable">STATus:QUEStionable[:EVENt]?</a>)</li>
+            <li class="IndentTight" value="3">The binary-weighted sum of all bits enabled in the Questionable Data <b><i>enable</i></b> register (<a href="#STATus_QUEStionable_ENABle">STATus:QUEStionable:ENABle?</a>).</li>
+        </ul>
+        <p><b>The STATus <i>queries</i></b> also allow you to access information about the status bits in the <b><i>Operation</i></b> registers, including:</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The binary-weighted sum of all bits enabled in the Operation                    <b><i>condition</i></b> register (<a href="#STATus_OPERation_CONDition">STATus:OPERation:CONDition?</a>).</li>
+            <li class="IndentTight" value="2">The binary-weighted sum of all bits enabled in the Operation                    <b><i>event</i></b> register (<a href="#STATus_OPERation">STATus:OPERation:EVENt?</a>).</li>
+        </ul>
+        <h2>Standard Operation Register Group</h2>
+        <p><a name="StandardOperationRegister"></a>The following table describes the Standard Operation Register group. </p>
+        <blockquote>
+            <table style="border-spacing: 0px;border-spacing: 0px;mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;" cellspacing="0" width="100.000%" class="TableStyle-RegTable">
+                <col style="width: 61px;" class="Column-Column1" />
+                <col style="width: 144px;" class="Column-Column1" />
+                <col style="width: 97px;" class="Column-Column1" />
+                <col style="width: 371px;" class="Column-Column1" />
+                <tr valign="top" class="Body-Body1">
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Bit</th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" Nclass="TableStyle_RegTable_Head_0_0_RowSep_ColSep" class="BodyE-Column1-Body1">Bit Name</th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Decimal Value </th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">Definition</th>
+                </tr>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">0</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Calibrating</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">1</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">The instrument is performing a calibration.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">1</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Self-test</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">2</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">
+                            <p>A self-test is running.</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">2</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">4</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">3</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Channel 1 Initiated</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">8</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1" rowspan="2">Channel is initiated and outputting the desired waveform. In INIT[1|2]:CONT OFF, this bit is set after receiving an INIT and not cleared until channel  goes to IDLE ( trigger count satisfied and not busy.) This bit is 0 if the channel is in INIT[1|2]:CONT ON mode.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">4</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Channel 2 Initiated</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">16</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">5</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Waiting for Trigger, Channel 1</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">32</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1" rowspan="2">Instrument is waiting for a trigger. In INIT[1|2]:CONT OFF, this bit is set after receiving an INIT and while waiting for a trigger. It is cleared after receiving the trigger. This bit is 0 if the channel is in INIT[1|2]:CONT ON mode.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">6</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Waiting for Trigger, Channel 2</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">64</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">7</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">128</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">8</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Configuration Changed Event</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">256</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">This bit is always 0 in the condition register, as it reflects an event, not a condition.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">9</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">512</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">10</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Instrument Locked</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">1024</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">If a remote interface (USB or LAN) has a lock (SYSTem:LOCK:REQuest?), this bit will be set. When a remote interface releases the lock (SYSTem:LOCK:RELease), this bit will be cleared.</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">11</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">2048</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">12</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">4096</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">13</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Global Error</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">8192</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">
+                            <p>This is set if any remote interface has an error in its error queue, and cleared otherwise.</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;font-weight: bold;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyB-Column1-Body1">14-15</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyB-Column1-Body1">(Reserved)</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: center;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyB-Column1-Body1">16,384 - 32,768</td>
+                        <td style="font-family: Verdana;font-size: 9pt;text-align: left;vertical-align: top;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyA-Column1-Body1">(Reserved for future use)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </blockquote>
+        <h2>Questionable Data Register Group</h2>
+        <p><a name="QuestionableDataRegister"></a>The following table describes the  Questionable Data Register group.
+            </p>
+        <blockquote>
+            <table style="border-spacing: 0px;border-spacing: 0px;mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;" cellspacing="0" width="100.000%" class="TableStyle-RegTable">
+                <col style="width: 10.000%;" class="Column-Column1" />
+                <col style="width: 20.000%;" class="Column-Column1" />
+                <col style="width: 10.000%;" class="Column-Column1" />
+                <col style="width: 60.000%;" class="Column-Column1" />
+                <tr valign="top" class="Body-Body1">
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Bit</th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" Nclass="TableStyle_RegTable_Head_0_0_RowSep_ColSep" class="BodyE-Column1-Body1">Bit Name</th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyE-Column1-Body1">Decimal Value </th>
+                    <th style="font-family: Verdana;font-size: 9pt;background-color: #d3d3d3;font-weight: bold;padding-left: 5pt;padding-right: 5pt;padding-top: 5pt;padding-bottom: 5pt;" class="BodyD-Column1-Body1">Definition</th>
+                </tr>
+                <tr valign="top" class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">0</td>
+                    <td class="BodyE-Column1-Body1">Channel 1 Voltage Overload</td>
+                    <td class="BodyE-Column1-Body1">1</td>
+                    <td class="BodyD-Column1-Body1">Voltage overload on channel 1 output connector. The output has been disabled.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">1</td>
+                    <td class="BodyE-Column1-Body1">Channel 2 Voltage Overload</td>
+                    <td class="BodyE-Column1-Body1">2</td>
+                    <td class="BodyD-Column1-Body1">Voltage overload on channel 2 output connector. The output has been disabled.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">2</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">4</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">3</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">8</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">4</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">16</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">5</td>
+                    <td class="BodyE-Column1-Body1">Loop Unlocked</td>
+                    <td class="BodyE-Column1-Body1">32</td>
+                    <td class="BodyD-Column1-Body1">Function generator has lost phase lock. Frequency accuracy will be affected.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">6</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">64</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">7</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">128</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">8</td>
+                    <td class="BodyE-Column1-Body1">Calibration Error</td>
+                    <td class="BodyE-Column1-Body1">256</td>
+                    <td class="BodyD-Column1-Body1">Error occurred during calibration, calibration is unsecured, or calibration memory has been lost</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">9</td>
+                    <td class="BodyE-Column1-Body1">External Reference</td>
+                    <td class="BodyE-Column1-Body1">512</td>
+                    <td class="BodyD-Column1-Body1">External timebase has been detected.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1" style="font-weight: bold;text-align: center;">10-15</td>
+                    <td class="BodyE-Column1-Body1">(Reserved)</td>
+                    <td class="BodyE-Column1-Body1">1024 - 32,768</td>
+                    <td class="BodyD-Column1-Body1">(Reserved for future use)</td>
+                </tr>
+            </table>
+        </blockquote>
+        <p />
+        <p>
+            <img src="../33500%20Series%20Status%20Diagram.bmp" style="width: 864px;height: 640px;" />
+        </p>
+        <p />
+        <h2><a name="kanchor287"></a><a name="STATus_OPERation_CONDition"></a>STATus:OPERation:CONDition?</h2>
+        <p class="IndentTight">Queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">condition register</a></span> 
+ for the <a href="#StandardOperationRegister">Standard Operation Register</a> group. Register is read-only; bits not cleared when read.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+32</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Read the condition register (bit 5 is set):<br />STAT:OPER:COND?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The condition register bits reflect the current condition. If a condition goes away, the corresponding bit is cleared 
+.</li>
+            <li class="IndentTight" value="2"><a href="IEEE-488_Subsystem.htm#RST">*RST</a> clears  this register, other than those bits where the condition still exists after *RST.</li>
+            <li class="IndentTight" value="3">The command reads the condition register and returns a decimal value equal to the binary-weighted sum of all bits set in the register. For example, if bit 5 (decimal 
+ value = 32) and bit 9 (decimal value = 512) are set, the command will return +544.</li>
+        </ul>
+        <h2><a name="kanchor288"></a><a name="STATus_OPERation_ENABle"></a>STATus:OPERation:ENABle &lt;<i>enable_value</i>&gt;<br />STATus:OPERation:ENABle?</h2>
+        <p class="IndentTight">Enables bits in the <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../_Home_Page/Registers.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">enable register</a></span> 
+ for the <a href="#StandardOperationRegister">Standard Operation Register</a> group. The selected bits are then reported to the Status 
+ Byte as the standard operation summary bit.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sum of the bits' decimal values in the register.</td>
+                    <td class="BodyD-Column1-Body1">+256</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Enable bit 8 (decimal value 256) in the enable register:<br />STAT:OPER:ENAB 256</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="IndentTight" value="1">Use &lt;<i>enable_value</i>&gt; to specify which bits are reported to the Status Byte. The specified value corresponds to the binary-weighted sum of the register bits to enable. For example, to enable bit 5 (value 32) and bit 9 (value 512), the decimal value would be 544.</li>
+            <li class="IndentTight" value="2"><a href="IEEE-488_Subsystem.htm#CLS">*CLS</a> does not clear the enable register, but does clear the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot" alt="An event register latches the various events from the condition register. There is no buffering in this register; while an event bit is set, subsequent events corresponding to that bit are ignored. This is a read-only register." title="An event register latches the various events from the condition register. There is no buffering in this register; while an event bit is set, subsequent events corresponding to that bit are ignored. This is a read-only register.">event register</a></span>.</li>
+        </ul>
+        <h2><a name="kanchor289"></a><a name="STATus_OPERation"></a>STATus:OPERation[:EVENt]?</h2>
+        <p class="IndentTight">Queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">event register</a></span> 
+ for the <a href="#StandardOperationRegister">Standard Operation Register</a> group. This is a read-only register; the bits are 
+ cleared when you read the register.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+32</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p>Read event register:<br />STAT:OPER:EVEN?</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">A set bit remains set until cleared by reading the event register or <a href="IEEE-488_Subsystem.htm#CLS">*CLS</a>.</li>
+            <li class="IndentTight" value="2"><a href="IEEE-488_Subsystem.htm#RST">*RST</a> does not affect this register.</li>
+            <li class="IndentTight" value="3">Query reads the event register and returns a decimal value equal to the binary-weighted sum of all bits set in the register. For example, if bit 5 (
+ value 32) and bit 9 (value 512) are set, the command returns +544.</li>
+        </ul>
+        <h2><a name="kanchor290"></a><a name="STATus_PRESet"></a>STATus:PRESet</h2>
+        <p class="IndentTight">Clears <a href="#QuestionableDataRegister">Questionable Data</a> enable register and <a href="#StandardOperationRegister">Standard Operation</a> enable register.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">(none)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Clear enable register bits:<br />STAT:PRES</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor291"></a><a name="STATus_QUEStionable_CONDition"></a>STATus:QUEStionable:CONDition?</h2>
+        <p class="IndentTight">Queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">condition 
+ register</a></span> for the <a href="#QuestionableDataRegister">Questionable Data Register group</a>.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+512</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Read the condition register (bit 9 is set):<br />STAT:QUES:COND?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The Questionable Data register group provides 
+ information about the instrument's quality or integrity.</li>
+            <li class="IndentTight" value="2">Any or all conditions can be reported 
+ to the Questionable Data summary bit through the enable register.</li>
+            <li class="IndentTight" value="3">Register is read-only; bits not cleared when read.</li>
+            <li class="IndentTight" value="4">The condition register bits reflect the current 
+ condition. If a condition goes away, the corresponding bit is cleared.</li>
+            <li class="IndentTight" value="5"><a href="IEEE-488_Subsystem.htm#RST">*RST</a> clears the condition register.</li>
+            <li class="IndentTight" value="6">The query reads the condition register and returns a decimal value equal to the binary-weighted sum of all bits set in the register. For example, if 
+ bit 12 (decimal value = 4096) is set, the query returns "+4096".</li>
+        </ul>
+        <h2><a name="kanchor292"></a><a name="STATus_QUEStionable_ENABle"></a>STATus:QUEStionable:ENABle &lt;<i>enable_value</i>&gt;<br />STATus:QUEStionable:ENABle?</h2>
+        <p class="IndentTight">Enables bits in the <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../_Home_Page/Registers.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">enable register</a></span> 
+ for the <a href="#QuestionableDataRegister">Questionable Data Register group</a>. The selected bits are then reported to the Status 
+ Byte.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Decimal value equal to the sum of the bit decimal values in the register.</td>
+                    <td class="BodyD-Column1-Body1">+512</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable bit 9 (value 512) in the enable register:<br />STAT:QUES:ENAB 512</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Use &lt;<i>enable_value</i>&gt; to specify which bits are reported to the Status Byte. The specified value corresponds to the binary-weighted sum of the register bits to enable. For example, to enable bit 5 (value 32) and bit 9 (value 512), the decimal value would be 544.</li>
+            <li class="IndentTight" value="2">Enable register cleared by:<ul type="disc" class="UL_Disc"><li class="IndentTight" value="1">STATus:Questionable:ENABle 
+ 0</li><li class="IndentTight" value="2"><a href="#STATus_PRESet">STATus:PRESet</a></li><li class="IndentTight" value="3">Power cycle</li></ul></li>
+            <li class="IndentTight" value="3"><a href="IEEE-488_Subsystem.htm#CLS">*CLS</a> does not clear enable register but it does clear <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">event register</a></span>. 
+</li>
+            <li class="IndentTight" value="4"><a href="IEEE-488_Subsystem.htm#RST">*RST</a> does not affect this register.</li>
+            <li class="IndentTight" value="5">The Query reads the enable register and returns a decimal value equal to the binary-weighted sum of all bits set in the register.ter. For example, if bit 0 (value 1) and bit 1 (
+ value 2) are enabled, the query returns +3. 
+</li>
+        </ul>
+        <h2><a name="kanchor293"></a><a name="STATus_QUEStionable"></a>STATus:QUEStionable[:EVENt]?</h2>
+        <p class="IndentTight"><a name="kanchor294"></a>Queries the <span class="MCPopup"><a href="javascript:void(0);" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">event 
+ register</a></span> 
+ for the <a href="#QuestionableDataRegister">Questionable Data Register group</a>. This is a read-only register; the bits are 
+ cleared when you read the register.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(none)</td>
+                    <td class="BodyD-Column1-Body1">+512</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Read the event register (bit 9 set):<br />STAT:QUES?</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Once a bit is set, it remains set until cleared 
+ by this query or <a href="IEEE-488_Subsystem.htm#CLS">*CLS</a>.</li>
+            <li class="IndentTight" value="2"><a href="IEEE-488_Subsystem.htm#RST">*RST</a>, 
+ <a href="#STATus_PRESet">STATus:PRESet</a>, and <a href="IEEE-488_Subsystem.htm#PSC">*PSC</a> have no effect on this register.</li>
+            <li class="IndentTight" value="3">Query reads the event register and returns a decimal value equal to the binary-weighted sum of all bits set in the register. For example, if bit 1 (value 2) and bit 9 (
+ value 512) are set, the query returns "+514". 
+</li>
+        </ul>
+        
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>Command Format Used in This Manual </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-An_Introduction_to_the_SCPI_Language.html" />
+<link rel="next" title="Next" href="33250A-Command_Separators.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1044525"> </a><h2 class="pHeading1">
+Command Format Used in This Manual 
+</h2>
+<a name="wp1044526"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The format used to show commands in this manual is illustrated below: 
+</div>
+<a name="wp1044527"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+FREQuency {&lt;<span style="font-style: italic">frequency</span>&gt;|MINimum|MAXimum} 
+</div>
+<a name="wp1044528"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The command syntax shows most commands (and some parameters) as a&#160;mixture of upper- and lower-case letters. The upper-case letters indicate the abbreviated spelling for the command. For shorter program lines, you can send the abbreviated form. For better program readability, you can send the long form. 
+</div>
+<a name="wp1044529"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+For example, in the above syntax statement, FREQ and FREQUENCY are both acceptable forms. You can use upper- or lower-case letters. Therefore, FREQUENCY, freq, and Freq are all acceptable. Other forms, such as FRE and FREQUEN, will generate an error. 
+</div>
+<a name="wp1044530"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Braces</span> ( <span style="font-weight: bold">{ }</span> ) enclose the parameter choices for a given command string. The braces <span style="font-style: italic">are not</span> sent with the command string. 
+</div>
+<a name="wp1044531"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	A <span style="font-style: italic">vertical bar</span> ( <span style="font-weight: bold">|</span> ) separates multiple parameter choices for a given command string. 
+</div>
+<a name="wp1044532"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Triangle brackets</span> ( <span style="font-weight: bold">&lt; &gt;</span> ) indicate that you must specify a value for the enclosed parameter. For example, the above syntax statement shows the <span style="font-style: italic">frequency</span> parameter enclosed in triangle brackets. The brackets <span style="font-style: italic">are not</span> sent with the command string. You must specify a value for the parameter (such as &quot;FREQ 5000&quot;). 
+</div>
+<a name="wp1044533"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Some parameters are enclosed in <span style="font-style: italic">square brackets</span> ( <span style="font-weight: bold">[ ]</span> ). The&#160;square brackets indicate that the parameter is optional and can be omitted. The&#160;brackets <span style="font-style: italic">are not</span> sent with the command string. If you do&#160;not specify a value for an optional parameter, the function generator chooses a default value. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

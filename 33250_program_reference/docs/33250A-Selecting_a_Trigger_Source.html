@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title> Selecting a Trigger Source </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Reading_a_Query_Response.html" />
+<link rel="next" title="Next" href="33250A-Using_the_APPLy_Commandkp.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1380978"> </a><h2 class="pHeading1">
+<br />Selecting a Trigger Source 
+</h2>
+<a name="wp1289002"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+When <span style="font-style: italic">Sweep</span> or <span style="font-style: italic">Burst</span> is enabled, the function generator will accept an immediate internal trigger, a hardware trigger from the rear-panel <span style="font-style: italic">Trig&#160;In </span>connector, a manual trigger from the front-panel<img src="images/trigger_keysz.jpg" height="26" width="36" id="wp1289004" border="0" hspace="0" vspace="0"/>key, or a software (bus) trigger. By&#160;default, the internal trigger source is selected. If you want to use an external or a software trigger source, you must first select that source. For example, the following command strings sent from your computer will output a 3-cycle burst each time the rear-panel <span style="font-style: italic">Trig&#160;In</span> connector receives the rising edge of a TTL pulse.
+</div>
+<a name="wp1045973"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+BURS:NCYC 3 			<span style="font-style: italic">Set burst count to 3 cycles</span> 
+</div>
+<a name="wp1285895"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+TRIG:SLOP POS	<span style="font-style: italic">Set polarity to rising edge</span>
+</div>
+<a name="wp1045975"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+TRIG:SOUR EXT 	<span style="font-style: italic">	Select external trigger source </span>
+</div>
+<a name="wp1045979"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+BURS:STAT ON 	<span style="font-style: italic">	Enable burst mode</span> 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

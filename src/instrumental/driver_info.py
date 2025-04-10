@@ -1,4 +1,4 @@
-# Auto-generated 2025-03-28T19:50:09.739082
+# Auto-generated 2025-04-04T03:19:38.504176
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -32,6 +32,14 @@ driver_info = OrderedDict([
         'classes': ['NIDAQ'],
         'imports': ['nicelib >= 0.5'],
     }),
+    ('funcgenerators.33250A', {
+        'params': ['visa_address'],
+        'classes': ['Keysight33500B'],
+        'imports': ['instrumental', 'pyvisa'],
+        'visa_info': {
+            'Keysight33500B': ('Agilent Technologies', ['33250A']),
+        },
+    }),
     ('funcgenerators.agilent', {
         'params': ['visa_address'],
         'classes': ['Agilent33250A', 'Agilent81110A', 'AgilentE4400B', 'AgilentMXG', 'Keysight81160A'],
@@ -47,9 +55,9 @@ driver_info = OrderedDict([
     ('funcgenerators.keysight33500b', {
         'params': ['visa_address'],
         'classes': ['Keysight33500B'],
-        'imports': [],
+        'imports': ['instrumental', 'pyvisa'],
         'visa_info': {
-            'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B']),
+            'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B', '33609A', '33610A', '33611A', '33612A', '33619A', '33620A', '33621A', '33622A']),
         },
     }),
     ('funcgenerators.rigol', {

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>AM Subsystem</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1><a name="top"></a>AM Subsystem<a name="kanchor35"></a></h1>
+        <p>The AM subsystem allows you to add amplitude modulation (AM) to a carrier waveform.</p>
+        <h2>Example</h2>
+        <p>To generate an amplitude modulation (AM) waveform:</p>
+        <ol style="list-style: decimal;list-style-type: decimal;">
+            <li class="IndentTight" value="1"><b>Configure carrier waveform:</b> Use <a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion</a>, <a href="FREQuency_Subsystem.htm#FREQuency">FREQuency</a>, <a href="VOLTage_Subsystem.htm#VOLTage">VOLTage</a>, and <a href="VOLTage_Subsystem.htm#VOLTage_OFFSet">VOLTage:OFFSet</a>  to specify the carrier waveform's function, frequency, amplitude, and offset.<br /></li>
+            <li class="IndentTight" value="2"><b>Select mode of Amplitude Modulation:</b> <a href="#AM_DEPTh">AM:DSSC</a><br /></li>
+            <li class="IndentTight" value="3"><b>Select modulation source (internal, external, CH1, or CH2): </b><a href="01%20(Modulation)_SOURce.htm">AM:SOURce</a>. For an external source, you can skip steps 4 and 5 below.</li>
+            <li class="IndentTight" value="4"><b>Select modulating waveform:</b> <a href="#AM_INTernal_FUNCtion">AM:INTernal:FUNCtion</a><br /></li>
+            <li class="IndentTight" value="5"><b>Set modulating frequency:</b> <a href="#AM_INTernal_FREQuency">AM:INTernal:FREQuency</a><br /></li>
+            <li class="IndentTight" value="6"><b>Set modulation depth:</b> <a href="#AM_DEPTh">AM[:DEPTh]</a><br /></li>
+            <li class="IndentTight" value="7"><b>Enable AM:</b><a href="02%20(Modulation)_STATe.htm">AM:STATe:ON</a>
+            </li>
+        </ol>
+        <p>The following code produces the oscilloscope image shown below.</p>
+        <p class="Shaded">FUNCtion SQU<br />FREQuency +1.0E+04<br />VOLTage +1<br />VOLTage:OFFset 0.0<br />AM:SOURce INT<br />AM:DSSC 0<br />AM:DEPTh +120<br />AM:INTernal:FUNCtion TRI<br />AM:INTernal:FREQ 5E+02<br />AM:STATe 1<br />OUTPut1 1</p>
+        <p>
+            <img src="../_Graphics_/scope_2d.png" />
+        </p>
+        <h2><a name="kanchor36"></a><a name="AM_DEPTh"></a>[SOURce[1|2]:]AM[:DEPTh] {&lt;<i>depth_in_percent</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]AM[:DEPTh]? [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets internal modulation depth ("percent modulation") in percent.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">0 to 120, default 100</td>
+                    <td class="BodyD-Column1-Body1">+5.000000000000000E+01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">
+                        <p colspan="2">Set the internal modulation depth to 50%:<br />AM:DEPT 50</p>
+                        <p colspan="2">Set the internal modulation depth to 120%:<br />AM:DEPT MAX</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Even at greater than 100% depth, the instrument will not exceed ±5 V peak on the output (into a 50 &#937; load). To achieve modulation depth greater than 100%, output carrier amplitude may be reduced.</li>
+            <li class="IndentTight" value="2">With AM:SOURce EXTernal, carrier waveform 
+ is modulated with an external waveform. The modulation depth is controlled by the ±5 V signal level on the rear-panel <b>Modulation In</b> connector. For example, if modulation depth (<a href="#AM_DEPTh">AM[:DEPTh]</a>) is 100%, then when the modulating signal is at +5 V, the output will be at the maximum amplitude. Similarly, a -5 V modulating signal produces output at minimum amplitude.</li>
+        </ul>
+        <h2><a name="kanchor37"></a><a name="AM_DSSC"></a>[SOURce[1|2]:]AM:DSSC {ON|1|OFF|0}<br />[SOURce[1|2]:]AM:DSSC?</h2>
+        <p class="IndentTight">Selects Amplitude Modulation mode &#8722; Double 
+ Sideband Suppressed Carrier (ON) or AM modulated carrier with sidebands (OFF).</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set AM to DSSC mode:<br />AM:DSSC ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The power-on default value is OFF.</li>
+            <li class="IndentTight" value="2">In DSSC AM, zero modulation results in zero output 
+ signal, and increasing modulation input signal raises the amplitude of 
+ the sidebands in proportion to the amplitude of the modulating signal.</li>
+            <li class="IndentTight" value="3">DSSC AM is useful for some digital modulation 
+ modes.</li>
+            <li class="IndentTight" value="4">In "normal" AM, zero modulation results 
+ in a half-amplitude carrier wave signal being output. As modulation input 
+ signal rises, the carrier is amplitude modulated between 0 and 100% 
+ amplitude.</li>
+            <li class="IndentTight" value="5">In DSSC, the <a href="#AM_DEPTh">AM[:DEPTh]</a> setting applies, and scales 
+ the modulation signal from 0 to 120% modulation.</li>
+        </ul>
+        <h2><a name="kanchor38"></a><a name="AM_INTernal_FREQuency"></a>[SOURce[1|2]:]AM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]AM:INTernal:FREQuency? [{MINimum|MAXimum}] 
+</h2>
+        <p class="IndentTight">Sets frequency of modulating waveform. The waveform chosen as modulating source will operate at that frequency,  within waveform frequency limits.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 &#956;Hz to the maximum allowed for the internal function. Default 100 Hz</td>
+                    <td class="BodyD-Column1-Body1">+1.000000000000000E+04</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set the modulating frequency to 10 kHz:<br />AM:INT:FUNC 10000</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When you select an arbitrary waveform as the modulating source, the frequency changes to the frequency of the arbitrary waveform, which is based on the sample rate and the number of points in the arbitrary waveform.</li>
+            <li class="IndentTight" value="2">When using an arbitrary waveform for the modulating source, changing this parameter also changes the cached metadata representing the arbitrary waveform's sample rate. You can also change the modulating frequency of an arbitrary waveform with <a href="FUNCtion_Subsystem.htm#FUNCtion_ARBitrary_FREQuency">FUNCtion:ARBitrary:FREQuency</a>, <a href="FUNCtion_Subsystem.htm#FUNCtion_ARBitrary_PERiod">FUNCtion:ARBitrary:PERiod</a>, and <a href="FUNCtion_Subsystem.htm#FUNCtion_ARBitrary_SRATe">FUNCtion:ARBitrary:SRATe</a>.  These commands and the modulation frequency command are directly coupled in order to keep the arbitrary waveform  behaving exactly as it was last played. If you later turn modulation off and select that same arbitrary waveform as the current function, its sample rate (and corresponding frequency based upon the number of points) will be the same as it was when played as the modulation source.</li>
+            <li class="IndentTight" value="3">If the internal function is TRIangle, UpRamp, or DnRamp, the maximum frequency limited to 200 kHz. If the internal function is PRBS, the frequency refers to bit rate and is limited to 50 Mbps.</li>
+            <li class="IndentTight" value="4">This command should be used only with the internal modulation source  (<a href="01%20(Modulation)_SOURce.htm">AM:SOURce INTernal</a>).</li>
+        </ul>
+        <h2><a name="kanchor39"></a><a name="AM_INTernal_FUNCtion"></a>[SOURce[1|2]:]AM:INTernal:FUNCtion &lt;<i>function</i>&gt;<br />[SOURce[1|2]:]AM:INTernal:FUNCtion?</h2>
+        <p class="IndentTight">Selects shape of modulating waveform.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{SINusoid|SQUare|RAMP|NRAMp|TRIangle|NOISe|PRBS|ARB}, default SINusoid, default SINusoid.<br /><a href="Internal%20Function%20Waveforms.htm">View internal function waveforms.</a></td>
+                    <td class="BodyD-Column1-Body1">SIN, SQU, RAMP, NRAM, TRI, NOIS, PRBS, or ARB</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Select a sine wave as the modulating waveform.<br />AM:INT:FUNC SIN</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">This command should be used only with the internal modulation source  (<a href="01%20(Modulation)_SOURce.htm">AM:SOURce INTernal</a>).</li>
+            <li class="IndentTight" value="2">Pulse and DC cannot be carrier waveform for AM.</li>
+        </ul>
+        
+    </body>
+</html>

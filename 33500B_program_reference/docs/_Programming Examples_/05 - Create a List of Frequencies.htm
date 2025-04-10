@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Programming Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Create a List of Frequencies</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Create a List of Frequencies<a name="kanchor371"></a></h1>
+        <h2>Description
+        </h2>
+        <p class="IndentTight">The <a href="../__I_SCPI/LIST_Subsystem.htm">LIST</a> commands set the instruments's output frequency according to entries in a frequency list, which allows fast changing to frequencies in a list of up to 128 frequencies. The frequencies to be used are entered using the <a href="../__I_SCPI/LIST_Subsystem.htm#LIST_FREQuency">LIST:FREQuency</a> command, or they may be read from a file using <a href="../__I_SCPI/MMEMory_Subsystem.htm#MMEMory_LOAD_LIST">MMEMory:LOAD:LIST[1|2]</a>.</p>
+        <h2>Examples</h2>
+        <p class="IndentTight">The following code demonstrates the <a href="../__I_SCPI/LIST_Subsystem.htm#LIST_FREQuency">LIST:FREQuency</a> method.</p>
+        <p class="Shaded">FUNCtion SQU<br />FREQuency:MODE LIST<br />LIST:DWELl +5.0E-03<br />LIST:FREQuency +1.0E+03,+3.0E+03,+7.0E+03<br />VOLTage +1.0<br />OUTPut 1</p>
+        <p class="IndentTight">The results of this code are shown below.</p>
+        <p class="IndentTight">
+            <img src="../_Graphics_/List.png" />
+        </p>
+        
+    </body>
+</html>

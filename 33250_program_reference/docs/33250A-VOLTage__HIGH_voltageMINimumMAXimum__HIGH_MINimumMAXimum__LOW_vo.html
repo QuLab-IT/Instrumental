@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>VOLTage &#160;:HIGH {&lt;voltage&gt;|MINimum|MAXimum} &#160;:HIGH? [MINimum|MAXimum] &#160;:LOW {&lt;voltage&gt;|MINimum|MAXimum} &#160;:LOW? [MINimum|MAXimum]</title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-VOLTageOFFSet_offsetMINimumMAXimum__VOLTageOFFSet_MINimumMAXimum.html" />
+<link rel="next" title="Next" href="33250A-VOLTageRANGeAUTO_OFFONONCE_VOLTageRANGeAUTO.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1344102"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">VOLTage<br />&#160;:HIGH</span> {&lt;<span style="font-style: italic">voltage</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>}<br /><span style="font-weight: bold">&#160;:HIGH? </span>[<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>]<br /><span style="font-weight: bold">&#160;:LOW</span> {&lt;<span style="font-style: italic">voltage</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>}<br /><span style="font-weight: bold">&#160;:LOW? </span>[<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>]
+</h2>
+<a name="wp1096035"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the high or low voltage levels. For all functions, the&#160;default <span style="font-style: italic">high level</span> is +50&#160;mV and the default <span style="font-style: italic">low level</span> is -50&#160;mV. MIN&#160;selects the most negative voltage level for the selected function and MAX selects the largest voltage level. The&#160;:HIGH? and :LOW? queries return the high and low levels, respectively. 
+</div>
+<a name="wp1347852"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Limits Due to Amplitude</span>:&#160;You can set the voltage levels to a positive or negative value with the&#160;restrictions shown below. V<span style="font-style: italic">pp</span> is the maximum peak-to-peak amplitude for the selected output termination (10 Vpp for a 50-ohm load or 20&#160;Vpp for a high-impedance load). <br /><br />&#160;V<span style="font-style: italic">high</span>&#160;&#160;-&#160;&#160;V<span style="font-style: italic">low</span> &#160;<span style="text-decoration: underline">&lt;</span>&#160;&#160;V<span style="font-style: italic">pp</span> (max)&#160;&#160;&#160;<span style="font-weight: bold">and&#160;</span>&#160;&#160;V<span style="font-style: italic">high</span>, V<span style="font-style: italic">low</span>&#160;&#160;<span style="text-decoration: underline">&lt;</span>&#160;&#160;<img src="images/33250-VOLTage__HIGH_voltageMINimumMAXimum__HIGH_MINimumMAXimum__LOW_vo.jpg" height="34" width="75" id="wp1347872" border="0" hspace="0" vspace="0"/><br /><br />If the specified level is not valid, the function generator will automatically adjust it to the maximum voltage allowed. <span style="font-style: italic">From the remote interface, a&#160;&quot;Data out of range&quot; error will be generated and the&#160;level will be adjusted as described. </span>&#160;
+</div>
+<a name="wp1349061"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You can set the levels to a positive or negative value, but&#160;note that the high level <span style="font-style: italic">must</span> always be greater than the low level. If you specify a&#160;low level that is greater than the high level, the&#160;function generator will automatically set the low level to be 1 mV less than the high level.<span style="font-style: italic"> From the remote interface, a&#160;&quot;Data out of range&quot; error will be generated and the level will be adjusted as described. </span>
+</div>
+<a name="wp1245366"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Note that when you set the high and low levels, you are also setting the amplitude of the waveform. For example, if you set the high level to +2 volts and the low level to -3 volts, the resulting amplitude is 5&#160;Vpp (with an offset voltage of -500&#160;mV).
+</div>
+<a name="wp1412038"> </a><div style="color: #000000; font-size: 10pt; font-style: italic; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Limits Due to Output Termination<span style="font-style: normal">:&#160;If you change the output termination setting, the displayed voltage levels will be automatically adjusted (and no error will be generated). For example, if you set the high level to +100&#160;mVdc and then change the output termination from 50 ohms to&#160;&quot;high impedance&quot;, the voltage displayed on the function generator&#39;s front-panel will </span>double<span style="font-style: normal"> to +200 mVdc. If you change from &quot;high impedance&quot; to 50&#160;ohms, the displayed voltage will&#160;drop in half. </span>See the <span style="font-style: normal">OUTP:LOAD</span><span style="font-style: normal"> </span>command on page <a href="33250A-OUTPutLOAD_ohmsINFinityMINimumMAXimum__OUTPutLOAD_MINimumMAXimum.html">163</a> for more&#160;information. 
+</div>
+<a name="wp1350478"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	To invert the waveform relative to the offset voltage, you can use the OUTP:POL command. <span style="font-style: italic">See page </span><a href="33250A-OUTPutPOLarity_NORMalINVerted__OUTPutPOLarity.html"><span style="font-style: italic">164</span></a><span style="font-style: italic"> for more information.</span>
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

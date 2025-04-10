@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>Embedded Waveform Editor</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Embedded Waveform Editor<a name="kanchor439"></a></h1>
+        <p>The instrument includes an embedded waveform editor for creating and editing single-channel arbitrary waveforms in ASCII arbitrary waveforms (.ARB suffix). You can enter and edit voltage values directly or by combining up to 12 different kinds of standard waveforms, as described in the following sections:</p>
+        <p><a href="#Standard_Waveforms">Standard Waveforms</a>
+        </p>
+        <p><a href="#Basic_Waveform_Editing">Basic Waveform Editing</a>
+        </p>
+        <p><a href="#Advanced_Edit">Advanced Edit</a>
+        </p>
+        <p><a href="#Advanced_Math">Advanced Math</a>
+        </p>
+        <p><a href="#Utility_Menu">Utility Menu</a>
+        </p>
+        <h2><a name="Standard_Waveforms"></a>Standard Waveforms</h2>
+        <p>The embedded waveform editor includes the following 12 waveforms:</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sine</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Sine.bmp" alt="Sine wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>y = sin(x)</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Square</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Square.bmp" alt="Square wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">A square wave that switches between two voltage levels</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Ramp</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Ramp.bmp" alt="Ramp wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">A waveform with linearly rising or falling voltage</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Line</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Line.bmp" alt="Line segment" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">Line segment</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">DC</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_DC.bmp" alt="DC voltage" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">A DC voltage</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Noise</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Noise.bmp" alt="Random noise" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">Random noise</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Gaussian</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Gaussian.bmp" alt="Gaussian wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">A gaussian bell curve</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sinc</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Sinc.bmp" alt="Sinc wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">y = sin(x)/x</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">D-Lorentz</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_D-Lorentz.bmp" alt="D-Lorentz wave" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">The derivative of the Lorentz function. The Lorentz function is y = 1/(x²+1), so the The D-Lorentz function is y = -2x/(x²+1)².</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Expo Fall</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Expo_Fall.bmp" alt="Exponential fall" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">Exponential decay: y = e<span style="vertical-align: super;">-kx</span></td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Expo Rise</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Expo_Rise.bmp" alt="Exponential rise" />
+                    </td>
+                    <td class="BodyD-Column1-Body1">Exponential rise: y = 1 – e<span style="vertical-align: super;">-kx</span></td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Haversine</td>
+                    <td class="BodyB-Column1-Body1">
+                        <img src="../_Graphics_/Icon_Haversine.bmp" alt="Haversine waveform" />
+                    </td>
+                    <td class="BodyA-Column1-Body1">y = [1 – cos(x)]/2</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>When you select a waveform, the instrument displays a screen that allows you to specify the waveform’s parameters, listed below.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Amplitude</td>
+                    <td class="BodyD-Column1-Body1">The peak height above 0 V when the waveform has 0 offset, from 10 &#956;V to 10 V (default 1).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Offset</td>
+                    <td class="BodyD-Column1-Body1">The distance the waveform is shifted up or down relative to 0 V, from -10 to 10 V (default 0).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyD-Column1-Body1" colspan="2">The Amplitude plus the Offset must be between -10 V and 10 V.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Phase</td>
+                    <td class="BodyD-Column1-Body1">The number of degrees that the waveform is advanced (positive value) or retarded (negative value) from 0 degrees, from -360 to 360 (default 0).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Cycles</td>
+                    <td class="BodyD-Column1-Body1">The number of complete output cycles (a positive integer) that the waveform includes. Each cycle must have at least 8 points.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Points</td>
+                    <td class="BodyD-Column1-Body1">The number of points the waveform includes, from 8 to 1,000,000 (default 100). You may also <a href="../__A_Preliminary%20Information/02%20Models_and_Options.htm">extend the memory up to 16,000,000 points</a>.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyD-Column1-Body1" colspan="2">Because a cycle must have at least 8 points, the number of points divided by the number of cycles must be at least 8.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Half Width<br />(D-Lorentz only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">A value that controls the waveform width; larger values make wider curves. An integer from 1 to the total number of points in one cycle (default 10).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Fall Factor<br />(Expo Fall only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="2">A decimal number from -99 to 99 that controls how fast the waveform falls or rises (default -5).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Rise Factor<br />(Expo Rise only)</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Full Width<br />(Gaussian only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">The width of the bell curve between the points on the curve that are one-half the curve's height, from 1 to the number of points in one cycle (default 10).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Symmetry<br />(Ramp only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">The percentage of time (per cycle period) that the ramp rises, a decimal from 0 to 100 (default 100).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Zero Crossing</p>
+                        <p>(Sinc only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">The number of times the waveform crosses the horizontal axis on one side of the waveform, from 0 to 100 (default 10).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Duty Cycle</p>
+                        <p>(Square only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">The percentage of the time (per cycle period) that the waveform voltage is high, from 0 to 100 (default 50).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Start Level</p>
+                        <p>(Line only)</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1" rowspan="2">The voltage at the beginning or end of the line segment.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">
+                        <p>End Level</p>
+                        <p>(Line only)</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="Basic_Waveform_Editing"></a>Basic Waveform Editing</h2>
+        <p>When you start the embedded waveform editor (press <b>[Waveforms]</b> and <b>Arb</b>, then <b>Arbs</b>, <b>Edit New</b>, and <b>Start Editor</b>), the opening screen appears. (Note that the same menu that contains the Edit New softkey also contains an Import CSV softkey. You can use this to import ASCII files from oscilloscopes and other common instruments.)</p>
+        <p>
+            <img src="../_Graphics_/WFE_OpeningScreen.png" alt="WFE opening screen" />
+        </p>
+        <p><b>Edit Points</b> allows you to edit the voltage values of individual points in the waveform. You can also insert and remove points in the waveform, and you can access the <b>Advanced Edit</b> features, described below. The current screen image shows the default new arbitrary waveform of 8 points at 0 VDC.</p>
+        <p>
+            <img src="../_Graphics_/WFE_EditPoints.png" alt="WFE edit points" />
+        </p>
+        <p><b>Edit Params</b> allows you to set the waveform’s sample rate, which is the rate (in points per second) in which the waveform is played. You can specify this value as a rate or as a period. If you change one, the other will recalculate based on the number of points in the waveform. This feature also allows you to specify whether the waveform is labeled with units of time or points along the horizontal axis.</p>
+        <p>
+            <img src="../_Graphics_/WFE_EditParams.png" alt="WFE edit parameters" />
+        </p>
+        <p><b>Insert Built-In</b> allows you to insert one of 12 pre-defined waveforms into the current waveform.</p>
+        <p>
+            <img src="../_Graphics_/WFE_InsertBuiltIn.png" alt="WFE insert built-in" />
+        </p>
+        <p><b>Select Point #</b> allows you to specify where the waveform is to be inserted, and the <b>Choose Wave</b> softkey allows you to specify which one of the 12 waveform types is to be inserted.</p>
+        <p>
+            <img src="../_Graphics_/New%20List%20of%20Waveforms.png" alt="New list of waveforms" />
+        </p>
+        <p>Once you have used the arrow keys to select the waveform to insert and pressed <b>OK</b>, the instrument displays the parameters for the waveform to be inserted. Note the up and down arrow softkeys, which you use to select a parameter for editing. Specify the parameters and press <b>OK</b>.</p>
+        <p>
+            <img src="../_Graphics_/WFE_EnterParams.png" alt="WFE enter parameters" />
+        </p>
+        <p><b>Save</b> allows you to save the current waveform at its current location in the instrument’s internal memory.</p>
+        <p>
+            <img src="../_Graphics_/WFE_Save.png" alt="WFE save" />
+        </p>
+        <p><b>Exit Editor</b> closes the waveform editor and resumes normal operation.</p>
+        <p>
+            <img src="../_Graphics_/WFE_ExitEditor.png" alt="WFE exit editor" />
+        </p>
+        <p>If you have unsaved changes, a message gives you the option of staying in the embedded waveform editor. After you exit the editor, you will have the option to play the waveform on the waveform generator.</p>
+        <p>
+            <img src="../_Graphics_/WFE_ExitWithoutSavingWarning.png" alt="WFE Exit Without Saving warning" />
+        </p>
+        <h2><a name="Advanced_Edit"></a>Advanced Edit</h2>
+        <p>As described above, the <b>Edit Points</b> menu includes an <b>Advanced Edit</b> softkey. This softkey allows you to cut, copy and paste portions of the waveform, edit waveform points in a table, and perform mathematical operations on the waveform.</p>
+        <p>
+            <img src="../_Graphics_/WFE_AdvancedEdit.png" alt="WFE advanced edit" />
+        </p>
+        <p><b>Cut/Copy/Paste</b> allows you to define a range of the waveform between two markers and then cut or copy the waveform points defined by the markers. Once you have cut or copied the range, you can paste it as many times as desired by using the <b>Paste</b> softkey.</p>
+        <p>
+            <img src="../_Graphics_/WFE_EditSelection.png" alt="WFE edit selection" />
+        </p>
+        <p><b>Paste Location</b> allows you to paste a range at the start of the waveform, the end of the waveform, or any point within the waveform.</p>
+        <p>
+            <img src="../_Graphics_/WFE_PasteLocationMenu.png" alt="WFE paste location menu" />
+        </p>
+        <p><b>Edit Via Table</b> allows you to edit the voltage values of individual points in a table. You can use the knob to scroll through the table, or you can use the Point # softkey to directly select any particular point. You can also insert or remove waveform points.</p>
+        <p>
+            <img src="../_Graphics_/WFE_EditViaTable.png" alt="WFE edit via table" />
+        </p>
+        <p><b>Perform Math</b> allows you to use markers to specify a range of the waveform. You can then add, subtract, or multiply the voltage values in that range by the voltage values in another waveform.</p>
+        <p>
+            <img src="../_Graphics_/WFE_PerformMath.png" alt="WFE perform math" />
+        </p>
+        <p>Once you have pressed <b>Add</b>, <b>Subtract</b>, or <b>Multiply</b>, the instrument displays a list of waveforms. Pick the waveform and press <b>OK</b>.</p>
+        <p>
+            <img src="../_Graphics_/Add%20Math%20Waveform%20Help.png" alt="Add math waveform help" />
+        </p>
+        <p>When you press <b>OK</b>, the instrument displays a list of parameters that you can use to specify the waveform. In this case, the screen below shows that you picked <b>D-Lorentz</b>. You can also use the <b>From Point</b> and <b>To Point</b> parameters to specify the range of points on which to perform the mathematical operation.</p>
+        <p>
+            <img src="../_Graphics_/WFE_PerformMathWaveformParams.png" alt="WFE perform math waveform parameters" />
+        </p>
+        <h2><a name="Advanced_Math"></a>Advanced Math</h2>
+        <p><b>Advanced Math</b> allows you to perform several different types of operations on the waveform. To open <b>Advanced Math</b> from the embedded waveform editor, press <b>Edit Points &gt; Advanced Edit &gt; Perform Math &gt; Advanced Math</b>.</p>
+        <p>
+            <br />
+            <img src="../_Graphics_/WFE_PerformMath.png" alt="WFE perform math" />
+        </p>
+        <p>The <b>Advanced Math</b> menu opens with the following screen. Each of the operations shown below will be described below, using images taken before and after each operation to demonstrate the operations’ effects.</p>
+        <p>
+            <img src="../_Graphics_/WFE_AdvMathMainScreen.png" alt="WFE advanced math main screen" />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Invert</b> reflects the waveform across the horizontal axis.</p>
+        <p>Image Before Invert<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />
+        </p>
+        <p>Image After Invert<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterInvert.png" alt="WFE after invert" />
+            <br />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Absolute</b> multiplies all negative waveform values by -1.</p>
+        <p>Image Before Absolute<br /><img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />/&gt;</p>
+        <p>Image After Absolute<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterAbsolute.png" alt="WFE after absolute" />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Mirror</b> reverses order of the points in the range.</p>
+        <p>Image Before Mirror<br /><img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />/&gt;</p>
+        <p>Image After Mirror<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterMirror.png" alt="WFE after mirror" />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Scale</b> allows you to scale the waveform’s amplitude and offset. Here, the amplitude scale was set to 180% and the offset scale was set to 1 V.</p>
+        <p>Image Before Scale<br /><img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />/&gt;</p>
+        <p>Image After Scale<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterScale.png" alt="WFE after scale" />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Clip</b> allows you to change voltage values outside upper and lower limits to be equal to the limits. In this example, the waveform was clipped to stay within the -400 mV lower limit and the 700 mV upper limit.</p>
+        <p>Image Before Clip<br /><img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />/&gt;</p>
+        <p>Image After Clip<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterClip.png" alt="WFE after clip" />
+        </p>
+        <hr width="100%" size="0" align="center" />
+        <p><b>Trim</b> allows you to use markers to "crop" the waveform so that only the points defined by the marker range remain in the waveform.</p>
+        <p>Image Before Trim<br /><img src="../_Graphics_/WFE_BeforeEachOperation.png" alt="WFE before each operation" />/&gt;</p>
+        <p>Image After Trim<br /></p>
+        <p>
+            <img src="../_Graphics_/WFE_AfterTrim.png" alt="WFE after trim" />
+        </p>
+        <h2><a name="Utility_Menu"></a>Utility Menu</h2>
+        <p>You can access several utility features by pressing the <b>[System]</b> key from within the embedded waveform editor.</p>
+        <p>
+            <img src="../_Graphics_/WFE_SystemButton.png" alt="System button" />
+        </p>
+        <p><b>Undo</b> allows you to undo recent operations, subject to the amount of available memory and the size of the undo operation. <b>Redo</b> allows you to redo "undone" tasks, subject to the same limitations.</p>
+        <p><b>Pan/Zoom Control</b> allows you to pan or zoom horizontally or vertically. You zoom using a percentage zoom factor, and you pan by specifying a point, and or voltage.</p>
+        <p>
+            <img src="../_Graphics_/WFE_PanZoomControl.png" alt="WFE pan/zoom control" />
+        </p>
+        <p><b>Show All</b> resets the scaling to display the entire waveform.</p>
+        
+    </body>
+</html>

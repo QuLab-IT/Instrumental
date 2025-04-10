@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:00:29" />
+    <title>DC Offset Voltage </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Output_Amplitude.html" />
+<link rel="next" title="Next" href="33250A-Output_Units.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1045894"> </a><h2 class="pHeading1">
+DC Offset Voltage 
+</h2>
+<a name="wp1048506"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The default offset is 0 volts for all functions. 
+</div>
+<a name="wp1048538"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Limits Due to Amplitude</span>:&#160;The relationship between offset voltage and output amplitude is shown below. V<span style="font-style: italic">max</span> is the maximum <span style="font-style: italic">peak voltage</span> for the selected output termination (5 volts for a 50<span style="font-family: Symbol">W</span> load or 10 volts for a high-impedance load). <br /><br />&#160;|V<span style="font-style: italic">offset</span>|&#160; <span style="text-decoration: underline">&lt;</span>&#160;V<span style="font-style: italic">max</span>&#160;&#160;-&#160;&#160;<img src="images/33250-DC_Offset_Voltage.jpg" height="37" width="31" id="wp1048509" border="0" hspace="0" vspace="0"/><br /><br />If the specified offset voltage is not valid, the function generator will automatically adjust it to the maximum dc&#160;voltage allowed with the amplitude specified. 
+</div>
+<a name="wp1072037"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Limits Due to Output Termination</span>:&#160;The offset limits are determined by the current output termination setting. For example, if&#160;you set the offset to 100 mVdc and then change the output termination from 50&#160;ohms to&#160;&quot;high impedance&quot;, the offset voltage displayed on the function generator&#39;s front-panel will <span style="font-style: italic">double</span> to 200 mVdc (and no error will be&#160;generated). If you change from &quot;high impedance&quot; to 50&#160;ohms, the&#160;displayed offset will drop in half. <span style="font-style: italic">See&#160;</span><a href="33250A-Output_Termination.html"><span style="font-style: italic">&quot;Output Termination&quot;</span></a><span style="font-style: italic"> on page </span><a href="33250A-Output_Termination.html"><span style="font-style: italic">57</span></a><span style="font-style: italic"> for more information. </span>
+</div>
+<a name="wp1048515"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Arbitrary Waveform Limitations</span>:&#160;For arbitrary waveforms, the maximum offset and amplitude will be limited if the waveform data points do not span the full range of the output DAC (Digital-to-Analog Converter). For&#160;example, the built-in &quot;Sinc&quot; waveform does not use the full range of values between ±1 and therefore its maximum offset is limited to 4.95&#160;volts (into 50 ohms). 
+</div>
+<a name="wp1048642"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You can also set the offset by&#160;specifying a high level and low level. For&#160;example, if you set the high level to +2&#160;volts and the low level to <br />-3 volts, the resulting amplitude is 5&#160;Vpp (with an offset voltage of <br />-500&#160;mV). 
+</div>
+<a name="wp1048645"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	For dc volts, the output level is actually controlled by setting the offset voltage. You can set the dc level to any value between <span style="font-family: Symbol">±</span>5 Vdc into 50 ohms or <span style="font-family: Symbol">±</span>10&#160;Vdc into an open circuit. <br /><span style="font-style: italic"><br /></span>To select <span style="font-style: italic">dc volts</span> from the front panel, press<img src="images/utility_keyif.jpg" height="26" width="36" id="wp1048657" border="0" hspace="0" vspace="0"/>and then select the <span style="font-weight: bold">DC&#160;On</span> softkey. Press the <span style="font-weight: bold">Offset</span> softkey to set the desired offset voltage level. 
+</div>
+<a name="wp1045903"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Front-Panel Operation</span>:&#160;To set the dc offset, press the <span style="font-weight: bold">Offset</span> softkey for the selected function. Then use the knob or numeric keypad to enter the desired offset. To set the offset using a high level and low level, press the <span style="font-weight: bold">Offset</span> softkey again to toggle to the <span style="font-weight: bold">HiLevel</span> and <span style="font-weight: bold">LoLevel</span> softkeys. 
+</div>
+<a name="wp1048472"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	<span style="font-style: italic">Remote Interface Operation</span>: <br /><br /><span style="font-style: normal">&#160;VOLTage:OFFSet {&lt;</span><span style="font-style: italic">offset</span>&gt;|MINimum|MAXimum} <br /><br />Or, you can set the offset by specifying a high level and low level using the following commands. <br /><span style="font-style: normal"><br />&#160;VOLTage:HIGH {&lt;</span><span style="font-style: italic">voltage</span><span style="font-style: normal">&gt;|MINimum|MAXimum}<br />&#160;VOLTage:LOW {&lt;</span><span style="font-style: italic">voltage</span>&gt;|MINimum|MAXimum}<br /><br />You can also use the APPLy command to select the function, frequency, amplitude, and offset with a single command. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

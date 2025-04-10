@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>The Status Byte Register </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-What_is_an_Enable_Register.html" />
+<link rel="next" title="Next" href="33250A-Using_Service_Request_(SRQ)_and_Serial_Poll.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1423110"> </a><h2 class="pHeading1">
+The Status Byte Register 
+</h2>
+<a name="wp1265692"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Status Byte summary register reports conditions from the other status registers. Data that is waiting in the function generator&#39;s output buffer is immediately reported on the &quot;Message Available&quot; bit (bit 4). Clearing an event register from one of the other register groups will clear the corresponding bits in the Status Byte condition register. Reading all messages from the output buffer, including any pending queries, will clear the &quot;Message Available&quot; bit. To set the enable register mask and generate an SRQ (service request), you must write a decimal value to the register using the *SRE command. 
+</div>
+<a name="wp1228167"> </a><h2 class="pTitle">
+Bit Definitions - Status Byte Register </h2>
+<div align="left">
+<table border="1" id="wp1228156table1228154">
+  <caption></caption>
+  <tr align="left">    <td><a name="wp1228156"> </a><div class="pCellBody">
+<br />&#160;&#160;Bit Number
+</div>
+</td>
+    <td><a name="wp1228158"> </a><div class="pCellBody">
+Decimal<br />Value
+</div>
+</td>
+    <td><a name="wp1228160"> </a><div class="pCellBody">
+<br />&#160;&#160;Definition
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1228162"> </a><div class="pCellBody">
+0&#160;<span style="font-style: italic">Not Used<br /></span>1&#160;<span style="font-style: italic; font-weight: normal">Not Used<br /></span><span style="font-weight: bold">2</span>&#160;Error Queue<br /><br /><span style="font-weight: bold">3</span>&#160;Questionable Data<br /><br /><span style="font-weight: bold">4</span>&#160;Message Available<br /><span style="font-weight: bold">5</span>&#160;Standard Event<br /><br /><span style="font-weight: bold">6</span>&#160;Master Summary<br /><br />7&#160;<span style="font-style: italic">Not Used</span>
+</div>
+</td>
+    <td><a name="wp1228164"> </a><div class="pCellBody">
+1<br />2<br /><span style="font-weight: bold">4<br /><br />8<br /><br />16<br />32<br /><br />64<br /><br /></span>128
+</div>
+</td>
+    <td><a name="wp1228166"> </a><div class="pCellBody">
+<span style="font-style: italic">Not Used. Returns &quot;0&quot;.<br />Not Used. Returns &quot;0&quot;.<br /></span>One or more errors are stored in the <br />&#160;Error Queue.<br />One or more bits are set in the Questionable &#160;Data Register (bits must be enabled). <br />Data is available in the instrument&#39;s output buffer.<br />One or more bits are set in the Standard Event &#160;Register (bits must be enabled). <br />One or more bits are set in the Status Byte &#160;Register (bits must be enabled). <br /><span style="font-style: italic">Not Used. Returns &quot;0&quot;.</span>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 class="pTitle">
+
+</h2>
+<hr />
+<a name="wp1228169"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Status Byte <span style="font-style: italic">condition register</span> is cleared when: 
+</div>
+<a name="wp1044441"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You execute the *CLS (clear status) command. 
+</div>
+<a name="wp1225981"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You read the event register from one of the other register groups (only&#160;the corresponding bits are cleared in the condition register).<br />
+</div>
+<a name="wp1228172"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Status Byte <span style="font-style: italic">enable register</span> is cleared when: 
+</div>
+<a name="wp1044444"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You execute the *SRE 0 command. 
+</div>
+<a name="wp1226025"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You turn the power on and have previously configured the function generator to clear the enable register using the *PSC 1 command. Note that the enable register <span style="font-style: italic">will not</span> be cleared at power-on if you have configured the function generator using the *PSC 0 command. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

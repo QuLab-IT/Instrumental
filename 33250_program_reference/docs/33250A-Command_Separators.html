@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>Command Separators </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-Command_Format_Used_in_This_Manual.html" />
+<link rel="next" title="Next" href="33250A-Using_the_MIN_and_MAX_Parameters.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1044536"> </a><h2 class="pHeading1">
+Command Separators 
+</h2>
+<a name="wp1044537"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+A <span style="font-style: italic">colon</span> ( <span style="font-weight: bold">:</span> ) is used to separate a command keyword from a lower-level keyword. You must insert a <span style="font-style: italic">blank space</span> to separate a parameter from a command keyword. If a command requires more than one parameter, you must separate adjacent parameters using a <span style="font-style: italic">comma</span> as shown below:
+</div>
+<a name="wp1060969"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+&quot;APPL:SIN 5 KHZ, 3.0 VPP, -2.5 V&quot;
+</div>
+<a name="wp1060971"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+A <span style="font-style: italic">semicolon</span> ( <span style="font-weight: bold">;</span> ) is used to separate commands within the same subsystem, and can also minimize typing. For example, sending the following command string: 
+</div>
+<a name="wp1060990"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+&quot;FREQ:START 10<span style="font-weight: bold">;</span> STOP 1000&quot; 
+</div>
+<a name="wp1060991"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+... is the same as sending the following two commands: 
+</div>
+<a name="wp1060992"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+&quot;FREQ:START 10&quot; <br />&quot;FREQ:STOP 1000&quot; 
+</div>
+<a name="wp1060993"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Use a colon <span style="font-style: italic">and</span> a semicolon to link commands from <span style="font-style: italic">different</span> subsystems. For example, in the following command string, an error is generated if you do not use both the colon <span style="font-style: italic">and</span> semicolon: 
+</div>
+<a name="wp1060994"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 18pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+&quot;SWE:STAT ON<span style="font-weight: bold">;:</span>TRIG:SOUR EXT&quot; 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

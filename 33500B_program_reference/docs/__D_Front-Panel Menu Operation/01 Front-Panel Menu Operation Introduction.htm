@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Front-Panel Menu Reference</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Front-Panel Menu Operation Introduction</h1>
+        <p>This section introduces front-panel keys and menus. See <a href="../__E_Features%20and%20Functions/01%20Features%20and%20Functions.htm">Features and Functions</a> for additional information.</p>
+        <ul>
+            <li class="IndentTight" value="1"><a href="02%20Front-Panel%20Menu%20Reference.htm">Front-Panel Menu Reference</a>
+            </li>
+            <li class="IndentTight" value="2"><a href="#Select_Output_Termination">Select Output Termination</a>
+            </li>
+            <li class="IndentTight" value="3"><a href="#Reset_Instrument">Reset Instrument</a>
+            </li>
+            <li class="IndentTight" value="4"><a href="#Output_Modulated_Waveform">Output a Modulated Waveform</a>
+            </li>
+            <li class="IndentTight" value="5"><a href="#Output_FSK_Waveform">Output FSK Waveform</a>
+            </li>
+            <li class="IndentTight" value="6"><a href="#Output_PWM_Waveform">Output PWM Waveform</a>
+            </li>
+            <li class="IndentTight" value="7"><a href="#Output_Frequency_Sweep">Output Frequency Sweep</a>
+            </li>
+            <li class="IndentTight" value="8"><a href="#Output_Burst_Waveform">Output Burst Waveform</a>
+            </li>
+            <li class="IndentTight" value="9"><a href="#Trigger_Sweep_or_Burst">Trigger Sweep or Burst</a>
+            </li>
+            <li class="IndentTight" value="10"><a href="#Store_Instrument_State">Store Instrument State</a>
+            </li>
+            <li class="IndentTight" value="11"><a href="03%20LAN%20Configuration%20Procedure.htm">LAN Configuration Procedure</a>
+            </li>
+            <li class="IndentTight" value="12"><a href="04%20Set%20Up%20Arbitrary%20Waveform.htm">Set Up Arbitrary Waveform</a>
+            </li>
+        </ul>
+        <h2><a name="Select_Output_Termination"></a>Select Output Termination<a name="kanchor411"></a></h2>
+        <p>The instrument has a fixed series output impedance of 50 &#937; to the front-panel channel connectors. If the actual load impedance differs from the value specified, the displayed amplitude and offset levels will be incorrect. The load impedance setting is simply a convenience to ensure that the displayed voltage matches the expected load.</p>
+        <ol>
+            <li class="IndentTight" value="1">Press a channel output key to open the channel configuration screen. Note that the current output termination values (both 50 &#937; in this case) appear on the tabs at the top of the screen.</li>
+            <li class="IndentTight" value="2">Specify the output termination.</li>
+            <li class="IndentTight" value="3">Press <b>Output Load</b>.<br /><img src="../_Graphics_/Specify_Channel_Load.png" alt="Specify channel load" /></li>
+            <li class="IndentTight" value="4">Select the desired output termination.</li>
+            <li class="IndentTight" value="5">Use the knob or numeric keypad to select the desired load impedance or press <b>Set to 50 &#937;</b> or <b>Set to High Z</b>.<br /></li>
+        </ol>
+        <h2><a name="Reset_Instrument"></a>Reset Instrument<a name="kanchor412"></a></h2>
+        <p>To reset the instrument to its <a href="../_Home_Page/Factory_Reset_State.htm">factory default state</a>, press <b>[System] &gt; Store/Recall &gt; Set to Defaults</b>.</p>
+        <h2><a name="Output_Modulated_Waveform"></a>Output a Modulated Waveform<a name="kanchor413"></a></h2>
+        <p>A modulated waveform consists of a carrier waveform and a modulating waveform. In AM (amplitude modulation), the carrier amplitude is varied by the modulating waveform. For this example, you will output an AM	waveform with 80% modulation depth. The carrier will be a 5 kHz sine wave and the modulating waveform will be a 200 Hz sine wave.</p>
+        <p>
+            <img src="../_Graphics_/Scope%20AM.png" />
+        </p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the function, frequency, and carrier amplitude.</b>
+                <br />
+                <br />Press	the <b>[Waveforms] &gt;&#160;Sine</b>. Press the <b>Frequency</b>, <b>Amplitude</b>, and <b>Offset</b> softkeys to configure the carrier waveform. For this example, select a 5 kHz sine wave with an amplitude of 5 Vpp, with 0 V offset.<br /><br />Note that you may specify amplitude in Vpp, Vrms or dBm.</li>
+            <li class="IndentTight" value="2"><b>Select AM.</b>
+                <br />Press <b>Modulate</b> and then select "AM" using the <b>Type</b> softkey. Then press <b>Modulate</b> to turn modulation on.  Notice that the <b>Modulate</b> button is illuminated, and the status message "AM Modulated by Sine" appears at the top left of the display.</li>
+            <li class="IndentTight" value="3"><b>Set the modulation depth.</b>
+                <br />Press the <b>AM Depth</b> softkey and then set the value to 80% using the numeric keypad or the knob and arrows.</li>
+            <li class="IndentTight" value="4"><b>Select the modulating waveform shape.</b>
+                <br />Press <b>Shape</b> to select the modulating waveform's shape. For this example, select a sine wave.</li>
+            <li class="IndentTight" value="5">Press <b>More &gt; AM Freq</b>. Set the value to 200 Hz using the numeric keypad or the knob and arrows. Press <b>Hz</b> to finish entering the number if you are using the numeric keypad.</li>
+        </ol>
+        <h2><a name="Output_FSK_Waveform"></a>Output an FSK Waveform<a name="kanchor414"></a></h2>
+        <p>You can configure the instrument to "shift" its output frequency between two preset values using <a href="../__I_SCPI/FSKey_Subsystem.htm">FSK modulation</a>. The rate at which the output shifts between the two frequencies (called the "carrier frequency" and the "hop frequency") is determined by the internal rate generator or the signal level on the rear-panel <b>Ext Trig</b> connector. For this example, you will set the "carrier" frequency to 3 kHz and the "hop" frequency to 500 Hz, with an FSK rate of 100 Hz.</p>
+        <p>
+            <img src="../_Graphics_/fsk_dump_ch2.bmp" style="width: 384px;height: 210px;" alt="FSK oscilloscope image" />
+        </p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the function, frequency, and carrier amplitude.</b>
+                <br />
+                <br />Press	the <b>[Waveforms] &gt;&#160;Sine</b>. Press the <b>Frequency</b>, <b>Amplitude</b>, and <b>Offset</b> softkeys to configure the carrier waveform. For this example, select a 5 kHz sine wave with an amplitude of 5 Vpp, with 0 V offset.</li>
+            <li class="IndentTight" value="2"><b>Select FSK.</b>
+                <br />Press <b>Modulate</b> and then select FSK using the <b>Type</b> softkey. Then press <b>Modulate</b> to turn modulation on. Notice the status message "FSK Modulated" at the top left of the display.</li>
+            <li class="IndentTight" value="3"><b>Set the "hop" frequency.</b>
+                <br />Press the <b>Hop Freq</b> softkey and then set the value to 500 Hz using the numeric keypad or the knob and arrows. If you use the numeric keypad, be sure to finish the entry by pressing <b>Hz</b>.<br /><img src="../_Graphics_/Set_Hop_to_500.png" alt="Set hop frequency to 500" /></li>
+            <li class="IndentTight" value="4"><b>Set the FSK "shift" rate.</b>
+                <br />Press the <b>FSK Rate</b> softkey and then set the value to 100 Hz using the numeric keypad or the knob and arrows.<br /><img src="../_Graphics_/Set_FSK_Rate_to_100_Hz.png" alt="Set FSK rate to 100 Hz" /></li>
+        </ol>
+        <p>At this point, the instrument outputs an FSK waveform.</p>
+        <h2><a name="Output_PWM_Waveform"></a>Output PWM Waveform<a name="kanchor415"></a></h2>
+        <p>You can configure the instrument to output a pulse width modulated (PWM) waveform. PWM is only available for the Pulse waveform, and the pulse width varies according to the modulating signal. The amount by which the pulse width varies is called the width deviation, and it can be specified as a percentage of the waveform period (that is, duty cycle) or in units of time. For example, if you specify a pulse with 20% duty cycle and then enable PWM with a 5% deviation, the duty cycle varies from 15% to 25% under control of the modulating signal.</p>
+        <p>To change from pulse width to pulse duty cycle, press <b>[Units]</b>.</p>
+        <p>For this example, you will specify a pulse width and pulse width deviation for a 1 kHz pulse waveform with a 5Hz sine wave modulating waveform.</p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the carrier waveform parameters.</b>
+                <br />Press <b>[Waveforms] &gt; Pulse</b>. Use the <b>Frequency</b>, <b>Amplitude</b>, <b>Offset</b>, <b>Pulse Width</b> and <b>Edge Times</b> softkeys to configure the carrier waveform. For this example, select a 1 kHz pulse waveform with an amplitude of 1 Vpp, zero offset, a pulse width of 100 µs, and an edge time of 50 ns (both leading and trailing).<br /><img src="../_Graphics_/All_Pulse_Settings.png" alt="All pulse settings" /></li>
+            <li class="IndentTight" value="2"><b>Select PWM.</b>
+                <br />Press <b>Modulate &gt; Type &gt; PWM</b>. Then press the first softkey (<b>Modulate</b>) to turn modulation on. Notice the status message "PWM Modulated by Sine" in the upper-left corner of the display.<br /><img src="../_Graphics_/PWM_Modulate_by_Sine.png" alt="PWM modulate by sine" /></li>
+            <li class="IndentTight" value="3"><b>Set the width deviation.</b>
+                <br />Press the <b>Width Dev</b> softkey and set the value to 20 µs using the numeric keypad or the knob and arrows.<br /><img src="../_Graphics_/Set_Width_Dev_to_20_us.png" alt="Set width deviation to 20 microseconds" /></li>
+            <li class="IndentTight" value="4"><b>Set the modulating frequency.</b>
+                <br />Press the <b>PWM Freq</b> softkey and then set the value to 5 Hz using the numeric keypad or the knob and arrows.<br /><img src="../_Graphics_/Set_PWM_Freq_to_5_Hz.png" alt="Set PWM frequency to 5 Hz" /></li>
+            <li class="IndentTight" value="5"><b>Select the modulating waveform shape.</b>
+                <br />Press <b>Shape</b> to select the modulating waveform's shape. For this example, select a sine wave.</li>
+        </ol>
+        <p>To view the actual PWM waveform, you would need to output it to an oscilloscope. If you do this, you will see how the pulse width varies, in this case, from 80 to 120 µs. At a modulation frequency of 5 Hz, the deviation is quite visible.</p>
+        <h2><a name="Output_Frequency_Sweep"></a>Output Frequency Sweep<a name="kanchor416"></a></h2>
+        <p>In the frequency sweep mode, the instrument moves from the start frequency to the stop frequency at a sweep rate, which you specify.	You can sweep up or down in frequency, and with either linear or logarithmic spacing, or using a list of frequencies. For this example, you will output a swept sine wave from 50 Hz to 5 kHz.</p>
+        <p>
+            <img src="../_Graphics_/Scope%20Sweep.png" />
+        </p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the function and amplitude for the sweep.</b>
+                <br />For sweeps, you can select sine, square, ramp, pulse, triangle, or PRBS waveforms (arbitrary waveforms, noise, and DC are not allowed). For this example, select a sine wave with an amplitude of 5 Vpp.<br /><img src="../_Graphics_/Sine_Wave_5_Vpp.png" alt="Sine wave 5 Vpp" /></li>
+            <li class="IndentTight" value="2"><b>Select the sweep mode.</b>
+                <br />Press <b>[Sweep]</b> and verify that the linear sweep mode is currently selected on the second softkey. Press the <b>Sweep</b> softkey to turn sweep on. Notice the <b>Linear Sweep</b> status message at the top of the tab for the current channel. The button is also illuminated.</li>
+            <li class="IndentTight" value="3"><b>Set the start frequency.</b>
+                <br />Press <b>Start Freq</b> and then set the value to 50 Hz using the numeric keypad or the knob and arrows.<br /><img src="../_Graphics_/Set_Start_Freq_to_50.png" alt="Set start frequency to 50" /></li>
+            <li class="IndentTight" value="4"><b>Set the stop frequency.</b>
+                <br />Press <span class="Bold">Stop Freq</span> and set the value to 5 kHz using the numeric keypad or the knob and arrows.</li>
+        </ol>
+        <p>At this point, the instrument outputs a continuous sweep from 50 Hz to 5 kHz if output is	enabled.<br /></p>
+        <p>
+            <img src="../_Graphics_/Set%20Stop%20Freq%20to%205kHz.png" alt="Set stop frequency to 5 kHz" />
+        </p>
+        <p>You can also set the sweep frequency boundaries of the sweep using a center frequency and frequency span. These parameters are similar to the start frequency and stop frequency (above) and they provide added flexibility. To achieve the same results, set the center frequency to 2.525 kHz and the frequency span to 4.950 kHz.</p>
+        <p>
+            <img src="../_Graphics_/Sweep_Parameter_Units.png" alt="Sweep parameter units" />
+        </p>
+        <p>To generate a frequency sweep, press <b>[Trigger]</b> twice. The first press puts the trigger in manual mode, and the second one sends a trigger. For more information, see <a href="#Trigger_Sweep_or_Burst">Trigger Sweep or Burst</a>.</p>
+        <h2><a name="Output_Burst_Waveform"></a>Output Burst Waveform<a name="kanchor417"></a></h2>
+        <p>You can configure the instrument to output a waveform with for a specified number of cycles, called a burst. You can control the amount of time that elapses between bursts with the internal timer or the signal level on the rear-panel <b>Ext Trig</b> connector. For this example, you will output a three-cycle sine wave with a 20 ms burst period.</p>
+        <p>
+            <img src="../_Graphics_/brst_dump_ch2.png" alt="Burst scope image" />
+        </p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the function and amplitude for the burst.</b>
+                <br />For burst waveforms, you can select sine, square, ramp, pulse, arbitrary waveforms, triangle, or PRBS. Noise is allowed only in the "gated" burst mode and DC is not allowed. For this example, select a sine wave with an amplitude of 5 Vpp.<br /><img src="../_Graphics_/Sine_Wave_5_Vpp.png" alt="Sine wave 5 Vpp" /></li>
+            <li class="IndentTight" value="2"><b>Select the burst mode.</b>
+                <br />Press <b>[Burst] &gt; Burst Off/On</b>. Notice that a status message <b>N Cycle Burst, Trig Imm</b> is shown in the tab of the current channel.<br /><img src="../_Graphics_/Burst_Showing_In_Tab.png" alt="Burst showing in tab" /></li>
+            <li class="IndentTight" value="3"><b>Set the burst count.</b>
+                <br />Press <b># of Cycles</b> and set the count to "3" using the numeric keypad or knob. Press <b>Enter</b> to finish data entry if you are using the numeric keypad.<br /><img src="../_Graphics_/Set_Cycle_Count_to_3.png" alt="Set cycle count to 3" /></li>
+            <li class="IndentTight" value="4"><b>Set the burst period.</b>
+                <br />Press <b>Burst Period</b> and set the period to 20 ms using the numeric keypad or the knob and arrows. The burst period sets the time from the start of one burst to the start of the next burst. At this point, the instrument outputs a continuous three-cycle burst at 20 ms intervals.<br /><img src="../_Graphics_/Set_Burst_Period_to_20_msec.png" alt="Set burst period to 20 ms" /></li>
+        </ol>
+        <p>You can generate a single burst (with the specified count) by pressing the <b>[Trigger]</b> key. For more information, see <a href="#Trigger_Sweep_or_Burst">Trigger Sweep or Burst</a>.</p>
+        <p>You can also use the external gate signal to create gated bursts, where a burst is produced while a gate signal is present on the input.</p>
+        <h2><a name="Trigger_Sweep_or_Burst"></a>Trigger Sweep or Burst<a name="kanchor418"></a></h2>
+        <p>You can issue four different types of triggers from the front panel for sweeps and bursts:</p>
+        <ul>
+            <li class="IndentTight" value="1">Immediate or "automatic" (default): instrument outputs continuously when sweep or burst mode is selected.</li>
+            <li class="IndentTight" value="2">External: triggering controlled by rear panel <b>Ext Trig</b> connector.</li>
+            <li class="IndentTight" value="3">Manual: initiates one sweep or  burst each time you press <b>[Trigger]</b>. Continue pressing <b>[Trigger]</b> to re-trigger instrument.</li>
+            <li class="IndentTight" value="4">Timer: issues one or more triggers a fixed time amount apart.</li>
+        </ul>
+        <p>If sweep or burst is on, pressing <b>[Trigger]</b> displays the trigger menu. An illuminated <b>[Trigger]</b> key (solid or blinking) indicates that one or both channels are in awaiting a manual trigger. Solid illumination occurs when trigger menu is selected, and flashing illumination occurs when trigger menu is not selected. The <b>[Trigger]</b>  key is disabled when instrument is in remote.</p>
+        <p>Pressing <b>[Trigger]</b> when it is solidly illuminated causes a manual trigger. Pressing <b>[Trigger]</b> when it is flashing selects the trigger menu; a second press causes a manual trigger.</p>
+        <h2><a name="Store_Instrument_State"></a>Store Instrument State<a name="kanchor419"></a></h2>
+        <p>You can store instrument states in any number of state files, (extension .sta). You can do this for backup purposes, or you can save your state to a USB drive and load it on another instrument  to have instruments with matching configurations. A stored state contains the selected function, frequency, amplitude, DC offset, duty cycle, symmetry, and any modulation parameters in use. The instrument does not store volatile arbitrary waveforms.</p>
+        <ol>
+            <li class="IndentTight" value="1">Select the desired storage location.<br /><img src="../_Graphics_/Button%20-%20System.png" alt="System key" /><img src="../_Graphics_/Softkey%20-%20Store-Recall.png" alt="Store - Recall softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Store%20State.png" alt="Store State softkey" /></li>
+            <li class="IndentTight" value="2">Specify the name for the selected location.<br /><img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /><br />To add characters, press the right-cursor key until the cursor is to the right of the existing name and then turn the knob. To delete a character, rotate the knob until you get to the blank character before the capital A. To delete all characters from the cursor position to the end of the line, press <b>[+/-]</b>. You can enter numbers directly from the numeric keypad.</li>
+            <li class="IndentTight" value="3">Store the instrument state.<br /><img src="../_Graphics_/Softkey%20-%20Store%20State%20(End).png" alt="Store State softkey" /><br /><br /></li>
+        </ol>
+        <h3>To restore (retrieve) a stored state:<br /><img src="../_Graphics_/Button%20-%20System.png" /><img src="../_Graphics_/Softkey%20-%20Store-Recall.png" alt="Store - Recall softkey" /> <img src="../_Graphics_/Softkey%20-%20Recall%20State.png" alt="Recall State softkey" /></h3>
+        
+    </body>
+</html>

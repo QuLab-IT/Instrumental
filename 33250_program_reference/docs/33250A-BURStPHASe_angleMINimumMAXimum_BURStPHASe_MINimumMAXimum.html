@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>BURSt:PHASe {&lt;angle&gt;|MINimum|MAXimum} BURSt:PHASe? [MINimum|MAXimum] </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-BURStINTernalPERiod_secondsMINimumMAXimum__BURStINTernalPERiod_M.html" />
+<link rel="next" title="Next" href="33250A-nz.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1196196"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">BURSt:PHASe </span>{&lt;<span style="font-style: italic">angle</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>}<br /><span style="font-weight: bold">BURSt:PHASe? </span>[<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>] 
+</h2>
+<a name="wp1139065"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 10pt; margin-left: 0pt; margin-right: 0pt; margin-top: 1pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the starting phase for the burst in degrees or radians as specified by&#160;the previous UNIT:ANGL command. Select&#160;from -360 degrees to +360&#160;degrees or -2<span style="font-family: Symbol">p</span> to +2<span style="font-family: Symbol">p</span> radians. The default is 0 degrees (0 radians). MIN = -360 degrees (-2<span style="font-family: Symbol">p </span>radians). MAX = +360 degrees (+2<span style="font-family: Symbol">p</span>). The&#160;:PHAS? query returns the starting phase in degrees or radians. 
+</div>
+<a name="wp1326564"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	For sine, square, and ramp waveforms, 0 degrees is the point at which the waveform crosses zero volts (or the dc offset value) in a positive-going direction. For arbitrary waveforms, 0 degrees is the first waveform point downloaded to memory. This command has no effect on pulse or noise waveforms. 
+</div>
+<a name="wp1326623"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The burst phase is also used in the <span style="font-style: italic">gated</span> burst mode. When&#160;the gate signal goes <span style="font-style: italic">false</span>, the current waveform cycle is completed and then the function generator stops. The output will remain at the voltage level corresponding to the starting burst phase.
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

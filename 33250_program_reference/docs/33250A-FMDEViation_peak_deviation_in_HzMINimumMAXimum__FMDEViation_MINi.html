@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>FM:DEViation {&lt;peak deviation in Hz&gt;|MINimum|MAXimum}  FM:DEViation? [MINimum|MAXimum]</title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-FMINTernalFREQuency_frequencyMINimumMAXimum__FMINTernalFREQuency.html" />
+<link rel="next" title="Next" href="33250A-FMSTATe_OFFON__FMSTATe.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1329016"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">FM:DEViation</span> {&lt;<span style="font-style: italic">peak deviation in Hz</span>&gt;|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>} <br /><span style="font-weight: bold">FM:DEViation?</span> [<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>]
+</h2>
+<a name="wp1390502"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Set the peak frequency deviation in hertz. This value represents the variation in frequency of the <span style="font-style: italic">modulating</span> waveform from the carrier frequency. Select any value from 5&#160;Hz to 40.05 MHz (limited to 550&#160;kHz for ramps and 12.55 MHz for arbitrary waveforms). The default is 100&#160;Hz. MIN = 5&#160;Hz. MAX = based on the frequency of the carrier waveform as shown below. The :DEV? query returns the deviation in&#160;hertz.<br /><br />&#160;Max. Deviation&#160;=&#160;<img src="images/33250-FMDEViation_peak_deviation_in_HzMINimumMAXimum__FMDEViation_MINi.jpg" height="34" width="51" id="wp1412453" border="0" hspace="0" vspace="0"/>&#160;&#160;					 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span style="font-style: italic">&#160;&#160;&#160;&#160;&#160;For Carrier &lt; 40 MHz<br /><br /><br /></span>&#160;Max. Deviation&#160;=&#160;<img src="images/33250-FMDEViation_peak_deviation_in_HzMINimumMAXimum__FMDEViation_MINitm.jpg" height="34" width="165" id="wp1390507" border="0" hspace="0" vspace="0"/>&#160; <span style="font-style: italic">For Carrier &gt; 40 MHz<br /></span>
+</div>
+<a name="wp1357963"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The <span style="font-style: italic">carrier frequency</span> must always be greater than or equal to the deviation. If you attempt to set the deviation to a value greater than the carrier frequency (with FM enabled), the&#160;function generator will automatically adjust the deviation to the maximum value allowed with the present carrier frequency. <span style="font-style: italic">From the remote interface, a&#160;&quot;Data out of range&quot; error will be generated and the deviation will be&#160;adjusted as&#160;described. </span>
+</div>
+<a name="wp1142159"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The sum of the <span style="font-style: italic">carrier frequency</span> and deviation must be less than or equal to the maximum frequency for the selected function <span style="font-style: italic; font-weight: bold">plus 100 kHz</span> (80.1 MHz for sine and square, 1.1&#160;MHz for ramp, and 25.1 MHz for arbitrary waveforms). If you attempt to set the deviation to a value that is not valid, the function generator will automatically adjust it to the maximum value allowed with the present carrier frequency. <span style="font-style: italic">From&#160;the remote interface, a&#160;&quot;Data out of range&quot; error will be generated and the deviation will be&#160;adjusted as described. </span>
+</div>
+<a name="wp1308621"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If the deviation causes the carrier waveform to exceed a frequency boundary for the current duty cycle (square waveform only), the&#160;function generator will automatically adjust the duty cycle to the maximum value allowed with the present carrier frequency. <span style="font-style: italic">From the remote interface, a&#160;&quot;Settings conflict&quot; error will be generated and the duty cycle will be&#160;adjusted as described. </span>
+</div>
+<a name="wp1357314"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you select the <span style="font-style: italic">External</span> modulating source (FM:SOUR EXT command), the deviation is controlled by the ±5V signal level present on the rear-panel <span style="font-style: italic">Modulation In </span>connector. For example, if you have set the frequency deviation to 100&#160;kHz, then a +5V signal level corresponds to a 100&#160;kHz increase in frequency. Lower external signal levels produce less deviation and negative signal levels reduce the frequency below the carrier frequency. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

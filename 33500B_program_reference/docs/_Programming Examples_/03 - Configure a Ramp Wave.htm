@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Programming Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Configure a Ramp Wave</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Configure a Ramp Wave<a name="kanchor369"></a></h1>
+        <h2>Description
+        </h2>
+        <p class="IndentTight">A ramp wave has amplitude, offset, and phase relative to sync pulse. It also has symmetry for creating triangular and other similar waveforms. Its amplitude and offset can also be set using high and low voltage values.</p>
+        <h2>Example</h2>
+        <p class="IndentTight"> The following waveform can be set up with the series of SCPI commands, where high and low can be used in place of <a href="../__I_SCPI/VOLTage_Subsystem.htm#VOLTage">SOUR:VOLT</a> and <a href="../__I_SCPI/VOLTage_Subsystem.htm#VOLTage_OFFSet">SOUR:VOLT:OFFS</a>.</p>
+        <p class="IndentTight">
+            <img src="../_Graphics_/Ramp.png" />
+        </p>
+        <p class="IndentTight">The following commands produce the ramp wave shown above.</p>
+        <p class="Shaded">FUNCtion RAMP<br />FUNCtion:RAMP:SYMMetry 25<br />FREQ +1.0E+03<br />VOLTage +2.0<br />VOLTage:OFFSet +1.0<br />OUTP 1<br /></p>
+        <h2>Remarks</h2>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Ramp frequency is limited to 200 kHz.</li>
+            <li class="IndentTight" value="2">Although period can be adjusted from the instrument's front panel, there is no SOUR:FUNC:RAMP:PER or SOUR:PER command that can be used in addition to <a href="../__I_SCPI/FREQuency_Subsystem.htm#FREQuency">SOUR:FREQ</a>.</li>
+        </ul>
+        
+    </body>
+</html>

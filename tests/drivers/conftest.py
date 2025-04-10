@@ -62,7 +62,7 @@ def pytest_runtest_setup(item):
     global current_instrument
     inst_key = inst_key_from_item(item)
     params = instruments[inst_key]
-    current_instrument = instrument(params)
+    current_instrument = instrument(None, **params)
 
 
 @pytest.fixture(scope="class")

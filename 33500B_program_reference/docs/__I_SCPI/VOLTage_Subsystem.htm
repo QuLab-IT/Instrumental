@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="VOLTage Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>VOLTage Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>VOLTage Subsystem Introduction<a name="kanchor355"></a></h1>
+        <p>The VOLTage subsystem sets parameters related to output voltage.</p>
+        <h2>Example</h2>
+        <p>The following is a typical procedure using the VOLTage subsystem.</p>
+        <ol>
+            <li class="IndentTight" value="1"><b>Select the waveform shape, amplitude and offset:</b> Use <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> or the  equivalent <a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion</a>, <a href="FREQuency_Subsystem.htm#FREQuency">FREQuency</a>, <a href="#VOLTage">VOLTage</a>, and <a href="#VOLTage_OFFSet">VOLTage:OFFSet</a> commands to select the function, frequency, amplitude, and offset.<br /></li>
+            <li class="IndentTight" value="2"><b>Set units for output amplitude:</b><a href="#VOLTage_UNIT">VOLTage:UNIT</a>
+            </li>
+            <li class="IndentTight" value="3"><b>Set output amplitude:</b><a href="#VOLTage">VOLTage</a>
+            </li>
+            <li class="IndentTight" value="4"><b>Set DC offset voltage:</b><a href="#VOLTage_OFFSet">VOLTage:OFFSet</a>
+            </li>
+            <li class="IndentTight" value="5"><b>Set high and low voltage level:</b><a href="#VOLTage_HIGH">VOLTage:HIGH</a> and <a href="#VOLTage_LOW">VOLTage:LOW</a></li>
+            <li class="IndentTight" value="6"><b>Select output voltage limits to protect device under test (DUT):</b><a href="#VOLTage_LIMit_HIGH">VOLTage:LIMit:HIGH</a>, <a href="#VOLTage_LIMit_LOW">VOLTage:LIMit:LOW</a>, and <a href="#VOLTage_LIMit_STATe">VOLTage:LIMit:STATe</a></li>
+            <li class="IndentTight" value="7"><b>Select status of auto-ranging for all output functions:</b><a href="#VOLTage_RANGe_AUTO">VOLTage:RANGe:AUTO</a>
+            </li>
+            <li class="IndentTight" value="8"><b>Set voltage coupling to lock amplitude and offset of the channels together (2-channel instruments only):</b><a href="#VOLTage_COUPle">VOLTageLCOUPle[:STATe]</a>
+            </li>
+        </ol>
+        <p>This example demonstrates the procedure outlined above:</p>
+        <p class="Shaded">SOURce1:FUNCtion SQU<br />SOURce1:FREQuency +1.0E+06<br />SOURce1:VOLTage +0.5<br />SOURce1:VOLTage:OFFSet +0.5<br />SOURce1:FUNCtion:SQUare:PERiod +1.0E-06<br />SOURce1:FUNCtion:PULSe:PERiod +1.0E-06<br />SOURce1:VOLTage:LIMit:LOW +0.0<br />SOURce1:VOLTage:LIMit:HIGH +1.0<br />SOURce1:VOLTage:LIMit:STATe 1<br />OUTP1 ON<br />SOURce2:FUNCtion SIN<br />SOURce2:FREQuency +1.0E+06<br />SOURce2:VOLTage +2.0<br />SOURce2:VOLTage:OFFSet +0.0<br />SOURce2:VOLTage:LIMit:LOW -1.0<br />SOURce2:VOLTage:LIMit:HIGH +1.0<br />SOURce2:VOLTage:LIMit:STATe 1<br />OUTP2 ON</p>
+        <h2><a name="kanchor356"></a><a name="VOLTage"></a>[SOURce[1|2]:]VOLTage {&lt;<i>amplitude</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]VOLTage?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets output amplitude.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1 mVpp to 10 Vpp into 50 &#937;, default 100 mVpp</td>
+                    <td class="BodyD-Column1-Body1">+5.0000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output amplitude to 5 Vpp:<br />VOLT 5 Vpp</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">The relationship between offset voltage and output amplitude is shown below. Vmax is the maximum peak voltage for the selected output termination (5 V for a 50 &#937; load or 10 V for a high-impedance load).<br /><br />|Voffset| &lt; Vmax - Vpp/2<br /><br />If the specified offset voltage is not valid, the instrument will adjust it to the maximum DC voltage allowed with the specified amplitude.  From the remote interface, a "Data out of range" error will also be generated.</li>
+            <li class="IndentTight" value="2"><i>Differences between remote and front panel operation:</i>
+                <br style="font-style: italic;" />
+            </li>
+            <li class="IndentTight2" value="3"><i>Remote Interface:</i> Setting amplitude from the remote interface can change the offset in order to achieve the desired amplitude. The instrument will generate either a "Data out of range" or "Settings conflict" error. If the specified offset voltage is not valid, the instrument adjusts it to the maximum allowed with the specified amplitude.</li>
+            <li class="IndentTight2" value="4"><i>Front Panel:</i> Setting amplitude from the front panel will not change the offset setting.  If the specified amplitude is not valid, the instrument clips it to the maximum amplitude allowed with the current offset and generates a "Data out of range" error.</li>
+            <li class="IndentTight" value="5"><i>Limits Due to Output Termination:</i> If the amplitude is 10 Vpp and you change the output termination setting from 50 &#937; to "high impedance" (<a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD INF</a>), the displayed amplitude doubles to 20 Vpp. Changing from "high impedance" to 50 &#937; halves the displayed amplitude. The output termination setting does not affect the actual output voltage; it only changes the values displayed and queried from the remote interface.  Actual output voltage depends on the connected load.</li>
+            <li class="IndentTight" value="6"><i>Limits due to Output Coupling:</i>
+            </li>
+            <li class="IndentTight2" value="7"><i>Differences between remote and front panel operation:&#160;</i>If two channels are coupled, both channels' amplitude limitations will be checked before a change in amplitude is executed.  If a change in output amplitude would exceed a LIMIT for either channel, or exceed the instrument's output specifications for either channel:</li>
+            <li class="IndentTight3" value="8"><b>Remote interface:</b> The instrument will first adjust the offset, then if necessary, the amplitude of that channel to comply with the voltage limits or specification. The instrument will generate either a "Data out of range" or "Settings conflict" error.</li>
+            <li class="IndentTight3" value="9"><b>Front panel:</b> The instrument will clip the amplitude value to the maximum value with the current offset setting. A "Data out of range" error will be generated.</li>
+            <li class="IndentTight" value="10"><i>Specifying Voltage Units:</i> You can set the output amplitude in Vpp, Vrms, or dBm by specifying the units as part of the VOLTage command VOLT 3.0 VRMS.</li>
+        </ul>
+        <p class="WithinList">Use <a href="#VOLTage_UNIT">VOLTage:UNIT</a> to specify output units for all subsequent commands.</p>
+        <p class="WithinList" style="margin-top: 14pt;">You cannot specify output amplitude in dBm if output termination is set to high impedance.The units are automatically converted to Vpp.</p>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Limits Due to Units Selection:</i>Amplitude limits are sometimes determined by the output units selected. This may occur when the units are Vrms or dBm due to the differences in various functions' crest factors. For example, if you change a 5 Vrms square wave (into 50 &#937;) to a sine wave, the instrument will adjust the amplitude to 3.536 Vrms (the upper limit for sine in Vrms). The remote interface will also generate a "Settings conflict" error.</li>
+            <li class="IndentTight" value="2">Arbitrary Waveform Limitations: For arbitrary waveforms, amplitude is limited if the waveform data points do not span the full range of the output DAC (Digital-to-Analog Converter). For example, the built-in "Sinc" waveform does not use the full range of values, so its maximum amplitude is limited to 6.087 Vpp (into 50 &#937;).</li>
+            <li class="IndentTight" value="3">
+                <p>Changing amplitude may briefly disrupt output at certain voltages due to output attenuator switching. The amplitude is controlled, however, so the output voltage will never exceed the current setting while switching ranges. To prevent this disruption, disable voltage autoranging using  <a href="#VOLTage_RANGe_AUTO">VOLTage:RANGe:AUTO OFF</a>. The <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> command automatically enables autoranging.</p>
+            </li>
+            <li class="IndentTight" value="4">You can also set the amplitude (with an associated offset voltage) by specifying a high level (<a href="#VOLTage_HIGH">VOLTage:HIGH</a>) and low level (<a href="#VOLTage_LOW">VOLTage:LOW</a>). For example, if you set the high level to +2 V and the low level to -3 V, the resulting amplitude is 5 Vpp, with a -500 mV offset.</li>
+            <li class="IndentTight" value="5">To output a DC voltage level, select the DC voltage function (<a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion DC</a>) and then set the offset voltage (<a href="#VOLTage_OFFSet">VOLTage:OFFSet</a>). Valid values are between ±5 VDC into 50 &#937; or ±10 VDC into an open circuit. While the instrument is in DC mode, setting amplitude has no effect.</li>
+        </ul>
+        <h2><a name="kanchor357"></a><a name="VOLTage_COUPle"></a>[SOURce[1|2]:]VOLTage:COUPle[:STATe] 
+{ON|1|OFF|0}<br />[SOURce[1|2]:]VOLTage:COUPle[:STATe]?</h2>
+        <p class="IndentTight">Enables or disables the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument. The command applies to both channels; the SOURce keyword is ignored.<br /><br /></p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Enable voltage coupling:<br />VOLT:COUP ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="kanchor358"></a><a name="kanchor359"></a><a name="VOLTage_HIGH"></a>[SOURce[1|2]:]VOLTage:HIGH {&lt;<i>voltage</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]VOLTage:HIGH?  [{MINimum|MAXimum}]<br /><br /><a name="VOLTage_LOW"></a>[SOURce[1|2]:]VOLTage:LOW {&lt;<i>voltage</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]VOLTage:LOW?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Set the waveform's high and low voltage levels.</p>
+        <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">±5 VDC into 50 &#937;, as long as HIGH is at least 1 mV greater than LOW. Defaults: HIGH +50 mV, LOW&#160;-50 mV.</td>
+                    <td class="BodyD-Column1-Body1">+4.000000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set high voltage level to 4 V:<br />VOLT:HIGH 4</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Limits Due to Amplitude:</i> You can set the voltage levels to a positive or negative value with the restrictions shown below. Vpp is the maximum peak-to-peak amplitude for the selected output termination (10 Vpp  into 50 &#937; or 20 Vpp into an open circuit).<br /><br />&#160;&#160;&#160;&#160;&#160;V<sub>high</sub> 
+ – V<sub>low</sub><span style="font-family: Symbol, serif;">£</span> 
+ Vpp (max) <b>and</b> V<sub>high</sub>, 
+ V<sub>low</sub><span style="font-family: Symbol, serif;">£ 
+ </span>Vpp (max)/2</li>
+            <li class="IndentTight" value="2"><i>Differences between remote and front panel operation:&#160;</i>
+            </li>
+            <li class="IndentTight2" value="3"><b>Remote Interface:</b> Setting the high or low level from the remote interface can change the high level or low level to achieve the desired setting.  In this case either a "Data out of range" or "Settings conflict" error will occur.  If the high level is set below the low level, the instrument will set the low level 1 mV less than the high level.  If the high level is set below the LOW limit or the instrument output specifications, the low level will be set to the LOW limit or instrument output specification and the high level will be set 1 mV above  the low level. A similar set of rules applies if the low level is set incorrectly.</li>
+            <li class="IndentTight2" value="4"><b>Front Panel:</b> Setting the high or low level from the front panel may clip that level setting in order to achieve the desired level setting, and a "Data out of range" error will be generated. The high level cannot be set below the low level from the front panel.</li>
+            <li class="IndentTight" value="5">Setting the high and low levels also sets the waveform amplitude and offset. For example, if you set the high level to +2 V and the low level to -3 V, the resulting amplitude is 5 Vpp, with a -500 mV offset.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Limits Due to Output Termination:</i>If the amplitude is 10 Vpp and you change the output termination setting from 50 &#937; to "high impedance" (<a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD INF</a>), the displayed amplitude doubles to 20 Vpp. Changing from "high impedance" to 50 &#937; halves the displayed amplitude. The output termination setting does not affect the actual output voltage; it only changes the values displayed and queried from the remote interface.  Actual output voltage depends on the connected load.</li>
+            <li class="IndentTight" value="2"><i>Limits due to VOLTage:LIMit:STATe:</i> If voltage limits are enabled, the level settings are checked against the specified limits (<a href="#VOLTage_LIMit_HIGH">VOLTage:LIMit:HIGH</a>, <a href="#VOLTage_LIMit_LOW">VOLTage:LIMit:LOW</a>) before a level change is executed. If an output level change would exceed a LIMIT setting, the level is clipped to the maximum (or minimum) value allowed that will not exceed the LIMit setting and a "Settings conflict" error will be generated.</li>
+            <li class="IndentTight" value="3"><i>Limits due to Output Coupling:</i> If two channels are coupled, limitations are checked on both channels before a change in level is executed. If a change in level would exceed a LIMIT setting or exceed the instrument's output specifications for either channel, the level is clipped to the maximum (or minimum) value allowed that will not exceed the LIMit setting and a "Settings conflict" error will be generated.</li>
+            <li class="IndentTight" value="4">To invert the waveform relative to the offset voltage, use <a href="OUTPut_Subsystem.htm#OUTPut_POLarity">OUTPut[1|2]:POLarity</a>.</li>
+        </ul>
+        <h2><a name="kanchor360"></a><a name="kanchor361"></a><a name="VOLTage_LIMit_HIGH"></a>[SOURce[1|2]:]VOLTage:LIMit:HIGH {&lt;<i>voltage</i>&gt;|MAXimum|MINimum}<br />[SOURce[1|2]:]VOLTage:LIMit:HIGH? {MAXimum|MINimum}<br /><br /><a name="VOLTage_LIMit_LOW"></a>[SOURce[1|2]:]VOLTage:LIMit:LOW {&lt;<i>voltage</i>&gt;|MAXimum|MINimum}<br />[SOURce[1|2]:]VOLTage:LIMit:LOW? {MAXimum|MINimum}?</h2>
+        <p class="IndentTight">Sets the high and low limits for output voltage.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>±5 VDC into 50 &#937;, as long as HIGH is at least 1 mV greater than LOW. Defaults: HIGH +50 mV, LOW&#160;-50 mV.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">+5.0000000000000E+00</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set channel 1 output high limit to 5 V:<br />VOLT:LIMIT:HIGH 5.0<br />VOLT:LIMIT:STATE ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">For voltage limits to be in effect, <a href="#VOLTage_LIMit_STATe">VOLTage:LIMit:STATe</a> must be ON. If this is the case, and the high limit is set below the high value of the signal or the low limit is set above the low value of the signal, the relevant limit will be clipped to the high or low value of the signal. The instrument will generate either a "Data out of range" or "Settings conflict" error.</li>
+            <li class="IndentTight" value="2">The high limit sets the highest output voltage allowed to be set, including  
+ DC Offset and peak amplitude. It is set in reference to the current <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPUT[1|2]:LOAD</a> setting. If the specified LOAD impedance is not present at the instrument's output, then the output limit may not represent the actual voltages at the output connector. For example, if the output impedance is set to 50 &#937;, but the actual load is high impedance, then the actual  output peak voltage may be up to twice the specified limit voltage.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>Specifying Voltage Units:</i> You can set the output limit voltage only in volts.</li>
+            <li class="IndentTight" value="2">When <a href="#VOLTage_COUPle">VOLTage:COUPle[:STATe]</a> is ON, and <a href="#VOLTage_LIMit_STATe">VOLTage:LIMit:STATe</a> is ON, voltage limit settings on both channels affect maximum amplitude and offset voltage settings on both channels. The most restrictive combination of high and low limits from either channel is used.</li>
+        </ul>
+        <h2><a name="kanchor362"></a><a name="VOLTage_LIMit_STATe"></a>[SOURce[1|2]:]VOLTage:LIMit:STATe {ON|1|OFF|0}<br />[SOURce[1|2]:]VOLTage:LIMit:STATe?</h2>
+        <p class="IndentTight">Enables or disables output amplitude voltage limits.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{ON|1|OFF|0}, default OFF</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set and enable ±2.5 V output limits on channel 1:<br />VOLT:LIM:HIGH 2.5<br />VOLT:LIM:LOW -2.5<br />VOLT:LIM:STAT ON</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">When this is turned ON, if the present settings of amplitude and offset exceed the limits, then the limits will be disabled. The instrument will generate either a  "Settings conflict" error.</li>
+            <li class="IndentTight" value="2">When <a href="#VOLTage_COUPle">VOLTage:COUPle[:STATe]</a> is ON, and <a href="#VOLTage_LIMit_STATe">VOLTage:LIMit:STATe</a> is ON, voltage limit settings on both channels affect maximum amplitude and offset voltage settings on both channels. The most restrictive combination of high and low limits from either channel is used.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits are set in reference to the current setting of <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a>. If the specified LOAD impedance is not present at the instrument's output, then the output limit may not represent the actual voltages at the output connector. For example, if the output impedance is set to 50 &#937;, but the actual load is high impedance, then the actual  output peak voltage may be up to twice the specified limit voltage.</li>
+        </ul>
+        <h2><a name="kanchor363"></a><a name="VOLTage_OFFSet"></a>[SOURce[1|2]:]VOLTage:OFFSet {&lt;<i>offset</i>&gt;|MINimum|MAXimum}<br />[SOURce[1|2]:]VOLTage:OFFSet?  [{MINimum|MAXimum}]</h2>
+        <p class="IndentTight">Sets DC offset voltage.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 78px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">± 5 VDC into 
+ 50 &#937;, default 0</td>
+                    <td class="BodyD-Column1-Body1">+1.0000000000000E-01</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set offset voltage to 100 mV:<br />VOLT:OFFS 100 mV</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1"><i>The relationship between offset voltage and output amplitude is shown below.<br /><br />|Voffset| &lt; Vmax - Vpp/2</i>
+            </li>
+            <li class="IndentTight" value="2"><i>Differences between remote and front panel operation:</i>
+            </li>
+            <li class="IndentTight2" value="3"><b>Remote Interface:</b> Setting the offset from the remote interface can change the amplitude in order to achieve the desired offset setting.  The instrument will generate either a "Data out of range" or "Settings conflict" error.</li>
+            <li class="IndentTight2" value="4"><b>Front Panel:</b> Setting the offset from the front panel will not change the amplitude in order to achieve the desired offset setting.  If the specified offset is not valid, the instrument will clip it to the maximum offset allowed with the current amplitude and generate a "Data out of range" error.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Limits Due to Output Termination: The offset range depends on the output termination setting. For example, if you set offset to 100 mVDC and then change output termination from 50 &#937; to "high impedance," the offset voltage displayed on the front panel doubles to 200 mVDC (no error is generated). If you change from "high impedance" to 50 &#937;, the displayed offset voltage will be halved. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details. Changing the output termination setting does not change the voltage present at the output terminals of the instrument. This only changes the displayed values on the front panel and the values queried from the remote interface. The voltage present at the instrument's output depends on the load connected to the instrument. See <a href="OUTPut_Subsystem.htm#OUTPut_LOAD">OUTPut[1|2]:LOAD</a> for details. </li>
+            <li class="IndentTight" value="2"><i>Limits due to Output Coupling:&#160;</i> If two channels are coupled, limitations of setting offset will be checked on both channels before a change in offset is executed. If a change in offset would exceed a LIMIT setting, or exceed the instrument's output specifications for either channel:</li>
+            <li class="IndentTight2" value="3"><i>Remote Interface:</i> First the amplitude and then if necessary, the offset of that channel will be adjusted to comply with the voltage limits or specification. The instrument will generate either a "Data out of range" or "Settings conflict" error.</li>
+            <li class="IndentTight2" value="4"><i>Front panel:</i> The offset value is clipped to the maximum value allowed that will not exceed the LIMit setting, and a "Data out of range" error will be generated.</li>
+        </ul>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Arbitrary Waveform Limitations: For arbitrary waveforms, amplitude is limited if the waveform data points do not span the full range of the output DAC (Digital-to-Analog Converter). For example, the built-in "Sinc" waveform does not use the full range of values, so its maximum amplitude is limited to 6.087 Vpp (into 50 &#937;).</li>
+            <li class="IndentTight" value="2">
+                <p>Changing amplitude may briefly disrupt output at certain voltages due to output attenuator switching. The amplitude is controlled, however, so the output voltage will never exceed the current setting while switching ranges. To prevent this disruption, disable voltage autoranging using  <a href="#VOLTage_RANGe_AUTO">VOLTage:RANGe:AUTO OFF</a>. The <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> command automatically enables autoranging.</p>
+            </li>
+            <li class="IndentTight" value="3">Setting the high and low levels also sets the waveform amplitude and offset. For example, if you set the high level to +2 V and the low level to -3 V, the resulting amplitude is 5 Vpp, with a -500 mV offset.</li>
+            <li class="IndentTight" value="4">To output a DC voltage level, select the DC voltage function (<a href="FUNCtion_Subsystem.htm#FUNCtion">FUNCtion DC</a>) and then set the offset voltage (<a href="#VOLTage_OFFSet">VOLTage:OFFSet</a>). Valid values are between ±5 VDC into 50 &#937; or ±10 VDC into an open circuit. While the instrument is in DC mode, setting amplitude has no effect.</li>
+        </ul>
+        <h2><a name="kanchor364"></a><a name="VOLTage_RANGe_AUTO"></a>[SOURce[1|2]:]VOLTage:RANGe:AUTO {OFF|0|ON|1|ONCE}<br />[SOURce[1|2]:]VOLTage:RANGe:AUTO?</h2>
+        <p class="IndentTight">Disables or enables voltage autoranging 
+ for all functions. Selecting ONCE performs an immediate autorange and then turns autoranging OFF</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 142px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{OFF|0|ON|1|ONCE}, default ON</td>
+                    <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Turn voltage autoranging OFF:<br />VOLT:RANG:AUTO 0</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">In the default mode, autoranging is enabled and the instrument automatically selects the optimal settings for the output waveform generator and attenuator.</li>
+            <li class="IndentTight" value="2">With autoranging disabled (OFF), the instrument uses the instrument's current gain and attenuator settings.</li>
+            <li class="IndentTight" value="3">The <a href="APPLY_Subsystem.htm">APPLy</a> command overrides the voltage autorange 
+ setting and automatically enables autoranging (ON).</li>
+            <li class="IndentTight" value="4">Disabling autoranging eliminates 
+ momentary disruptions caused by attenuator switching while changing
+ amplitude. However, the amplitude and offset accuracy and resolution (and waveform fidelity) may be adversely affected when reducing the 
+ amplitude below the expected range change.</li>
+            <li class="IndentTight" value="5">If a <a href="#VOLTage_COUPle">VOLTage:COUPle[:STATe]</a> is ON, changing this setting on either channel changes it on both.</li>
+        </ul>
+        <h2><a name="kanchor365"></a><a name="VOLTage_UNIT"></a>[SOURce[1|2]:]VOLTage:UNIT {VPP|VRMS|DBM}<br />[SOURce[1|2]:]VOLTage:UNIT?</h2>
+        <p class="IndentTight">Selects the units for output amplitude.</p>
+        <table style="mc-table-style: url('../RegTable.css');margin-left: 0;margin-right: auto;caption-side: top;" class="TableStyle-RegTable" cellspacing="0">
+            <col class="Column-Column1" style="width: 124px;">
+            </col>
+            <col class="Column-Column1">
+            </col>
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Parameter</th>
+                    <th class="HeadD-Column1-Header1">Typical Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">{VPP|VRMS|DBM}, default VPP</td>
+                    <td class="BodyD-Column1-Body1">VPP, VRMS, or DBM</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyA-Column1-Body1" colspan="2">Set output amplitude units to Vrms:<br />VOLT:UNIT VRMS</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul type="disc" class="UL_Disc">
+            <li class="IndentTight" value="1">Does not affect offset 
+ voltage (VOLTage:OFFSet), high level (<a href="#VOLTage_HIGH">VOLTage:HIGH</a>) 
+ or low level (<a href="#VOLTage_LOW">VOLTage:LOW</a>). They all use units of volts.</li>
+            <li class="IndentTight" value="2">The instrument uses the current units 
+ selection for both front panel and remote interface operations. For example, 
+ if you select "VRMS" from the remote interface (VOLTage:UNIT VRMS), the units are displayed 
+ as "VRMS" on the front panel.</li>
+            <li class="IndentTight" value="3">Command applies to VOLTage? query results.</li>
+            <li class="IndentTight" value="4">Output units for amplitude cannot be set to dBm if the output termination is set to "high impedance." The units are automatically converted to Vpp.</li>
+            <li class="IndentTight" value="5">Arbitrary waveform sequences do not accept units of Vrms or dBm.</li>
+            <li class="IndentTight" value="6">Unless you specify the units as part of either 
+ the VOLTage command or one of the <a href="APPLY_Subsystem.htm#APPLy">APPLy</a> commands, 
+ the VOLTage:UNIT command takes precedence. 
+ For example, if you select VOLTage:UNIT VRMS and do not include units with an APPLy 
+ command, the &lt;<i>amplitude</i>&gt; in the APPLy command will be in "Vrms".</li>
+        </ul>
+        
+    </body>
+</html>

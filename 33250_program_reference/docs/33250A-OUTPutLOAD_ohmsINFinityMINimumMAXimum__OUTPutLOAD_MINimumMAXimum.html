@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>OUTPut:LOAD {&lt;ohms&gt;|INFinity|MINimum|MAXimum}  OUTPut:LOAD? [MINimum|MAXimum]</title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-OUTPut_OFFON__OUTPut.html" />
+<link rel="next" title="Next" href="33250A-OUTPutPOLarity_NORMalINVerted__OUTPutPOLarity.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1306277"> </a><h2 class="pHeading1">
+<span style="font-weight: bold">OUTPut:LOAD</span> {&lt;<span style="font-style: italic">ohms</span>&gt;|<span style="font-weight: bold">INFinity</span>|<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>} <br /><span style="font-weight: bold">OUTPut:LOAD?</span> [<span style="font-weight: bold">MINimum</span>|<span style="font-weight: bold">MAXimum</span>]
+</h2>
+<a name="wp1352827"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+Select the desired output termination (i.e., the impedance of the load attached to the output of the Agilent&#160;33250A). The specified value is used for amplitude, offset, and high/low level settings. You can set the load to any value from 1<span style="font-family: Symbol">W</span> to 10&#160;k<span style="font-family: Symbol">W</span>. MIN&#160;selects 1<span style="font-family: Symbol">W</span>. MAX selects 10 k<span style="font-family: Symbol">W</span>. INF sets the output termination to &quot;high impedance&quot; (&gt;10&#160;k<span style="font-family: Symbol">W)</span>.<span style="font-style: italic"> </span>The&#160;default is 50<span style="font-family: Symbol">W</span>. The :LOAD? query returns the current load setting in ohms or &quot;9.9E+37&quot; (for&#160;&quot;high impedance&quot;). 
+</div>
+<a name="wp1075126"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	The Agilent&#160;33250A has a fixed series output impedance of 50 ohms to the front-panel <span style="font-style: italic">Output</span> connector. If the actual load impedance is different than the value specified, the displayed amplitude, offset, and high/low levels will be incorrect. 
+</div>
+<a name="wp1352878"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you change the output termination setting, the displayed output amplitude, offset, and high/low levels are automatically adjusted (and&#160;no&#160;error will be generated). For example, if you set the amplitude to 10&#160;Vpp and then change the output termination from 50&#160;ohms to &quot;high impedance&quot;, the amplitude displayed on the function generator&#39;s front-panel will <span style="font-style: italic">double</span> to 20 Vpp. If you change from &quot;high impedance&quot; to 50&#160;ohms, the displayed amplitude will drop in half. 
+</div>
+<a name="wp1130832"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You cannot specify the output amplitude in dBm if the output termination is currently set to &quot;high impedance&quot;. The units are automatically converted to Vpp. <span style="font-style: italic">See the </span><span style="font-style: normal">VOLT:UNIT</span><span style="font-style: italic"> command on page </span><a href="33250A-VOLTageUNIT_VPPVRMSDBM__VOLTageUNIT.html"><span style="font-style: italic">165</span></a><span style="font-style: italic"> for more information. </span>
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

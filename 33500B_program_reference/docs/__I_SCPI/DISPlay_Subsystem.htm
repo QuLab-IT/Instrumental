@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="n" MadCap:tocPath="Agilent 33500 Series Operating and Service Guide|SCPI Programming Reference|Alphabetical List of SCPI Commands and Queries" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head>
+        <link href="../RegTable.css" rel="stylesheet" MadCap:stylesheetType="table" /><title>DISPlay Subsystem Introduction</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>DISPlay Subsystem<a name="kanchor96"></a></h1>
+        <p>The DISPlay subsystem controls the instrument's  display.</p>
+        <h2>Example</h2>
+        <p>The following program turns off the instrument's display and then shows a message that indicates people should not touch the instrument.</p>
+        <p class="Shaded">DISP OFF<br />DISP:TEXT "Test running. Please do not touch."</p>
+        <h2>Commands</h2>
+        <p>The DISPlay subsystem includes the following commands.</p>
+        <ul>
+            <li class="IndentTight" value="1"><a href="#DISPlay">DISPlay</a> - enables or disables display</li>
+            <li class="IndentTight" value="2"><a href="#DISPlay_FOCus">DISPlay:FOCus</a> - selects the channel displayed "in front" on a two-channel instrument</li>
+            <li class="IndentTight" value="3"><a href="#DISPlay_TEXT">DISPlay:TEXT</a> - displays text message on display</li>
+            <li class="IndentTight" value="4"><a href="#DISPlay_TEXT_CLEar">DISPlay:TEXT:CLEar</a> - clears text messages from display</li>
+            <li class="IndentTight" value="5"><a href="#DISPlay_UNIT_ARBRate">DISPlay:UNIT:ARBRate</a> - selects the arbitrary waveform rate units</li>
+            <li class="IndentTight" value="6"><a href="#DISPlay_UNIT_PULSe">DISPlay:UNIT:PULSe</a> - selects the method for specifying pulse widths</li>
+            <li class="IndentTight" value="7"><a href="#DISPlay_UNIT_RATE">DISPlay:UNIT:RATE</a> - selects the rate units for sine, square, ramp, pulse, and triangle waves</li>
+            <li class="IndentTight" value="8"><a href="#DISPlay_UNIT_SWEep">DISPlay:UNIT:SWEep</a> - selects the method for specifying sweep ranges</li>
+            <li class="IndentTight" value="9"><a href="#DISPlay_UNIT_VOLT">DISPlay:UNIT:VOLT</a> - selects the method for specifying voltage ranges</li>
+            <li class="IndentTight" value="10"><a href="#DISPlay_VIEW">DISPlay:VIEW</a> - selects the view shown on the display</li>
+        </ul>
+        <div>
+            <h2><a name="kanchor97"></a><a name="DISPlay"></a>DISPlay {ON|1|OFF|0}<br />DISPlay?</h2>
+            <p class="IndentTight">Disables or enables the  
+ front-panel display. When disabled, the front-panel display turns black, and all annunciators are disabled. However, the screen remains on.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{ON|1|OFF|0},&#160;default&#160;ON</td>
+                        <td class="BodyD-Column1-Body1">0&#160;(OFF)&#160;or&#160;1&#160;(ON)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Turn display off:<br />DISP OFF</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul type="disc" class="UL_Disc">
+                <li class="IndentTight" value="1">Disabling the display improves command execution speed from the remote interface and provides basic security. 
+</li>
+                <li class="IndentTight" value="2">Sending <a href="#DISPlay_TEXT">DISPlay:TEXT &lt;<i>string</i>&gt;</a> overrides the display state. You can display 
+ a message with the display disabled.</li>
+                <li class="IndentTight" value="3">The display is  enabled when power is cycled,  or when you return to local (front panel) operation by pressing the front-panel 
+ <b>[Local]</b> key.</li>
+            </ul>
+        </div>
+        <div>
+            <h2><a name="kanchor98"></a><a name="DISPlay_FOCus"></a>DISPlay:FOCus {CH1|CH2}</h2>
+            <p>Selects the channel that is displayed "in front" on a two-channel instrument.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{CH1|CH2}<p>Default CH1</p></td>
+                        <td class="BodyD-Column1-Body1">CH1 or CH2</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Bring channel 2 to the front:<br />DISP:FOCus CH2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2><a name="kanchor99"></a><a name="kanchor100"></a><a name="DISPlay_TEXT"></a>DISPlay:TEXT &lt;<i>string</i>&gt;<br />DISPlay:TEXT?</h2>
+            <p class="IndentTight">Displays a text message on the front-panel display. &#160;&#160;</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">Quoted string of up to 40 characters (any character on a standard keyboard), default "".</td>
+                        <td class="BodyD-Column1-Body1">"Test running. Do not touch."</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Show message on display:<br />DISP:TEXT "Test in progress..."</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul type="disc" class="UL_Disc">
+                <li class="IndentTight" value="1">Sending <a href="#DISPlay_TEXT">DISPlay:TEXT &lt;<i>string</i>&gt;</a> overrides the display state. You can display 
+ a message with the display disabled.</li>
+                <li class="IndentTight" value="2">While a message is displayed, information relating 
+ to the current instrument operation is not sent 
+ to the front-panel display.</li>
+                <li class="IndentTight" value="3">The display text is unaffected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>. It is cleared at power-on.</li>
+            </ul>
+        </div>
+        <div>
+            <h2><a name="kanchor101"></a><a name="DISPlay_TEXT_CLEar"></a>DISPlay:TEXT:CLEar</h2>
+            <p class="IndentTight">Clears the text message from the front-panel display.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">(none)</td>
+                        <td class="BodyD-Column1-Body1">(none)</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Clear message on display:<br />DISP:TEXT:CLE</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul type="disc" class="UL_Disc">
+                <li class="IndentTight" value="1">With <a href="#DISPlay">DISPlay ON</a>, DISP:TEXT:CLEar  returns the display to its normal mode.</li>
+                <li class="IndentTight" value="2">With <a href="#DISPlay">DISPlay OFF</a>, DISP:TEXT:CLEar clears the message and the display remains disabled. To enable the display, send <a href="#DISPlay">DISPplay ON</a> or press the front-panel <b>[Local]</b> key.</li>
+                <li class="IndentTight" value="3">The display text is unaffected by <a href="IEEE-488_Subsystem.htm#RST">*RST</a>. It is cleared at power-on.</li>
+            </ul>
+        </div>
+        <div>
+            <h2><a name="kanchor102"></a><a name="DISPlay_UNIT_ARBRate"></a>DISPlay:UNIT:ARBRate {SRATe|FREQuency|PERiod}</h2>
+            <p>Specifies whether the rate units for arbitrary waveforms are samples per second, (SRATe), Hz (FREQ) or seconds (PER).</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{SRATe|FREQuency|PERiod}<br />Default SRATe</td>
+                        <td class="BodyD-Column1-Body1">SRAT, FREQ, or PER</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Set the unit for arbitrary waveforms to seconds:<br />DISP:UNIT:ARBR PER</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li class="IndentTight" value="1">The frequency and period of an arbitrary waveform refer to the time that it takes to run through the entire waveform once. For example, a waveform of 200 samples running at 1 MSa/s would have a period of 0.0002 s and a frequency of 5000 Hz.</li>
+            </ul>
+        </div>
+        <div>
+            <h2><a name="kanchor103"></a><a name="DISPlay_UNIT_PULSe"></a>DISPlay:UNIT:PULse {WIDTh|DUTY}</h2>
+            <p>Selects the method for specifying pulse duration. You can specify either the width or the duty cycle.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{WIDTh|DUTY}<p>Default WIDTh</p></td>
+                        <td class="BodyD-Column1-Body1">WIDT or DUTY</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Specify pulse width as a percentage (duty cycle):<br />DISP:UNIT:PULS DUTY</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2><a name="kanchor104"></a><a name="DISPlay_UNIT_RATE"></a>DISPlay:UNIT:RATE {FREQuency|PERiod}</h2>
+            <p>Specifies whether the rate units for sine, square, ramp, pulse, and triangle waves are Hz (FREQ) or seconds (PER).</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{FREQuency|PERiod}<p>Default FREQuency</p></td>
+                        <td class="BodyD-Column1-Body1">
+                            <p>FREQ or PER</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Set the units to Hz:<br />DISP:UNIT:RATE FREQ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2><a name="kanchor105"></a><a name="DISPlay_UNIT_SWEep"></a>DISPlay:UNIT:SWEep {STARtstop|CENTerspan}</h2>
+            <p>Selects the method for specifying sweep frequency range. You can specify the range as start and stop values or as a span around a center value.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{STARtstop|CENTerspan}<p>Default STARtstop</p></td>
+                        <td class="BodyD-Column1-Body1">
+                            <p>STAR or CENT</p>
+                        </td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">
+                            <p colspan="2">The following examples both specify a sweep from 10 to 500 Hz:<br />DISP:UNIT:SWE STAR<br />FREQ:STAR 10<br />FREQ:STOP 500<br /><br />DISP:UNIT:SWE CENT<br />FREQ:SPAN 490<br />FREQ:CENT 255</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li class="IndentTight" value="1">To sweep up in frequency, set a positive frequency span; to sweep down, set a negative frequency span.</li>
+            </ul>
+        </div>
+        <div>
+            <h2><a name="kanchor106"></a><a name="DISPlay_UNIT_VOLT"></a>DISPlay:UNIT:VOLT {AMPLitudeoffset|HIGHlow}</h2>
+            <p>Selects the method for specifying voltage ranges. You can specify a voltage range as an amplitude and an offset or as high and low values.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{AMPLitudeoffset|HIGHlow}<br />Default: AMPLitudeoffset</td>
+                        <td class="BodyD-Column1-Body1">AMPL or HIGH</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">The following examples both specify a waveform voltage from 1 to 4 V:<br />DISP:UNIT:VOLT HIGH<br />VOLT:LOW 1<br />VOLT:HIGH 4<br /><br />DISP:UNIT:VOLT:AMPL<br />VOLT 3<br />VOLT OFFS 2.5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2><a name="kanchor107"></a><a name="DISPlay_VIEW"></a>DISPlay:VIEW {STANdard|TEXT|GRAPh|DUAL}</h2>
+            <p>Selects the screen layout.</p>
+            <table style="mc-table-style: url('../RegTable.css');caption-side: top;margin-left: 0;margin-right: auto;" class="TableStyle-RegTable" cellspacing="0">
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Parameter</th>
+                        <th class="HeadD-Column1-Header1">Typical Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">{STANdard|TEXT|GRAPh|DUAL}<p>Default STANdard</p></td>
+                        <td class="BodyD-Column1-Body1">STAN, TEXT, GRAP, or DUAL</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyA-Column1-Body1" colspan="2">Select the large graph display:<br />DISP:VIEW GRAP</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul>
+                <li class="IndentTight" value="1">The STANdard, TEXT, GRAPh, and DUAL keywords correspond to the <b>Standard View</b>, <b>Large Text</b>, <b>Large Graph</b>, and <b>CH1/CH2</b> softkeys on the <b>[System] &gt; System Setup &gt;&#160;Screen Layout</b> menu.</li>
+            </ul>
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:01:09" />
+    <title>The Standard Event Register </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-The_Questionable_Data_Register.html" />
+<link rel="next" title="Next" href="33250A-Status_Reporting_Commands.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1227236"> </a><h2 class="pHeading1">
+The Standard Event Register 
+</h2>
+<a name="wp1044486"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Standard Event register group reports the following types of events: power-on detected, command syntax errors, command execution errors, self-test or calibration errors, query errors, or&#160;the *OPC command has been executed. Any or all of these conditions can be reported to the Standard Event summary bit through the <span style="font-style: italic">enable register</span>. To set the enable register mask, you must write a decimal value to the register using the *ESE command. 
+</div>
+<a name="wp1044489"> </a><h2 class="pTitle">
+Bit Definitions - Standard Event Register</h2>
+<div align="left">
+<table border="1" id="wp1227654table1227570">
+  <caption></caption>
+  <tr align="left">    <td><a name="wp1227654"> </a><div class="pCellBody">
+<br />&#160;&#160;Bit Number
+</div>
+</td>
+    <td><a name="wp1227656"> </a><div class="pCellBody">
+Decimal<br />Value
+</div>
+</td>
+    <td><a name="wp1227658"> </a><div class="pCellBody">
+<br />&#160;&#160;Definition
+</div>
+</td>
+</tr>
+  <tr align="left">    <td><a name="wp1227660"> </a><div class="pCellBody">
+<span style="font-weight: bold">0</span>&#160;Operation Complete<br /><br /><br />1&#160;<span style="font-style: italic; font-weight: normal">Not Used<br /></span><span style="font-weight: bold">2</span>&#160;Query Error<br /><span style="font-weight: bold"><br /><br /><br /><br />3</span>&#160;Device Error<br /><br /><span style="font-weight: bold">4</span>&#160;Execution Error<br /><br /><span style="font-weight: bold">5</span>&#160;Command Error<br /><br />6&#160;<span style="font-style: italic; font-weight: normal">Not Used<br /></span><span style="font-weight: bold">7</span>&#160;Power On
+</div>
+</td>
+    <td><a name="wp1227662"> </a><div class="pCellBody">
+<span style="font-weight: bold">1<br /><br /><br /></span>2<br /><span style="font-weight: bold">4<br /><br /><br /><br /><br />8<br /><br />16<br /><br />32<br /><br /></span>64<br /><span style="font-weight: bold">128</span>
+</div>
+</td>
+    <td><a name="wp1227664"> </a><div class="pCellBody">
+All commands prior to and including *OPC &#160;have completed <span style="text-decoration: underline">and</span> the overlapped command &#160;(e.g., *TRG for burst) has completed.<br /><span style="font-style: italic">Not Used. Returns &quot;0&quot;.<br /></span>The instrument tried to read the output buffer &#160;but it was empty. Or, a new command line &#160;was received before a previous query has &#160;been read. Or, both the input and output &#160;buffers are full.<br />A self-test, cal, or other device-specific error &#160;has occurred (see chapter&#160;5).<br />An execution error has occurred <br />&#160;(see chapter 5).<br />A command syntax error has occurred <br />&#160;(see chapter 5). <br /><span style="font-style: italic">Not Used. Returns &quot;0&quot;.<br /></span>Power has been cycled on since the last time<br />&#160;the event register was read or cleared.
+</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 class="pTitle">
+
+</h2>
+<hr />
+<a name="wp1227038"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Standard <span style="font-style: italic">event register</span> is cleared when: 
+</div>
+<a name="wp1044492"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You execute the *CLS command. 
+</div>
+<a name="wp1044493"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You query the event register using the *ESR? command. <br />
+</div>
+<a name="wp1044494"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 6pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+The Standard Event <span style="font-style: italic">enable register</span> is cleared when: 
+</div>
+<a name="wp1044495"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You execute the *ESE 0 command. 
+</div>
+<a name="wp1227069"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	You turn the power on and have previously configured the function generator to clear the enable register using the *PSC 1 command. Note that the enable register <span style="font-style: italic">will not</span> be cleared at power-on if you have configured the function generator using the *PSC 0 command. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

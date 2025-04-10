@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 8.0.5157.0" />
+    <meta name="TEMPLATEBASE" content="Dynamic HTML" />
+    <meta name="LASTUPDATED" content="08/25/10 16:00:29" />
+    <title>Additional Information on Arbitrary Waveforms </title>
+    <link rel="StyleSheet" href="document.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" media="all" />
+<link rel="contents" title="Table of Contents" href="TOC.html" />
+<link rel="index" title="Index" href="IX.html" />
+<link rel="first" title="First" href="TOC.html" />
+<link rel="last" title="Last" href="IX.html" />
+<link rel="previous" title="Previous" href="33250A-gw.html" />
+<link rel="next" title="Next" href="33250A-System-Related_Operations.html" />
+
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/seealso.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      var  WebWorksSeeAlso = new WebWorksSeeAlso_Object();
+     // -->
+    </script>
+  </head>
+
+  <body>
+
+    
+
+    <p>
+      
+    </p>
+    <hr align="left" />
+
+    <blockquote>
+<a name="wp1068063"> </a><h2 class="pHeading1">
+Additional Information on Arbitrary Waveforms 
+</h2>
+<a name="wp1046451"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	As a shortcut to determine which arbitrary waveform is selected, press<img src="images/arb_keyjk.jpg" height="26" width="33" id="wp1069530" border="0" hspace="0" vspace="0"/>. A temporary message is displayed on the front panel.
+</div>
+<a name="wp1046456"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	In addition to creating a new arbitrary waveform from the front panel, you can also edit any existing user-defined waveforms. You can edit waveforms that were created either from the front panel or from the remote interface. However, you cannot edit any of the five built-in arbitrary waveforms.
+</div>
+<a name="wp1073560"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	Press the <span style="font-weight: bold">Edit Wform</span> softkey to edit any of the arbitrary waveforms stored in non-volatile memory or the waveform currently stored in volatile memory. While editing an existing waveform, please note the following interactions.
+</div>
+<a name="wp1069659"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 30pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you <span style="font-style: italic">increase</span> the cycle period, some points could potentially match existing points. The waveform editor will preserve the earliest points and remove all duplicates. 
+</div>
+<a name="wp1069660"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 30pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you <span style="font-style: italic">decrease</span> the cycle period, the waveform editor will remove all points that were previously defined beyond the new period. 
+</div>
+<a name="wp1069661"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 30pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you <span style="font-style: italic">increase</span> the voltage limits, there will be no change in the voltage levels of any existing points but there may be some loss of vertical resolution. 
+</div>
+<a name="wp1069662"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 30pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you <span style="font-style: italic">decrease</span> the voltage limits, some of the existing points could potentially exceed the new limits. The waveform editor will reduce the voltage levels of such points to equal the new limits. 
+</div>
+<a name="wp1069682"> </a><div style="color: #000000; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 7pt; margin-left: 15pt; margin-right: 0pt; margin-top: 8pt; text-align: left; text-decoration: none; text-indent: -15pt; text-transform: none">
+·	If you select an arbitrary waveform as the <span style="font-style: italic">modulating</span> waveshape for&#160;AM or FM, the waveform is automatically limited to 8K points. Extra&#160;waveform points are removed using decimation. 
+</div>
+    </blockquote>
+
+    <hr />
+
+    
+
+    
+  </body>
+</html>

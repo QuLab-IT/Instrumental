@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:id="AM Subsystem Introduction" MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="In Progress" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="Agilent_33500_Series_Operating_and_Service_Guide.xml" MadCap:SearchType="Stem">
+    <head><title>Sum Modulation</title>
+        <link rel="StyleSheet" href="../dds_best_rh.css" />
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        <h1>Sum Modulation<a name="kanchor430"></a></h1>
+        <p>Sum modulation adds a modulating signal to any carrier waveform; it is typically used to add gaussian noise to a carrier. The modulating signal is added to the carrier as a percentage of carrier waveform amplitude.</p>
+        <h2><a name="Enable_Sum"></a>Enable Sum</h2>
+        <ul>
+            <li class="IndentTight" value="1">To avoid multiple waveform changes, enable Sum after configuring other modulation parameters.</li>
+            <li class="IndentTight" value="2"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Modulate%20Type.png" alt="(Modulation) Type softkey (AM)" /> <img src="../_Graphics_/Softkey%20-%20Sum.png" alt="Sum softkey" /><br /><img src="../_Graphics_/Softkey%20-%20Modulate%20OFF%20On.png" alt="Modulate softkey (Off)" /> <img src="../_Graphics_/SoftkeyNF%20-%20Modulate%20Off%20ON.png" alt="Modulate softkey (ON)" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b> <a href="../__I_SCPI/SUM_Subsystem.htm#SUM_STATe">SUM:STATe {OFF|ON}</a></li>
+        </ul>
+        <h2><a name="Modulating_Waveform_Shape"></a>Modulating Waveform Shape</h2>
+        <p>The instrument accepts an internal or external modulation source.  On a two-channel instrument you can modulate one channel with the other. </p>
+        <ul>
+            <li class="IndentTight" value="1">The modulating waveform shape (internal source) may be:</li>
+            <li class="IndentTight2" value="2">Sine wave</li>
+            <li class="IndentTight2" value="3">Square with 50% duty cycle&#160;&#160;<img src="../_Graphics_/Modulation%20Square%2050.png" style="width: 44px;height: 22px;" alt="Modulation Square 50" /></li>
+            <li class="IndentTight2" value="4">UpRamp with 100% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20UpRamp%20100.png" style="width: 46px;height: 24px;" alt="Modulation UpRamp 100" /></li>
+            <li class="IndentTight2" value="5">Triangle with 50% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20Triangle%2050.png" style="width: 38px;height: 19px;" alt="Modulation Triangle 50" /></li>
+            <li class="IndentTight2" value="6">DnRamp with 0% symmetry&#160;&#160;<img src="../_Graphics_/Modulation%20DnRamp%200.png" style="width: 48px;height: 24px;" alt="Modulation DnRamp 0" /></li>
+            <li class="IndentTight2" value="7">Noise</li>
+            <li class="IndentTight2" value="8">PRBS with PN7 sequence</li>
+            <li class="IndentTight2" value="9">Arbitrary waveform</li>
+            <li class="IndentTight" value="10"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Modulate%20Type.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Sum.png" alt="Sum softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Modulate%20Shape.png" alt="Shape softkey (Sine)" /></li>
+            <li class="IndentTight" value="11"><b>SCPI:</b> <a href="../__I_SCPI/SUM_Subsystem.htm#SUM_INTernal_FUNCtion">SUM:INTernal:FUNCtion {SIN|SQU|RAMP|NRAM|TRI|NOIS|PRBS|ARB)</a></li>
+        </ul>
+        <h2><a name="Modulating_Waveform_Frequency"></a>Modulating Waveform Frequency</h2>
+        <p>The instrument accepts an internal or external modulation source.&#160;On a two-channel instrument you can modulate one channel with the other. </p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating frequency (internal source): 1 µHz to 30 MHz, default 100 Hz.</li>
+            <li class="IndentTight" value="2"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Modulate%20Type.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Sum.png" alt="Sum softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Modulate%20Sum%20Freq.png" alt="Sum Freq softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /></li>
+            <li class="IndentTight" value="3"><b>SCPI:</b> <a href="../__I_SCPI/SUM_Subsystem.htm#SUM_INTernal_FREQuency">[SOURce[1|2]:]SUM:INTernal:FREQuency {&lt;<i>frequency</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Sum_Amplitude"></a>Sum Amplitude</h2>
+        <p>The Sum Amplitude represents the amplitude of the signal added to the carrier (in percent of carrier amplitude).</p>
+        <ul>
+            <li class="IndentTight" value="1">Amplitude setting: 0 to 100% of carrier amplitude, 0.01% resolution.</li>
+            <li class="IndentTight" value="2">Sum Amplitude remains a constant fraction of carrier amplitude and tracks carrier amplitude changes.</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Modulate%20Type.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Sum.png" alt="Sum softkey" /><br /><img src="../_Graphics_/Softkey%20-%20Modulate%20Sum%20Ampl.png" alt="Modulate Sum Ampl softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Buttons%20-%20Keypad%20and%20Knob.png" alt="Keypad and knob" /><br /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/SUM_Subsystem.htm#SUM_AMPLitude">SUM:AMPLitude {&lt;<i>amplitude</i>&gt;|MIN|MAX}</a></li>
+        </ul>
+        <h2><a name="Modulating_Source"></a>Modulating Source</h2>
+        <p>The instrument accepts an internal or external modulation source.&#160;On a two-channel instrument you can modulate one channel with the other. </p>
+        <ul>
+            <li class="IndentTight" value="1">Modulating source: Internal (default), Other Channel, or External. The External modulation source may be up to 100 kHz.</li>
+            <li class="IndentTight" value="2">With the external source, the carrier waveform is summed by the ±5 V signal level on the rear-panel <b>Modulation In</b> connector. For example, if you have set the sum amplitude to 10%, then when the modulating signal is at +5 V, the output will be at the maximum amplitude (110% of carrier amplitude). When the modulating signal is at -5 V, the output will be at the minimum amplitude (90% of carrier amplitude).</li>
+            <li class="IndentTight" value="3"><b>Front Panel:</b>
+                <br />
+                <img src="../_Graphics_/Button%20-%20Modulate.png" alt="Modulate key" />
+                <img src="../_Graphics_/Softkey%20-%20Modulate%20Type.png" alt="(Modulation) Type softkey (AM)" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Sum.png" alt="Sum softkey" />&#160;&#160;&#160;<img src="../_Graphics_/Softkey%20-%20Source.png" alt="Source softkey (Internal)" /></li>
+            <li class="IndentTight" value="4"><b>SCPI:</b> <a href="../__I_SCPI/SUM_Subsystem.htm#SUM_SOURce">SUM:SOURce {INTernal|EXTernal|CH1|CH2}</a></li>
+        </ul>
+        
+    </body>
+</html>

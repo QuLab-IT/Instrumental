@@ -278,6 +278,7 @@ class NGC2D(Instrument):
                 pressure = status[pos+5:pos+13]
                 
                 gauge_id = f"{gauge_type}_{gauge_num}"
+                print(pressure)
                 gauges[gauge_id] = {
                     'type': GaugeType(gauge_type),
                     'num': GaugeSelection(gauge_num),

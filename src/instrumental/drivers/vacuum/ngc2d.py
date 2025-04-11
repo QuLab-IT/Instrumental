@@ -175,7 +175,8 @@ class NGC2D(Instrument):
         response = self._ser.readline().decode().strip()
         
         if len(response) < 2:
-            raise ValueError("Invalid response from device")
+            print(f"Invalid response from device: {response}")
+            return None, None, None
             
         # Convert string bytes to integers for parsing
         state_byte = int.from_bytes(response[0].encode(), 'big')

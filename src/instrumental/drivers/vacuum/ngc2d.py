@@ -5,8 +5,10 @@ Driver for NGC2D Pressure Gauge Controller.
 The controller supports communication via RS232 serial interface at 9600 baud,
 8 data bits, 1 stop bit, no parity, and no handshaking.
 """
-from enum import Enum
-from serial import Serial
+from enum import Enum, Flag, auto
+import sys
+import glob
+from serial import Serial, SerialException
 
 from .. import Instrument, ParamSet
 from ... import u
@@ -14,6 +16,33 @@ from ... import u
 _INST_PRIORITY = 5
 _INST_PARAMS = ['port']
 _INST_CLASSES = ['NGC2D']
+
+def list_serial_ports():
+    """Lists all available serial ports.
+    
+    Returns
+    -------
+    list of str
+        List of available serial port names
+    """
+    if sys.platform.startswith('win'):
+        ports = ['COM%s' % (i + 1) for i in range(256)]
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
+    elif sys.platform.startswith('darwin'):
+        ports = glob.glob('/dev/tty.*')
+    else:
+        raise EnvironmentError('Unsupported platform')
+    result = []
+    for port in ports:
+        try:
+            s = Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, SerialException):
+            pass
+    return result
 
 class GaugeType(Enum):
     """Types of gauges supported by the NGC2D controller"""
@@ -28,6 +57,60 @@ class PressureUnit(Enum):
     TORR = 'T'
     PASCAL = 'P'
     MBAR = 'M'
+
+class StateFlags(Flag):
+    """Flags representing the state byte information"""
+    IG1_SELECTED = 0  # Bit 6 = 0
+    IG2_SELECTED = auto()  # Bit 6 = 1
+    LOCAL_MODE = 0  # Bit 4 = 0
+    REMOTE_MODE = auto()  # Bit 4 = 1
+    IG_CONNECTED = 0  # Bit 7 = 0
+    IG_DISCONNECTED = auto()  # Bit 7 = 1
+
+class ErrorFlags(Flag):
+    """Flags representing the error byte information"""
+    GAUGE_ERROR = auto()  # Bit 0
+    OVER_TEMP_TRIP = auto()  # Bit 1
+    TEMP_WARNING = auto()  # Bit 3
+
+def parse_state_byte(state_byte: int) -> dict:
+    """Parse the state byte into a dictionary of states.
+    
+    Parameters
+    ----------
+    state_byte : int
+        The state byte from the device
+        
+    Returns
+    -------
+    dict
+        Dictionary containing the parsed states
+    """
+    states = {}
+    states['instrument_type'] = state_byte & 0x0F  # Bits 3-0
+    states['mode'] = 'remote' if state_byte & 0x10 else 'local'  # Bit 4
+    states['selected_gauge'] = 'IG2' if state_byte & 0x40 else 'IG1'  # Bit 6
+    states['ig_connected'] = not bool(state_byte & 0x80)  # Bit 7
+    return states
+
+def parse_error_byte(error_byte: int) -> dict:
+    """Parse the error byte into a dictionary of errors.
+    
+    Parameters
+    ----------
+    error_byte : int
+        The error byte from the device
+        
+    Returns
+    -------
+    dict
+        Dictionary containing the parsed errors
+    """
+    errors = {}
+    errors['gauge_error'] = bool(error_byte & 0x01)  # Bit 0
+    errors['over_temp_trip'] = bool(error_byte & 0x02)  # Bit 1
+    errors['temp_warning'] = bool(error_byte & 0x08)  # Bit 3
+    return errors
 
 class NGC2D(Instrument):
     """NGC2D Pressure Gauge Controller driver.
@@ -88,11 +171,46 @@ class NGC2D(Instrument):
         if len(response) < 2:
             raise ValueError("Invalid response from device")
             
-        state_byte = response[0]
-        error_byte = response[1]
-        status_report = response[2:] if len(response) > 2 else None
+        # Convert string bytes to integers for parsing
+        state_byte = int.from_bytes(response[0].encode(), 'big')
+        error_byte = int.from_bytes(response[1].encode(), 'big')
         
-        return state_byte, error_byte, status_report
+        # Parse state and error information
+        self._state = parse_state_byte(state_byte)
+        self._error = parse_error_byte(error_byte)
+        
+        # Store the raw bytes for debugging
+        self._raw_state = state_byte
+        self._raw_error = error_byte
+        
+        # Raise exception if there are errors
+        if any(self._error.values()):
+            error_msg = ', '.join(f"{k}" for k, v in self._error.items() if v)
+            raise ValueError(f"Device errors detected: {error_msg}")
+        
+        return self._state, self._error, response[2:] if len(response) > 2 else None
+
+    @property
+    def state(self) -> dict:
+        """Get the current state of the device.
+        
+        Returns
+        -------
+        dict
+            Dictionary containing the current state information
+        """
+        return self._state.copy() if hasattr(self, '_state') else None
+
+    @property
+    def error(self) -> dict:
+        """Get the current error status.
+        
+        Returns
+        -------
+        dict
+            Dictionary containing the current error information
+        """
+        return self._error.copy() if hasattr(self, '_error') else None
 
     def poll(self):
         """Poll the instrument for state and error information.
@@ -164,7 +282,14 @@ class NGC2D(Instrument):
             else:
                 pos += 1
                 
-        return gauges
+        # Add state and error information to the response
+        result = {
+            'state': state,
+            'error': error,
+            'gauges': gauges
+        }
+        
+        return result
 
     def gauge_on(self, emission_current='0'):
         """Switch on ion gauge emission.
@@ -249,5 +374,5 @@ def list_instruments():
     list of ParamSet
         A list of parameter sets for each available instrument
     """
-    # TODO: Implement proper device discovery
-    return [] 
+    ports = list_serial_ports()
+    return [ParamSet(NGC2D, port=port) for port in ports] 

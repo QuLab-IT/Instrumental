@@ -44,13 +44,19 @@ def list_serial_ports():
             pass
     return result
 
-class GaugeType(Enum):
+class GaugeSelection(Enum):
     """Types of gauges supported by the NGC2D controller"""
     ION_GAUGE_1 = '1'
     PIRANI_1 = '2'
     PIRANI_2 = '3'
     CAPACITANCE_MANOMETER = '4'
     ION_GAUGE_2 = '5'
+
+class GaugeType(Enum):
+    """Types of gauges supported by the NGC2D controller"""
+    ION_GAUGE = 'I'
+    PIRANI = 'P'
+    CAPACITANCE_MANOMETER = 'M'
 
 class PressureUnit(Enum):
     """Supported pressure units"""
@@ -274,6 +280,7 @@ class NGC2D(Instrument):
                 gauge_id = f"{gauge_type}_{gauge_num}"
                 gauges[gauge_id] = {
                     'type': GaugeType(gauge_type),
+                    'num': GaugeSelection(gauge_num),
                     'status': gauge_status,
                     'error': gauge_error,
                     'pressure': float(pressure.strip(',')) if pressure.strip() else None

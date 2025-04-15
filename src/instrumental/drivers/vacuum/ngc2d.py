@@ -6,6 +6,8 @@ The controller supports communication via RS232 serial interface at 9600 baud,
 8 data bits, 1 stop bit, no parity, and no handshaking.
 """
 from enum import Enum, Flag, auto
+import glob
+import sys
 from typing import Dict, List, Optional, Tuple, Union, Any
 from serial import Serial, SerialException
 
@@ -339,6 +341,34 @@ class NGC2D(Instrument):
         state, error, _ = self._send_command('I', param=relay)
         if error != '0':
             raise ValueError(f"Failed to inhibit relay: error {error}")
+
+def list_serial_ports() -> List[str]:
+    """Lists all available serial ports.
+    
+    Returns
+    -------
+    list of str
+        List of available serial port names
+    """
+    if sys.platform.startswith('win'):
+        ports = ['COM%s' % (i + 1) for i in range(256)]
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
+    elif sys.platform.startswith('darwin'):
+        ports = glob.glob('/dev/tty.*')
+    else:
+        raise EnvironmentError('Unsupported platform')
+    result: List[str] = []
+    for port in ports:
+        try:
+            s = Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, SerialException):
+            pass
+    return result
+
 
 def list_instruments() -> List[ParamSet]:
     """List all available NGC2D instruments.

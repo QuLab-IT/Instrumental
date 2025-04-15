@@ -150,7 +150,8 @@ class NGC2D(Instrument):
         
         # Read first line
         first_line = self._ser.readline().decode().strip()
-        
+        print(f"first_line: {first_line}")
+
         # Handle empty responses (like from control and release commands)
         if not first_line:
             return None, None, None
@@ -168,7 +169,9 @@ class NGC2D(Instrument):
                 if not line:
                     break
                 response_lines.append(line)
-        
+        print(f"state_byte: {state_byte}")
+        print(f"error_byte: {error_byte}")
+        print(f"response_lines: {response_lines}")
         return state_byte, error_byte, response_lines
 
     @property

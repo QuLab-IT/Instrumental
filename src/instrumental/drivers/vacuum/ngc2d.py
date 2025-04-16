@@ -412,19 +412,16 @@ class DeviceStatus:
 
     def __str__(self) -> str:
         return (
-            f"DeviceStatus(instrument_type={self.instrument_type}, "
-            f"mode={self.mode}, selected_gauge={self.selected_gauge}, "
-            f"ig_connected={self.ig_connected}, "
+            f"DeviceStatus(state={self.state}, "
+            f"error={self.error}, "
             f"relay_status={self.relay_status}, "
             f"gauges={self.gauges})"
         )  
     
     def to_dict(self) -> Dict[str, Union[int, str, bool]]:
         return {
-            "instrument_type": self.instrument_type,
-            "mode": self.mode,
-            "selected_gauge": self.selected_gauge,
-            "ig_connected": self.ig_connected,
+            "state": self.state.to_dict(),
+            "error": self.error.to_dict(),
             "relay_status": self.relay_status.to_dict(),
             "gauges": [gauge.to_dict() for gauge in self.gauges],
         }

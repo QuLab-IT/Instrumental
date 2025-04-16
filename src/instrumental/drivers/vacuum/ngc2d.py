@@ -494,7 +494,7 @@ class NGC2D(Instrument):
             if not line:
                 break
             response_lines.append(line)
-        print(response_lines)
+
         return response_lines
 
     @property
@@ -698,38 +698,3 @@ def list_instruments() -> List[ParamSet]:
     """
     ports = list_serial_ports()
     return [ParamSet(NGC2D, port=port) for port in ports]
-
-{'error': {'gauge_error': False,
-           'over_temp_trip': False,
-           'temp_warning': False},
- 'gauges': [{'error': {'emission_failure': False,
-                       'filament_failure': False,
-                       'over_pressure': False,
-                       'over_temp': False},
-             'pressure': None,
-             'status': {'controlling_bakeout': False,
-                        'filament_2': False,
-                        'in_degas': False,
-                        'in_emission': False},
-             'type': 'I'},
-            {'error': {'over_pressure': False, 'over_temp': False},
-             'pressure': 0.02,
-             'status': {'filament_leads': False,
-                        'operating': True,
-                        'pirani_interlock': False},
-             'type': 'P'},
-            {'error': {'over_pressure': False, 'over_temp': False},
-             'pressure': 1000.0,
-             'status': {'filament_leads': False,
-                        'operating': True,
-                        'pirani_interlock': False},
-             'type': 'P'},
-            {'error': {'over_pressure': False, 'over_temp': False},
-             'pressure': None,
-             'status': {'operating': False},
-             'type': 'M'}],
- 'relay_status': {'A': False, 'B': False, 'C': False, 'D': False},
- 'state': {'ig_connected': True,
-           'instrument_type': 2,
-           'mode': <DeviceMode.LOCAL: False>,
-           'selected_gauge': <SelectedGauge.IG1: False>,},}

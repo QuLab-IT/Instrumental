@@ -153,7 +153,7 @@ class GaugeError:
     bit_6: bool
     bit_7: bool
 
-    def __init__(self, error_byte: int, gauge_type: str):
+    def __init__(self, error_byte: int, gauge_type: GaugeType):
         """Initialize the gauge error from an error byte.
 
         Parameters
@@ -165,68 +165,71 @@ class GaugeError:
         """
         self.gauge_type = gauge_type
 
-        if gauge_type == "I":
-            # Ion Gauge Error
-            self.filament_failure = bool(error_byte & 0x01)  # Bit 0
-            self.emission_failure = bool(error_byte & 0x02)  # Bit 1
-            self.over_pressure = bool(error_byte & 0x04)  # Bit 2
-            self.over_temp = bool(error_byte & 0x08)  # Bit 3
-            self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
-            self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
-            self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
-            self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
-        elif gauge_type == "P":
-            # Pirani Gauge Error
-            self.over_pressure = bool(error_byte & 0x04)  # Bit 2
-            self.over_temp = bool(error_byte & 0x08)  # Bit 3
-            self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
-            self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
-            self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
-            self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
-        elif gauge_type == "M":
-            # Manometer Error
-            self.over_pressure = bool(error_byte & 0x04)  # Bit 2
-            self.over_temp = bool(error_byte & 0x08)  # Bit 3
-            self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
-            self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
-            self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
-            self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
+        match gauge_type:
+            case GaugeType.ION_GAUGE:
+                # Ion Gauge Error
+                self.filament_failure = bool(error_byte & 0x01)  # Bit 0
+                self.emission_failure = bool(error_byte & 0x02)  # Bit 1
+                self.over_pressure = bool(error_byte & 0x04)  # Bit 2
+                self.over_temp = bool(error_byte & 0x08)  # Bit 3
+                self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
+                self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
+                self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
+                self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
+            case GaugeType.PIRANI:
+                # Pirani Gauge Error
+                self.over_pressure = bool(error_byte & 0x04)  # Bit 2
+                self.over_temp = bool(error_byte & 0x08)  # Bit 3
+                self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
+                self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
+                self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
+                self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
+            case GaugeType.CAPACITANCE_MANOMETER:
+                # Manometer Error
+                self.over_pressure = bool(error_byte & 0x04)  # Bit 2
+                self.over_temp = bool(error_byte & 0x08)  # Bit 3
+                self.bit_4 = bool(error_byte & 0x10)  # Bit 4 (always 0)
+                self.bit_5 = bool(error_byte & 0x20)  # Bit 5 (always 0)
+                self.bit_6 = bool(error_byte & 0x40)  # Bit 6 (always 0)
+                self.bit_7 = bool(error_byte & 0x80)  # Bit 7 (always 0)
 
     def __str__(self) -> str:
-        if self.gauge_type == "I":
-            return (
-                f"GaugeError(type=Ion, filament_failure={self.filament_failure}, "
-                f"emission_failure={self.emission_failure}, "
-                f"over_pressure={self.over_pressure}, "
-                f"over_temp={self.over_temp})"
-            )
-        elif self.gauge_type == "P":
-            return (
-                f"GaugeError(type=Pirani, over_pressure={self.over_pressure}, "
-                f"over_temp={self.over_temp})"
-            )
-        else:  # M
-            return (
-                f"GaugeError(type=Manometer, over_pressure={self.over_pressure}, "
-                f"over_temp={self.over_temp})"
-            )
+        match self.gauge_type:
+            case GaugeType.ION_GAUGE:
+                return (
+                    f"GaugeError(type=Ion, filament_failure={self.filament_failure}, "
+                    f"emission_failure={self.emission_failure}, "
+                    f"over_pressure={self.over_pressure}, "
+                    f"over_temp={self.over_temp})"
+                )
+            case GaugeType.PIRANI:
+                return (
+                    f"GaugeError(type=Pirani, over_pressure={self.over_pressure}, "
+                    f"over_temp={self.over_temp})"
+                )
+            case GaugeType.CAPACITANCE_MANOMETER:
+                return (
+                    f"GaugeError(type=Manometer, over_pressure={self.over_pressure}, "
+                    f"over_temp={self.over_temp})"
+                )
 
     def __repr__(self) -> str:
         return self.__str__()
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the error to a dictionary."""
-        if self.gauge_type == "I":
-            return {
-                "filament_failure": self.filament_failure,
-                "emission_failure": self.emission_failure,
-                "over_pressure": self.over_pressure,
-                "over_temp": self.over_temp,
-            }
-        elif self.gauge_type == "P":
-            return {"over_pressure": self.over_pressure, "over_temp": self.over_temp}
-        else:  # M
-            return {"over_pressure": self.over_pressure, "over_temp": self.over_temp}
+        match self.gauge_type:
+            case GaugeType.ION_GAUGE:
+                return {
+                    "filament_failure": self.filament_failure,
+                    "emission_failure": self.emission_failure,
+                    "over_pressure": self.over_pressure,
+                    "over_temp": self.over_temp,
+                }
+            case GaugeType.PIRANI:
+                return {"over_pressure": self.over_pressure, "over_temp": self.over_temp}
+            case GaugeType.CAPACITANCE_MANOMETER:
+                return {"over_pressure": self.over_pressure, "over_temp": self.over_temp}
 
 
 class Gauge:

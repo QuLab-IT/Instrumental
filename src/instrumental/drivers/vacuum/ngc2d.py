@@ -45,30 +45,11 @@ class PressureUnit(Enum):
     MBAR: str = "M"
 
 
-class StateFlags(Flag):
-    """Flags representing the state byte information"""
-
-    IG1_SELECTED: int = 0  # Bit 6 = 0
-    IG2_SELECTED: int = auto()  # Bit 6 = 1
-    LOCAL_MODE: int = 0  # Bit 4 = 0
-    REMOTE_MODE: int = auto()  # Bit 4 = 1
-    IG_CONNECTED: int = 0  # Bit 7 = 0
-    IG_DISCONNECTED: int = auto()  # Bit 7 = 1
-
-
-class ErrorFlags(Flag):
-    """Flags representing the error byte information"""
-
-    GAUGE_ERROR: int = auto()  # Bit 0
-    OVER_TEMP_TRIP: int = auto()  # Bit 1
-    TEMP_WARNING: int = auto()  # Bit 3
-
-
 class DeviceMode(Enum):
     """Modes of the NGC2D controller"""
 
-    LOCAL: str = "local"
-    REMOTE: str = "remote"
+    LOCAL: str = False
+    REMOTE: str = True
 
 class SelectedGauge(Enum):
     """Gauges selected by the NGC2D controller"""
@@ -250,7 +231,7 @@ class Gauge:
     """Class representing a gauge in the NGC2D controller."""
 
     type: str
-    number: str
+    number: GaugeSelection
     status: GaugeStatus
     error: GaugeError
     pressure: Optional[float]
@@ -265,7 +246,7 @@ class Gauge:
             Example: 'GP2A@  2E-02,M0'
         """
         self.type = line[1]  # P for Pirani, I for Ion, etc.
-        self.number = line[2]  # Gauge number
+        self.number = GaugeSelection(line[2])  # Gauge number
         self.status = GaugeStatus(ord(line[3]), self.type)
         self.error = GaugeError(ord(line[4]), self.type)
         pressure_str = line[5:].split(",")[0].strip()
@@ -273,7 +254,7 @@ class Gauge:
 
     def __str__(self) -> str:
         return (
-            f"Gauge(type={self.type}, number={self.number}, "
+            f"Gauge(type={self.type}, number={self.number.value}, "
             f"status={self.status}, error={self.error}, "
             f"pressure={self.pressure})"
         )
@@ -309,8 +290,8 @@ class State:
         """
         state_byte = ord(state_byte)
         self.instrument_type = state_byte & 0x0F  # Bits 3-0
-        self.mode = DeviceMode(state_byte & 0x10)  # Bit 4
-        self.selected_gauge = SelectedGauge(state_byte & 0x40)  # Bit 6
+        self.mode = DeviceMode(bool(state_byte & 0x10))  # Bit 4
+        self.selected_gauge = SelectedGauge(bool(state_byte & 0x40))  # Bit 6
         self.ig_connected = not bool(state_byte & 0x80)  # Bit 7
 
     def __str__(self) -> str:
@@ -384,7 +365,7 @@ class DeviceStatus:
         status_byte : int
             The status byte from the device
         """
-        print(response_lines)
+
         if len(response_lines) == 0:
             raise ValueError("No response received from device")
         
@@ -521,7 +502,7 @@ class NGC2D(Instrument):
             if not line:
                 break
             response_lines.append(line)
-
+        print(response_lines)
         return response_lines
 
     @property

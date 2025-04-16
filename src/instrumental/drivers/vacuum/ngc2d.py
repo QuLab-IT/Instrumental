@@ -54,8 +54,8 @@ class DeviceMode(Enum):
 class SelectedGauge(Enum):
     """Gauges selected by the NGC2D controller"""
 
-    IG1: str = "IG1"
-    IG2: str = "IG2"
+    IG1: str = False
+    IG2: str = True
 
 
 class GaugeStatus:
@@ -393,47 +393,6 @@ class DeviceStatus:
             "ig_connected": self.ig_connected,
         }
 
-def parse_state_byte(state_byte: int) -> Dict[str, Union[int, str, bool]]:
-    """Parse the state byte into a dictionary of states.
-
-    Parameters
-    ----------
-    state_byte : int
-        The state byte from the device
-
-    Returns
-    -------
-    dict
-        Dictionary containing the parsed states
-    """
-    states: Dict[str, Union[int, str, bool]] = {}
-    states["instrument_type"] = state_byte & 0x0F  # Bits 3-0
-    states["mode"] = "remote" if state_byte & 0x10 else "local"  # Bit 4
-    states["selected_gauge"] = "IG2" if state_byte & 0x40 else "IG1"  # Bit 6
-    states["ig_connected"] = not bool(state_byte & 0x80)  # Bit 7
-    return states
-
-
-def parse_error_byte(error_byte: int) -> Dict[str, bool]:
-    """Parse the error byte into a dictionary of errors.
-
-    Parameters
-    ----------
-    error_byte : int
-        The error byte from the device
-
-    Returns
-    -------
-    dict
-        Dictionary containing the parsed errors
-    """
-    errors: Dict[str, bool] = {}
-    errors["gauge_error"] = bool(error_byte & 0x01)  # Bit 0
-    errors["over_temp_trip"] = bool(error_byte & 0x02)  # Bit 1
-    errors["temp_warning"] = bool(error_byte & 0x08)  # Bit 3
-    return errors
-
-
 
 class NGC2D(Instrument):
     """NGC2D Pressure Gauge Controller driver.
@@ -535,10 +494,10 @@ class NGC2D(Instrument):
         tuple
             (State, Error)
         """
-        response = self._send_command("P")
-        if response == []:
+        response_lines = self._send_command("P")
+        if response_lines == []:
             raise ValueError("No response received from device")
-        return State(response[0]), Error(response[1])
+        return State(response_lines[0][0]), Error(response_lines[0][1])
 
     def control(self) -> None:
         """Switch the instrument to remote control mode."""

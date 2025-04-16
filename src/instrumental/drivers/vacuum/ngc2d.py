@@ -372,7 +372,7 @@ class DeviceStatus:
         self.state = State(response_lines[0][0])  # Bits 3-0
         self.error = Error(response_lines[0][1])  # Bit 4
         
-        lines = response_lines[0][2:] + response_lines[1:]
+        lines = [response_lines[0][2:]] + response_lines[1:]
         self.gauges = []
         if len(lines) > 0:
             self.gauges = [Gauge(line) for line in lines]

@@ -307,6 +307,7 @@ class State:
         state_byte : str
             The state byte from the device
         """
+        print(state_byte)
         state_byte = ord(state_byte)
         self.instrument_type = state_byte & 0x0F  # Bits 3-0
         self.mode = DeviceMode(state_byte & 0x10)  # Bit 4

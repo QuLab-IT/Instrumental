@@ -360,6 +360,7 @@ class RelayStatus:
 
     def __init__(self, relay_status_byte: str):
         """Initialize the relay status from a relay status byte."""
+        relay_status_byte = ord(relay_status_byte)
         self.A = bool(relay_status_byte & 0x01)  # Bit 0
         self.B = bool(relay_status_byte & 0x02)  # Bit 1
         self.C = bool(relay_status_byte & 0x04)  # Bit 2

@@ -307,8 +307,8 @@ class State:
     def to_dict(self) -> Dict[str, Union[int, str, bool]]:
         return {
             "instrument_type": self.instrument_type,
-            "mode": self.mode,
-            "selected_gauge": self.selected_gauge,
+            "mode": self.mode.value,
+            "selected_gauge": self.selected_gauge.value,
             "ig_connected": self.ig_connected,
         }
 
@@ -698,3 +698,38 @@ def list_instruments() -> List[ParamSet]:
     """
     ports = list_serial_ports()
     return [ParamSet(NGC2D, port=port) for port in ports]
+
+{'error': {'gauge_error': False,
+           'over_temp_trip': False,
+           'temp_warning': False},
+ 'gauges': [{'error': {'emission_failure': False,
+                       'filament_failure': False,
+                       'over_pressure': False,
+                       'over_temp': False},
+             'pressure': None,
+             'status': {'controlling_bakeout': False,
+                        'filament_2': False,
+                        'in_degas': False,
+                        'in_emission': False},
+             'type': 'I'},
+            {'error': {'over_pressure': False, 'over_temp': False},
+             'pressure': 0.02,
+             'status': {'filament_leads': False,
+                        'operating': True,
+                        'pirani_interlock': False},
+             'type': 'P'},
+            {'error': {'over_pressure': False, 'over_temp': False},
+             'pressure': 1000.0,
+             'status': {'filament_leads': False,
+                        'operating': True,
+                        'pirani_interlock': False},
+             'type': 'P'},
+            {'error': {'over_pressure': False, 'over_temp': False},
+             'pressure': None,
+             'status': {'operating': False},
+             'type': 'M'}],
+ 'relay_status': {'A': False, 'B': False, 'C': False, 'D': False},
+ 'state': {'ig_connected': True,
+           'instrument_type': 2,
+           'mode': <DeviceMode.LOCAL: False>,
+           'selected_gauge': <SelectedGauge.IG1: False>,},}

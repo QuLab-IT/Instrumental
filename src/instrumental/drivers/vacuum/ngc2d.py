@@ -564,9 +564,6 @@ class NGC2D(Instrument):
         dict
             Dictionary containing status information for each gauge
         """
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to get status")
-
         response_lines = self._send_command("S")
         if response_lines == []:
             raise ValueError("No response received from device")

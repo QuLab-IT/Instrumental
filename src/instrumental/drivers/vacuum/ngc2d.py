@@ -47,15 +47,15 @@ class PressureUnit(Enum):
 
 class DeviceMode(Enum):
     """Modes of the NGC2D controller"""
+    LOCAL: bool = False
+    REMOTE: bool = True
 
-    LOCAL: str = False
-    REMOTE: str = True
 
 class SelectedGauge(Enum):
     """Gauges selected by the NGC2D controller"""
 
-    IG1: str = False
-    IG2: str = True
+    IG1: bool = False
+    IG2: bool = True
 
 
 class GaugeStatus:
@@ -70,7 +70,7 @@ class GaugeStatus:
     pirani_interlock: bool
     filament_leads: bool
 
-    def __init__(self, status_byte: int, gauge_type: str):
+    def __init__(self, status_byte: int, gauge_type: GaugeType):
         """Initialize the gauge status from a status byte.
 
         Parameters
@@ -82,60 +82,63 @@ class GaugeStatus:
         """
         self.gauge_type = gauge_type
 
-        if gauge_type == "I":
-            # Ion Gauge Status
-            self.in_emission = bool(status_byte & 0x01)  # Bit 0
-            self.controlling_bakeout = bool(status_byte & 0x04)  # Bit 2
-            self.in_degas = bool(status_byte & 0x08)  # Bit 3
-            self.filament_2 = bool(status_byte & 0x20)  # Bit 5
-            self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
-        elif gauge_type == "P":
-            # Pirani Gauge Status
-            self.operating = bool(status_byte & 0x01)  # Bit 0
-            self.pirani_interlock = bool(status_byte & 0x10)  # Bit 4
-            self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
-            self.filament_leads = bool(status_byte & 0x80)  # Bit 7
-        elif gauge_type == "M":
-            # Manometer Status
-            self.operating = bool(status_byte & 0x01)  # Bit 0
-            self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
+        match gauge_type:
+            case GaugeType.ION_GAUGE:
+                # Ion Gauge Status
+                self.in_emission = bool(status_byte & 0x01)  # Bit 0
+                self.controlling_bakeout = bool(status_byte & 0x04)  # Bit 2
+                self.in_degas = bool(status_byte & 0x08)  # Bit 3
+                self.filament_2 = bool(status_byte & 0x20)  # Bit 5
+                self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
+            case GaugeType.PIRANI:
+                # Pirani Gauge Status
+                self.operating = bool(status_byte & 0x01)  # Bit 0
+                self.pirani_interlock = bool(status_byte & 0x10)  # Bit 4
+                self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
+                self.filament_leads = bool(status_byte & 0x80)  # Bit 7
+            case GaugeType.CAPACITANCE_MANOMETER:
+                # Manometer Status
+                self.operating = bool(status_byte & 0x01)  # Bit 0
+                self.bit_6 = bool(status_byte & 0x40)  # Bit 6 (always 1)
 
     def __str__(self) -> str:
-        if self.gauge_type == "I":
-            return (
-                f"GaugeStatus(type=Ion, in_emission={self.in_emission}, "
-                f"controlling_bakeout={self.controlling_bakeout}, "
-                f"in_degas={self.in_degas}, filament_2={self.filament_2})"
-            )
-        elif self.gauge_type == "P":
-            return (
-                f"GaugeStatus(type=Pirani, operating={self.operating}, "
-                f"pirani_interlock={self.pirani_interlock}, "
-                f"filament_leads={self.filament_leads})"
-            )
-        else:  # M
-            return f"GaugeStatus(type=Manometer, operating={self.operating})"
+        match self.gauge_type:
+            case GaugeType.ION_GAUGE:
+                return (
+                    f"GaugeStatus(type=Ion, in_emission={self.in_emission}, "
+                    f"controlling_bakeout={self.controlling_bakeout}, "
+                    f"in_degas={self.in_degas}, filament_2={self.filament_2})"
+                )
+            case GaugeType.PIRANI:
+                return (
+                    f"GaugeStatus(type=Pirani, operating={self.operating}, "
+                    f"pirani_interlock={self.pirani_interlock}, "
+                    f"filament_leads={self.filament_leads})"
+                )
+            case GaugeType.CAPACITANCE_MANOMETER:
+                return f"GaugeStatus(type=Manometer, operating={self.operating})"
 
     def __repr__(self) -> str:
         return self.__str__()
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the status to a dictionary."""
-        if self.gauge_type == "I":
-            return {
-                "in_emission": self.in_emission,
-                "controlling_bakeout": self.controlling_bakeout,
-                "in_degas": self.in_degas,
-                "filament_2": self.filament_2,
-            }
-        elif self.gauge_type == "P":
-            return {
-                "operating": self.operating,
-                "pirani_interlock": self.pirani_interlock,
-                "filament_leads": self.filament_leads,
-            }
-        else:  # M
-            return {"operating": self.operating}
+        match self.gauge_type:
+            case GaugeType.ION_GAUGE:
+                return {
+                    "in_emission": self.in_emission,
+                    "controlling_bakeout": self.controlling_bakeout,
+                    "in_degas": self.in_degas,
+                    "filament_2": self.filament_2,
+                }
+            case GaugeType.PIRANI:
+                return {
+                    "operating": self.operating,
+                    "pirani_interlock": self.pirani_interlock,
+                    "filament_leads": self.filament_leads,
+                }
+            case GaugeType.CAPACITANCE_MANOMETER:
+                return {"operating": self.operating}
 
 
 class GaugeError:
@@ -226,11 +229,10 @@ class GaugeError:
             return {"over_pressure": self.over_pressure, "over_temp": self.over_temp}
 
 
-
 class Gauge:
     """Class representing a gauge in the NGC2D controller."""
 
-    type: str
+    type: GaugeType
     number: GaugeSelection
     status: GaugeStatus
     error: GaugeError
@@ -245,7 +247,7 @@ class Gauge:
             The gauge status line in format G<type><num><status><error><pressure>,<unit>
             Example: 'GP2A@  2E-02,M0'
         """
-        self.type = line[1]  # P for Pirani, I for Ion, etc.
+        self.type = GaugeType(line[1])  # P for Pirani, I for Ion, etc.
         self.number = GaugeSelection(line[2])  # Gauge number
         self.status = GaugeStatus(ord(line[3]), self.type)
         self.error = GaugeError(ord(line[4]), self.type)
@@ -254,7 +256,7 @@ class Gauge:
 
     def __str__(self) -> str:
         return (
-            f"Gauge(type={self.type}, number={self.number.value}, "
+            f"Gauge(type={self.type.name}, number={self.number.name}, "
             f"status={self.status}, error={self.error}, "
             f"pressure={self.pressure})"
         )
@@ -265,7 +267,7 @@ class Gauge:
     def to_dict(self) -> Dict[str, Any]:
         """Convert the gauge to a dictionary."""
         return {
-            "type": self.type,
+            "type": self.type.name,
             "status": self.status.to_dict(),
             "error": self.error.to_dict(),
             "pressure": self.pressure,
@@ -297,7 +299,7 @@ class State:
     def __str__(self) -> str:
         return (
             f"State(instrument_type={self.instrument_type}, "
-            f"mode={self.mode}, selected_gauge={self.selected_gauge}, "
+            f"mode={self.mode.name}, selected_gauge={self.selected_gauge.name}, "
             f"ig_connected={self.ig_connected})"
         )
 
@@ -307,8 +309,8 @@ class State:
     def to_dict(self) -> Dict[str, Union[int, str, bool]]:
         return {
             "instrument_type": self.instrument_type,
-            "mode": self.mode.value,
-            "selected_gauge": self.selected_gauge.value,
+            "mode": self.mode.name,
+            "selected_gauge": self.selected_gauge.name,
             "ig_connected": self.ig_connected,
         }
 
@@ -349,7 +351,8 @@ class Error:
             "over_temp_trip": self.over_temp_trip,
             "temp_warning": self.temp_warning,
         }
-    
+
+
 class RelayStatus:
     """Class representing the status of the relays in the NGC2D controller."""
 
@@ -371,7 +374,7 @@ class RelayStatus:
 
     def __repr__(self) -> str:
         return self.__str__()
-    
+
     def to_dict(self) -> Dict[str, bool]:
         return {
             "A": self.A,
@@ -379,6 +382,7 @@ class RelayStatus:
             "C": self.C,
             "D": self.D,
         }
+
 
 class DeviceStatus:
     """Class representing the status of the NGC2D controller."""
@@ -399,16 +403,15 @@ class DeviceStatus:
 
         if len(response_lines) == 0:
             raise ValueError("No response received from device")
-        
+
         self.state = State(response_lines[0][0])  # Bits 3-0
         self.error = Error(response_lines[0][1])  # Bit 4
         self.relay_status = RelayStatus(response_lines[0][2])  # Bit 4
-        
+
         lines = [response_lines[0][4:]] + response_lines[1:]
         self.gauges = []
         if len(lines) > 0:
             self.gauges = [Gauge(line) for line in lines]
-
 
     def __str__(self) -> str:
         return (
@@ -416,8 +419,8 @@ class DeviceStatus:
             f"error={self.error}, "
             f"relay_status={self.relay_status}, "
             f"gauges={self.gauges})"
-        )  
-    
+        )
+
     def to_dict(self) -> Dict[str, Union[int, str, bool]]:
         return {
             "state": self.state.to_dict(),
@@ -547,9 +550,9 @@ class NGC2D(Instrument):
         response_lines = self._send_command("E")
         if response_lines == []:
             raise ValueError("No response received from device")
-        
+
         error = Error(response_lines[0][1])
-        
+
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to reset errors")
 
@@ -567,7 +570,6 @@ class NGC2D(Instrument):
 
         return DeviceStatus(response_lines)
 
-
     def select_ion_gauge(self, gauge_num: str) -> None:
         """Select which ion gauge to use.
 
@@ -582,7 +584,7 @@ class NGC2D(Instrument):
         response_lines = self._send_command("j", param=gauge_num)
         if response_lines == []:
             raise ValueError("No response received from device")
-        
+
         error = Error(response_lines[1][1])
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to select ion gauge")
@@ -632,7 +634,7 @@ class NGC2D(Instrument):
         response_lines = self._send_command("O", param=relay)
         if response_lines == []:
             raise ValueError("No response received from device")
-        
+
         error = Error(response_lines[0][1])
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to override relay")
@@ -654,7 +656,7 @@ class NGC2D(Instrument):
         response_lines = self._send_command("I", param=relay)
         if response_lines == []:
             raise ValueError("No response received from device")
-        
+
         error = Error(response_lines[0][1])
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to inhibit relay")
@@ -698,3 +700,77 @@ def list_instruments() -> List[ParamSet]:
     """
     ports = list_serial_ports()
     return [ParamSet(NGC2D, port=port) for port in ports]
+
+
+{
+    "error": {
+        "gauge_error": False,
+        "over_temp_trip": False,
+        "temp_warning": False,
+    },
+    "gauges": [
+        {
+            "error": {
+                "emission_failure": False,
+                "filament_failure": False,
+                "over_pressure": False,
+                "over_temp": False,
+            },
+            "pressure": None,
+            "status": {
+                "controlling_bakeout": False,
+                "filament_2": False,
+                "in_degas": False,
+                "in_emission": False,
+            },
+            "type": "I",
+        },
+        {
+            "error": {
+                "over_pressure": False,
+                "over_temp": False,
+            },
+            "pressure": 0.02,
+            "status": {
+                "filament_leads": False,
+                "operating": True,
+                "pirani_interlock": False,
+            },
+            "type": "P",
+        },
+        {
+            "error": {
+                "over_pressure": False,
+                "over_temp": False,
+            },
+            "pressure": 1000.0,
+            "status": {
+                "filament_leads": False,
+                "operating": True,
+                "pirani_interlock": False,
+            },
+            "type": "P",
+        },
+        {
+            "error": {
+                "over_pressure": False,
+                "over_temp": False,
+            },
+            "pressure": None,
+            "status": {"operating": False},
+            "type": "M",
+        },
+    ],
+    "relay_status": {
+        "A": False,
+        "B": False,
+        "C": False,
+        "D": False,
+    },
+    "state": {
+        "ig_connected": True,
+        "instrument_type": 2,
+        "mode": False,
+        "selected_gauge": False,
+    },
+}

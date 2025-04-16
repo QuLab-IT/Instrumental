@@ -349,12 +349,42 @@ class Error:
             "over_temp_trip": self.over_temp_trip,
             "temp_warning": self.temp_warning,
         }
+    
+class RelayStatus:
+    """Class representing the status of the relays in the NGC2D controller."""
+
+    A: bool
+    B: bool
+    C: bool
+    D: bool
+
+    def __init__(self, relay_status_byte: str):
+        """Initialize the relay status from a relay status byte."""
+        self.A = bool(relay_status_byte & 0x01)  # Bit 0
+        self.B = bool(relay_status_byte & 0x02)  # Bit 1
+        self.C = bool(relay_status_byte & 0x04)  # Bit 2
+        self.D = bool(relay_status_byte & 0x08)  # Bit 3
+
+    def __str__(self) -> str:
+        return f"RelayStatus(A={self.A}, B={self.B}, C={self.C}, D={self.D})"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+    
+    def to_dict(self) -> Dict[str, bool]:
+        return {
+            "A": self.A,
+            "B": self.B,
+            "C": self.C,
+            "D": self.D,
+        }
 
 class DeviceStatus:
     """Class representing the status of the NGC2D controller."""
 
     state: State
     error: Error
+    relay_status: RelayStatus
     gauges: List[Gauge]
 
     def __init__(self, response_lines: List[str]):
@@ -371,8 +401,9 @@ class DeviceStatus:
         
         self.state = State(response_lines[0][0])  # Bits 3-0
         self.error = Error(response_lines[0][1])  # Bit 4
+        self.relay_status = RelayStatus(response_lines[0][2])  # Bit 4
         
-        lines = [response_lines[0][2:]] + response_lines[1:]
+        lines = [response_lines[0][3:]] + response_lines[1:]
         self.gauges = []
         if len(lines) > 0:
             self.gauges = [Gauge(line) for line in lines]
@@ -382,7 +413,9 @@ class DeviceStatus:
         return (
             f"DeviceStatus(instrument_type={self.instrument_type}, "
             f"mode={self.mode}, selected_gauge={self.selected_gauge}, "
-            f"ig_connected={self.ig_connected})"
+            f"ig_connected={self.ig_connected}, "
+            f"relay_status={self.relay_status}, "
+            f"gauges={self.gauges})"
         )  
     
     def to_dict(self) -> Dict[str, Union[int, str, bool]]:
@@ -391,6 +424,8 @@ class DeviceStatus:
             "mode": self.mode,
             "selected_gauge": self.selected_gauge,
             "ig_connected": self.ig_connected,
+            "relay_status": self.relay_status.to_dict(),
+            "gauges": [gauge.to_dict() for gauge in self.gauges],
         }
 
 
@@ -569,12 +604,10 @@ class NGC2D(Instrument):
             raise RuntimeError("Must be in remote control mode to control gauge")
 
         response_lines = self._send_command("i", param=emission_current)
-        if response_lines == []:
-            raise ValueError("No response received from device")
-        
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to switch on gauge")
+        if len(response_lines) > 1:
+            error = Error(response_lines[0][1])
+            if error.gauge_error or error.over_temp_trip or error.temp_warning:
+                raise ValueError("Failed to switch on gauge")
 
     def gauge_off(self) -> None:
         """Switch off ion gauge."""
@@ -582,12 +615,10 @@ class NGC2D(Instrument):
             raise RuntimeError("Must be in remote control mode to control gauge")
 
         response_lines = self._send_command("o")
-        if response_lines == []:
-            raise ValueError("No response received from device")
-        
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to switch off gauge")
+        if len(response_lines) > 1:
+            error = Error(response_lines[0][1])
+            if error.gauge_error or error.over_temp_trip or error.temp_warning:
+                raise ValueError("Failed to switch off gauge")
 
     def override_relay(self, relay: str) -> None:
         """Permanently energize a relay.

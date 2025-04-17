@@ -1,4 +1,4 @@
-# Auto-generated 2025-04-17T22:46:31.815948
+# Auto-generated 2025-04-17T23:17:44.334950
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -242,7 +242,7 @@ driver_info = OrderedDict([
         'imports': ['pyvisa'],
         'visa_info': {},
     }),
-    ('vacuum.ngc2d', {
+    ('vacuum.ngc', {
         'params': ['port'],
         'classes': ['NGC2', 'NGC2D', 'NGC2_D', 'NGC3'],
         'imports': ['serial'],

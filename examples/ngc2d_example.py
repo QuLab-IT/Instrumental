@@ -10,7 +10,7 @@ This script:
 5. Reads the status
 6. Closes the connection
 """
-from instrumental.drivers.vacuum.ngc2d import NGC2_D, IonGaugeSelection, EmissionCurrent
+from instrumental.drivers.vacuum.ngc import NGC2_D, IonGaugeSelection, EmissionCurrent
 
 def main():
     # Create NGC2D instance (replace 'COM1' with your actual port)

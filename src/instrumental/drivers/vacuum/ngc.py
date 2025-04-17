@@ -5,7 +5,7 @@ Driver for NGC2D Pressure Gauge Controller.
 The controller supports communication via RS232 serial interface at 9600 baud,
 8 data bits, 1 stop bit, no parity, and no handshaking.
 """
-from enum import Enum, Flag, auto
+from enum import Enum
 import glob
 import sys
 from typing import Dict, List, Optional, Tuple, Union, Any

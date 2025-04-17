@@ -4,7 +4,7 @@
 import datetime
 
 __distname__ = "Instrumental-lib"
-__version__ = "0.8"
+__version__ = "0.9.0"
 __author__ = "Nate Bogdanowicz"
 __email__ = "natezb@gmail.com"
 __url__ = 'https://github.com/mabuchilab/Instrumental'

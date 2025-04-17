@@ -2,6 +2,24 @@ Change Log
 ==========
 
 
+(0.9.0) - 2024-03-20
+------------------
+
+Added
+"""""
+- NGC Pressure Gauge Controller driver with support for multiple models:
+  - NGC2: Basic pressure gauge controller
+  - NGC2D: Dual ion gauge controller with bakeout capability
+  - NGC2-D: Dual ion gauge controller
+  - NGC3: Dual ion gauge controller with bakeout capability
+- Basler camera control driver
+
+Changed
+"""""""
+- Made NGC base class abstract to prevent direct instantiation
+- Improved documentation for NGC driver
+
+
 (0.8) - 2024-12-31
 ------------------
 

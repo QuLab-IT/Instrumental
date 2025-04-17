@@ -548,26 +548,17 @@ class NGC(Instrument):
         The serial port to connect to (e.g., 'COM1' or '/dev/ttyUSB0')
     """
 
-    _INST_PRIORITY: int = 5
-    _INST_PARAMS: List[str] = ["port"]
-    _INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
-
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._remote_mode = False
-        self._features: Dict[str, bool] = {
-            OptionalFeature.DUAL_ION_GAUGE: False,
-            OptionalFeature.BAKEOUT: False,
-        }
-        self._initialize_features()
-
     def _initialize_features(self) -> None:
         """Initialize device-specific features"""
         pass
 
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
+        self._remote_mode = False
+        self._features: Dict[str, bool] = {
+            OptionalFeature.DUAL_ION_GAUGE: False,
+            OptionalFeature.BAKEOUT: False,
+        }
         self._ser = Serial(
             self._paramset["port"],
             baudrate=9600,
@@ -576,6 +567,7 @@ class NGC(Instrument):
             parity="N",
             timeout=1.0,
         )
+        self._initialize_features()
 
     def has_feature(self, feature: OptionalFeature) -> bool:
         """Check if the device has a specific feature"""

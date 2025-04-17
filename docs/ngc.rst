@@ -1,14 +1,35 @@
-NGC2D Pressure Gauge Controller
+NGC Pressure Gauge Controllers
 =============================
 
-.. module:: instrumental.drivers.vacuum.ngc2d
+.. module:: instrumental.drivers.vacuum.ngc
 
-The NGC2D is a dual pressure gauge controller that supports multiple gauge types including ion gauges and pirani gauges. This driver provides an interface to control and read from the NGC2D pressure gauge controller.
+The NGC series of pressure gauge controllers support multiple gauge types including ion gauges and pirani gauges. This driver provides an interface to control and read from various NGC models (NGC2, NGC2D, NGC2-D, and NGC3) with their specific features.
+
+Supported Models
+---------------
+
+The driver supports the following NGC models:
+
+- **NGC2**: Basic pressure gauge controller
+- **NGC2D**: Dual ion gauge controller with bakeout capability
+- **NGC2-D**: Dual ion gauge controller
+- **NGC3**: Dual ion gauge controller with bakeout capability
+
+Feature Support
+-------------
+
++----------------+-----------+-----------+-----------+-----------+
+| Feature        | NGC2      | NGC2D     | NGC2-D    | NGC3      |
++================+===========+===========+===========+===========+
+| Dual Ion Gauge | No        | Yes       | Yes       | Yes       |
++----------------+-----------+-----------+-----------+-----------+
+| Bakeout        | No        | Yes       | No        | Yes       |
++----------------+-----------+-----------+-----------+-----------+
 
 Installation
 ------------
 
-The NGC2D driver is included in the Instrumental package. To use it, ensure you have the following:
+The NGC driver is included in the Instrumental package. To use it, ensure you have the following:
 
 - Python 3.6 or higher
 - Instrumental package installed
@@ -18,7 +39,7 @@ The NGC2D driver is included in the Instrumental package. To use it, ensure you 
 Interface Protocol
 -----------------
 
-The controller communicates via RS232 serial interface with the following settings:
+The controllers communicate via RS232 serial interface with the following settings:
 
 - Baud rate: 9600
 - Data bits: 8
@@ -37,7 +58,7 @@ The instrument responds with a state byte and an error byte, followed by a CR-LF
 Configuration
 ------------
 
-The NGC2D can be configured with the following settings:
+The NGC controllers can be configured with the following settings:
 
 Serial Port Settings
 ~~~~~~~~~~~~~~~~~~
@@ -60,17 +81,18 @@ Usage
 
 Basic usage example::
 
-    from instrumental.drivers.vacuum.ngc2d import NGC2D
+    from instrumental.drivers.vacuum.ngc import NGC2D  # or NGC2, NGC2_D, NGC3
 
-    # Create NGC2D instance
+    # Create NGC instance
     ngc = NGC2D(port='COM1')  # Replace with your actual port
 
     try:
         # Set remote control
         ngc.control()
         
-        # Select ion gauge 1
-        ngc.select_ion_gauge('1')
+        # Select ion gauge 1 (only available on dual ion gauge models)
+        if ngc.has_feature(OptionalFeature.DUAL_ION_GAUGE):
+            ngc.select_ion_gauge('1')
         
         # Turn on the gauge with 0.5mA emission current
         ngc.gauge_on('0')
@@ -103,10 +125,35 @@ Error Handling::
     except RuntimeError as e:
         print(f"Failed to turn on gauge: {e}")
 
+Bakeout Example (NGC2D and NGC3 only)::
+
+    if ngc.has_feature(OptionalFeature.BAKEOUT):
+        ngc.bakeout()
+
 API Reference
 ------------
 
+.. autoclass:: NGC
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: NGC2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: NGC2D
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: NGC2_D
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: NGC3
    :members:
    :undoc-members:
    :show-inheritance:
@@ -153,6 +200,8 @@ The following commands are supported:
 | <inhibit>      | I      | R             | Permanently de-energize relay  | State, Error    |
 |                |        |               | (R='A' to 'D')                |                 |
 +----------------+--------+----------------+--------------------------------+------------------+
+| <bakeout>      | B      | None          | Start bakeout cycle           | State, Error    |
++----------------+--------+----------------+--------------------------------+------------------+
 
 Status Report Format
 ------------------
@@ -187,18 +236,18 @@ The status report provides detailed information about the controller's state:
 Gauge Types
 ----------
 
-The controller supports the following gauge types:
+The controllers support the following gauge types:
 
 1. Ion Gauge 1
 2. Pirani 1
 3. Pirani 2
 4. Capacitance manometer
-5. Ion Gauge 2
+5. Ion Gauge 2 (on dual ion gauge models)
 
 Pressure Units
 -------------
 
-The controller supports the following pressure units:
+The controllers support the following pressure units:
 
 - Torr
 - Pascal
@@ -213,6 +262,7 @@ The driver includes comprehensive error handling for all commands and responses.
 - Attempting to control the device while in local mode
 - Invalid parameter values
 - Communication timeouts
+- Attempting to use features not supported by the model
 
 Troubleshooting
 --------------
@@ -234,28 +284,34 @@ Common Issues
   - Verify device is in correct mode (local/remote)
   - Ensure no other program is using the port
 
+- **Feature Not Supported**
+  - Verify your device model supports the feature
+  - Check has_feature() before using advanced features
+
 Safety Information
 ----------------
 
-Important safety considerations when using the NGC2D:
+Important safety considerations when using NGC controllers:
 
 - Always ensure proper ventilation when using ion gauges
 - Do not operate ion gauges at pressures above 1e-3 Torr
 - Allow proper warm-up time for ion gauges
 - Follow manufacturer's guidelines for bakeout procedures
+- Use appropriate safety measures when handling high voltage components
 
 Version History
 --------------
 
 - 1.0.0 (2024-03-20)
   - Initial release
-  - Basic functionality implemented
-  - Support for all NGC2D commands
+  - Support for all NGC models
+  - Feature detection and validation
+  - Comprehensive error handling
 
 References
 ----------
 
-- `NGC2D User Manual <https://www.lesker.com>`_
+- `NGC Series User Manual <https://www.lesker.com>`_
 - `PySerial Documentation <https://pyserial.readthedocs.io>`_
 - `Instrumental Documentation <https://instrumental-lib.readthedocs.io>`_
 

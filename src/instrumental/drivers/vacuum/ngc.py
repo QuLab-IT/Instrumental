@@ -10,6 +10,7 @@ import glob
 import sys
 from typing import Dict, List, Optional, Tuple, Union, Any
 from serial import Serial, SerialException
+from abc import ABC, abstractmethod
 
 from .. import Instrument, ParamSet
 from ... import u
@@ -543,12 +544,15 @@ class DeviceStatus:
         }
 
 
-class NGC(Instrument):
+class NGC(Instrument, ABC):
     """NGC Pressure Gauge Controller driver.
 
     This class provides an interface to control and read from the NGC pressure
     gauge controller. The controller supports multiple gauge types and pressure
     measurement units.
+
+    This is an abstract base class and should not be instantiated directly.
+    Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.
 
     Parameters
     ----------
@@ -556,8 +560,17 @@ class NGC(Instrument):
         The serial port to connect to (e.g., 'COM1' or '/dev/ttyUSB0')
     """
 
+    def __new__(cls, *args, **kwargs):
+        if cls is NGC:
+            raise TypeError("Cannot instantiate abstract class NGC directly. Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.")
+        return super().__new__(cls)
+
+    @abstractmethod
     def _initialize_features(self) -> None:
-        """Initialize device-specific features"""
+        """Initialize device-specific features.
+        
+        This method must be implemented by subclasses to set up model-specific features.
+        """
         pass
 
     def _initialize(self) -> None:

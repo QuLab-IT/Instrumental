@@ -1,9 +1,11 @@
-NGC Pressure Gauge Controllers
+Arun Microelectronics NGC Pressure Gauge Controllers
 =============================
 
 .. module:: instrumental.drivers.vacuum.ngc
 
 The NGC series of pressure gauge controllers support multiple gauge types including ion gauges and pirani gauges. This driver provides an interface to control and read from various NGC models (NGC2, NGC2D, NGC2-D, and NGC3) with their specific features.
+
+The `NGC2 <https://arunmicro.com/documentation/Manual_NGC2.pdf>`_, `NGC2D <https://arunmicro.com/documentation/Manual_NGC2D.pdf>`_, `NGC2-D <https://manualzz.com/doc/7009440/aml-ngc2-d-dual-pressure-gauge-controller-user-manual>`_ and `NGC3 <https://arunmicro.com/documentation/Manual_NGC3.pdf>`_ user manuals were used as guide for the implementation.
 
 Supported Models
 ---------------

@@ -147,10 +147,7 @@ class GaugeStatus:
     controlling_bakeout: bool
     in_degas: bool
     filament_2: bool
-    bit_6: bool
     operating: bool
-    pirani_interlock: bool
-    filament_leads: bool
 
     def __init__(self, status_byte: int, gauge_type: GaugeType):
         """Initialize the gauge status from a status byte.
@@ -212,8 +209,6 @@ class GaugeStatus:
             case GaugeType.PIRANI:
                 return {
                     "operating": self.operating,
-                    "pirani_interlock": self.pirani_interlock,
-                    "filament_leads": self.filament_leads,
                 }
             case GaugeType.CAPACITANCE_MANOMETER:
                 return {"operating": self.operating}

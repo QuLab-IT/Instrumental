@@ -171,6 +171,7 @@ class GaugeStatus:
 
             case GaugeType.PIRANI:
                 # Pirani Gauge Status
+                print(status_byte)
                 self.operating = bool(status_byte & 0x01)  # Bit 0
             case GaugeType.CAPACITANCE_MANOMETER:
                 # Manometer Status

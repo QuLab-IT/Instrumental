@@ -69,7 +69,7 @@ class Command(Enum):
     GAUGE_OFF: str = "o"
     OVERRIDE_RELAY: str = "O"
     INHIBIT_RELAY: str = "I"
-
+    BAKEOUT: str = "B"
     def format(self, ignored_byte: str = "0", param: Optional[str] = None) -> str:
         """Format the command with ignored byte and optional parameter."""
         cmd = f"*{self.value}{ignored_byte}"
@@ -110,6 +110,14 @@ class PressureUnit(Enum):
     PASCAL: str = "P"
     MBAR: str = "M"
 
+
+class DeviceType(Enum):
+    """Modes of the NGC2D controller"""
+
+    NGC2: str = "NGC2"
+    NGC2D: str = "NGC2D"
+    NGC2_D: str = "NGC2_D"
+    NGC3: str = "NGC3"
 
 class DeviceMode(Enum):
     """Modes of the NGC2D controller"""
@@ -183,9 +191,7 @@ class GaugeStatus:
             case GaugeType.PIRANI:
                 return (
                     "GaugeStatus(type=Pirani, "
-                    f"operating={self.operating}, "
-                    f"pirani_interlock={self.pirani_interlock}, "
-                    f"filament_leads={self.filament_leads})"
+                    f"operating={self.operating})"
                 )
             case GaugeType.CAPACITANCE_MANOMETER:
                 return "GaugeStatus(type=Manometer)"
@@ -501,10 +507,10 @@ class DeviceStatus:
         }
 
 
-class NGC2D(Instrument):
-    """NGC2D Pressure Gauge Controller driver.
+class NGC(Instrument):
+    """NGC Pressure Gauge Controller driver.
 
-    This class provides an interface to control and read from the NGC2D pressure
+    This class provides an interface to control and read from the NGC pressure
     gauge controller. The controller supports multiple gauge types and pressure
     measurement units.
 
@@ -618,28 +624,6 @@ class NGC2D(Instrument):
 
         return DeviceStatus(response_lines)
 
-    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
-        """Select which ion gauge to use.
-
-        Parameters
-        ----------
-        gauge_num : IonGaugeSelection
-            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
-        """
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to select gauge")
-        
-        if gauge_num not in IonGaugeSelection:
-            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
-        
-        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
-        if response_lines == []:
-            raise ValueError("No response received from device")
-
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to select ion gauge")
-
     def gauge_on(self, emission_current: EmissionCurrent = EmissionCurrent.mA0_5) -> None:
         """Switch on ion gauge emission.
 
@@ -714,3 +698,150 @@ class NGC2D(Instrument):
         error = Error(response_lines[0][1])
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to inhibit relay")
+
+
+class NGC2(NGC):
+    """NGC2 Pressure Gauge Controller driver.
+
+    This class provides an interface to control and read from the NGC2 pressure
+    gauge controller. The controller supports multiple gauge types and pressure
+    measurement units.
+    """
+    _INST_CLASSES: List[str] = ["NGC2"]
+
+    def _initialize(self) -> None:
+        """Initialize the instrument connection"""
+        super()._initialize()
+        self._inst_type = DeviceType.NGC2
+
+
+class NGC2D(NGC):
+    """NGC2D Pressure Gauge Controller driver.
+
+    This class provides an interface to control and read from the NGC2D pressure
+    gauge controller. The controller supports multiple gauge types and pressure
+    measurement units.
+    """
+    _INST_CLASSES: List[str] = ["NGC2D"]
+
+    def _initialize(self) -> None:
+        """Initialize the instrument connection"""
+        super()._initialize()
+        self._inst_type = DeviceType.NGC2D
+
+    
+    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
+        """Select which ion gauge to use.
+
+        Parameters
+        ----------
+        gauge_num : IonGaugeSelection
+            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
+        """
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to select gauge")
+        
+        if gauge_num not in IonGaugeSelection:
+            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
+        
+        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
+        if response_lines == []:
+            raise ValueError("No response received from device")
+
+        error = Error(response_lines[1][1])
+        if error.gauge_error or error.over_temp_trip or error.temp_warning:
+            raise ValueError("Failed to select ion gauge")
+
+    
+    def bakeout(self) -> None:
+        """Start the bakeout cycle."""
+
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to control bakeout")
+
+        self._send_command(Command.BAKEOUT)
+
+
+class NGC2_D(NGC):
+    """NGC2_D Pressure Gauge Controller driver.
+
+    This class provides an interface to control and read from the NGC2D pressure
+    gauge controller. The controller supports multiple gauge types and pressure
+    measurement units.
+    """
+    _INST_CLASSES: List[str] = ["NGC2_D"]
+
+    def _initialize(self) -> None:
+        """Initialize the instrument connection"""
+        super()._initialize()
+        self._inst_type = DeviceType.NGC2_D
+
+    
+    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
+        """Select which ion gauge to use.
+
+        Parameters
+        ----------
+        gauge_num : IonGaugeSelection
+            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
+        """
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to select gauge")
+        
+        if gauge_num not in IonGaugeSelection:
+            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
+        
+        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
+        if response_lines == []:
+            raise ValueError("No response received from device")
+
+        error = Error(response_lines[1][1])
+        if error.gauge_error or error.over_temp_trip or error.temp_warning:
+            raise ValueError("Failed to select ion gauge")
+
+
+
+class NGC3(NGC):
+    """NGC3 Pressure Gauge Controller driver.
+
+    This class provides an interface to control and read from the NGC3 pressure
+    gauge controller. The controller supports multiple gauge types and pressure
+    measurement units.
+    """
+    _INST_CLASSES: List[str] = ["NGC3"]
+
+    def _initialize(self) -> None:
+        """Initialize the instrument connection"""
+        super()._initialize()
+        self._inst_type = DeviceType.NGC3
+
+    
+    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
+        """Select which ion gauge to use.
+
+        Parameters
+        ----------
+        gauge_num : IonGaugeSelection
+            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
+        """
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to select gauge")
+        
+        if gauge_num not in IonGaugeSelection:
+            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
+        
+        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
+        if response_lines == []:
+            raise ValueError("No response received from device")
+
+        error = Error(response_lines[1][1])
+        if error.gauge_error or error.over_temp_trip or error.temp_warning:
+            raise ValueError("Failed to select ion gauge")
+
+    def bakeout(self) -> None:
+        """Start the bakeout cycle."""
+
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to control bakeout")
+
+        self._send_command(Command.BAKEOUT)

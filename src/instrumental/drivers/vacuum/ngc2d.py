@@ -143,13 +143,75 @@ class Relay(Enum):
 class GaugeStatus:
     """Class representing the status of a gauge in the NGC2D controller."""
 
+
+    def __init__(self, status_byte: int):
+        """Initialize the gauge status from a status byte.
+
+        Parameters
+        ----------
+        status_byte : int
+            The status byte from the device
+        """
+
+    def __str__(self) -> str:
+        return "GaugeStatus()"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert the status to a dictionary."""
+        pass
+
+
+class IonGaugeStatus(GaugeStatus):
+    """Class representing the status of a Ion gauge in the NGC2D controller."""
+
     in_emission: bool
     controlling_bakeout: bool
     in_degas: bool
     filament_2: bool
+
+    def __init__(self, status_byte: int):
+        """Initialize the gauge status from a status byte.
+
+        Parameters
+        ----------
+        status_byte : int
+            The status byte from the device
+        """
+        self.in_emission = bool(status_byte & 0x01)  # Bit 0
+        self.controlling_bakeout = bool(status_byte & 0x04)  # Bit 2
+        self.in_degas = bool(status_byte & 0x08)  # Bit 3
+        self.filament_2 = bool(status_byte & 0x20)  # Bit 5
+
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert the status to a dictionary."""
+        return {
+            "in_emission": self.in_emission,
+            "controlling_bakeout": self.controlling_bakeout,
+            "in_degas": self.in_degas,
+            "filament_2": self.filament_2,
+        }
+    
+    def __str__(self) -> str:
+        return (
+            "GaugeStatus("
+            f"in_emission={self.in_emission}, "
+            f"controlling_bakeout={self.controlling_bakeout}, "
+            f"in_degas={self.in_degas}, "
+            f"filament_2={self.filament_2})"
+        )
+
+
+
+class PiraniStatus(GaugeStatus):
+    """Class representing the status of a Pirani gauge in the NGC2D controller."""
+
     operating: bool
 
-    def __init__(self, status_byte: int, gauge_type: GaugeType):
+    def __init__(self, status_byte: int):
         """Initialize the gauge status from a status byte.
 
         Parameters
@@ -159,60 +221,20 @@ class GaugeStatus:
         gauge_type : str
             The type of gauge ('I' for Ion, 'P' for Pirani, 'M' for Manometer)
         """
-        self.gauge_type = gauge_type
-
-        match gauge_type:
-            case GaugeType.ION_GAUGE:
-                # Ion Gauge Status
-                self.in_emission = bool(status_byte & 0x01)  # Bit 0
-                self.controlling_bakeout = bool(status_byte & 0x04)  # Bit 2
-                self.in_degas = bool(status_byte & 0x08)  # Bit 3
-                self.filament_2 = bool(status_byte & 0x20)  # Bit 5
-
-            case GaugeType.PIRANI:
-                # Pirani Gauge Status
-                print(status_byte)
-                self.operating = bool(status_byte & 0x01)  # Bit 0
-            case GaugeType.CAPACITANCE_MANOMETER:
-                # Manometer Status
-                pass
+        print(status_byte)
+        self.operating = bool(status_byte & 0x01)  # Bit 0
 
     def __str__(self) -> str:
-        match self.gauge_type:
-            case GaugeType.ION_GAUGE:
-                return (
-                    "GaugeStatus(type=Ion, "
-                    f"in_emission={self.in_emission}, "
-                    f"controlling_bakeout={self.controlling_bakeout}, "
-                    f"in_degas={self.in_degas}, filament_2={self.filament_2})"
-                )
-            case GaugeType.PIRANI:
-                return (
-                    "GaugeStatus(type=Pirani, "
-                    f"operating={self.operating})"
-                )
-            case GaugeType.CAPACITANCE_MANOMETER:
-                return "GaugeStatus(type=Manometer)"
-
-    def __repr__(self) -> str:
-        return self.__str__()
+        return (
+            "GaugeStatus("
+            f"operating={self.operating})"
+        )
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the status to a dictionary."""
-        match self.gauge_type:
-            case GaugeType.ION_GAUGE:
-                return {
-                    "in_emission": self.in_emission,
-                    "controlling_bakeout": self.controlling_bakeout,
-                    "in_degas": self.in_degas,
-                    "filament_2": self.filament_2,
-                }
-            case GaugeType.PIRANI:
-                return {
-                    "operating": self.operating,
-                }
-            case GaugeType.CAPACITANCE_MANOMETER:
-                return {"operating": self.operating}
+        return {
+            "operating": self.operating,
+        }
 
 
 class GaugeError:
@@ -319,7 +341,15 @@ class Gauge:
         """
         self.type = GaugeType(line[1])  # P for Pirani, I for Ion, etc.
         self.number = GaugeSelection(line[2])  # Gauge number
-        self.status = GaugeStatus(ord(line[3]), self.type)
+
+        match self.type:
+            case GaugeType.ION_GAUGE:
+                self.status = IonGaugeStatus(ord(line[3]))
+            case GaugeType.PIRANI:
+                self.status = PiraniStatus(ord(line[3]))
+            case GaugeType.CAPACITANCE_MANOMETER:
+                self.status = GaugeStatus(ord(line[3]))
+
         self.error = GaugeError(ord(line[4]), self.type)
         pressure_str = line[5:].split(",")[0].strip()
         self.pressure = float(pressure_str) if pressure_str.strip() else None

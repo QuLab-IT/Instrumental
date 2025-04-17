@@ -1,4 +1,4 @@
-# Auto-generated 2025-04-13T18:24:46.811087
+# Auto-generated 2025-04-17T20:57:42.888251
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -244,7 +244,7 @@ driver_info = OrderedDict([
     }),
     ('vacuum.ngc2d', {
         'params': ['port'],
-        'classes': ['NGC2D'],
+        'classes': ['NGC2', 'NGC2D', 'NGC2_D', 'NGC3'],
         'imports': ['serial'],
     }),
     ('lasers.femto_ferb', {

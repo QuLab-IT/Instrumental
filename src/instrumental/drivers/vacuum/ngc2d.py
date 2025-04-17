@@ -14,6 +14,8 @@ from serial import Serial, SerialException
 from .. import Instrument, ParamSet
 from ... import u
 
+_INST_PARAMS = ['port']
+_INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
 
 def list_serial_ports() -> List[str]:
     """Lists all available serial ports.
@@ -70,6 +72,7 @@ class Command(Enum):
     OVERRIDE_RELAY: str = "O"
     INHIBIT_RELAY: str = "I"
     BAKEOUT: str = "B"
+
     def format(self, ignored_byte: str = "0", param: Optional[str] = None) -> str:
         """Format the command with ignored byte and optional parameter."""
         cmd = f"*{self.value}{ignored_byte}"
@@ -111,14 +114,6 @@ class PressureUnit(Enum):
     MBAR: str = "M"
 
 
-class DeviceType(Enum):
-    """Modes of the NGC2D controller"""
-
-    NGC2: str = "NGC2"
-    NGC2D: str = "NGC2D"
-    NGC2_D: str = "NGC2_D"
-    NGC3: str = "NGC3"
-
 class DeviceMode(Enum):
     """Modes of the NGC2D controller"""
 
@@ -139,6 +134,13 @@ class Relay(Enum):
     B: str = "B"
     C: str = "C"
     D: str = "D"
+
+
+class OptionalFeature(Enum):
+    """Feature flags for the NGC2D controller"""
+    DUAL_ION_GAUGE = "dual_ion_gauge"
+    BAKEOUT = "bakeout"
+
 
 class GaugeStatus:
     """Class representing the status of a gauge in the NGC2D controller."""
@@ -548,7 +550,21 @@ class NGC(Instrument):
 
     _INST_PRIORITY: int = 5
     _INST_PARAMS: List[str] = ["port"]
-    _INST_CLASSES: List[str] = ["NGC2D"]
+    _INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._remote_mode = False
+        self._features: Dict[str, bool] = {
+            OptionalFeature.DUAL_ION_GAUGE: False,
+            OptionalFeature.BAKEOUT: False,
+        }
+        self._initialize_features()
+
+    def _initialize_features(self) -> None:
+        """Initialize device-specific features"""
+        pass
 
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
@@ -560,8 +576,10 @@ class NGC(Instrument):
             parity="N",
             timeout=1.0,
         )
-        # Start in local mode
-        self._remote_mode: bool = False
+
+    def has_feature(self, feature: OptionalFeature) -> bool:
+        """Check if the device has a specific feature"""
+        return self._features.get(feature, False)
 
     def close(self) -> None:
         """Close the serial connection"""
@@ -681,6 +699,31 @@ class NGC(Instrument):
             if error.gauge_error or error.over_temp_trip or error.temp_warning:
                 raise ValueError("Failed to switch off gauge")
 
+    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
+        """Select which ion gauge to use.
+
+        Parameters
+        ----------
+        gauge_num : IonGaugeSelection
+            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
+        """
+        if not self.has_feature(OptionalFeature.DUAL_ION_GAUGE):
+            raise NotImplementedError("This device doesn't support dual ion gauges")
+        
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to select gauge")
+        
+        if gauge_num not in IonGaugeSelection:
+            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
+        
+        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
+        if response_lines == []:
+            raise ValueError("No response received from device")
+
+        error = Error(response_lines[1][1])
+        if error.gauge_error or error.over_temp_trip or error.temp_warning:
+            raise ValueError("Failed to select ion gauge")
+
     def override_relay(self, relay: Relay) -> None:
         """Permanently energize a relay.
 
@@ -724,6 +767,16 @@ class NGC(Instrument):
         error = Error(response_lines[0][1])
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to inhibit relay")
+        
+    def bakeout(self) -> None:
+        """Start the bakeout cycle."""
+        if not self.has_feature(OptionalFeature.BAKEOUT):
+            raise NotImplementedError("This device doesn't support bakeout")
+
+        if not self._remote_mode:
+            raise RuntimeError("Must be in remote control mode to control bakeout")
+
+        self._send_command(Command.BAKEOUT)
 
 
 class NGC2(NGC):
@@ -738,7 +791,10 @@ class NGC2(NGC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         super()._initialize()
-        self._inst_type = DeviceType.NGC2
+
+    def _initialize_features(self) -> None:
+        """NGC2 has no additional features"""
+        pass
 
 
 class NGC2D(NGC):
@@ -753,39 +809,13 @@ class NGC2D(NGC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         super()._initialize()
-        self._inst_type = DeviceType.NGC2D
 
-    
-    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
-        """Select which ion gauge to use.
-
-        Parameters
-        ----------
-        gauge_num : IonGaugeSelection
-            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
-        """
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to select gauge")
-        
-        if gauge_num not in IonGaugeSelection:
-            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
-        
-        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
-        if response_lines == []:
-            raise ValueError("No response received from device")
-
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to select ion gauge")
-
-    
-    def bakeout(self) -> None:
-        """Start the bakeout cycle."""
-
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to control bakeout")
-
-        self._send_command(Command.BAKEOUT)
+    def _initialize_features(self) -> None:
+        """NGC2D has dual ion gauge and bakeout features"""
+        self._features.update({
+            OptionalFeature.DUAL_ION_GAUGE: True,
+            OptionalFeature.BAKEOUT: True,
+        })
 
 
 class NGC2_D(NGC):
@@ -800,32 +830,12 @@ class NGC2_D(NGC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         super()._initialize()
-        self._inst_type = DeviceType.NGC2_D
 
-    
-    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
-        """Select which ion gauge to use.
-
-        Parameters
-        ----------
-        gauge_num : IonGaugeSelection
-            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
-        """
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to select gauge")
-        
-        if gauge_num not in IonGaugeSelection:
-            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
-        
-        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
-        if response_lines == []:
-            raise ValueError("No response received from device")
-
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to select ion gauge")
-
-
+    def _initialize_features(self) -> None:
+        """NGC2D has dual ion gauge and bakeout features"""
+        self._features.update({
+            OptionalFeature.DUAL_ION_GAUGE: True,
+        })
 
 class NGC3(NGC):
     """NGC3 Pressure Gauge Controller driver.
@@ -839,35 +849,10 @@ class NGC3(NGC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         super()._initialize()
-        self._inst_type = DeviceType.NGC3
 
-    
-    def select_ion_gauge(self, gauge_num: IonGaugeSelection = IonGaugeSelection.IG1) -> None:
-        """Select which ion gauge to use.
-
-        Parameters
-        ----------
-        gauge_num : IonGaugeSelection
-            'IG1' for Ion Gauge 1, 'IG2' for Ion Gauge 2
-        """
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to select gauge")
-        
-        if gauge_num not in IonGaugeSelection:
-            raise ValueError("Gauge number must be 'IG1' or 'IG2'")
-        
-        response_lines = self._send_command(Command.SELECT_ION_GAUGE, param=gauge_num.value)
-        if response_lines == []:
-            raise ValueError("No response received from device")
-
-        error = Error(response_lines[1][1])
-        if error.gauge_error or error.over_temp_trip or error.temp_warning:
-            raise ValueError("Failed to select ion gauge")
-
-    def bakeout(self) -> None:
-        """Start the bakeout cycle."""
-
-        if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to control bakeout")
-
-        self._send_command(Command.BAKEOUT)
+    def _initialize_features(self) -> None:
+        """NGC2D has dual ion gauge and bakeout features"""
+        self._features.update({
+            OptionalFeature.DUAL_ION_GAUGE: True,
+            OptionalFeature.BAKEOUT: True,
+        })

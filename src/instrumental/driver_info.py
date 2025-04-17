@@ -1,4 +1,4 @@
-# Auto-generated 2025-03-21T15:49:49.650521
+# Auto-generated 2025-04-17T23:28:29.053157
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -241,6 +241,11 @@ driver_info = OrderedDict([
         'classes': ['TC038'],
         'imports': ['pyvisa'],
         'visa_info': {},
+    }),
+    ('vacuum.ngc', {
+        'params': ['port'],
+        'classes': ['NGC2', 'NGC2D', 'NGC2_D', 'NGC3'],
+        'imports': ['serial'],
     }),
     ('lasers.femto_ferb', {
         'params': ['visa_address'],

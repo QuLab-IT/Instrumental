@@ -223,7 +223,6 @@ class PiraniStatus(GaugeStatus):
         gauge_type : str
             The type of gauge ('I' for Ion, 'P' for Pirani, 'M' for Manometer)
         """
-        print(status_byte)
         self.operating = bool(status_byte & 0x01)  # Bit 0
 
     def __str__(self) -> str:

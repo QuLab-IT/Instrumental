@@ -54,7 +54,16 @@ def list_instruments() -> List[ParamSet]:
         A list of parameter sets for each available instrument
     """
     ports = list_serial_ports()
-    return [ParamSet(NGC2D, port=port) for port in ports]
+    return [
+        ParamSet(class_name, port=port) 
+            for port in ports 
+                for class_name in [
+                    NGC2,
+                    NGC2D,
+                    NGC2_D,
+                    NGC3,
+                ]
+    ]
 
 
 

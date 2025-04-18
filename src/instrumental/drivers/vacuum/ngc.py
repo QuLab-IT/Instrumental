@@ -81,7 +81,7 @@ class Command(Enum):
     GAUGE_OFF: str = "o"
     OVERRIDE_RELAY: str = "O"
     INHIBIT_RELAY: str = "I"
-    BAKE: str = "B"
+    BAKE: str = "b"
 
     def format(self, ignored_byte: str = "0", param: Optional[str] = None) -> str:
         """Format the command with ignored byte and optional parameter."""

@@ -657,7 +657,7 @@ class NGC(Instrument, ABC):
 
     def control(self) -> None:
         """Switch the instrument to remote control mode."""
-        self._send_command("C")  # Empty response is expected
+        self._send_command(Command.CONTROL)  # Empty response is expected
         self._remote_mode = True
 
     def release(self) -> None:

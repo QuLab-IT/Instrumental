@@ -340,7 +340,7 @@ class Gauge:
     status: GaugeStatus
     error: GaugeError
     pressure: Optional[float]
-
+    unit: PressureUnit
     def __init__(self, line: str):
         """Initialize the gauge from a status line.
 
@@ -364,6 +364,7 @@ class Gauge:
         self.error = GaugeError(ord(line[4]), self.type)
         pressure_str = line[5:].split(",")[0].strip()
         self.pressure = float(pressure_str) if pressure_str.strip() else None
+        self.unit = PressureUnit(line[13])
 
     def __str__(self) -> str:
         return (
@@ -371,7 +372,8 @@ class Gauge:
             f"number={self.number.name}, "
             f"status={self.status}, "
             f"error={self.error}, "
-            f"pressure={self.pressure})"
+            f"pressure={self.pressure}, "
+            f"unit={self.unit.name})"
         )
 
     def __repr__(self) -> str:
@@ -384,6 +386,7 @@ class Gauge:
             "status": self.status.to_dict(),
             "error": self.error.to_dict(),
             "pressure": self.pressure,
+            "unit": self.unit.name,
         }
 
 

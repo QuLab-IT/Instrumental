@@ -1,7 +1,16 @@
 Change Log
 ==========
 
-(0.9.2) - 2025-04-18
+
+(0.9.4) - 2025-04-18
+------------------
+
+Fixed
+"""""
+- Fixed bake command in NGC Pressure Gauge Controller driver
+
+
+(0.9.3) - 2025-04-18
 ------------------
 
 Fixed

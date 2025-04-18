@@ -81,7 +81,7 @@ class Command(Enum):
     GAUGE_OFF: str = "o"
     OVERRIDE_RELAY: str = "O"
     INHIBIT_RELAY: str = "I"
-    BAKEOUT: str = "B"
+    BAKE: str = "B"
 
     def format(self, ignored_byte: str = "0", param: Optional[str] = None) -> str:
         """Format the command with ignored byte and optional parameter."""
@@ -136,6 +136,12 @@ class EmissionCurrent(Enum):
     mA0_5: str = "0"
     mA5: str = "1"
 
+class BakeState(Enum):
+    """Bake state of the NGC2D controller"""
+
+    START: str = "1"
+    STOP: str = "0"
+
 
 class Relay(Enum):
     """Relays on the NGC2D controller"""
@@ -149,7 +155,7 @@ class Relay(Enum):
 class OptionalFeature(Enum):
     """Feature flags for the NGC2D controller"""
     DUAL_ION_GAUGE = "dual_ion_gauge"
-    BAKEOUT = "bakeout"
+    BAKE = "bake"
 
 
 class GaugeStatus:
@@ -581,7 +587,7 @@ class NGC(Instrument, ABC):
         self._remote_mode = False
         self._features: Dict[str, bool] = {
             OptionalFeature.DUAL_ION_GAUGE: False,
-            OptionalFeature.BAKEOUT: False,
+            OptionalFeature.BAKE: False,
         }
         self._ser = Serial(
             self._paramset["port"],
@@ -626,7 +632,7 @@ class NGC(Instrument, ABC):
             (State, Error, [response_lines]) or None if no response
         """
         self._ser.write(command.format(ignored_byte, param).encode())
-
+        
         response_lines: List[str] = []
         while True:
             line = self._ser.readline().decode().strip()
@@ -784,15 +790,15 @@ class NGC(Instrument, ABC):
         if error.gauge_error or error.over_temp_trip or error.temp_warning:
             raise ValueError("Failed to inhibit relay")
         
-    def bakeout(self) -> None:
-        """Start the bakeout cycle."""
-        if not self.has_feature(OptionalFeature.BAKEOUT):
-            raise NotImplementedError("This device doesn't support bakeout")
+    def bake(self, state: BakeState = BakeState.START) -> None:
+        """Start or stop the bake cycle."""
+        if not self.has_feature(OptionalFeature.BAKE):
+            raise NotImplementedError("This device doesn't support bake")
 
         if not self._remote_mode:
-            raise RuntimeError("Must be in remote control mode to control bakeout")
+            raise RuntimeError("Must be in remote control mode to control bake")
 
-        self._send_command(Command.BAKEOUT)
+        self._send_command(Command.BAKE, param=state.value)
 
 
 class NGC2(NGC):
@@ -830,7 +836,7 @@ class NGC2D(NGC):
         """NGC2D has dual ion gauge and bakeout features"""
         self._features.update({
             OptionalFeature.DUAL_ION_GAUGE: True,
-            OptionalFeature.BAKEOUT: True,
+            OptionalFeature.BAKE: True,
         })
 
 
@@ -870,5 +876,5 @@ class NGC3(NGC):
         """NGC2D has dual ion gauge and bakeout features"""
         self._features.update({
             OptionalFeature.DUAL_ION_GAUGE: True,
-            OptionalFeature.BAKEOUT: True,
+            OptionalFeature.BAKE: True,
         })

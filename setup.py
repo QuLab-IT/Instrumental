@@ -27,46 +27,43 @@ try:
 except FileNotFoundError:
     extras = {}
 
-# Check for cffi and C compiler
+# Check for cffi and C compiler - needed early for potential messages
 post_install_msgs = []
+cffi_found = False
+compiler_found = False
 try:
     import cffi
+    cffi_found = True
     try:
-        new_compiler().compile(b'')
-        build_cffi_modules = True
+        new_compiler().compile(b'') # Simple check for compiler existence
+        compiler_found = True
     except Exception:
-        build_cffi_modules = False
         post_install_msgs.append(
-            "No C compiler was found, so cffi modules were not built. If you would like to use "
-            "cffi-based drivers that require compilation, first install a suitable compiler, "
-            "then reinstall Instrumental. See the cffi installation documentation for more details "
-            "on installing an appropriate compiler for your platform.")
+            "No C compiler was found, so cffi modules may not build. If you would like to use "
+            "cffi-based drivers that require compilation, first install a suitable compiler. "
+            "See the cffi installation documentation for more details on installing an appropriate compiler "
+            "for your platform.")
 except ImportError:
-    build_cffi_modules = False
     post_install_msgs.append(
-        "Python cffi was not installed, so cffi modules were not built. If you would like to use "
+        "Python cffi package was not installed, so cffi modules cannot be built. If you would like to use "
         "cffi-based drivers that require compilation, first install cffi and a suitable compiler, "
-        "then reinstall Instrumental. See the cffi installation documentation for more details on "
-        "installing an appropriate compiler for your platform.")
+        "then reinstall Instrumental. See the cffi installation documentation for more details.")
 
-# Find all cffi build scripts if applicable
-keywords = {}
-if build_cffi_modules:
-    # setup_requires is deprecated in favor of pyproject.toml build-system.requires
-    # but cffi_modules needs to be passed to setup()
+# Function to find CFFI modules - call this only when needed
+def find_cffi_modules():
     modules = []
-    # Assuming the source layout is src/instrumental
-    cffi_build_root = os.path.join('src', 'instrumental')
-    for dirpath, dirnames, filenames in os.walk(cffi_build_root):
-        basename = os.path.basename(dirpath)
-        for fname in filenames:
-            if basename == '_cffi_build' and fname.startswith('build_'):
-                # Path relative to package root ('src') expected by cffi?
-                # Adjust if needed based on how cffi expects the path.
-                rel_path = os.path.relpath(dirpath, 'src')
-                modules.append(os.path.join(rel_path, fname) + ':ffi')
-    if modules:
-        keywords['cffi_modules'] = modules
+    if cffi_found and compiler_found:
+        cffi_build_root = os.path.join('src', 'instrumental')
+        for dirpath, dirnames, filenames in os.walk(cffi_build_root):
+            basename = os.path.basename(dirpath)
+            for fname in filenames:
+                if basename == '_cffi_build' and fname.startswith('build_'):
+                    # Path relative to package root ('src') expected by cffi?
+                    # Adjust if needed based on how cffi expects the path.
+                    rel_path = os.path.relpath(dirpath, 'src')
+                    # This will be executed by setuptools during build_ext
+                    modules.append(os.path.join(rel_path, fname) + ':ffi')
+    return modules
 
 # Custom command to generate driver_info.py
 class GenerateCommand(distutils.cmd.Command):
@@ -85,34 +82,38 @@ class GenerateCommand(distutils.cmd.Command):
         script_path = os.path.join(pkg_dir, 'parse_modules.py')
         call([sys.executable, script_path])
 
+# Determine if we are running a command that requires building CFFI modules
+# Avoid running CFFI detection during 'egg_info', 'dist_info', 'clean' etc.
+# This list might need adjustment based on observed pip/setuptools behavior
+build_commands = ['build', 'build_py', 'build_ext', 'install', 'bdist', 'bdist_wheel', 'develop']
+requires_cffi_build = any(cmd in sys.argv for cmd in build_commands)
+
+setup_kwargs = {
+    # Most metadata (name, version, author, etc.) and dependencies
+    # are now defined in pyproject.toml.
+    # Setuptools will automatically use them.
+
+    # We still need to specify things that setuptools cannot (yet)
+    # infer from pyproject.toml or that are dynamic:
+    'packages': find_packages(where='src', exclude=['*._cffi_build']),
+    'package_dir': {'': 'src'},
+    'package_data': {
+        '': ['*.h', '*.pyd'],
+        'instrumental': ['instrumental.conf.default']
+    },
+    'extras_require': extras, # Dynamically generated
+    'cmdclass': {
+        'generate': GenerateCommand,
+    },
+    # Only include cffi_modules if we detected CFFI/Compiler AND a relevant command is run
+    # 'setup_requires': ['cffi>=1.0.0'] if requires_cffi_build and cffi_found else [], # setup_requires is less preferred now
+    'cffi_modules': find_cffi_modules() if requires_cffi_build else [],
+}
 
 if __name__ == '__main__':
-    # Long description can still be read dynamically if desired,
-    # though pyproject.toml's 'readme' field is preferred
-    # with open('README.rst') as f:
-    #     long_desc = f.read()
-
-    setup(
-        # Most metadata (name, version, author, etc.) and dependencies
-        # are now defined in pyproject.toml.
-        # Setuptools will automatically use them.
-
-        # We still need to specify things that setuptools cannot (yet)
-        # infer from pyproject.toml or that are dynamic:
-        packages=find_packages(where='src', exclude=['*._cffi_build']),
-        package_dir={'': 'src'},
-        package_data={
-            '': ['*.h', '*.pyd'],
-            'instrumental': ['instrumental.conf.default']
-        },
-        extras_require=extras, # Dynamically generated
-        cmdclass={
-            'generate': GenerateCommand,
-        },
-        # Pass cffi_modules if they were found
-        **keywords
-    )
+    setup(**setup_kwargs)
 
     # Print post-install messages if any occurred during CFFI check
+    # These messages are now generated earlier, print them regardless of build outcome
     if post_install_msgs:
         print("\n" + "\n\n".join(post_install_msgs))

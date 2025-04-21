@@ -54,15 +54,23 @@ def find_cffi_modules():
     modules = []
     if cffi_found and compiler_found:
         cffi_build_root = os.path.join('src', 'instrumental')
+        # Walk through the source directory
         for dirpath, dirnames, filenames in os.walk(cffi_build_root):
-            basename = os.path.basename(dirpath)
-            for fname in filenames:
-                if basename == '_cffi_build' and fname.startswith('build_'):
-                    # Path relative to package root ('src') expected by cffi?
-                    # Adjust if needed based on how cffi expects the path.
-                    rel_path = os.path.relpath(dirpath, 'src')
-                    # This will be executed by setuptools during build_ext
-                    modules.append(os.path.join(rel_path, fname) + ':ffi')
+            # Check if a '_cffi_build' subdirectory exists
+            if '_cffi_build' in dirnames:
+                # Look for the build script (e.g., _build_pixelfly.py) in the current directory
+                for fname in filenames:
+                    if fname.startswith('_build_') and fname.endswith('.py'):
+                        # Construct the path relative to the 'src' directory
+                        rel_path = os.path.relpath(os.path.join(dirpath, fname), 'src')
+                        # Format for cffi_modules: 'path/to/script.py:variable_name'
+                        # Assuming the ffi object is created implicitly or via a standard name ('ffi'?)
+                        # by the build_lib function used in _build_pixelfly.py.
+                        # The ':ffi' suffix is standard for setuptools cffi integration.
+                        modules.append(rel_path + ':ffi')
+                        # Optional: break if only one build script per dir is expected
+                        # break
+    print(f"Found CFFI modules: {modules}") # Add print for debugging
     return modules
 
 # Custom command to generate driver_info.py

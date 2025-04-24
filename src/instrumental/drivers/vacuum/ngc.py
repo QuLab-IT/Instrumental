@@ -589,6 +589,7 @@ class NGC(Instrument, ABC):
             OptionalFeature.DUAL_ION_GAUGE: False,
             OptionalFeature.BAKE: False,
         }
+        print("Initializing NGC with port:", self._paramset["port"])
         self._ser = Serial(
             self._paramset["port"],
             baudrate=9600,

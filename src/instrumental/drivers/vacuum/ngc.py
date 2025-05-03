@@ -35,11 +35,13 @@ def matches_arun_gauge(response: bytes) -> bool:
 def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
     arun_ports = []
     for port in comports():
+        print("debug: port", port.device)
         arun_ports.append(port.device)
         try:
             with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
                 ser.write(Command.POLL.format().encode())
                 response = ser.read_line()
+                print("debug: response", response) 
                 if matches_arun_gauge(response):
                     arun_ports.append(port.device)
         except Exception as e:

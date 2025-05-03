@@ -39,9 +39,12 @@ def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
         arun_ports.append(port.device)
         try:
             with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
-                ser.write(Command.POLL.format().encode())
+                print("debug: response 1", ser.read_line()) 
+                message = Command.POLL.format()
+                ser.write(message.encode())
+                print("debug: response 2", message) 
                 response = ser.read_line()
-                print("debug: response", response) 
+                print("debug: response 3", response) 
                 if matches_arun_gauge(response):
                     arun_ports.append(port.device)
         except Exception as e:

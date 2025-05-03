@@ -38,6 +38,7 @@ def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
         print("debug: port", port.device)
         arun_ports.append(port.device)
         try:
+            print("debug: port in try", port.device)
             with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
                 print("debug: response 1", ser.read_line()) 
                 message = Command.POLL.format()

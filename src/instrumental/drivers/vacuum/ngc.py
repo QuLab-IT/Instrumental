@@ -20,10 +20,20 @@ _INST_PARAMS = ['port']
 _INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
 
 def matches_arun_gauge(response: bytes) -> bool:
+    """
+    Check if the response from the NGC2D controller matches an Arun gauge.
+    Byte fingerprint is given in NGC2D User Manual, Section State & Error byte coding.
+    Args:
+        response: bytes
+            The response from the NGC2D controller
+
+    Returns:
+        bool
+        True if the response matches an Arun gauge, False otherwise
+    """
     if len(response) != 4:
         return False
     b1, b2 = response[0], response[1]
-    print("debug: bytes", b1, b2)
     return (
         (b1 & 0b00001111) == 0b0010 and  # bits 7–4 of byte 1
         (b1 & 0b00100000) != 0 and           # bit 6 of byte 1 is 1
@@ -35,22 +45,13 @@ def matches_arun_gauge(response: bytes) -> bool:
 def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
     arun_ports = []
     for port in comports():
-        print("debug: port", port.device)
-        # arun_ports.append(port.device)
         try:
-            print("debug: port in try", port.device)
             with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
-                print("debug: response 1", ser.readline()) 
-                message = Command.POLL.format()
-                ser.write(message.encode())
-                print("debug: response 2", message) 
+                ser.write(Command.POLL.format().encode())
                 response = ser.readline()
-                print("debug: response 3", response) 
                 if matches_arun_gauge(response):
-                    print("debug: matches arun gauge")
                     arun_ports.append(port.device)
         except Exception as e:
-            print("debug: error", e)
             continue
     return arun_ports
 

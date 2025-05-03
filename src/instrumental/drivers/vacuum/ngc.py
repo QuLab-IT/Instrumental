@@ -572,7 +572,7 @@ class NGC(Instrument, ABC):
     def __new__(cls, *args, **kwargs):
         if cls is NGC:
             raise TypeError("Cannot instantiate abstract class NGC directly. Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.")
-        return super().__new__(cls)
+        return super().__new__(cls, *args, **kwargs)
 
     @abstractmethod
     def _initialize_features(self) -> None:
@@ -585,6 +585,7 @@ class NGC(Instrument, ABC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         self._remote_mode = False
+        print("hello")
         self._features: Dict[str, bool] = {
             OptionalFeature.DUAL_ION_GAUGE: False,
             OptionalFeature.BAKE: False,
@@ -650,6 +651,7 @@ class NGC(Instrument, ABC):
         tuple
             (State, Error)
         """
+        print("polling")
         response_lines = self._send_command(Command.POLL)
         if response_lines == []:
             raise ValueError("No response received from device")

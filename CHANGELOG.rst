@@ -2,6 +2,14 @@ Change Log
 ==========
 
 
+(0.9.5) - 2025-05-03
+------------------
+
+Fixed
+"""""
+- Fixed Arun Gauge detection in NGC Pressure Gauge Controller driver
+
+
 (0.9.4) - 2025-04-18
 ------------------
 

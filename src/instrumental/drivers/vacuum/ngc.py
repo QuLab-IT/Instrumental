@@ -10,6 +10,7 @@ import glob
 import sys
 from typing import Dict, List, Optional, Tuple, Union, Any
 from serial import Serial, SerialException
+from serial.tools.list_ports import comports
 from abc import ABC, abstractmethod
 
 from .. import Instrument, ParamSet
@@ -18,33 +19,31 @@ from ... import u
 _INST_PARAMS = ['port']
 _INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
 
-def list_serial_ports() -> List[str]:
-    """Lists all available serial ports.
+def matches_arun_gauge(response: bytes) -> bool:
+    if len(response) != 4:
+        return False
+    b1, b2 = response[0], response[1]
+    print("debug: bytes", b1, b2)
+    return (
+        (b1 & 0b11110000) >> 4 == 0b0010 and  # bits 7–4 of byte 1
+        (b1 & 0b00010000) != 0 and           # bit 6 of byte 1 is 1
+        (b2 & 0b10000000) != 0 and           # bit 7 of byte 2 is 1
+        (b2 & 0b00100000) == 0 and           # bit 5 of byte 2 is 0
+        (b2 & 0b00010000) == 0               # bit 4 of byte 2 is 0
+    )
 
-    Returns
-    -------
-    list of str
-        List of available serial port names
-    """
-    if sys.platform.startswith("win"):
-        ports = ["COM%s" % (i + 1) for i in range(256)]
-    elif sys.platform.startswith("linux") or sys.platform.startswith("cygwin"):
-        # this excludes your current terminal "/dev/tty"
-        ports = glob.glob("/dev/tty[A-Za-z]*")
-    elif sys.platform.startswith("darwin"):
-        ports = glob.glob("/dev/tty.*")
-    else:
-        raise EnvironmentError("Unsupported platform")
-    result: List[str] = []
-    for port in ports:
+def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
+    arun_ports = []
+    for port in comports():
         try:
-            s = Serial(port)
-            s.close()
-            result.append(port)
-        except (OSError, SerialException):
-            pass
-    return result
-
+            with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
+                ser.write(Command.POLL.format().encode())
+                response = ser.read_line()
+                if matches_arun_gauge(response):
+                    arun_ports.append(port.device)
+        except Exception as e:
+            continue
+    return arun_ports
 
 def list_instruments() -> List[ParamSet]:
     """List all available NGC2D instruments.
@@ -54,7 +53,8 @@ def list_instruments() -> List[ParamSet]:
     list of ParamSet
         A list of parameter sets for each available instrument
     """
-    ports = list_serial_ports()
+    ports = find_arun_gauge_ports()
+
     return [
         ParamSet(class_name, port=port) 
             for port in ports 

@@ -10,6 +10,7 @@ import glob
 import sys
 from typing import Dict, List, Optional, Tuple, Union, Any
 from serial import Serial, SerialException
+from serial.tools.list_ports import comports
 from abc import ABC, abstractmethod
 
 from .. import Instrument, ParamSet
@@ -18,33 +19,41 @@ from ... import u
 _INST_PARAMS = ['port']
 _INST_CLASSES = ["NGC2", "NGC2D", "NGC2_D", "NGC3"]
 
-def list_serial_ports() -> List[str]:
-    """Lists all available serial ports.
-
-    Returns
-    -------
-    list of str
-        List of available serial port names
+def matches_arun_gauge(response: bytes) -> bool:
     """
-    if sys.platform.startswith("win"):
-        ports = ["COM%s" % (i + 1) for i in range(256)]
-    elif sys.platform.startswith("linux") or sys.platform.startswith("cygwin"):
-        # this excludes your current terminal "/dev/tty"
-        ports = glob.glob("/dev/tty[A-Za-z]*")
-    elif sys.platform.startswith("darwin"):
-        ports = glob.glob("/dev/tty.*")
-    else:
-        raise EnvironmentError("Unsupported platform")
-    result: List[str] = []
-    for port in ports:
-        try:
-            s = Serial(port)
-            s.close()
-            result.append(port)
-        except (OSError, SerialException):
-            pass
-    return result
+    Check if the response from the NGC2D controller matches an Arun gauge.
+    Byte fingerprint is given in NGC2D User Manual, Section State & Error byte coding.
+    Args:
+        response: bytes
+            The response from the NGC2D controller
 
+    Returns:
+        bool
+        True if the response matches an Arun gauge, False otherwise
+    """
+    if len(response) != 4:
+        return False
+    b1, b2 = response[0], response[1]
+    return (
+        (b1 & 0b00001111) == 0b0010 and  # bits 7–4 of byte 1
+        (b1 & 0b00100000) != 0 and           # bit 6 of byte 1 is 1
+        (b2 & 0b01000000) != 0 and           # bit 7 of byte 2 is 1
+        (b2 & 0b00100000) == 0 and           # bit 5 of byte 2 is 0
+        (b2 & 0b00010000) == 0               # bit 4 of byte 2 is 0
+    )
+
+def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
+    arun_ports = []
+    for port in comports():
+        try:
+            with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
+                ser.write(Command.POLL.format().encode())
+                response = ser.readline()
+                if matches_arun_gauge(response):
+                    arun_ports.append(port.device)
+        except Exception as e:
+            continue
+    return arun_ports
 
 def list_instruments() -> List[ParamSet]:
     """List all available NGC2D instruments.
@@ -54,7 +63,8 @@ def list_instruments() -> List[ParamSet]:
     list of ParamSet
         A list of parameter sets for each available instrument
     """
-    ports = list_serial_ports()
+    ports = find_arun_gauge_ports()
+
     return [
         ParamSet(class_name, port=port) 
             for port in ports 
@@ -572,7 +582,7 @@ class NGC(Instrument, ABC):
     def __new__(cls, *args, **kwargs):
         if cls is NGC:
             raise TypeError("Cannot instantiate abstract class NGC directly. Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.")
-        return super().__new__(cls)
+        return super().__new__(cls, *args, **kwargs)
 
     @abstractmethod
     def _initialize_features(self) -> None:
@@ -585,6 +595,7 @@ class NGC(Instrument, ABC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         self._remote_mode = False
+        print("hello")
         self._features: Dict[str, bool] = {
             OptionalFeature.DUAL_ION_GAUGE: False,
             OptionalFeature.BAKE: False,
@@ -650,6 +661,7 @@ class NGC(Instrument, ABC):
         tuple
             (State, Error)
         """
+        print("polling")
         response_lines = self._send_command(Command.POLL)
         if response_lines == []:
             raise ValueError("No response received from device")

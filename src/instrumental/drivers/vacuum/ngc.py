@@ -35,6 +35,7 @@ def matches_arun_gauge(response: bytes) -> bool:
 def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
     arun_ports = []
     for port in comports():
+        arun_ports.append(port.device)
         try:
             with Serial(port.device, baudrate=baudrate, timeout=timeout) as ser:
                 ser.write(Command.POLL.format().encode())
@@ -572,7 +573,7 @@ class NGC(Instrument, ABC):
     def __new__(cls, *args, **kwargs):
         if cls is NGC:
             raise TypeError("Cannot instantiate abstract class NGC directly. Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.")
-        return super().__new__(cls)
+        return super().__new__(cls, *args, **kwargs)
 
     @abstractmethod
     def _initialize_features(self) -> None:

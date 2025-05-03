@@ -595,7 +595,6 @@ class NGC(Instrument, ABC):
     def _initialize(self) -> None:
         """Initialize the instrument connection"""
         self._remote_mode = False
-        print("hello")
         self._features: Dict[str, bool] = {
             OptionalFeature.DUAL_ION_GAUGE: False,
             OptionalFeature.BAKE: False,

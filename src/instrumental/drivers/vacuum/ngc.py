@@ -572,7 +572,7 @@ class NGC(Instrument, ABC):
     def __new__(cls, *args, **kwargs):
         if cls is NGC:
             raise TypeError("Cannot instantiate abstract class NGC directly. Use one of the specific model classes (NGC2, NGC2D, NGC2_D, or NGC3) instead.")
-        return super().__new__(cls, *args, **kwargs)
+        return super().__new__(cls)
 
     @abstractmethod
     def _initialize_features(self) -> None:

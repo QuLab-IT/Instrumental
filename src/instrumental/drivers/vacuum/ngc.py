@@ -49,6 +49,7 @@ def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
                 if matches_arun_gauge(response):
                     arun_ports.append(port.device)
         except Exception as e:
+            print("debug: error", e)
             continue
     return arun_ports
 

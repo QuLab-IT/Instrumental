@@ -25,9 +25,9 @@ def matches_arun_gauge(response: bytes) -> bool:
     b1, b2 = response[0], response[1]
     print("debug: bytes", b1, b2)
     return (
-        (b1 & 0b11110000) >> 4 == 0b0010 and  # bits 7–4 of byte 1
-        (b1 & 0b00010000) != 0 and           # bit 6 of byte 1 is 1
-        (b2 & 0b10000000) != 0 and           # bit 7 of byte 2 is 1
+        (b1 & 0b00001111) == 0b0010 and  # bits 7–4 of byte 1
+        (b1 & 0b00100000) != 0 and           # bit 6 of byte 1 is 1
+        (b2 & 0b01000000) != 0 and           # bit 7 of byte 2 is 1
         (b2 & 0b00100000) == 0 and           # bit 5 of byte 2 is 0
         (b2 & 0b00010000) == 0               # bit 4 of byte 2 is 0
     )
@@ -47,6 +47,7 @@ def find_arun_gauge_ports(baudrate=9600, timeout=0.5):
                 response = ser.readline()
                 print("debug: response 3", response) 
                 if matches_arun_gauge(response):
+                    print("debug: matches arun gauge")
                     arun_ports.append(port.device)
         except Exception as e:
             print("debug: error", e)

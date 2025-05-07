@@ -1,4 +1,4 @@
-# Auto-generated 2025-05-07T22:55:39.849245
+# Auto-generated 2025-05-07T23:00:03.411038
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -50,6 +50,14 @@ driver_info = OrderedDict([
             'AgilentE4400B': ('Hewlett-Packard', ['ESG-1000B']),
             'AgilentMXG': ('Agilent Technologies', ['N5181A']),
             'Keysight81160A': ('Agilent Technologies', ['81160A']),
+        },
+    }),
+    ('funcgenerators.keysight33250a', {
+        'params': ['visa_address'],
+        'classes': ['Keysight33250A'],
+        'imports': ['instrumental', 'pyvisa'],
+        'visa_info': {
+            'Keysight33250A': ('Agilent Technologies', ['33250A']),
         },
     }),
     ('funcgenerators.keysight33500b', {

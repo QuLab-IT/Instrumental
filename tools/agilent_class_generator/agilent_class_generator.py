@@ -8,7 +8,7 @@ from parse_agilent_sdl import (
     CommandSyntax,
     ParameterType,
     EnumMember,
-    GlobalDefinitions,
+    GlobalDefinition,
     Node,
     NodeSuffix,
     extract_supported_models,
@@ -21,7 +21,7 @@ import argparse
 import os
 import xml.etree.ElementTree as ET
 
-def generate_enum_class(enum_name: str, members: List[EnumMember]) -> str:
+def generate_enum_class(definition: GlobalDefinition) -> str:
     """
     Generate a Python enum class from enum data.
 
@@ -32,16 +32,17 @@ def generate_enum_class(enum_name: str, members: List[EnumMember]) -> str:
     Returns:
         str: The generated Python enum class code
     """
-    class_name = sanitize_enum_name(enum_name)
+    print("definition: ", definition)
+    class_name = sanitize_enum_name(definition.name)
 
     # Generate the class header
     code = f"class {class_name}(Enum):\n"
     code += '    """\n'
-    code += f"    Enum for {enum_name}\n"
+    code += f"    Enum for {definition.name}\n"
     code += '    """\n\n'
 
     # Add each member
-    for member in members:
+    for member in definition.members:
         mnemonic = member.mnemonic
         value = member.value
         description = member.description
@@ -53,8 +54,8 @@ def generate_enum_class(enum_name: str, members: List[EnumMember]) -> str:
         code += f"    {member_name} = {value}\n"
         if description:
             code += f"    # {description}\n"
-        if member.aliases:
-            code += f"    # Aliases: {member.aliases}\n"
+        # if member.aliases:
+        #     code += f"    # Aliases: {member.aliases}\n"
         code += "\n"
 
     return code
@@ -121,7 +122,7 @@ def generate_method_docstring(cmd_info: CommandInfo, is_write: bool, nodes: List
     return docstring
 
 
-def get_parameter_type(param: ParameterData) -> str:
+def get_parameter_type(param: ParameterData, definitions: Dict[str, GlobalDefinition] = None) -> str:
     """
     Get the Python type annotation for a parameter based on its types.
     If there are non-enum parameter types, they will be added as optional types
@@ -139,7 +140,11 @@ def get_parameter_type(param: ParameterData) -> str:
     if param.parameter_types:
         for pt in param.parameter_types:
             if pt.enum_ref:
-                type = sanitize_enum_name(pt.enum_ref)
+                enum_definition = definitions.get(pt.enum_ref)
+                if enum_definition:
+                    type = sanitize_enum_name(enum_definition.name)
+                else:
+                    type = sanitize_enum_name(pt.enum_ref)
             elif pt.type_name:
                 # For other types, use the Python type mapping
                 type = param.to_python_type()
@@ -158,7 +163,10 @@ def get_parameter_type(param: ParameterData) -> str:
     return f"Union[{', '.join(types)}]"
 
 
-def get_response_type(response: ResponseData) -> str:
+def get_response_type(
+        response: ResponseData,
+        definitions: Dict[str, GlobalDefinition] = None,
+    ) -> str:
     """
     Get the Python type annotation for a parameter based on its types.
     If there are non-enum parameter types, they will be added as optional types
@@ -176,7 +184,11 @@ def get_response_type(response: ResponseData) -> str:
     if response.response_types:
         for response_type in response.response_types:
             if response_type.enum_ref:
-                type = sanitize_enum_name(response_type.enum_ref)
+                enum_definition = definitions.get(response_type.enum_ref)
+                if enum_definition:
+                    type = sanitize_enum_name(enum_definition.name)
+                else:
+                    type = sanitize_enum_name(response_type.enum_ref)
             elif response_type.type_name:
                 # For other types, use the Python type mapping
                 type = response.to_python_type()
@@ -279,6 +291,7 @@ def generate_command_method(
     cmd_info: CommandInfo,
     is_query: bool,
     nodes: List[Node] = None,
+    definitions: Dict[str, GlobalDefinition] = None,
 ) -> str:
     """
     Generate a Python method for a SCPI command.
@@ -296,6 +309,7 @@ def generate_command_method(
     method_name = get_method_name(cmd_info, is_query, has_parameters)
     params = []
     extra_params = []
+
     # Add syntax parameter if multiple syntaxes exist
     if len(cmd_info.command_syntaxes) > 1:
         enum_name = f"{sanitize_enum_name('_'.join(cmd_info.path).upper())}Syntax"
@@ -332,7 +346,10 @@ def generate_command_method(
             for syntax in cmd_info.command_syntaxes:
                 for param in syntax.parameters:
                     if param.name in common_param_names and param.name not in added_params:
-                        param_type = get_parameter_type(param)
+                        param_type = get_parameter_type(
+                            param=param,
+                            definitions=definitions,
+                        )
                         param_name = param.name
                         params.append(f"{param_name}: {param_type}")
                         added_params.add(param.name)
@@ -342,7 +359,10 @@ def generate_command_method(
         else:
             # Single syntax case - add all parameters
             for param in cmd_info.command_syntaxes[0].parameters:
-                param_type = get_parameter_type(param)
+                param_type = get_parameter_type(
+                    param=param,
+                    definitions=definitions,
+                )
                 param_name = param.name
                 params.append(f"{param_name}: {param_type}")
 
@@ -354,7 +374,10 @@ def generate_command_method(
 
     # Generate return type annotation
     if is_query and cmd_info.responses:
-        response_type = get_response_type(cmd_info.responses[0])
+        response_type = get_response_type(
+            response=cmd_info.responses[0],
+            definitions=definitions,
+        )
         method_signature += f" -> {response_type}"
 
     method_signature += ":\n"
@@ -432,7 +455,8 @@ def generate_command_method(
 
 def generate_overload_methods(
     cmd_info: CommandInfo, 
-    parent_nodes: List[Node] = None
+    parent_nodes: List[Node] = None,
+    definitions: Dict[str, GlobalDefinition] = None,
 ) -> str:
     """
     Generate overload methods for a SCPI command.
@@ -468,14 +492,21 @@ def generate_overload_methods(
         # Add command parameters
         if syntax.parameters:
             for param in syntax.parameters:
-                param_type = get_parameter_type(param)
+                param_type = get_parameter_type(
+                    param=param,
+                    definitions=definitions,
+                )
                 overload_code += f", {param.name}: {param_type}"
         
         overload_code += ") -> None: ...\n\n"
     
     return overload_code
 
-def generate_node_methods(node: Node, parent_path: List[str] = [], parent_nodes: List[Node] = None) -> str:
+def generate_node_methods(
+        node: Node, parent_path: List[str] = [],
+        parent_nodes: List[Node] = None,
+        definitions: Dict[str, GlobalDefinition] = None,
+    ) -> str:
     """
     Generate methods for a SCPI node.
     
@@ -510,23 +541,45 @@ def generate_node_methods(node: Node, parent_path: List[str] = [], parent_nodes:
 
         if cmd.has_query:
             # For query commands
-            class_code += generate_command_method(cmd, True, current_nodes)
+            class_code += generate_command_method(
+                cmd_info=cmd,
+                is_query=True,
+                nodes=current_nodes,
+                definitions=definitions,
+            )
         if cmd.has_write:
             # Generate overloads for write commands with multiple syntaxes
             if len(cmd.command_syntaxes) > 1:
-                class_code += generate_overload_methods(cmd, current_nodes)
+                class_code += generate_overload_methods(
+                    cmd_info=cmd,
+                    parent_nodes=current_nodes,
+                    definitions=definitions,
+                )
 
             # Generate the actual implementation
-            class_code += generate_command_method(cmd, False, current_nodes)
+            class_code += generate_command_method(
+                cmd_info=cmd,
+                is_query=False,
+                nodes=current_nodes,
+                definitions=definitions,
+            )
 
     # Generate child node methods
     for child in node.nodes:
-        class_code += generate_node_methods(child, current_path, current_nodes)
+        class_code += generate_node_methods(
+            node=child,
+            parent_path=current_path,
+            parent_nodes=current_nodes,
+            definitions=definitions,
+        )
 
     return class_code
 
 
-def generate_subsystem_methods(subsystem_info: Node) -> str:
+def generate_subsystem_methods(
+    subsystem_info: Node,
+    definitions: Dict[str, GlobalDefinition] = None,
+) -> str:
     """
     Generate a Python class for a SCPI subsystem.
     
@@ -542,19 +595,35 @@ def generate_subsystem_methods(subsystem_info: Node) -> str:
     for cmd in subsystem_info.commands:
         if cmd.has_query:
             # For query commands
-            class_code += generate_command_method(cmd, True)
+            class_code += generate_command_method(
+                cmd_info=cmd,
+                is_query=True,
+                definitions=definitions,
+            )
         if cmd.has_write:
             # Generate overloads for write commands with multiple syntaxes
             if len(cmd.command_syntaxes) > 1:
-                class_code += generate_overload_methods(cmd)
+                class_code += generate_overload_methods(
+                    cmd_info=cmd,
+                    definitions=definitions,
+                )
 
             # Generate the actual implementation
-            class_code += generate_command_method(cmd, False)
+            class_code += generate_command_method(
+                cmd_info=cmd,
+                is_query=False,
+                definitions=definitions,
+            )
 
     # Generate child node instances
     mnemonic = subsystem_info.mnemonic
     for node in subsystem_info.nodes:
-        class_code += generate_node_methods(node, [mnemonic], [subsystem_info])
+        class_code += generate_node_methods(
+            node=node,
+            parent_path=[mnemonic],
+            parent_nodes=[subsystem_info],
+            definitions=definitions,
+        )
 
     return class_code
 
@@ -585,8 +654,8 @@ def generate_enums_file(parsed_data: ParsedData) -> List[str]:
     ]
 
     # Add each enum class
-    for enum_name, enum_data in global_defs.items():
-        content.append(generate_enum_class(enum_name, enum_data.members))
+    for enum_data in set(global_defs.values()):
+        content.append(generate_enum_class(enum_data))
         content.append("")  # Add blank line between classes
 
     print(f"Generated {len(global_defs)} enum classes")
@@ -694,7 +763,10 @@ def generate_command_syntaxes_file(parsed_data: ParsedData) -> List[str]:
     return content
 
 
-def generate_subsystems_methods(subsystems: List[Node]) -> List[str]:
+def generate_subsystems_methods(
+        subsystems: List[Node],
+        definitions: Dict[str, GlobalDefinition] = None,
+    ) -> List[str]:
     """
     Generate Python classes for all SCPI subsystems.
 
@@ -715,7 +787,10 @@ def generate_subsystems_methods(subsystems: List[Node]) -> List[str]:
 
     # Add each subsystem class
     for subsystem in subsystems:
-        content.append(generate_node_methods(subsystem))
+        content.append(generate_node_methods(
+            node=subsystem,
+            definitions=definitions,
+        ))
         content.append("")  # Add blank line between classes
 
     print(f"Generated {len(subsystems)} subsystem methods")
@@ -739,10 +814,11 @@ def generate_main_class(parsed_data: ParsedData, supported_models: List[str], sd
     Returns:
         str: The generated class code
     """
-    class_name = generate_main_class_name(sdl_filename)
+    class_name: str = generate_main_class_name(sdl_filename)
+    global_defs: Dict[str, GlobalDefinition] = parsed_data.global_definitions
 
     # Generate the content
-    content = [
+    content: List[str] = [
         "",
         f"# Main {class_name} class",
         "# This class provides access to all SCPI commands and subsystems",
@@ -772,17 +848,35 @@ def generate_main_class(parsed_data: ParsedData, supported_models: List[str], sd
     for cmd in parsed_data.commands:
         if cmd.has_query:
             # For query-only commands
-            content.append(generate_command_method(cmd, True))
+            content.append(
+                generate_command_method(
+                    cmd_info=cmd,
+                    is_query=True,
+                    definitions=global_defs,
+                )
+            )
         if cmd.has_write:
             # Generate overloads for write commands with multiple syntaxes
             if len(cmd.command_syntaxes) > 1:
-                content.append(generate_overload_methods(cmd))
-                # Generate the actual implementation
+                content.append(
+                    generate_overload_methods(
+                        cmd_info=cmd,
+                        definitions=global_defs,
+                    )
+                )
+            # Generate the actual implementation
             content.append(generate_command_method(
-                cmd, False
+                cmd_info=cmd,
+                is_query=False,
+                definitions=global_defs,
             ))
 
-    content.extend(generate_subsystems_methods(parsed_data.subsystems))
+    content.extend(
+        generate_subsystems_methods(
+            subsystems=parsed_data.subsystems,
+            definitions=global_defs,
+        )
+    )
     return "\n".join(content)
 
 
@@ -1106,7 +1200,7 @@ def generate_test_file(parsed_data: ParsedData, supported_models: List[str], sdl
 if __name__ == "__main__":
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Generate Python classes from Agilent SDL file')
-    parser.add_argument('input_file', help='Path to the input SDL file')
+    parser.add_argument('--input_file', help='Path to the input SDL file')
     parser.add_argument('--output-dir', help='Directory where the output Python file will be stored (optional)')
     parser.add_argument('--idf-file', help='Path to the IDF file containing supported models information')
     

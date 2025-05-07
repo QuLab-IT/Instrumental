@@ -6,238 +6,145 @@ import numpy as np
 # Generated SCPI enums from SDL file
 # This file is auto-generated. Do not edit manually.
 
-class Enum33500bStdNumEnums(Enum):
+class FormBorder(Enum):
     """
-    Enum for enum_33500B_std_num_enums
+    Enum for form_border
+    """
+
+    NORMAL = 0
+
+    SWAPPED = 1
+
+
+
+class DispWindUnitSweep(Enum):
+    """
+    Enum for disp_wind_unit_sweep
+    """
+
+    STARTSTOP = 0
+
+    CENTERSPAN = 1
+
+
+
+class TrigSeqSlope(Enum):
+    """
+    Enum for trig_seq_slope
+    """
+
+    POSITIVE = 0
+
+    NEGATIVE = 1
+
+
+
+class OutpTrigSource(Enum):
+    """
+    Enum for outp_trig_source
+    """
+
+    CH1 = 0
+
+    CH2 = 1
+
+
+
+class StdNumEnumsDef(Enum):
+    """
+    Enum for std_num_enums_DEF
+    """
+
+    DEFAULT = 3
+
+
+
+class SourFreqMode(Enum):
+    """
+    Enum for sour_freq_mode
+    """
+
+    FIXED = 0
+
+    SWEEP = 2
+
+    CW = 3
+
+    LIST = 4
+
+
+
+class SourFreqCoupMode(Enum):
+    """
+    Enum for sour_freq_coup_mode
+    """
+
+    OFFSET = 0
+
+    RATIO = 1
+
+
+
+class DispWindUnitRate(Enum):
+    """
+    Enum for disp_wind_unit_rate
+    """
+
+    FREQUENCY = 0
+
+    PERIOD = 1
+
+
+
+class OutpSyncPolarity(Enum):
+    """
+    Enum for outp_sync_polarity
+    """
+
+    NORMAL = 0
+
+    INVERTED = 1
+
+
+
+class Enumminmaxdef(Enum):
+    """
+    Enum for enumMinMaxDef
     """
 
     MINIMUM = 1
-    # Aliases: MIN
 
     MAXIMUM = 2
-    # Aliases: MAX
 
 
 
-class DispWindFocusCommandParameter1(Enum):
+class DispWindUnitArbrate(Enum):
     """
-    Enum for disp_wind_focus_command_parameter_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class DispWindFocusQueryResponse1(Enum):
-    """
-    Enum for disp_wind_focus_query_response_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class DispWindUnitArbrateCommandParameter1(Enum):
-    """
-    Enum for disp_wind_unit_arbrate_command_parameter_1
+    Enum for disp_wind_unit_arbrate
     """
 
     SRATE = 0
-    # Aliases: SRAT
 
     FREQUENCY = 1
-    # Aliases: FREQ
 
     PERIOD = 2
-    # Aliases: PER
 
 
 
-class DispWindUnitArbrateQueryResponse1(Enum):
+class SourRoscSourCurrent(Enum):
     """
-    Enum for disp_wind_unit_arbrate_query_response_1
-    """
-
-    SRATE = 0
-    # Aliases: SRAT
-
-    FREQUENCY = 1
-    # Aliases: FREQ
-
-    PERIOD = 2
-    # Aliases: PER
-
-
-
-class DispWindUnitPulseCommandParameter1(Enum):
-    """
-    Enum for disp_wind_unit_pulse_command_parameter_1
+    Enum for sour_rosc_sour_current
     """
 
-    WIDTH = 0
-    # Aliases: WID
+    INTERNAL = 0
 
-    DUTY = 1
-    # Aliases: DUT
+    EXTERNAL = 1
 
 
 
-class DispWindUnitPulseQueryResponse1(Enum):
+class HcopSdumDataFormat(Enum):
     """
-    Enum for disp_wind_unit_pulse_query_response_1
-    """
-
-    WIDTH = 0
-    # Aliases: WID
-
-    DUTY = 1
-    # Aliases: DUT
-
-
-
-class DispWindUnitRateCommandParameter1(Enum):
-    """
-    Enum for disp_wind_unit_rate_command_parameter_1
-    """
-
-    FREQUENCY = 0
-    # Aliases: FREQ
-
-    PERIOD = 1
-    # Aliases: PER
-
-
-
-class DispWindUnitRateQueryResponse1(Enum):
-    """
-    Enum for disp_wind_unit_rate_query_response_1
-    """
-
-    FREQUENCY = 0
-    # Aliases: FREQ
-
-    PERIOD = 1
-    # Aliases: PER
-
-
-
-class DispWindUnitSweepCommandParameter1(Enum):
-    """
-    Enum for disp_wind_unit_sweep_command_parameter_1
-    """
-
-    STARTSTOP = 0
-    # Aliases: STAR
-
-    CENTERSPAN = 1
-    # Aliases: CENT
-
-
-
-class DispWindUnitSweepQueryResponse1(Enum):
-    """
-    Enum for disp_wind_unit_sweep_query_response_1
-    """
-
-    STARTSTOP = 0
-    # Aliases: STAR
-
-    CENTERSPAN = 1
-    # Aliases: CENT
-
-
-
-class DispWindUnitVoltageCommandParameter1(Enum):
-    """
-    Enum for disp_wind_unit_voltage_command_parameter_1
-    """
-
-    AMPLITUDEOFF = 0
-    # Aliases: AMPL
-
-    HIGHLOW = 1
-    # Aliases: HIGH
-
-
-
-class DispWindUnitVoltageQueryResponse1(Enum):
-    """
-    Enum for disp_wind_unit_voltage_query_response_1
-    """
-
-    AMPLITUDEOFF = 0
-    # Aliases: AMPL
-
-    HIGHLOW = 1
-    # Aliases: HIGH
-
-
-
-class DispWindViewCommandParameter1(Enum):
-    """
-    Enum for disp_wind_view_command_parameter_1
-    """
-
-    STANDARD = 0
-    # Aliases: STAN
-
-    TEXT = 1
-
-    GRAPH = 2
-
-    DUAL = 3
-
-
-
-class DispWindViewQueryResponse1(Enum):
-    """
-    Enum for disp_wind_view_query_response_1
-    """
-
-    STANDARD = 0
-    # Aliases: STAN
-
-    TEXT = 1
-
-    GRAPH = 2
-
-    DUAL = 3
-
-
-
-class FormBorderCommandParameter1(Enum):
-    """
-    Enum for form_border_command_parameter_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    SWAPPED = 1
-    # Aliases: SWAP
-
-
-
-class FormBorderQueryResponse1(Enum):
-    """
-    Enum for form_border_query_response_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    SWAPPED = 1
-    # Aliases: SWAP
-
-
-
-class HcopSdumDataFormatCommandParameter1(Enum):
-    """
-    Enum for hcop_sdum_data_format_command_parameter_1
+    Enum for hcop_sdum_data_format
     """
 
     BMP = 0
@@ -246,330 +153,233 @@ class HcopSdumDataFormatCommandParameter1(Enum):
 
 
 
-class Enum33500bEnumminmaxdefinf(Enum):
+class SourFuncShapArbAdvance(Enum):
     """
-    Enum for enum_33500B_enumMinMaxDefInf
+    Enum for sour_func_shap_arb_advance
+    """
+
+    TRIGGER = 0
+
+    SRATE = 1
+
+
+
+class SourFuncShapPulsHold(Enum):
+    """
+    Enum for sour_func_shap_puls_hold
+    """
+
+    WIDTH = 0
+
+    DCYCLE = 1
+
+
+
+class SourSumIntFunctionclone(Enum):
+    """
+    Enum for sour_sum_int_functionClone
+    """
+
+    SINUSOID = 0
+
+    SQUARE = 1
+
+    TRIANGLE = 2
+
+    RAMP = 3
+
+    NRAMP = 4
+
+    NOISE = 5
+
+    PRBS = 6
+
+    ARB = 7
+
+
+
+class OutpSyncSource(Enum):
+    """
+    Enum for outp_sync_source
+    """
+
+    CH1 = 0
+
+    CH2 = 1
+
+
+
+class DispWindUnitPulse(Enum):
+    """
+    Enum for disp_wind_unit_pulse
+    """
+
+    WIDTH = 0
+
+    DUTY = 1
+
+
+
+class DispWindUnitVoltage(Enum):
+    """
+    Enum for disp_wind_unit_voltage
+    """
+
+    AMPLITUDEOFF = 0
+
+    HIGHLOW = 1
+
+
+
+class StdNumEnums(Enum):
+    """
+    Enum for std_num_enums
     """
 
     MINIMUM = 1
-    # Aliases: MIN
 
     MAXIMUM = 2
-    # Aliases: MAX
+
+
+
+class SourTrack(Enum):
+    """
+    Enum for sour_track
+    """
+
+    OFF = 0
+
+    ON = 1
+
+    INVERTED = 2
+
+
+
+class SourBursGatePolarity(Enum):
+    """
+    Enum for sour_burs_gate_polarity
+    """
+
+    NORMAL = 0
+
+    INVERTED = 1
+
+
+
+class StdNumEnums1(Enum):
+    """
+    Enum for std_num_enums1
+    """
+
+    MINIMUM = 1
+
+    MAXIMUM = 2
+
+    DEFAULT = 3
+
+
+
+class SystLicsDel(Enum):
+    """
+    Enum for syst_lics_del
+    """
+
+    SEC = 0
+
+    IQP = 1
+
+    MEM = 2
+
+    BW30 = 3
+
+
+
+class SourRateCoupMode(Enum):
+    """
+    Enum for sour_rate_coup_mode
+    """
+
+    OFFSET = 0
+
+    RATIO = 1
+
+
+
+class SourFmSource(Enum):
+    """
+    Enum for sour_fm_source
+    """
+
+    INTERNAL = 0
+
+    EXTERNAL = 1
+
+    CH1 = 2
+
+    CH2 = 3
+
+
+
+class Enumminmaxdefinf(Enum):
+    """
+    Enum for enumMinMaxDefInf
+    """
+
+    MINIMUM = 1
+
+    MAXIMUM = 2
 
     INFINITY = 7
-    # Aliases: INF
 
 
 
-class OutpModeCommandParameter1(Enum):
+class SourAmSourceclone(Enum):
     """
-    Enum for outp_mode_command_parameter_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    GATED = 1
-    # Aliases: GAT
-
-
-
-class OutpModeQueryResponse1(Enum):
-    """
-    Enum for outp_mode_query_response_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    GATED = 1
-    # Aliases: GAT
-
-
-
-class OutpPolarityCommandParameter1(Enum):
-    """
-    Enum for outp_polarity_command_parameter_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    INVERTED = 1
-    # Aliases: INV
-
-
-
-class OutpPolarityQueryResponse1(Enum):
-    """
-    Enum for outp_polarity_query_response_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    INVERTED = 1
-    # Aliases: INV
-
-
-
-class OutpSyncModeCommandParameter1(Enum):
-    """
-    Enum for outp_sync_mode_command_parameter_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    CARRIER = 1
-    # Aliases: CARR
-
-    MARKER = 2
-    # Aliases: MARK
-
-
-
-class OutpSyncModeQueryResponse1(Enum):
-    """
-    Enum for outp_sync_mode_query_response_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    CARRIER = 1
-    # Aliases: CARR
-
-    MARKER = 2
-    # Aliases: MARK
-
-
-
-class OutpSyncPolarityCommandParameter1(Enum):
-    """
-    Enum for outp_sync_polarity_command_parameter_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    INVERTED = 1
-    # Aliases: INV
-
-
-
-class OutpSyncPolarityQueryResponse1(Enum):
-    """
-    Enum for outp_sync_polarity_query_response_1
-    """
-
-    NORMAL = 0
-    # Aliases: NORM
-
-    INVERTED = 1
-    # Aliases: INV
-
-
-
-class OutpSyncSourceCommandParameter1(Enum):
-    """
-    Enum for outp_sync_source_command_parameter_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class OutpSyncSourceQueryResponse1(Enum):
-    """
-    Enum for outp_sync_source_query_response_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class OutpTrigSlopeCommandParameter1(Enum):
-    """
-    Enum for outp_trig_slope_command_parameter_1
-    """
-
-    POSITIVE = 1
-    # Aliases: POS
-
-    NEGATIVE = 2
-    # Aliases: NEG
-
-
-
-class OutpTrigSlopeQueryResponse1(Enum):
-    """
-    Enum for outp_trig_slope_query_response_1
-    """
-
-    POSITIVE = 1
-    # Aliases: POS
-
-    NEGATIVE = 2
-    # Aliases: NEG
-
-
-
-class OutpTrigSourceCommandParameter1(Enum):
-    """
-    Enum for outp_trig_source_command_parameter_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class OutpTrigSourceQueryResponse1(Enum):
-    """
-    Enum for outp_trig_source_query_response_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-
-
-class Enum33500bEnumminmaxdef(Enum):
-    """
-    Enum for enum_33500B_enumMinMaxDef
-    """
-
-    MINIMUM = 1
-    # Aliases: MIN
-
-    MAXIMUM = 2
-    # Aliases: MAX
-
-
-
-class SourAmSourceCommandParameter1(Enum):
-    """
-    Enum for sour_am_source_command_parameter_1
+    Enum for sour_am_sourceClone
     """
 
     INTERNAL = 0
-    # Aliases: INT
 
     EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
 
 
 
-class SourAmSourceQueryResponse1(Enum):
+class OutpMode(Enum):
     """
-    Enum for sour_am_source_query_response_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT BOTH
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
-
-
-
-class SourBursGatePolarityCommandParameter1(Enum):
-    """
-    Enum for sour_burs_gate_polarity_command_parameter_1
+    Enum for outp_mode
     """
 
     NORMAL = 0
-    # Aliases: NORM
 
-    INVERTED = 1
-    # Aliases: INV
+    GATED = 1
 
 
 
-class SourBursGatePolarityQueryResponse1(Enum):
+class SourBursMode(Enum):
     """
-    Enum for sour_burs_gate_polarity_query_response_1
+    Enum for sour_burs_mode
+    """
+
+    TRIGGERED = 0
+
+    GATED = 1
+
+
+
+class OutpPolarity(Enum):
+    """
+    Enum for outp_polarity
     """
 
     NORMAL = 0
-    # Aliases: NORM
 
     INVERTED = 1
-    # Aliases: INV
 
 
 
-class SourBursModeCommandParameter1(Enum):
+class SourceDataArb2Format(Enum):
     """
-    Enum for sour_burs_mode_command_parameter_1
-    """
-
-    TRIGGERED = 0
-    # Aliases: TRIG
-
-    GATED = 1
-    # Aliases: GAT
-
-
-
-class SourBursModeQueryResponse1(Enum):
-    """
-    Enum for sour_burs_mode_query_response_1
-    """
-
-    TRIGGERED = 0
-    # Aliases: TRIG
-
-    GATED = 1
-    # Aliases: GAT
-
-
-
-class SourCombFeedCommandParameter1(Enum):
-    """
-    Enum for sour_comb_feed_command_parameter_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-    NONE = 2
-
-
-
-class SourCombFeedQueryResponse1(Enum):
-    """
-    Enum for sour_comb_feed_query_response_1
-    """
-
-    CH1 = 0
-
-    CH2 = 1
-
-    NONE = 2
-
-
-
-class SourceDataArb2FormatCommandParameter1(Enum):
-    """
-    Enum for source_data_arb2_format_command_parameter_1
+    Enum for source_data_arb2_format
     """
 
     AABB = 0
@@ -578,27 +388,38 @@ class SourceDataArb2FormatCommandParameter1(Enum):
 
 
 
-class SourceDataArb2FormatQueryResponse1(Enum):
+class Boolean(Enum):
     """
-    Enum for source_data_arb2_format_query_response_1
+    Enum for Boolean
     """
 
-    AABB = 0
+    ON = 1
 
-    ABAB = 1
+    OFF = 0
 
 
 
-class SourFmSourceCommandParameter1(Enum):
+class SourFuncShapArbFilter(Enum):
     """
-    Enum for sour_fm_source_command_parameter_1
+    Enum for sour_func_shap_arb_filter
+    """
+
+    OFF = 0
+
+    NORMAL = 1
+
+    STEP = 2
+
+
+
+class SourPwmSource(Enum):
+    """
+    Enum for sour_pwm_source
     """
 
     INTERNAL = 0
-    # Aliases: INT
 
     EXTERNAL = 1
-    # Aliases: EXT
 
     CH1 = 2
 
@@ -606,140 +427,35 @@ class SourFmSourceCommandParameter1(Enum):
 
 
 
-class SourFmSourceQueryResponse1(Enum):
+class SourRoscSource(Enum):
     """
-    Enum for sour_fm_source_query_response_1
+    Enum for sour_rosc_source
     """
 
     INTERNAL = 0
-    # Aliases: INT
 
     EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
 
 
 
-class SourFreqCoupModeCommandParameter1(Enum):
+class TrigSeqSource(Enum):
     """
-    Enum for sour_freq_coup_mode_command_parameter_1
+    Enum for trig_seq_source
     """
 
-    OFFSET = 0
-    # Aliases: OFFS
+    IMMEDIATE = 0
 
-    RATIO = 1
-    # Aliases: RAT
+    EXTERNAL = 1
+
+    BUS = 2
+
+    TIMER = 3
 
 
 
-class SourFreqCoupModeQueryResponse1(Enum):
+class SourFuncShapPrbsData(Enum):
     """
-    Enum for sour_freq_coup_mode_query_response_1
-    """
-
-    OFFSET = 0
-    # Aliases: OFFS
-
-    RATIO = 1
-    # Aliases: RAT
-
-
-
-class SourFreqModeCommandParameter1(Enum):
-    """
-    Enum for sour_freq_mode_command_parameter_1
-    """
-
-    FIXED = 0
-    # Aliases: FIX
-
-    SWEEP = 2
-    # Aliases: SWE
-
-    CW = 3
-
-    LIST = 4
-
-
-
-class SourFreqModeQueryResponse1(Enum):
-    """
-    Enum for sour_freq_mode_query_response_1
-    """
-
-    FIXED = 0
-    # Aliases: FIX
-
-    SWEEP = 2
-    # Aliases: SWE
-
-    LIST = 4
-
-    CW = 3
-
-
-
-class SourFuncShapArbAdvanceCommandParameter1(Enum):
-    """
-    Enum for sour_func_shap_arb_advance_command_parameter_1
-    """
-
-    TRIGGER = 0
-    # Aliases: TRIG
-
-    SRATE = 1
-    # Aliases: SRAT
-
-
-
-class SourFuncShapArbAdvanceQueryResponse1(Enum):
-    """
-    Enum for sour_func_shap_arb_advance_query_response_1
-    """
-
-    TRIGGER = 0
-    # Aliases: TRIG
-
-    SRATE = 1
-    # Aliases: SRAT
-
-
-
-class SourFuncShapArbFilterCommandParameter1(Enum):
-    """
-    Enum for sour_func_shap_arb_filter_command_parameter_1
-    """
-
-    OFF = 0
-
-    NORMAL = 1
-    # Aliases: NORM
-
-    STEP = 2
-
-
-
-class SourFuncShapArbFilterQueryResponse1(Enum):
-    """
-    Enum for sour_func_shap_arb_filter_query_response_1
-    """
-
-    OFF = 0
-
-    NORMAL = 1
-    # Aliases: NORM
-
-    STEP = 2
-
-
-
-class SourFuncShapPrbsDataCommandParameter1(Enum):
-    """
-    Enum for sour_func_shap_prbs_data_command_parameter_1
+    Enum for sour_func_shap_prbs_data
     """
 
     PN7 = 0
@@ -753,445 +469,6 @@ class SourFuncShapPrbsDataCommandParameter1(Enum):
     PN20 = 4
 
     PN23 = 5
-
-
-
-class SourFuncShapPrbsDataQueryResponse1(Enum):
-    """
-    Enum for sour_func_shap_prbs_data_query_response_1
-    """
-
-    PN7 = 0
-
-    PN9 = 1
-
-    PN11 = 2
-
-    PN15 = 3
-
-    PN20 = 4
-
-    PN23 = 5
-
-
-
-class SourFuncShapPulsHoldCommandParameter1(Enum):
-    """
-    Enum for sour_func_shap_puls_hold_command_parameter_1
-    """
-
-    WIDTH = 0
-    # Aliases: WIDT
-
-    DCYCLE = 1
-    # Aliases: DCYC
-
-
-
-class SourFuncShapPulsHoldQueryResponse1(Enum):
-    """
-    Enum for sour_func_shap_puls_hold_query_response_1
-    """
-
-    WIDTH = 0
-    # Aliases: WIDT
-
-    DCYCLE = 1
-    # Aliases: DCYC
-
-
-
-class SourPmSourceCommandParameter1(Enum):
-    """
-    Enum for sour_pm_source_command_parameter_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
-
-
-
-class SourPmSourceQueryResponse1(Enum):
-    """
-    Enum for sour_pm_source_query_response_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
-
-
-
-class SourPwmSourceCommandParameter1(Enum):
-    """
-    Enum for sour_pwm_source_command_parameter_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
-
-
-
-class SourPwmSourceQueryResponse1(Enum):
-    """
-    Enum for sour_pwm_source_query_response_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    CH1 = 2
-
-    CH2 = 3
-
-
-
-class SourRateCoupModeCommandParameter1(Enum):
-    """
-    Enum for sour_rate_coup_mode_command_parameter_1
-    """
-
-    OFFSET = 0
-    # Aliases: OFFS
-
-    RATIO = 1
-    # Aliases: RAT
-
-
-
-class SourRateCoupModeQueryResponse1(Enum):
-    """
-    Enum for sour_rate_coup_mode_query_response_1
-    """
-
-    OFFSET = 0
-    # Aliases: OFFS
-
-    RATIO = 1
-    # Aliases: RAT
-
-
-
-class SourRoscSourceCommandParameter1(Enum):
-    """
-    Enum for sour_rosc_source_command_parameter_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-
-
-class SourRoscSourceQueryResponse1(Enum):
-    """
-    Enum for sour_rosc_source_query_response_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-
-
-class SourRoscSourAutoCommandParameter1(Enum):
-    """
-    Enum for sour_rosc_sour_auto_command_parameter_1
-    """
-
-    OFF = 0
-
-    ON = 1
-
-
-
-class SourRoscSourAutoQueryResponse1(Enum):
-    """
-    Enum for sour_rosc_sour_auto_query_response_1
-    """
-
-    OFF = 0
-
-    ON = 1
-
-
-
-class SourRoscSourCurrentQueryResponse1(Enum):
-    """
-    Enum for sour_rosc_sour_current_query_response_1
-    """
-
-    INTERNAL = 0
-    # Aliases: INT
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-
-
-class SourSweSpacingCommandParameter1(Enum):
-    """
-    Enum for sour_swe_spacing_command_parameter_1
-    """
-
-    LINEAR = 0
-    # Aliases: LIN
-
-    LOGARITHMIC = 1
-    # Aliases: LOG
-
-
-
-class SourSweSpacingQueryResponse1(Enum):
-    """
-    Enum for sour_swe_spacing_query_response_1
-    """
-
-    LINEAR = 0
-    # Aliases: LIN
-
-    LOGARITHMIC = 1
-    # Aliases: LOG
-
-
-
-class SourTrackCommandParameter1(Enum):
-    """
-    Enum for sour_track_command_parameter_1
-    """
-
-    OFF = 0
-
-    ON = 1
-
-    INVERTED = 2
-    # Aliases: INV
-
-
-
-class SourTrackQueryResponse1(Enum):
-    """
-    Enum for sour_track_query_response_1
-    """
-
-    OFF = 0
-
-    ON = 1
-
-    INVERTED = 2
-    # Aliases: INV
-
-
-
-class SourVoltLevUnitCommandParameter1(Enum):
-    """
-    Enum for sour_volt_lev_unit_command_parameter_1
-    """
-
-    VPP = 0
-    # Aliases: DEFault DEF
-
-    VRMS = 1
-
-    DBM = 2
-
-
-
-class SourVoltLevUnitQueryResponse1(Enum):
-    """
-    Enum for sour_volt_lev_unit_query_response_1
-    """
-
-    VPP = 0
-    # Aliases: DEFault DEF
-
-    VRMS = 1
-
-    DBM = 2
-
-
-
-class SourVoltRangAutoCommandParameter1(Enum):
-    """
-    Enum for sour_volt_rang_auto_command_parameter_1
-    """
-
-    OFF = 0
-
-    ON = 1
-
-    ONCE = 2
-
-
-
-class Enum33500bEnumstaticcurrent(Enum):
-    """
-    Enum for enum_33500B_enumStaticCurrent
-    """
-
-    STATIC = 0
-    # Aliases: STAT
-
-    CURRENT = 1
-    # Aliases: CURR
-
-
-
-class TrigSeqSlopeCommandParameter1(Enum):
-    """
-    Enum for trig_seq_slope_command_parameter_1
-    """
-
-    POSITIVE = 0
-    # Aliases: POS
-
-    NEGATIVE = 1
-    # Aliases: NEG
-
-
-
-class TrigSeqSlopeQueryResponse1(Enum):
-    """
-    Enum for trig_seq_slope_query_response_1
-    """
-
-    POSITIVE = 0
-    # Aliases: POS
-
-    NEGATIVE = 1
-    # Aliases: NEG
-
-
-
-class TrigSeqSourceCommandParameter1(Enum):
-    """
-    Enum for trig_seq_source_command_parameter_1
-    """
-
-    IMMEDIATE = 0
-    # Aliases: IMM
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    BUS = 2
-
-    TIMER = 3
-    # Aliases: TIM
-
-
-
-class TrigSeqSourceQueryResponse1(Enum):
-    """
-    Enum for trig_seq_source_query_response_1
-    """
-
-    IMMEDIATE = 0
-    # Aliases: IMM
-
-    EXTERNAL = 1
-    # Aliases: EXT
-
-    BUS = 2
-
-    TIMER = 3
-    # Aliases: TIM
-
-
-
-class Enum33500bBoolean(Enum):
-    """
-    Enum for enum_33500B_boolean
-    """
-
-    ON = 1
-
-    OFF = 0
-
-
-
-class UnitAngleCommandParameter1clone(Enum):
-    """
-    Enum for unit_angle_command_parameter_1Clone
-    """
-
-    DEGREE = 0
-    # Aliases: DEG
-
-    RADIAN = 1
-    # Aliases: RAD
-
-    SECOND = 2
-    # Aliases: SEC
-
-    DEFAULT = 3
-    # Aliases: DEF
-
-
-
-class Enum33500bStdNumEnumsclone(Enum):
-    """
-    Enum for enum_33500B_std_num_enumsClone
-    """
-
-    MINIMUM = 1
-    # Aliases: MIN
-
-    MAXIMUM = 2
-    # Aliases: MAX
-
-    DEFAULT = 3
-    # Aliases: DEF
-
-
-
-class Enum33500bStdNumEnumscloneclone(Enum):
-    """
-    Enum for enum_33500B_std_num_enumsCloneClone
-    """
-
-    DEFAULT = 3
-    # Aliases: DEF
-
-
-
-class SourAmSourceCommandParameter1clone(Enum):
-    """
-    Enum for sour_am_source_command_parameter_1Clone
-    """
-
-    INTERNAL = 0
-    # Aliases: INT BOTH
-
-    EXTERNAL = 1
-    # Aliases: EXT
 
 
 
@@ -1207,10 +484,8 @@ class SystCommEnableCommandParameter2clone(Enum):
     LAN = 2
 
     SOCKETS = 3
-    # Aliases: SOCK
 
     TELNET = 4
-    # Aliases: TELN
 
     VXI11 = 5
 
@@ -1218,57 +493,145 @@ class SystCommEnableCommandParameter2clone(Enum):
 
 
 
-class SourAmIntFuncShapeCommandParameter1clone(Enum):
+class SourSweSpacing(Enum):
     """
-    Enum for sour_am_int_func_shape_command_parameter_1Clone
+    Enum for sour_swe_spacing
+    """
+
+    LINEAR = 0
+
+    LOGARITHMIC = 1
+
+
+
+class DispWindFocus(Enum):
+    """
+    Enum for disp_wind_focus
+    """
+
+    CH1 = 0
+
+    CH2 = 1
+
+
+
+class SourVoltLevUnit(Enum):
+    """
+    Enum for sour_volt_lev_unit
+    """
+
+    VPP = 0
+
+    VRMS = 1
+
+    DBM = 2
+
+
+
+class SourPmSource(Enum):
+    """
+    Enum for sour_pm_source
+    """
+
+    INTERNAL = 0
+
+    EXTERNAL = 1
+
+    CH1 = 2
+
+    CH2 = 3
+
+
+
+class SourAmSource(Enum):
+    """
+    Enum for sour_am_source
+    """
+
+    INTERNAL = 0
+
+    EXTERNAL = 1
+
+    CH1 = 2
+
+    CH2 = 3
+
+
+
+class DispWindView(Enum):
+    """
+    Enum for disp_wind_view
+    """
+
+    STANDARD = 0
+
+    TEXT = 1
+
+    GRAPH = 2
+
+    DUAL = 3
+
+
+
+class UnitAngleclone(Enum):
+    """
+    Enum for unit_angleClone
+    """
+
+    DEGREE = 0
+
+    RADIAN = 1
+
+    SECOND = 2
+
+    DEFAULT = 3
+
+
+
+class OutpTrigSlope(Enum):
+    """
+    Enum for outp_trig_slope
+    """
+
+    POSITIVE = 1
+
+    NEGATIVE = 2
+
+
+
+class SourFreqMode(Enum):
+    """
+    Enum for sour_freq_mode
+    """
+
+    FIXED = 0
+
+    SWEEP = 2
+
+    LIST = 4
+
+    CW = 3
+
+
+
+class SourFuncShapeclone(Enum):
+    """
+    Enum for sour_func_shapeClone
     """
 
     SINUSOID = 0
-    # Aliases: SIN
 
     SQUARE = 1
-    # Aliases: SQU
-
-    TRIANGLE = 2
-    # Aliases: TRI
-
-    RAMP = 3
-
-    NRAMP = 4
-    # Aliases: NRAM
-
-    NOISE = 5
-    # Aliases: NOIS
-
-    PRBS = 6
-
-    ARB = 7
-
-
-
-class SourFuncShapeCommandParameter1clone(Enum):
-    """
-    Enum for sour_func_shape_command_parameter_1Clone
-    """
-
-    SINUSOID = 0
-    # Aliases: SIN
-
-    SQUARE = 1
-    # Aliases: SQU
 
     RAMP = 2
 
     PULSE = 3
-    # Aliases: PULS
 
     ARB = 4
 
     TRIANGLE = 5
-    # Aliases: TRI
 
     NOISE = 6
-    # Aliases: NOIS
 
     PRBS = 7
 
@@ -1276,46 +639,87 @@ class SourFuncShapeCommandParameter1clone(Enum):
 
 
 
-class SourSumIntFunctionCommandParameter1clone(Enum):
+class Enumstaticcurrent(Enum):
     """
-    Enum for sour_sum_int_function_command_parameter_1Clone
+    Enum for enumStaticCurrent
+    """
+
+    STATIC = 0
+
+    CURRENT = 1
+
+
+
+class SourCombFeed(Enum):
+    """
+    Enum for sour_comb_feed
+    """
+
+    CH1 = 0
+
+    CH2 = 1
+
+    NONE = 2
+
+
+
+class SourVoltRangAuto(Enum):
+    """
+    Enum for sour_volt_rang_auto
+    """
+
+    OFF = 0
+
+    ON = 1
+
+    ONCE = 2
+
+
+
+class SourRoscSourAuto(Enum):
+    """
+    Enum for sour_rosc_sour_auto
+    """
+
+    OFF = 0
+
+    ON = 1
+
+
+
+class OutpSyncMode(Enum):
+    """
+    Enum for outp_sync_mode
+    """
+
+    NORMAL = 0
+
+    CARRIER = 1
+
+    MARKER = 2
+
+
+
+class SourAmIntFuncShapeclone(Enum):
+    """
+    Enum for sour_am_int_func_shapeClone
     """
 
     SINUSOID = 0
-    # Aliases: SIN
 
     SQUARE = 1
-    # Aliases: SQU
 
     TRIANGLE = 2
-    # Aliases: TRI
 
     RAMP = 3
 
     NRAMP = 4
-    # Aliases: NRAM
 
     NOISE = 5
-    # Aliases: NOIS
 
     PRBS = 6
 
     ARB = 7
-
-
-
-class SystCommEnableCommandParameter2clone2(Enum):
-    """
-    Enum for syst_comm_enable_command_parameter_2Clone_2
-    """
-
-    SEC = 0
-
-    IQP = 1
-
-    MEM = 2
-
-    BW30 = 3
 
 
 
@@ -1588,7 +992,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return str(response)
 
 
-    def get_psc(self) -> Enum33500bBoolean:
+    def get_psc(self) -> Boolean:
         """
         Power-On Status Clear. Enables (1) or disables (0) clearing of two specific registers at power on.
 
@@ -1763,7 +1167,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":CALibration:SECure:CODE {new_code}"
         self._rsrc.write(cmd)
 
-    def get_calibration_secure_state(self) -> Enum33500bBoolean:
+    def get_calibration_secure_state(self) -> Boolean:
         """
         Unsecures or secures the instrument for calibration. 
 
@@ -1775,7 +1179,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_calibration_secure_state(self, state: Enum33500bBoolean, code: str):
+    def set_calibration_secure_state(self, state: Boolean, code: str):
         """
         Unsecures or secures the instrument for calibration. 
 
@@ -1854,7 +1258,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_display(self) -> Enum33500bBoolean:
+    def get_display(self) -> Boolean:
         """
         Disables or enables the front-panel display.
 
@@ -1866,7 +1270,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_display(self, state: Enum33500bBoolean):
+    def set_display(self, state: Boolean):
         """
         Disables or enables the front-panel display.
 
@@ -1876,7 +1280,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay {state}"
         self._rsrc.write(cmd)
 
-    def get_display_focus(self) -> DispWindFocusQueryResponse1:
+    def get_display_focus(self) -> DispWindFocus:
         """
         selects the channel displayed "in front" on a two-channel instrument 
 
@@ -1888,7 +1292,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_focus(self, focus: DispWindFocusCommandParameter1):
+    def set_display_focus(self, focus: DispWindFocus):
         """
         selects the channel displayed "in front" on a two-channel instrument 
 
@@ -1929,7 +1333,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:TEXT:CLEar"
         self._rsrc.write(cmd)
 
-    def get_display_unit_arbrate(self) -> DispWindUnitArbrateQueryResponse1:
+    def get_display_unit_arbrate(self) -> DispWindUnitArbrate:
         """
         Specifies whether the rate units for arbitrary waveforms are samples per second, (SRATe), Hz (FREQ) or seconds (PER).
 
@@ -1941,7 +1345,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_unit_arbrate(self, arbrate: DispWindUnitArbrateCommandParameter1):
+    def set_display_unit_arbrate(self, arbrate: DispWindUnitArbrate):
         """
         Specifies whether the rate units for arbitrary waveforms are samples per second, (SRATe), Hz (FREQ) or seconds (PER).
 
@@ -1951,7 +1355,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:UNIT:ARBRate {arbrate}"
         self._rsrc.write(cmd)
 
-    def get_display_unit_pulse(self) -> DispWindUnitPulseQueryResponse1:
+    def get_display_unit_pulse(self) -> DispWindUnitPulse:
         """
         Selects the method for specifying pulse duration.
 
@@ -1963,7 +1367,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_unit_pulse(self, pulse: DispWindUnitPulseCommandParameter1):
+    def set_display_unit_pulse(self, pulse: DispWindUnitPulse):
         """
         Selects the method for specifying pulse duration.
 
@@ -1973,7 +1377,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:UNIT:PULSe {pulse}"
         self._rsrc.write(cmd)
 
-    def get_display_unit_rate(self) -> DispWindUnitRateQueryResponse1:
+    def get_display_unit_rate(self) -> DispWindUnitRate:
         """
         Specifies whether the rate units for sine, square, ramp, pulse, and triangle waves are Hz (FREQ) or seconds (PER).
 
@@ -1985,7 +1389,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_unit_rate(self, rate: DispWindUnitRateCommandParameter1):
+    def set_display_unit_rate(self, rate: DispWindUnitRate):
         """
         Specifies whether the rate units for sine, square, ramp, pulse, and triangle waves are Hz (FREQ) or seconds (PER).
 
@@ -1995,7 +1399,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:UNIT:RATE {rate}"
         self._rsrc.write(cmd)
 
-    def get_display_unit_sweep(self) -> DispWindUnitSweepQueryResponse1:
+    def get_display_unit_sweep(self) -> DispWindUnitSweep:
         """
         Selects the method for specifying sweep frequency range.
 
@@ -2007,7 +1411,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_unit_sweep(self, sweep: DispWindUnitSweepCommandParameter1):
+    def set_display_unit_sweep(self, sweep: DispWindUnitSweep):
         """
         Selects the method for specifying sweep frequency range.
 
@@ -2017,7 +1421,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:UNIT:SWEep {sweep}"
         self._rsrc.write(cmd)
 
-    def get_display_unit_voltage(self) -> DispWindUnitVoltageQueryResponse1:
+    def get_display_unit_voltage(self) -> DispWindUnitVoltage:
         """
         Selects the method for specifying voltage ranges.
 
@@ -2029,7 +1433,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_unit_voltage(self, voltage: DispWindUnitVoltageCommandParameter1):
+    def set_display_unit_voltage(self, voltage: DispWindUnitVoltage):
         """
         Selects the method for specifying voltage ranges.
 
@@ -2039,7 +1443,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:UNIT:VOLTage {voltage}"
         self._rsrc.write(cmd)
 
-    def get_display_view(self) -> DispWindViewQueryResponse1:
+    def get_display_view(self) -> DispWindView:
         """
         Selects the screen layout.
 
@@ -2051,7 +1455,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_display_view(self, view: DispWindViewCommandParameter1):
+    def set_display_view(self, view: DispWindView):
         """
         Selects the screen layout.
 
@@ -2063,7 +1467,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_format_border(self) -> FormBorderQueryResponse1:
+    def get_format_border(self) -> FormBorder:
         """
         Sets the byte order used in binary data point transfers in the block mode.
 
@@ -2075,7 +1479,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_format_border(self, border: FormBorderCommandParameter1):
+    def set_format_border(self, border: FormBorder):
         """
         Sets the byte order used in binary data point transfers in the block mode.
 
@@ -2111,7 +1515,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_hcopy_sdump_data_format(self, format: HcopSdumDataFormatCommandParameter1):
+    def set_hcopy_sdump_data_format(self, format: HcopSdumDataFormat):
         """
         Specifies the image format for images returned by HCOPy:SDUMp:DATA?.
 
@@ -2123,7 +1527,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_initiate_continuous(self, initiate_num: int = 1) -> Enum33500bBoolean:
+    def get_initiate_continuous(self, initiate_num: int = 1) -> Boolean:
         """
         Specifies whether the trigger system for one channel always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -2137,7 +1541,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_initiate_continuous(self, state: Enum33500bBoolean, initiate_num: int = 1):
+    def set_initiate_continuous(self, state: Boolean, initiate_num: int = 1):
         """
         Specifies whether the trigger system for one channel always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -2148,7 +1552,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":INITiate{initiate_num}:CONTinuous {state}"
         self._rsrc.write(cmd)
 
-    def set_initiate_continuous_all(self, state: Enum33500bBoolean, initiate_num: int = 1):
+    def set_initiate_continuous_all(self, state: Boolean, initiate_num: int = 1):
         """
         Specifies whether the trigger system for both channels (ALL) always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -2181,7 +1585,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_lxi_identify_state(self) -> Enum33500bBoolean:
+    def get_lxi_identify_state(self) -> Boolean:
         """
         Turns the LXI Identify Indicator on the display on or off.
 
@@ -2193,7 +1597,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_lxi_identify_state(self, state: Enum33500bBoolean):
+    def set_lxi_identify_state(self, state: Boolean):
         """
         Turns the LXI Identify Indicator on the display on or off.
 
@@ -2203,7 +1607,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":LXI:IDENtify:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_lxi_mdns_enable(self) -> Enum33500bBoolean:
+    def get_lxi_mdns_enable(self) -> Boolean:
         """
         Disables or enables the Multicast Domain Name System (mDNS).
 
@@ -2215,7 +1619,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_lxi_mdns_enable(self, state: Enum33500bBoolean):
+    def set_lxi_mdns_enable(self, state: Boolean):
         """
         Disables or enables the Multicast Domain Name System (mDNS).
 
@@ -2348,7 +1752,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":MEMory:STATe:NAME {sLocation}, {name}"
         self._rsrc.write(cmd)
 
-    def get_memory_state_recall_auto(self) -> Enum33500bBoolean:
+    def get_memory_state_recall_auto(self) -> Boolean:
         """
         Disables or enables automatic recall of instrument state in storage location "0" at power on.
 
@@ -2360,7 +1764,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_memory_state_recall_auto(self, state: Enum33500bBoolean):
+    def set_memory_state_recall_auto(self, state: Boolean):
         """
         Disables or enables automatic recall of instrument state in storage location "0" at power on.
 
@@ -2370,7 +1774,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":MEMory:STATe:RECall:AUTO {state}"
         self._rsrc.write(cmd)
 
-    def get_memory_state_valid(self) -> Enum33500bBoolean:
+    def get_memory_state_valid(self) -> Boolean:
         """
         Indicates whether a valid state is currently stored in a storage location.
 
@@ -2670,7 +2074,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_output(self, output_num: int = 1) -> Enum33500bBoolean:
+    def get_output(self, output_num: int = 1) -> Boolean:
         """
         Enables or disables the front-panel output connector.
 
@@ -2684,7 +2088,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output(self, state: Enum33500bBoolean, output_num: int = 1):
+    def set_output(self, state: Boolean, output_num: int = 1):
         """
         Enables or disables the front-panel output connector.
 
@@ -2709,7 +2113,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_output_load(self, ohms: Union[float, Enum33500bEnumminmaxdefinf], output_num: int = 1):
+    def set_output_load(self, ohms: Union[float, Enumminmaxdefinf], output_num: int = 1):
         """
         Sets expected output termination.
 
@@ -2720,7 +2124,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:LOAD {ohms}"
         self._rsrc.write(cmd)
 
-    def get_output_mode(self, output_num: int = 1) -> OutpModeQueryResponse1:
+    def get_output_mode(self, output_num: int = 1) -> OutpMode:
         """
         Enables (GATed) or disables (NORMal) gating of the output waveform signal on and off using the trigger input.
 
@@ -2734,7 +2138,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_mode(self, mode: OutpModeCommandParameter1, output_num: int = 1):
+    def set_output_mode(self, mode: OutpMode, output_num: int = 1):
         """
         Enables (GATed) or disables (NORMal) gating of the output waveform signal on and off using the trigger input.
 
@@ -2745,7 +2149,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:MODE {mode}"
         self._rsrc.write(cmd)
 
-    def get_output_polarity(self, output_num: int = 1) -> OutpPolarityQueryResponse1:
+    def get_output_polarity(self, output_num: int = 1) -> OutpPolarity:
         """
         Inverts waveform relative to the offset voltage.
 
@@ -2759,7 +2163,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_polarity(self, polarity: OutpPolarityCommandParameter1, output_num: int = 1):
+    def set_output_polarity(self, polarity: OutpPolarity, output_num: int = 1):
         """
         Inverts waveform relative to the offset voltage.
 
@@ -2770,7 +2174,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:POLarity {polarity}"
         self._rsrc.write(cmd)
 
-    def get_output_sync(self, output_num: int = 1) -> Enum33500bBoolean:
+    def get_output_sync(self, output_num: int = 1) -> Boolean:
         """
         Disables or enables the front-panel Sync connector.  
 
@@ -2784,7 +2188,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output_sync(self, state: Enum33500bBoolean, output_num: int = 1):
+    def set_output_sync(self, state: Boolean, output_num: int = 1):
         """
         Disables or enables the front-panel Sync connector.  
 
@@ -2795,7 +2199,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:SYNC {state}"
         self._rsrc.write(cmd)
 
-    def get_output_sync_mode(self, output_num: int = 1) -> OutpSyncModeQueryResponse1:
+    def get_output_sync_mode(self, output_num: int = 1) -> OutpSyncMode:
         """
         Specifies normal Sync behavior (NORMal), forces Sync to follow the carrier waveform (CARRier), or indicates marker position (MARKer).
 
@@ -2809,7 +2213,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_sync_mode(self, mode: OutpSyncModeCommandParameter1, output_num: int = 1):
+    def set_output_sync_mode(self, mode: OutpSyncMode, output_num: int = 1):
         """
         Specifies normal Sync behavior (NORMal), forces Sync to follow the carrier waveform (CARRier), or indicates marker position (MARKer).
 
@@ -2820,7 +2224,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:SYNC:MODE {mode}"
         self._rsrc.write(cmd)
 
-    def get_output_sync_polarity(self, output_num: int = 1) -> OutpSyncPolarityQueryResponse1:
+    def get_output_sync_polarity(self, output_num: int = 1) -> OutpSyncPolarity:
         """
         Sets the desired output polarity of the Sync output to trigger external equipment that may require falling or rising edge triggers.
 
@@ -2834,7 +2238,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_sync_polarity(self, polarity: OutpSyncPolarityCommandParameter1, output_num: int = 1):
+    def set_output_sync_polarity(self, polarity: OutpSyncPolarity, output_num: int = 1):
         """
         Sets the desired output polarity of the Sync output to trigger external equipment that may require falling or rising edge triggers.
 
@@ -2845,7 +2249,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:SYNC:POLarity {polarity}"
         self._rsrc.write(cmd)
 
-    def get_output_sync_source(self, output_num: int = 1) -> OutpSyncSourceQueryResponse1:
+    def get_output_sync_source(self, output_num: int = 1) -> OutpSyncSource:
         """
         Sets the source for the Sync output connector.
 
@@ -2859,7 +2263,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_sync_source(self, channel: OutpSyncSourceCommandParameter1, output_num: int = 1):
+    def set_output_sync_source(self, channel: OutpSyncSource, output_num: int = 1):
         """
         Sets the source for the Sync output connector.
 
@@ -2870,7 +2274,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:SYNC:SOURce {channel}"
         self._rsrc.write(cmd)
 
-    def get_output_trigger(self, output_num: int = 1) -> Enum33500bBoolean:
+    def get_output_trigger(self, output_num: int = 1) -> Boolean:
         """
         Disables or enables the "trigger out" signal for sweep and burst modes.
 
@@ -2884,7 +2288,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output_trigger(self, state: Enum33500bBoolean, output_num: int = 1):
+    def set_output_trigger(self, state: Boolean, output_num: int = 1):
         """
         Disables or enables the "trigger out" signal for sweep and burst modes.
 
@@ -2895,7 +2299,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:TRIGger {state}"
         self._rsrc.write(cmd)
 
-    def get_output_trigger_slope(self, output_num: int = 1) -> OutpTrigSlopeQueryResponse1:
+    def get_output_trigger_slope(self, output_num: int = 1) -> OutpTrigSlope:
         """
         Selects whether the instrument uses the rising edge or falling edge for the "trigger out" signal.
 
@@ -2909,7 +2313,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_trigger_slope(self, edge: OutpTrigSlopeCommandParameter1, output_num: int = 1):
+    def set_output_trigger_slope(self, edge: OutpTrigSlope, output_num: int = 1):
         """
         Selects whether the instrument uses the rising edge or falling edge for the "trigger out" signal.
 
@@ -2920,7 +2324,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":OUTPut{output_num}:TRIGger:SLOPe {edge}"
         self._rsrc.write(cmd)
 
-    def get_output_trigger_source(self, output_num: int = 1) -> OutpTrigSourceQueryResponse1:
+    def get_output_trigger_source(self, output_num: int = 1) -> OutpTrigSource:
         """
         Selects the source channel used by trigger output on a two-channel instrument. 
 
@@ -2934,7 +2338,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_output_trigger_source(self, channel: OutpTrigSourceCommandParameter1, output_num: int = 1):
+    def set_output_trigger_source(self, channel: OutpTrigSource, output_num: int = 1):
         """
         Selects the source channel used by trigger output on a two-channel instrument. 
 
@@ -2947,7 +2351,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_source_burst_gate_polarity(self, source_num: int = 1) -> SourBursGatePolarityQueryResponse1:
+    def get_source_burst_gate_polarity(self, source_num: int = 1) -> SourBursGatePolarity:
         """
         Selects true-high (NORMal) or true-low (INVerted) logic levels on the rear-panel Trig In connector for an externally gated burst.
 
@@ -2961,7 +2365,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_burst_gate_polarity(self, polarity: SourBursGatePolarityCommandParameter1, source_num: int = 1):
+    def set_source_burst_gate_polarity(self, polarity: SourBursGatePolarity, source_num: int = 1):
         """
         Selects true-high (NORMal) or true-low (INVerted) logic levels on the rear-panel Trig In connector for an externally gated burst.
 
@@ -2987,7 +2391,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_internal_period(self, seconds: Union[float, Enum33500bEnumminmaxdef], source_num: int = 1):
+    def set_source_burst_internal_period(self, seconds: Union[float, Enumminmaxdef], source_num: int = 1):
         """
         Sets the burst period for internally-triggered bursts.
 
@@ -2998,7 +2402,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:BURSt:INTernal:PERiod {seconds}"
         self._rsrc.write(cmd)
 
-    def get_source_burst_mode(self, source_num: int = 1) -> SourBursModeQueryResponse1:
+    def get_source_burst_mode(self, source_num: int = 1) -> SourBursMode:
         """
         Selects the burst mode.
 
@@ -3012,7 +2416,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_burst_mode(self, mode: SourBursModeCommandParameter1, source_num: int = 1):
+    def set_source_burst_mode(self, mode: SourBursMode, source_num: int = 1):
         """
         Selects the burst mode.
 
@@ -3037,7 +2441,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_ncycles(self, num_cycles: Union[float, Enum33500bEnumminmaxdefinf], source_num: int = 1):
+    def set_source_burst_ncycles(self, num_cycles: Union[float, Enumminmaxdefinf], source_num: int = 1):
         """
         Sets the number of cycles to be output per burst (triggered burst mode only).
 
@@ -3062,7 +2466,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_phase(self, angle: Union[float, Enum33500bEnumminmaxdef], source_num: int = 1):
+    def set_source_burst_phase(self, angle: Union[float, Enumminmaxdef], source_num: int = 1):
         """
         Sets the starting phase angle for the burst.
 
@@ -3073,7 +2477,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:BURSt:PHASe {angle}"
         self._rsrc.write(cmd)
 
-    def get_source_burst_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_burst_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables burst mode.
 
@@ -3087,7 +2491,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_burst_state(self, boolean: Enum33500bBoolean, source_num: int = 1):
+    def set_source_burst_state(self, boolean: Boolean, source_num: int = 1):
         """
         Enables or disables burst mode.
 
@@ -3112,7 +2516,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_am_depth(self, depth_in_percent: Union[float, Enum33500bEnumminmaxdef], source_num: int = 1):
+    def set_source_am_depth(self, depth_in_percent: Union[float, Enumminmaxdef], source_num: int = 1):
         """
         Sets internal modulation depth ("percent modulation") in percent.
 
@@ -3123,7 +2527,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:AM:DEPTh {depth_in_percent}"
         self._rsrc.write(cmd)
 
-    def get_source_am_dssc(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_am_dssc(self, source_num: int = 1) -> Boolean:
         """
         Selects Amplitude Modulation mode 
 
@@ -3137,7 +2541,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_am_dssc(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_am_dssc(self, state: Boolean, source_num: int = 1):
         """
         Selects Amplitude Modulation mode 
 
@@ -3162,7 +2566,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_am_internal_frequency(self, frequency: Union[float, Enum33500bEnumminmaxdef], source_num: int = 1):
+    def set_source_am_internal_frequency(self, frequency: Union[float, Enumminmaxdef], source_num: int = 1):
         """
         Sets frequency of modulating waveform.
 
@@ -3173,7 +2577,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:AM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_am_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeCommandParameter1clone:
+    def get_source_am_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeclone:
         """
         Selects shape of modulating waveform.
 
@@ -3187,7 +2591,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_am_internal_function(self, function: SourAmIntFuncShapeCommandParameter1clone, source_num: int = 1):
+    def set_source_am_internal_function(self, function: SourAmIntFuncShapeclone, source_num: int = 1):
         """
         Selects shape of modulating waveform.
 
@@ -3198,7 +2602,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:AM:INTernal:FUNCtion {function}"
         self._rsrc.write(cmd)
 
-    def get_source_am_source(self, source_num: int = 1) -> SourAmSourceQueryResponse1:
+    def get_source_am_source(self, source_num: int = 1) -> SourAmSource:
         """
         Select the source of the modulating signal.
 
@@ -3212,7 +2616,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_am_source(self, source: SourAmSourceCommandParameter1, source_num: int = 1):
+    def set_source_am_source(self, source: SourAmSource, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -3223,7 +2627,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:AM:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_am_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_am_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -3237,7 +2641,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_am_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_am_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -3262,7 +2666,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_apply_arbitrary(self, sample_rate: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_arbitrary(self, sample_rate: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs arbitrary waveform selected by FUNCtion: ARBitrary, using the specified sample rate, amplitude, and offset. 
 
@@ -3275,7 +2679,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:ARBitrary {sample_rate}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_dc(self, frequency: Union[float, Enum33500bStdNumEnumscloneclone], amplitude: Union[float, Enum33500bStdNumEnumscloneclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_dc(self, frequency: Union[float, StdNumEnumsDef], amplitude: Union[float, StdNumEnumsDef], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a DC voltage.
 
@@ -3288,7 +2692,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:DC {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_noise(self, frequency: Union[float, Enum33500bStdNumEnumscloneclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_noise(self, frequency: Union[float, StdNumEnumsDef], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs gaussian noise with the specified amplitude and DC offset.
 
@@ -3301,7 +2705,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:NOISe {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_prbs(self, frequency: Union[float, Enum33500bStdNumEnumscloneclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_prbs(self, frequency: Union[float, StdNumEnumsDef], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a pseudo-random binary sequence with the specified bit rate, amplitude and DC offset.
 
@@ -3314,7 +2718,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:PRBS {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_pulse(self, frequency: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_pulse(self, frequency: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a pulse wave with the specified frequency, amplitude, and DC offset.
 
@@ -3327,7 +2731,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:PULSe {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_ramp(self, frequency: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_ramp(self, frequency: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a ramp wave with the specified frequency, amplitude, and DC offset.
 
@@ -3340,7 +2744,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:RAMP {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_sinusoid(self, frequency: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_sinusoid(self, frequency: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a sine wave with the specified frequency, amplitude, and DC offset.
 
@@ -3353,7 +2757,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:SINusoid {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_square(self, frequency: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_square(self, frequency: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a square wave with the specified frequency, amplitude, and DC offset.
 
@@ -3366,7 +2770,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:APPLy:SQUare {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_source_apply_triangle(self, frequency: Union[float, Enum33500bStdNumEnumsclone], amplitude: Union[float, Enum33500bStdNumEnumsclone], offset: Union[float, Enum33500bStdNumEnumsclone], source_num: int = 1):
+    def set_source_apply_triangle(self, frequency: Union[float, StdNumEnums1], amplitude: Union[float, StdNumEnums1], offset: Union[float, StdNumEnums1], source_num: int = 1):
         """
         Outputs a triangle wave with the specified frequency, amplitude, and DC offset.
 
@@ -3393,7 +2797,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_bpsk_internal_rate(self, modulating_frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_bpsk_internal_rate(self, modulating_frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the rate at which the output phase "shifts" between the carrier and offset phase.
 
@@ -3418,7 +2822,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_bpsk_phase(self, angle: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_bpsk_phase(self, angle: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the Binary Phase Shift Keying phase shift in degrees.
 
@@ -3429,7 +2833,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:BPSK:PHASe {angle}"
         self._rsrc.write(cmd)
 
-    def get_source_bpsk_source(self, source_num: int = 1) -> SourAmSourceCommandParameter1clone:
+    def get_source_bpsk_source(self, source_num: int = 1) -> SourAmSourceclone:
         """
         Select the source of the modulating signal.
 
@@ -3443,7 +2847,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_bpsk_source(self, source: SourAmSourceCommandParameter1clone, source_num: int = 1):
+    def set_source_bpsk_source(self, source: SourAmSourceclone, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -3454,7 +2858,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:BPSK:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_bpsk_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_bpsk_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -3468,7 +2872,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_bpsk_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_bpsk_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -3479,7 +2883,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:BPSK:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_combine_feed(self, source_num: int = 1) -> SourCombFeedQueryResponse1:
+    def get_source_combine_feed(self, source_num: int = 1) -> SourCombFeed:
         """
         Enables or disables the combining of both channels' outputs on a two-channel instrument into a single channel connector.
 
@@ -3493,7 +2897,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_combine_feed(self, source: SourCombFeedCommandParameter1, source_num: int = 1):
+    def set_source_combine_feed(self, source: SourCombFeed, source_num: int = 1):
         """
         Enables or disables the combining of both channels' outputs on a two-channel instrument into a single channel connector.
 
@@ -3648,7 +3052,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         else:
             self._rsrc.write(cmd)
 
-    def get_source_data_arbitrary2_format(self, source_num: int = 1) -> SourceDataArb2FormatQueryResponse1:
+    def get_source_data_arbitrary2_format(self, source_num: int = 1) -> SourceDataArb2Format:
         """
         Specifies whether the format for data points in DATA:ARB2 and DATA:ARB2:DAC commands is interleaved (ABAB) or all of channel 1 followed by all of channel 2 (AABB).
 
@@ -3662,7 +3066,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_data_arbitrary2_format(self, format: SourceDataArb2FormatCommandParameter1, source_num: int = 1):
+    def set_source_data_arbitrary2_format(self, format: SourceDataArb2Format, source_num: int = 1):
         """
         Specifies whether the format for data points in DATA:ARB2 and DATA:ARB2:DAC commands is interleaved (ABAB) or all of channel 1 followed by all of channel 2 (AABB).
 
@@ -3792,7 +3196,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fm_deviation(self, peak_deviation_in_Hz: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_fm_deviation(self, peak_deviation_in_Hz: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the peak frequency deviation in Hz. 
 
@@ -3817,7 +3221,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fm_internal_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_fm_internal_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the frequency of the modulating waveform. 
 
@@ -3828,7 +3232,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_fm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeCommandParameter1clone:
+    def get_source_fm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeclone:
         """
         This command selects the shape of the modulating waveform.
 
@@ -3842,7 +3246,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_fm_internal_function(self, function: SourAmIntFuncShapeCommandParameter1clone, source_num: int = 1):
+    def set_source_fm_internal_function(self, function: SourAmIntFuncShapeclone, source_num: int = 1):
         """
         This command selects the shape of the modulating waveform.
 
@@ -3853,7 +3257,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FM:INTernal:FUNCtion {function}"
         self._rsrc.write(cmd)
 
-    def get_source_fm_source(self, source_num: int = 1) -> SourFmSourceQueryResponse1:
+    def get_source_fm_source(self, source_num: int = 1) -> SourFmSource:
         """
         Select the source of the modulating signal.
 
@@ -3867,7 +3271,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_fm_source(self, source: SourFmSourceCommandParameter1, source_num: int = 1):
+    def set_source_fm_source(self, source: SourFmSource, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -3878,7 +3282,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FM:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_fm_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_fm_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -3892,7 +3296,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_fm_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_fm_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -3917,7 +3321,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the output frequency.
 
@@ -3942,7 +3346,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_center(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_frequency_center(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the center frequency.
 
@@ -3953,7 +3357,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FREQuency:CENTer {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_frequency_couple_mode(self, source_num: int = 1) -> SourFreqCoupModeQueryResponse1:
+    def get_source_frequency_couple_mode(self, source_num: int = 1) -> SourFreqCoupMode:
         """
         Sets the type of frequency coupling between frequency coupled channels; OFFSet specifies a constant frequency offset between channels; RATio specifies a constant ratio between the channels' frequencies.
 
@@ -3967,7 +3371,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_frequency_couple_mode(self, mode: SourFreqCoupModeCommandParameter1, source_num: int = 1):
+    def set_source_frequency_couple_mode(self, mode: SourFreqCoupMode, source_num: int = 1):
         """
         Sets the type of frequency coupling between frequency coupled channels; OFFSet specifies a constant frequency offset between channels; RATio specifies a constant ratio between the channels' frequencies.
 
@@ -4028,7 +3432,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FREQuency:COUPle:RATio {ratio}"
         self._rsrc.write(cmd)
 
-    def get_source_frequency_couple_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_frequency_couple_state(self, source_num: int = 1) -> Boolean:
         """
         Enables/disables frequency coupling between channels in a two-channel instrument.
 
@@ -4042,7 +3446,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_frequency_couple_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_frequency_couple_state(self, state: Boolean, source_num: int = 1):
         """
         Enables/disables frequency coupling between channels in a two-channel instrument.
 
@@ -4053,7 +3457,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FREQuency:COUPle:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_frequency_mode(self, source_num: int = 1) -> SourFreqModeQueryResponse1:
+    def get_source_frequency_mode(self, source_num: int = 1) -> SourFreqMode:
         """
         Sets the type of frequency mode as a continuous wave at a fixed frequency (CW or FIXed), a frequency sweep (SWEep), or a frequency list (LIST).
 
@@ -4067,7 +3471,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_frequency_mode(self, mode: SourFreqModeCommandParameter1, source_num: int = 1):
+    def set_source_frequency_mode(self, mode: SourFreqMode, source_num: int = 1):
         """
         Sets the type of frequency mode as a continuous wave at a fixed frequency (CW or FIXed), a frequency sweep (SWEep), or a frequency list (LIST).
 
@@ -4092,7 +3496,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_span(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_frequency_span(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets frequency span (used in conjunction with the center frequency) for a frequency sweep.
 
@@ -4117,7 +3521,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_start(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_frequency_start(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the start frequencies for a frequency sweep.
 
@@ -4142,7 +3546,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_stop(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_frequency_stop(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the stop frequencies for a frequency sweep.
 
@@ -4167,7 +3571,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fskey_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_fskey_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the FSK alternate (or "hop") frequency.
 
@@ -4192,7 +3596,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fskey_internal_rate(self, rate_in_Hz: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_fskey_internal_rate(self, rate_in_Hz: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the rate at which output frequency "shifts" between the carrier and hop frequency.
 
@@ -4203,7 +3607,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FSKey:INTernal:RATE {rate_in_Hz}"
         self._rsrc.write(cmd)
 
-    def get_source_fskey_source(self, source_num: int = 1) -> SourAmSourceCommandParameter1clone:
+    def get_source_fskey_source(self, source_num: int = 1) -> SourAmSourceclone:
         """
         Select the source of the modulating signal.
 
@@ -4217,7 +3621,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_fskey_source(self, source: SourAmSourceCommandParameter1clone, source_num: int = 1):
+    def set_source_fskey_source(self, source: SourAmSourceclone, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -4228,7 +3632,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FSKey:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_fskey_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_fskey_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -4242,7 +3646,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_fskey_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_fskey_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -4253,7 +3657,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FSKey:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_function(self, source_num: int = 1) -> SourFuncShapeCommandParameter1clone:
+    def get_source_function(self, source_num: int = 1) -> SourFuncShapeclone:
         """
         Selects output function.
 
@@ -4267,7 +3671,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_function(self, function: SourFuncShapeCommandParameter1clone, source_num: int = 1):
+    def set_source_function(self, function: SourFuncShapeclone, source_num: int = 1):
         """
         Selects output function.
 
@@ -4303,7 +3707,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary {filename}"
         self._rsrc.write(cmd)
 
-    def get_source_function_arbitrary_advance(self, source_num: int = 1) -> SourFuncShapArbAdvanceQueryResponse1:
+    def get_source_function_arbitrary_advance(self, source_num: int = 1) -> SourFuncShapArbAdvance:
         """
         Specifies the method for advancing to the next arbitrary waveform data point for the specified channel.
 
@@ -4317,7 +3721,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_function_arbitrary_advance(self, mode: SourFuncShapArbAdvanceCommandParameter1, source_num: int = 1):
+    def set_source_function_arbitrary_advance(self, mode: SourFuncShapArbAdvance, source_num: int = 1):
         """
         Specifies the method for advancing to the next arbitrary waveform data point for the specified channel.
 
@@ -4342,7 +3746,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_balance_gain(self, percent: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_balance_gain(self, percent: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the gain balance ratio for dual arbitrary waveforms.
 
@@ -4367,7 +3771,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_balance_offset1(self, volts: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_balance_offset1(self, volts: Union[float, StdNumEnums], source_num: int = 1):
         """
         Specifies the offset (in volts) added to the dual arbitrary waveform offset for the specified channel.
 
@@ -4392,7 +3796,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_balance_offset2(self, volts: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_balance_offset2(self, volts: Union[float, StdNumEnums], source_num: int = 1):
         """
         Specifies the offset (in volts) added to the dual arbitrary waveform offset for the specified channel.
 
@@ -4403,7 +3807,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary:BALance:OFFSet2 {volts}"
         self._rsrc.write(cmd)
 
-    def get_source_function_arbitrary_balance_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_function_arbitrary_balance_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables channel balancing for dual arbitrary waveforms 
 
@@ -4417,7 +3821,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_function_arbitrary_balance_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_function_arbitrary_balance_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables channel balancing for dual arbitrary waveforms 
 
@@ -4428,7 +3832,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary:BALance:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_function_arbitrary_filter(self, source_num: int = 1) -> SourFuncShapArbFilterQueryResponse1:
+    def get_source_function_arbitrary_filter(self, source_num: int = 1) -> SourFuncShapArbFilter:
         """
         Specifies the filter setting for an arbitrary waveform.
 
@@ -4442,7 +3846,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_function_arbitrary_filter(self, filter: SourFuncShapArbFilterCommandParameter1, source_num: int = 1):
+    def set_source_function_arbitrary_filter(self, filter: SourFuncShapArbFilter, source_num: int = 1):
         """
         Specifies the filter setting for an arbitrary waveform.
 
@@ -4469,7 +3873,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the frequency for the arbitrary waveform.
 
@@ -4496,7 +3900,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_period(self, period: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_period(self, period: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the period for the arbitrary waveform.
 
@@ -4535,7 +3939,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_ptpeak(self, voltage: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_ptpeak(self, voltage: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets peak to peak voltage.
 
@@ -4546,7 +3950,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary:PTPeak {voltage}"
         self._rsrc.write(cmd)
 
-    def get_source_function_arbitrary_skew_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_function_arbitrary_skew_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables skew time compensation (FUNCtion:ARBitrary:SKEW:TIME). This is always OFF for modulated signals, sweeps, lists, and bursts.
 
@@ -4560,7 +3964,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_function_arbitrary_skew_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_function_arbitrary_skew_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables skew time compensation (FUNCtion:ARBitrary:SKEW:TIME). This is always OFF for modulated signals, sweeps, lists, and bursts.
 
@@ -4585,7 +3989,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_skew_time(self, time: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_skew_time(self, time: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets a small time difference between the channels to compensate for minor variations in timing at the connector output plane or at the device under test (DUT). 
 
@@ -4610,7 +4014,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_arbitrary_srate(self, sample_rate: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_arbitrary_srate(self, sample_rate: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the sample rate for the arbitrary waveform.
 
@@ -4645,7 +4049,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_noise_bandwidth(self, bandwidth: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_noise_bandwidth(self, bandwidth: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets bandwidth of noise function.
 
@@ -4670,7 +4074,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_prbs_brate(self, bit_rate: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_prbs_brate(self, bit_rate: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the pseudo-random binary sequence (PRBS) bit rate.
 
@@ -4681,7 +4085,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:PRBS:BRATe {bit_rate}"
         self._rsrc.write(cmd)
 
-    def get_source_function_prbs_data(self, source_num: int = 1) -> SourFuncShapPrbsDataQueryResponse1:
+    def get_source_function_prbs_data(self, source_num: int = 1) -> SourFuncShapPrbsData:
         """
         Sets the pseudo-random binary sequence (PRBS) type. 
 
@@ -4695,7 +4099,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_function_prbs_data(self, sequence_type: SourFuncShapPrbsDataCommandParameter1, source_num: int = 1):
+    def set_source_function_prbs_data(self, sequence_type: SourFuncShapPrbsData, source_num: int = 1):
         """
         Sets the pseudo-random binary sequence (PRBS) type. 
 
@@ -4720,7 +4124,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_prbs_transition_both(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_prbs_transition_both(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets PRBS transition edge time on both edges of a PRBS transition.
 
@@ -4745,7 +4149,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_dcycle(self, percent: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_dcycle(self, percent: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets pulse duty cycle.
 
@@ -4756,7 +4160,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:FUNCtion:PULSe:DCYCle {percent}"
         self._rsrc.write(cmd)
 
-    def get_source_function_pulse_hold(self, source_num: int = 1) -> SourFuncShapPulsHoldQueryResponse1:
+    def get_source_function_pulse_hold(self, source_num: int = 1) -> SourFuncShapPulsHold:
         """
         Sets the pulse waveform parameter (either pulse width or duty cycle) to be held constant as other parameters are varied.
 
@@ -4770,7 +4174,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_function_pulse_hold(self, pulse: SourFuncShapPulsHoldCommandParameter1, source_num: int = 1):
+    def set_source_function_pulse_hold(self, pulse: SourFuncShapPulsHold, source_num: int = 1):
         """
         Sets the pulse waveform parameter (either pulse width or duty cycle) to be held constant as other parameters are varied.
 
@@ -4795,7 +4199,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_period(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_period(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the period for pulse waveforms.
 
@@ -4820,7 +4224,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_transition_both(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_transition_both(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the pulse edge time on both edges of a pulse.
 
@@ -4847,7 +4251,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_transition_leading(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_transition_leading(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the pulse edge time on the leading edges of a pulse.
 
@@ -4876,7 +4280,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_transition_trailing(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_transition_trailing(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the pulse edge time on the trailing edges of a pulse.
 
@@ -4903,7 +4307,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_pulse_width(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_pulse_width(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets pulse width.
 
@@ -4928,7 +4332,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_ramp_symmetry(self, percent: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_ramp_symmetry(self, percent: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the symmetry percentage for ramp waves.
 
@@ -4953,7 +4357,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_square_dcycle(self, percent: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_square_dcycle(self, percent: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets duty cycle percentage for square wave.
 
@@ -4978,7 +4382,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_square_period(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_function_square_period(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets period for square wave.
 
@@ -5003,7 +4407,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_list_dwell(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_list_dwell(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets dwell time, the amount of time each frequency in a frequency list is generated.
 
@@ -5067,7 +4471,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_marker_cycle(self, cycle_num: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_marker_cycle(self, cycle_num: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the marker cycle number at which the front-panel Sync signal goes low in a burst mode operation.
 
@@ -5092,7 +4496,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_marker_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_marker_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the marker frequency at which the front-panel Sync signal goes low during a sweep.
 
@@ -5117,7 +4521,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_marker_point(self, sample_number: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_marker_point(self, sample_number: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the sample number at which the front-panel Sync signal goes low within the active arbitrary waveform.
 
@@ -5142,7 +4546,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_modulation_phase(self, angle: Union[float, Enum33500bEnumminmaxdef], source_num: int = 1):
+    def set_source_modulation_phase(self, angle: Union[float, Enumminmaxdef], source_num: int = 1):
         """
         Sets the phase of the internal modulation source when modulating by the internal source with shape SIN, SQU, RAMP, NRAMp, or TRI. This command applies to the 336xx models only.
 
@@ -5173,7 +4577,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PHASe:SYNChronize"
         self._rsrc.write(cmd)
 
-    def get_source_phase_unlock_error_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_phase_unlock_error_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables the generation of an error if the phase-lock is ever lost by the instrument timebase.
 
@@ -5187,7 +4591,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_phase_unlock_error_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_phase_unlock_error_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables the generation of an error if the phase-lock is ever lost by the instrument timebase.
 
@@ -5212,7 +4616,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pm_deviation(self, deviation_in_degrees: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_pm_deviation(self, deviation_in_degrees: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the phase deviation in degrees. 
 
@@ -5237,7 +4641,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pm_internal_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_pm_internal_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the frequency of the modulating waveform.
 
@@ -5248,7 +4652,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_pm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeCommandParameter1clone:
+    def get_source_pm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeclone:
         """
         Selects shape of modulating waveform.
 
@@ -5262,7 +4666,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_pm_internal_function(self, function: SourAmIntFuncShapeCommandParameter1clone, source_num: int = 1):
+    def set_source_pm_internal_function(self, function: SourAmIntFuncShapeclone, source_num: int = 1):
         """
         Selects shape of modulating waveform.
 
@@ -5273,7 +4677,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PM:INTernal:FUNCtion {function}"
         self._rsrc.write(cmd)
 
-    def get_source_pm_source(self, source_num: int = 1) -> SourPmSourceQueryResponse1:
+    def get_source_pm_source(self, source_num: int = 1) -> SourPmSource:
         """
         Select the source of the modulating signal.
 
@@ -5287,7 +4691,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_pm_source(self, source: SourPmSourceCommandParameter1, source_num: int = 1):
+    def set_source_pm_source(self, source: SourPmSource, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -5298,7 +4702,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PM:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_pm_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_pm_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -5312,7 +4716,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_pm_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_pm_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -5337,7 +4741,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pwm_deviation(self, deviation: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_pwm_deviation(self, deviation: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets pulse width deviation; the ± variation in width (in seconds) from the pulse width of the carrier pulse waveform.
 
@@ -5362,7 +4766,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pwm_deviation_dcycle(self, deviation_in_pct: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_pwm_deviation_dcycle(self, deviation_in_pct: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets duty cycle deviation in percent of period.
 
@@ -5387,7 +4791,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pwm_internal_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_pwm_internal_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Selects frequency at which output pulse width shifts through its pulse width deviation.
 
@@ -5398,7 +4802,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PWM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_pwm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeCommandParameter1clone:
+    def get_source_pwm_internal_function(self, source_num: int = 1) -> SourAmIntFuncShapeclone:
         """
         Selects shape of the internal modulating waveform.
 
@@ -5412,7 +4816,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_pwm_internal_function(self, function: SourSumIntFunctionCommandParameter1clone, source_num: int = 1):
+    def set_source_pwm_internal_function(self, function: SourSumIntFunctionclone, source_num: int = 1):
         """
         Selects shape of the internal modulating waveform.
 
@@ -5423,7 +4827,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PWM:INTernal:FUNCtion {function}"
         self._rsrc.write(cmd)
 
-    def get_source_pwm_source(self, source_num: int = 1) -> SourPwmSourceQueryResponse1:
+    def get_source_pwm_source(self, source_num: int = 1) -> SourPwmSource:
         """
         Select the source of the modulating signal.
 
@@ -5437,7 +4841,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_pwm_source(self, source: SourPwmSourceCommandParameter1, source_num: int = 1):
+    def set_source_pwm_source(self, source: SourPwmSource, source_num: int = 1):
         """
         Select the source of the modulating signal.
 
@@ -5448,7 +4852,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PWM:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_pwm_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_pwm_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables modulation.
 
@@ -5462,7 +4866,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_pwm_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_pwm_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables modulation.
 
@@ -5473,7 +4877,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:PWM:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_rate_couple_mode(self, source_num: int = 1) -> SourRateCoupModeQueryResponse1:
+    def get_source_rate_couple_mode(self, source_num: int = 1) -> SourRateCoupMode:
         """
         Sets type of sample rate coupling to either a constant sample rate offset (OFFSet) or a constant ratio (RATio) between the channels' sample rates.
 
@@ -5487,7 +4891,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_rate_couple_mode(self, mode: SourRateCoupModeCommandParameter1, source_num: int = 1):
+    def set_source_rate_couple_mode(self, mode: SourRateCoupMode, source_num: int = 1):
         """
         Sets type of sample rate coupling to either a constant sample rate offset (OFFSet) or a constant ratio (RATio) between the channels' sample rates.
 
@@ -5548,7 +4952,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:RATE:COUPle:RATio {ratio}"
         self._rsrc.write(cmd)
 
-    def get_source_rate_couple_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_rate_couple_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables sample rate coupling between channels, or allows one-time copying of one channel's sample rate into the other channel.
 
@@ -5562,7 +4966,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_rate_couple_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_rate_couple_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables sample rate coupling between channels, or allows one-time copying of one channel's sample rate into the other channel.
 
@@ -5573,7 +4977,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:RATE:COUPle:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_roscillator_source(self, source_num: int = 1) -> SourRoscSourceQueryResponse1:
+    def get_source_roscillator_source(self, source_num: int = 1) -> SourRoscSource:
         """
         Selects the source for the reference oscillator used as the frequency/phase reference for signals generated by the instrument.
 
@@ -5587,7 +4991,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_roscillator_source(self, source: SourRoscSourceCommandParameter1, source_num: int = 1):
+    def set_source_roscillator_source(self, source: SourRoscSource, source_num: int = 1):
         """
         Selects the source for the reference oscillator used as the frequency/phase reference for signals generated by the instrument.
 
@@ -5598,7 +5002,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:ROSCillator:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_roscillator_source_auto(self, source_num: int = 1) -> SourRoscSourAutoQueryResponse1:
+    def get_source_roscillator_source_auto(self, source_num: int = 1) -> SourRoscSourAuto:
         """
         Disables or enables automatic selection of the reference oscillator.
 
@@ -5612,7 +5016,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_roscillator_source_auto(self, state: SourRoscSourAutoCommandParameter1, source_num: int = 1):
+    def set_source_roscillator_source_auto(self, state: SourRoscSourAuto, source_num: int = 1):
         """
         Disables or enables automatic selection of the reference oscillator.
 
@@ -5623,7 +5027,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:ROSCillator:SOURce:AUTO {state}"
         self._rsrc.write(cmd)
 
-    def get_source_roscillator_source_current(self, source_num: int = 1) -> SourRoscSourCurrentQueryResponse1:
+    def get_source_roscillator_source_current(self, source_num: int = 1) -> SourRoscSourCurrent:
         """
         Indicates which reference oscillator signal is currently in use when ROSC:SOURce:AUTO is ON.
 
@@ -5676,7 +5080,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_sum_internal_frequency(self, frequency: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_sum_internal_frequency(self, frequency: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the frequency of the summing waveform when internal sum source is selected (SUM:SOURce:INTernal). 
 
@@ -5687,7 +5091,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SUM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
 
-    def get_source_sum_internal_function(self, source_num: int = 1) -> SourSumIntFunctionCommandParameter1clone:
+    def get_source_sum_internal_function(self, source_num: int = 1) -> SourSumIntFunctionclone:
         """
         Selects the summing waveform (the waveform added to the primary waveform).
 
@@ -5701,7 +5105,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_sum_internal_function(self, function: SourSumIntFunctionCommandParameter1clone, source_num: int = 1):
+    def set_source_sum_internal_function(self, function: SourSumIntFunctionclone, source_num: int = 1):
         """
         Selects the summing waveform (the waveform added to the primary waveform).
 
@@ -5712,7 +5116,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SUM:INTernal:FUNCtion {function}"
         self._rsrc.write(cmd)
 
-    def get_source_sum_source(self, source_num: int = 1) -> SourAmSourceCommandParameter1:
+    def get_source_sum_source(self, source_num: int = 1) -> SourAmSource:
         """
         Selects source of summing signal.
 
@@ -5726,7 +5130,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_sum_source(self, source: SourAmSourceCommandParameter1, source_num: int = 1):
+    def set_source_sum_source(self, source: SourAmSource, source_num: int = 1):
         """
         Selects source of summing signal.
 
@@ -5737,7 +5141,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SUM:SOURce {source}"
         self._rsrc.write(cmd)
 
-    def get_source_sum_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_sum_state(self, source_num: int = 1) -> Boolean:
         """
         Disables or enables SUM function.
 
@@ -5751,7 +5155,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_sum_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_sum_state(self, state: Boolean, source_num: int = 1):
         """
         Disables or enables SUM function.
 
@@ -5776,7 +5180,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_sweep_htime(self, hold_time: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_sweep_htime(self, hold_time: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets number of seconds the sweep holds (pauses) at the stop frequency before returning to the start frequency.
 
@@ -5801,7 +5205,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_sweep_rtime(self, return_time: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_sweep_rtime(self, return_time: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets number of seconds the sweep takes to return from stop frequency to start frequency.
 
@@ -5812,7 +5216,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SWEep:RTIMe {return_time}"
         self._rsrc.write(cmd)
 
-    def get_source_sweep_spacing(self, source_num: int = 1) -> SourSweSpacingQueryResponse1:
+    def get_source_sweep_spacing(self, source_num: int = 1) -> SourSweSpacing:
         """
         Selects linear or logarithmic spacing for sweep.
 
@@ -5826,7 +5230,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_sweep_spacing(self, spacing: SourSweSpacingCommandParameter1, source_num: int = 1):
+    def set_source_sweep_spacing(self, spacing: SourSweSpacing, source_num: int = 1):
         """
         Selects linear or logarithmic spacing for sweep.
 
@@ -5837,7 +5241,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SWEep:SPACing {spacing}"
         self._rsrc.write(cmd)
 
-    def get_source_sweep_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_sweep_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables the sweep.
 
@@ -5851,7 +5255,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_sweep_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_sweep_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables the sweep.
 
@@ -5876,7 +5280,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_sweep_time(self, seconds: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_sweep_time(self, seconds: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets time (seconds) to sweep from start frequency to stop frequency.
 
@@ -5887,7 +5291,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:SWEep:TIME {seconds}"
         self._rsrc.write(cmd)
 
-    def get_source_track(self, source_num: int = 1) -> SourTrackQueryResponse1:
+    def get_source_track(self, source_num: int = 1) -> SourTrack:
         """
         Causes channels 1 and 2 of a two-channel instrument to output the same signal, or an inverted polarity signal.
 
@@ -5901,7 +5305,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_track(self, track: SourTrackCommandParameter1, source_num: int = 1):
+    def set_source_track(self, track: SourTrack, source_num: int = 1):
         """
         Causes channels 1 and 2 of a two-channel instrument to output the same signal, or an inverted polarity signal.
 
@@ -5926,7 +5330,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage(self, amplitude: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage(self, amplitude: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets output amplitude.
 
@@ -5953,7 +5357,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_limit_high(self, voltage: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage_limit_high(self, voltage: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the high limits for output voltage.
 
@@ -5982,7 +5386,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_limit_low(self, voltage: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage_limit_low(self, voltage: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets the low limits for output voltage.
 
@@ -5995,7 +5399,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:VOLTage:LIMit:LOW {voltage}"
         self._rsrc.write(cmd)
 
-    def get_source_voltage_limit_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_voltage_limit_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables output amplitude voltage limits.
 
@@ -6009,7 +5413,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_voltage_limit_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_voltage_limit_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables output amplitude voltage limits.
 
@@ -6020,7 +5424,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:VOLTage:LIMit:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_source_voltage_range_auto(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_voltage_range_auto(self, source_num: int = 1) -> Boolean:
         """
         Disables or enables voltage autoranging for all functions.
 
@@ -6034,7 +5438,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_voltage_range_auto(self, state: Union[int, SourVoltRangAutoCommandParameter1], source_num: int = 1):
+    def set_source_voltage_range_auto(self, state: Union[int, SourVoltRangAuto], source_num: int = 1):
         """
         Disables or enables voltage autoranging for all functions.
 
@@ -6045,7 +5449,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:VOLTage:RANGe:AUTO {state}"
         self._rsrc.write(cmd)
 
-    def get_source_voltage_unit(self, source_num: int = 1) -> SourVoltLevUnitQueryResponse1:
+    def get_source_voltage_unit(self, source_num: int = 1) -> SourVoltLevUnit:
         """
         Selects the units for output amplitude.
 
@@ -6059,7 +5463,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_source_voltage_unit(self, unit: SourVoltLevUnitCommandParameter1, source_num: int = 1):
+    def set_source_voltage_unit(self, unit: SourVoltLevUnit, source_num: int = 1):
         """
         Selects the units for output amplitude.
 
@@ -6070,7 +5474,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:VOLTage:UNIT {unit}"
         self._rsrc.write(cmd)
 
-    def get_source_voltage_couple_state(self, source_num: int = 1) -> Enum33500bBoolean:
+    def get_source_voltage_couple_state(self, source_num: int = 1) -> Boolean:
         """
         Enables or disables the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument. 
 
@@ -6084,7 +5488,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_voltage_couple_state(self, state: Enum33500bBoolean, source_num: int = 1):
+    def set_source_voltage_couple_state(self, state: Boolean, source_num: int = 1):
         """
         Enables or disables the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument. 
 
@@ -6109,7 +5513,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_high(self, voltage: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage_high(self, voltage: Union[float, StdNumEnums], source_num: int = 1):
         """
         Set the waveform's high voltage levels.
 
@@ -6134,7 +5538,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_low(self, voltage: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage_low(self, voltage: Union[float, StdNumEnums], source_num: int = 1):
         """
         Set the waveform's low voltage levels.
 
@@ -6159,7 +5563,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_offset(self, offset: Union[float, Enum33500bStdNumEnums], source_num: int = 1):
+    def set_source_voltage_offset(self, offset: Union[float, StdNumEnums], source_num: int = 1):
         """
         Sets DC offset voltage.
 
@@ -6285,7 +5689,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SYSTem{system_num}:BEEPer:IMMediate"
         self._rsrc.write(cmd)
 
-    def get_system_beeper_state(self, system_num: int = 1) -> Enum33500bBoolean:
+    def get_system_beeper_state(self, system_num: int = 1) -> Boolean:
         """
         Disables or enables the beeper tone heard when an error is generated from the front panel or remote interface. 
 
@@ -6299,7 +5703,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_system_beeper_state(self, state: Enum33500bBoolean, system_num: int = 1):
+    def set_system_beeper_state(self, state: Boolean, system_num: int = 1):
         """
         Disables or enables the beeper tone heard when an error is generated from the front panel or remote interface. 
 
@@ -6310,7 +5714,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SYSTem{system_num}:BEEPer:STATe {state}"
         self._rsrc.write(cmd)
 
-    def get_system_communicate_enable(self, system_num: int = 1) -> Enum33500bBoolean:
+    def get_system_communicate_enable(self, system_num: int = 1) -> Boolean:
         """
         Disables or enables the GPIB, USB, or LAN remote interface.
 
@@ -6324,7 +5728,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_system_communicate_enable(self, state: Enum33500bBoolean, interface: SystCommEnableCommandParameter2clone, system_num: int = 1):
+    def set_system_communicate_enable(self, state: Boolean, interface: SystCommEnableCommandParameter2clone, system_num: int = 1):
         """
         Disables or enables the GPIB, USB, or LAN remote interface.
 
@@ -6375,7 +5779,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def get_system_communicate_lan_dhcp(self, system_num: int = 1) -> Enum33500bBoolean:
+    def get_system_communicate_lan_dhcp(self, system_num: int = 1) -> Boolean:
         """
         Disables or enables instrument's use of DHCP.
 
@@ -6389,7 +5793,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_system_communicate_lan_dhcp(self, state: Enum33500bBoolean, system_num: int = 1):
+    def set_system_communicate_lan_dhcp(self, state: Boolean, system_num: int = 1):
         """
         Disables or enables instrument's use of DHCP.
 
@@ -6700,7 +6104,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_system_license_delete(self, option_name: SystCommEnableCommandParameter2clone2, system_num: int = 1):
+    def set_system_license_delete(self, option_name: SystLicsDel, system_num: int = 1):
         """
         Deletes a license.
 
@@ -6763,7 +6167,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def get_system_license_install(self, system_num: int = 1) -> Enum33500bBoolean:
+    def get_system_license_install(self, system_num: int = 1) -> Boolean:
         """
         This command installs all licenses from a specified file or from all license files in the specified folder. 
 
@@ -6826,7 +6230,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SYSTem{system_num}:LOCK:RELease"
         self._rsrc.write(cmd)
 
-    def get_system_lock_request(self, system_num: int = 1) -> Enum33500bBoolean:
+    def get_system_lock_request(self, system_num: int = 1) -> Boolean:
         """
         Requests a lock of the current I/O interface.
 
@@ -6944,7 +6348,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_trigger_delay(self, delay: Union[float, Enum33500bStdNumEnums], trigger_num: int = 1):
+    def set_trigger_delay(self, delay: Union[float, StdNumEnums], trigger_num: int = 1):
         """
         Sets trigger delay, (time from assertion of trigger to occurrence of triggered event).
 
@@ -6969,7 +6373,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_trigger_timer(self, timer: Union[float, Enum33500bStdNumEnums], trigger_num: int = 1):
+    def set_trigger_timer(self, timer: Union[float, StdNumEnums], trigger_num: int = 1):
         """
         Sets timer used when TRIGger[1|2]:SOURce is TIMer.
 
@@ -6980,7 +6384,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":TRIGger{trigger_num}:TIMer {timer}"
         self._rsrc.write(cmd)
 
-    def get_trigger_slope(self, trigger_num: int = 1) -> TrigSeqSlopeQueryResponse1:
+    def get_trigger_slope(self, trigger_num: int = 1) -> TrigSeqSlope:
         """
         Specifies polarity of trigger signal on rear-panel Trig In connector for any externally-triggered mode. 
 
@@ -6994,7 +6398,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_trigger_slope(self, edge: TrigSeqSlopeCommandParameter1, trigger_num: int = 1):
+    def set_trigger_slope(self, edge: TrigSeqSlope, trigger_num: int = 1):
         """
         Specifies polarity of trigger signal on rear-panel Trig In connector for any externally-triggered mode. 
 
@@ -7005,7 +6409,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":TRIGger{trigger_num}:SLOPe {edge}"
         self._rsrc.write(cmd)
 
-    def get_trigger_source(self, trigger_num: int = 1) -> TrigSeqSourceQueryResponse1:
+    def get_trigger_source(self, trigger_num: int = 1) -> TrigSeqSource:
         """
         Selects the trigger source for sequence, list, burst or sweep. 
 
@@ -7019,7 +6423,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_trigger_source(self, source: TrigSeqSourceCommandParameter1, trigger_num: int = 1):
+    def set_trigger_source(self, source: TrigSeqSource, trigger_num: int = 1):
         """
         Selects the trigger source for sequence, list, burst or sweep. 
 
@@ -7032,7 +6436,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_unit_angle(self) -> UnitAngleCommandParameter1clone:
+    def get_unit_angle(self) -> UnitAngleclone:
         """
         Specifies the angle units that displayed on the screen and used for specifying angles.
 
@@ -7044,7 +6448,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return str(response)
 
-    def set_unit_angle(self, unit: UnitAngleCommandParameter1clone):
+    def set_unit_angle(self, unit: UnitAngleclone):
         """
         Specifies the angle units that displayed on the screen and used for specifying angles.
 

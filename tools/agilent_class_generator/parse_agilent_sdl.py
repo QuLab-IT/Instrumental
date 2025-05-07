@@ -34,19 +34,38 @@ class DefiniteLengthArbitraryBlock:
 @dataclass(frozen=True)
 class EnumMember:
     mnemonic: str
-    aliases: str
+    # aliases: str
     value: str
     description: Optional[str] = None
 
+    def __eq__(self, other):
+        if not isinstance(other, EnumMember):
+            return False
+        return self.mnemonic == other.mnemonic and self.value == other.value and self.description == other.description
+    
+    def __hash__(self):
+        return hash((self.mnemonic, self.value, self.description))
+
 @dataclass(frozen=True)
-class EnumDefinition:
+class GlobalDefinition:
     name: str
     members: List[EnumMember]
 
-@dataclass(frozen=True)
-class GlobalDefinitions:
-    name: str
-    members: List[EnumMember]
+    def __eq__(self, other):
+        if not isinstance(other, GlobalDefinition):
+            return False
+        if len(self.members) != len(other.members):
+            return False
+        # Compare the names of the members
+        for member in self.members:
+            if not any(member == other_member for other_member in other.members):
+                return False
+
+        # Check if the names are the same
+        return self.name == other.name
+
+    def __hash__(self):
+        return hash((self.name, tuple(self.members)))
 
 @dataclass(frozen=True)
 class ParameterType:
@@ -188,8 +207,7 @@ class Node:
 
 @dataclass(frozen=True)
 class ParsedData:
-    global_definitions: Dict[str, GlobalDefinitions]
-    enums: List[EnumDefinition]
+    global_definitions: Dict[str, GlobalDefinition]
     commands: List[CommandInfo]
     subsystems: List[Node]
 
@@ -251,7 +269,7 @@ def parse_parameter_type(param_type_node: Tag) -> List[ParameterType]:
     
     return types
 
-def parse_global_definitions(soup: BeautifulSoup) -> Dict[str, GlobalDefinitions]:
+def parse_global_definitions(soup: BeautifulSoup) -> Dict[str, GlobalDefinition]:
     """
     Parse the GlobalDefinitions section and extract all enum information.
     
@@ -261,7 +279,7 @@ def parse_global_definitions(soup: BeautifulSoup) -> Dict[str, GlobalDefinitions
     Returns:
         Dict[str, GlobalDefinitions]: Dictionary containing all enum definitions
     """
-    global_defs: Dict[str, GlobalDefinitions] = {}
+    global_defs: Dict[str, GlobalDefinition] = {}
     
     # Find the GlobalDefinitions section
     global_defs_node = soup.find('GlobalDefinitions')
@@ -270,26 +288,40 @@ def parse_global_definitions(soup: BeautifulSoup) -> Dict[str, GlobalDefinitions
     
     # Parse all Enums in GlobalDefinitions
     for enum in global_defs_node.find_all('Enum'):
-        enum_name = enum.get('name', '')
-        if not enum_name:
+        enum_ref_name = enum.get('name', '')
+        if not enum_ref_name:
             continue
-            
+        
+        enum_name = enum.get('langTypeName', '')
+        if not enum_name:
+            enum_name = enum_ref_name
+        
+        for suffix in ['_command_parameter_1', '_query_response_1']:
+            enum_name = enum_name.replace(suffix, "")
+
         members: List[EnumMember] = []
         # Parse all members of the enum
         for member in enum.find_all('Member'):
             member_data = EnumMember(
                 mnemonic=member.get('mnemonic', ''),
-                aliases=member.get('aliases', ''),
+                # aliases=member.get('aliases', ''),
                 value=member.get('value', ''),
                 description=member.find('Description').text if member.find('Description') else None
             )
             members.append(member_data)
         
-        global_defs[enum_name] = GlobalDefinitions(name=enum_name, members=members)
+        if enum_name in global_defs:
+            existing_members = global_defs[enum_name].members
+            if set(existing_members) != set(members):
+                print(f"Warning: Duplicate enum name '{enum_name}' with different members found.")
+                print(f"Existing members: {existing_members}")
+                print(f"New members: {members}")
+            continue
+        global_defs[enum_ref_name] = GlobalDefinition(name=enum_name, members=members)
     
     return global_defs
 
-def print_global_definitions(global_defs: Dict[str, GlobalDefinitions]) -> None:
+def print_global_definitions(global_defs: Dict[str, GlobalDefinition]) -> None:
     """
     Print the global definitions in a readable format.
     
@@ -301,8 +333,8 @@ def print_global_definitions(global_defs: Dict[str, GlobalDefinitions]) -> None:
         print(f"\nEnum: {enum_data.name}")
         for member in enum_data.members:
             print(f"  - {member.mnemonic}")
-            if member.aliases:
-                print(f"    Aliases: {member.aliases}")
+            # if member.aliases:
+                # print(f"    Aliases: {member.aliases}")
             if member.value:
                 print(f"    Value: {member.value}")
             if member.description:
@@ -483,32 +515,14 @@ def parse_sdl_file(file_path: str) -> ParsedData:
     soup: BeautifulSoup = BeautifulSoup(content, 'xml')
     
     # Parse global definitions first
-    global_defs: Dict[str, GlobalDefinitions] = parse_global_definitions(soup)
+    global_defs: Dict[str, GlobalDefinition] = parse_global_definitions(soup)
     
     # Initialize result dictionary with proper typing
     result = ParsedData(
         global_definitions=global_defs,
-        enums=[],
         commands=[],
         subsystems=[]
     )
-    
-    # Parse enums
-    for enum in soup.find_all('Enum'):
-        members: List[EnumMember] = []
-        for member in enum.find_all('Member'):
-            member_data = EnumMember(
-                mnemonic=member.get('mnemonic', ''),
-                aliases=member.get('aliases', ''),
-                value=member.get('value', '')
-            )
-            members.append(member_data)
-        
-        enum_data = EnumDefinition(
-            name=enum.get('name', ''),
-            members=members
-        )
-        result.enums.append(enum_data)
     
     # Parse CommonCommands section
     common_commands = soup.find('CommonCommands')
@@ -685,7 +699,7 @@ if __name__ == "__main__":
     parsed_data: ParsedData = parse_sdl_file(file_path)
     
     # Print global definitions
-    print_global_definitions(parsed_data.global_definitions)
+    # print_global_definitions(parsed_data.global_definitions)
     
     # Example usage of the subsystem commands function
-    print_subsystem_commands(parsed_data, "DISPlay")
+    # print_subsystem_commands(parsed_data, "DISPlay")

@@ -13,6 +13,7 @@ def sanitize_enum_name(name: str) -> str:
     # Remove any non-alphanumeric characters and convert to PascalCase
     name = re.sub(r"[^a-zA-Z0-9]", "_", name)
     words = name.split("_")
+    
     return "".join(word.capitalize() for word in words if word)
 
 def get_python_type(semantic_type: str) -> str:

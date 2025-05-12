@@ -27,9 +27,6 @@ class DefiniteLengthArbitraryBlock:
     element_type: str
     separator: str
 
-    def from_device(response: str):
-        return np.array(response.split(self.separator))
-
 
 @dataclass(frozen=True)
 class EnumMember:

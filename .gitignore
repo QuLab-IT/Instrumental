@@ -6,6 +6,7 @@
 .idea/*
 .dir-locals.el
 .venv/
+.vscode/
 
 _*lib.py
 !_*midlib.py

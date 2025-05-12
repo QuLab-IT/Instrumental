@@ -960,7 +960,6 @@ def find_visa_driver_class(visa_inst, module=None):
 
     module_supports_idn = any(info for _,info in all_info)
     if module_supports_idn:
-        print('Checking IDN...')
         log.info('Checking IDN...')
         inst_manufac, inst_model = get_idn(visa_inst)
 

@@ -19,107 +19,123 @@ _BASIC_TYPE_MAP = {
     'Boolean': bool, # Handle a common alias
 }
 
-def validate_parameters(rules_list=None):
-    """
-    Decorator to validate method parameters against a list of rules.
-    Each rule in rules_list is a dictionary specifying validation criteria for a parameter.
-    Rule keys: 'name', 'type_options' (list of type strings like 'int', 'MyEnum'), 
-                 'min_val', 'max_val'.
-    """
-    def decorator(func):
+
+def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
+    if rules_list is None:
+        rules_list = []
+    
+    param_rules: Dict[str, Dict[str, Any]] = {rule['name']: rule for rule in rules_list}
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
-        def wrapper(self, *args, **kwargs):
-            if rules_list:
-                sig = inspect.signature(func)
-                try:
-                    bound_args = sig.bind(self, *args, **kwargs)
-                except TypeError as e:
-                        raise TypeError(f"Error binding arguments for {func.__name__}: {e}") from e
-                
-                bound_args.apply_defaults()
-                all_params = dict(bound_args.arguments)
-                
-                if 'self' in all_params:
-                    del all_params['self']
+        def wrapper(self: Any, *args: Any, **kwargs: Any) -> Any:
+            sig = inspect.signature(func)
+            try:
+                bound_args = sig.bind(self, *args, **kwargs)
+            except TypeError as e:
+                raise TypeError(
+                    f"Error binding arguments for {func.__name__}{sig}: {e}. "
+                    f"Provided args: {args}, kwargs: {kwargs}"
+                ) from e
+            
+            bound_args.apply_defaults()
+            
+            # --- 1. Validation Phase ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
 
-                for rule in rules_list:
-                    param_name = rule['name']
-                    if param_name not in all_params:
-                        continue
+                rule = param_rules.get(param_name)
+                if not rule:
+                    continue
 
-                    value = all_params[param_name]
-
-                    # 1. Type Checking based on 'type_options'
-                    type_options = rule.get('type_options', [])
-                    
-                    if not type_options or 'Any' in type_options:
-                        # If no type_options or 'Any' is explicitly listed, skip type check for this param.
-                        # Range checks will still apply if defined.
-                        pass
-                    else:
-                        type_match_found = False
-                        for type_str_opt in type_options:
-                            expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
-                            if expected_py_type:
-                                # Handle basic Python types
-                                if (expected_py_type is float and isinstance(value, int)) or                                    isinstance(value, expected_py_type):
-                                    type_match_found = True
+                type_options = rule.get('type_options', [])
+                if not type_options or 'Any' in type_options: # Allow 'Any' to bypass type checks
+                    pass
+                else:
+                    type_match_found = False
+                    for type_str_opt in type_options:
+                        expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
+                        if expected_py_type:
+                            # Handle basic Python types (int, float, str, bool)
+                            # Allow int to be passed for a float parameter
+                            if (expected_py_type is float and isinstance(arg_value, int)) or \
+                               isinstance(arg_value, expected_py_type):
+                                type_match_found = True
                                 break
-                            else:
-                                # Assume type_str_opt is an Enum class name string
-                                enum_class = globals().get(type_str_opt)
-                                if enum_class and isinstance(enum_class, type) and issubclass(enum_class, Enum):
-                                    if isinstance(value, enum_class):
-                                        type_match_found = True
-                                        break
-                                    else:
-                                        try:
-                                            enum_class(value) # Try to coerce to the enum type
-                                            type_match_found = True
-                                            break
-                                        except (ValueError, TypeError): # Coercion failed
-                                            pass # Continue to next type_option or fail if no match
-                                else:
-                                    # This means type_str_opt was not in _BASIC_TYPE_MAP and not a found Enum.
-                                    # Could log a warning here if a type_option is unrecognized.
-                                    pass 
-                        
-                            if not type_match_found:
-                                expected_types_str = ", ".join(type_options)
-                                raise TypeError(
-                                            f"Parameter '{param_name}' expected one of types [{expected_types_str}], "
-                                            f"but got {type(value).__name__}: '{value}'."
-                                )
+                        else:
+                            # Assume type_str_opt is an Enum class name string
+                            enum_class = globals().get(type_str_opt)
+                            if enum_class and isinstance(enum_class, type) and issubclass(enum_class, Enum):
+                                if isinstance(arg_value, enum_class):
+                                    type_match_found = True
+                                    break
+                                # else:
+                                    # Coercion logic for enums from raw values was here, removed for stricter typing based on user request focus.
+                                    # If needed, it could be: 
+                                    # try: enum_class(arg_value); type_match_found = True; break
+                                    # except (ValueError, TypeError): pass
+                            # else:
+                                # print(f"Warning: Unrecognized type '{type_str_opt}' in validation rule for '{param_name}' of {func.__name__}")
 
-                    # 2. Range Checking (min_val, max_val)
+                    if not type_match_found:
+                        expected_types_str = ", ".join(type_options)
+                        raise TypeError(
+                            f"Parameter '{param_name}' for {func.__name__} expected one of types "
+                            f"[{expected_types_str}], but got {type(arg_value).__name__} with value {arg_value!r}."
+                        )
+
+                # --- Min/Max Value Validation ---
+                current_value_for_range_check = arg_value
+
+                if not isinstance(current_value_for_range_check, Enum):
                     min_val = rule.get('min_val')
                     if min_val is not None:
                         try:
-                            # Ensure value can be compared as float, even if it's int
-                            if float(value) < float(min_val):
+                            if float(current_value_for_range_check) < float(min_val):
                                 raise ValueError(
-                                    f"Parameter '{param_name}' ({value}) is less than "
-                                    f"minimum allowed value ({min_val})."
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is less than minimum value {min_val}."
                                 )
-                        except (TypeError, ValueError) as e:
-                                # Value couldn't be converted to float or compared.
-                                # Type check should ideally prevent incompatible types for range check.
-                                # If type check passed (e.g. type was 'Any'), this might still occur.
-                                # Consider if an additional warning or error is needed here.
-                                pass 
+                        except (TypeError, ValueError):
+                            pass 
 
                     max_val = rule.get('max_val')
                     if max_val is not None:
                         try:
-                            if float(value) > float(max_val):
+                            if float(current_value_for_range_check) > float(max_val):
                                 raise ValueError(
-                                    f"Parameter '{param_name}' ({value}) is greater than "
-                                    f"maximum allowed value ({max_val})."
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is greater than maximum value {max_val}."
                                 )
-                        except (TypeError, ValueError) as e:
+                        except (TypeError, ValueError):
                             pass
 
-            return func(self, *args, **kwargs)
+            # --- 2. Transformation Phase (Enum to .value for mixed Unions) ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
+
+                if isinstance(arg_value, Enum):
+                    rule = param_rules.get(param_name)
+                    if rule:
+                        type_options = rule.get('type_options', [])
+                        enum_type_name = type(arg_value).__name__
+                        
+                        is_enum_in_options = enum_type_name in type_options
+                        is_mixed_union = len(type_options) > 1 
+
+                        if is_enum_in_options and is_mixed_union and hasattr(arg_value, 'value'):
+                            non_enum_type_in_options = False
+                            for opt_str in type_options:
+                                if _BASIC_TYPE_MAP.get(opt_str):
+                                    non_enum_type_in_options = True
+                                    break
+                            
+                            if non_enum_type_in_options:
+                                bound_args.arguments[param_name] = arg_value.value
+            
+            return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
 

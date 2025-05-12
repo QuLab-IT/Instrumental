@@ -250,6 +250,11 @@ driver_info = OrderedDict([
         'imports': ['pyvisa'],
         'visa_info': {},
     }),
+    ('vacuum.ngc', {
+        'params': ['port'],
+        'classes': ['NGC2', 'NGC2D', 'NGC2_D', 'NGC3'],
+        'imports': ['serial'],
+    }),
     ('lasers.femto_ferb', {
         'params': ['visa_address'],
         'classes': [],

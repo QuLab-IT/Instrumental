@@ -32,14 +32,6 @@ driver_info = OrderedDict([
         'classes': ['NIDAQ'],
         'imports': ['nicelib >= 0.5'],
     }),
-    ('funcgenerators.33250A', {
-        'params': ['visa_address'],
-        'classes': ['Keysight33500B'],
-        'imports': ['instrumental', 'pyvisa'],
-        'visa_info': {
-            'Keysight33500B': ('Agilent Technologies', ['33250A']),
-        },
-    }),
     ('funcgenerators.agilent', {
         'params': ['visa_address'],
         'classes': ['Agilent33250A', 'Agilent81110A', 'AgilentE4400B', 'AgilentMXG', 'Keysight81160A'],
@@ -50,14 +42,6 @@ driver_info = OrderedDict([
             'AgilentE4400B': ('Hewlett-Packard', ['ESG-1000B']),
             'AgilentMXG': ('Agilent Technologies', ['N5181A']),
             'Keysight81160A': ('Agilent Technologies', ['81160A']),
-        },
-    }),
-    ('funcgenerators.keysight33250a', {
-        'params': ['visa_address'],
-        'classes': ['Keysight33250A'],
-        'imports': ['instrumental', 'pyvisa'],
-        'visa_info': {
-            'Keysight33250A': ('Agilent Technologies', ['33250A']),
         },
     }),
     ('funcgenerators.keysight33500b', {

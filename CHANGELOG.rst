@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+(0.10.0) - 2025-05-12
+------------------
+
+Added
+"""""
+- New tool:
+  - Class generator tool for Agilent SDL files
+- New driver:
+  - Agilent (Keysight) 33500B Series signal generator driver
+
+Changed
+""""""
+- Updated documentation
+
+
 
 (0.9.5) - 2025-05-03
 ------------------

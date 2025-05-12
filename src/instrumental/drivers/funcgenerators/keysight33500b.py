@@ -113,12 +113,14 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
 
             # --- 2. Transformation Phase (Enum to .value for mixed Unions) ---
             for param_name, arg_value in bound_args.arguments.items():
+                print(f"param_name: {param_name}, arg_value: {arg_value}")
                 if param_name == 'self':
                     continue
 
                 if isinstance(arg_value, Enum):
-                    rule = param_rules.get(param_name)
+                    print("Is Enum")
                     bound_args.arguments[param_name] = arg_value.value
+                    # rule = param_rules.get(param_name)
                     # if rule:
                     #     type_options = rule.get('type_options', [])
                     #     enum_type_name = type(arg_value).__name__
@@ -4231,6 +4233,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             source_num (int): The channel number identifier. (Range: 1-2)
             function (str): The output function.
         """
+        print(f"Setting function to {function}")
         cmd = f":SOURce{source_num}:FUNCtion {function}"
         self._rsrc.write(cmd)
 

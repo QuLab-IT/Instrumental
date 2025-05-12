@@ -7,6 +7,7 @@
 .dir-locals.el
 .venv/
 .vscode/
+.DS_Store
 
 _*lib.py
 !_*midlib.py

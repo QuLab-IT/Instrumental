@@ -118,25 +118,25 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                     continue
 
                 if isinstance(arg_value, Enum):
-                    print("Is Enum")
-                    bound_args.arguments[param_name] = arg_value.name
-                    # rule = param_rules.get(param_name)
-                    # if rule:
-                    #     type_options = rule.get('type_options', [])
-                    #     enum_type_name = type(arg_value).__name__
+                    # print("Is Enum")
+                    # bound_args.arguments[param_name] = arg_value.name
+                    rule = param_rules.get(param_name)
+                    if rule:
+                        type_options = rule.get('type_options', [])
+                        enum_type_name = type(arg_value).__name__
                         
-                    #     is_enum_in_options = enum_type_name in type_options
-                    #     is_mixed_union = len(type_options) > 1 
+                        is_enum_in_options = enum_type_name in type_options
+                        is_mixed_union = len(type_options) > 1 
 
-                    #     if is_enum_in_options and is_mixed_union and hasattr(arg_value, 'value'):
-                    #         non_enum_type_in_options = False
-                    #         for opt_str in type_options:
-                    #             if _BASIC_TYPE_MAP.get(opt_str):
-                    #                 non_enum_type_in_options = True
-                    #                 break
+                        if is_enum_in_options and is_mixed_union and hasattr(arg_value, 'value'):
+                            non_enum_type_in_options = False
+                            for opt_str in type_options:
+                                if _BASIC_TYPE_MAP.get(opt_str):
+                                    non_enum_type_in_options = True
+                                    break
                             
-                    #         if non_enum_type_in_options:
-                    #             bound_args.arguments[param_name] = arg_value.value
+                            if non_enum_type_in_options:
+                                bound_args.arguments[param_name] = arg_value.name
             
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper

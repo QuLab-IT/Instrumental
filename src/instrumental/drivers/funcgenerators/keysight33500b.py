@@ -119,7 +119,7 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
 
                 if isinstance(arg_value, Enum):
                     print("Is Enum")
-                    bound_args.arguments[param_name] = arg_value.value
+                    bound_args.arguments[param_name] = arg_value.name
                     # rule = param_rules.get(param_name)
                     # if rule:
                     #     type_options = rule.get('type_options', [])

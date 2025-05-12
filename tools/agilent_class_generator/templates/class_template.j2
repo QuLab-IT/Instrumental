@@ -1,0 +1,300 @@
+{# templates/class_template.j2 #}
+import functools
+import inspect
+import numpy as np
+
+from enum import Enum
+from instrumental.drivers import VisaMixin
+from instrumental.drivers.funcgenerators import FunctionGenerator # Assuming this is the correct base class
+from numpy.typing import NDArray # Included if any type hints might resolve to NDArray
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List,
+    overload,
+    Union
+) # Added for type hints
+
+
+_BASIC_TYPE_MAP = {
+    'int': int,
+    'float': float,
+    'str': str,
+    'bool': bool,
+    'Boolean': bool, # Handle a common alias
+}
+
+def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
+    if rules_list is None:
+        rules_list = []
+    
+    param_rules: Dict[str, Dict[str, Any]] = {rule['name']: rule for rule in rules_list}
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @functools.wraps(func)
+        def wrapper(self: Any, *args: Any, **kwargs: Any) -> Any:
+            sig = inspect.signature(func)
+            try:
+                bound_args = sig.bind(self, *args, **kwargs)
+            except TypeError as e:
+                raise TypeError(
+                    f"Error binding arguments for {func.__name__}{sig}: {e}. "
+                    f"Provided args: {args}, kwargs: {kwargs}"
+                ) from e
+            
+            bound_args.apply_defaults()
+            
+            # --- 1. Validation Phase ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
+
+                rule = param_rules.get(param_name)
+                if not rule:
+                    continue
+
+                type_options = rule.get('type_options', [])
+                if not type_options or 'Any' in type_options: # Allow 'Any' to bypass type checks
+                    pass
+                else:
+                    type_match_found = False
+                    for type_str_opt in type_options:
+                        expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
+                        if expected_py_type:
+                            # Handle basic Python types (int, float, str, bool)
+                            # Allow int to be passed for a float parameter
+                            if (expected_py_type is float and isinstance(arg_value, int)) or \
+                               isinstance(arg_value, expected_py_type):
+                                type_match_found = True
+                                break
+                        else:
+                            # Assume type_str_opt is an Enum class name string
+                            enum_class = globals().get(type_str_opt)
+                            if enum_class and isinstance(enum_class, type) and issubclass(enum_class, Enum):
+                                if isinstance(arg_value, enum_class):
+                                    type_match_found = True
+                                    break
+                                # else:
+                                    # Coercion logic for enums from raw values was here, removed for stricter typing based on user request focus.
+                                    # If needed, it could be: 
+                                    # try: enum_class(arg_value); type_match_found = True; break
+                                    # except (ValueError, TypeError): pass
+                            # else:
+                                # print(f"Warning: Unrecognized type '{type_str_opt}' in validation rule for '{param_name}' of {func.__name__}")
+
+                    if not type_match_found:
+                        expected_types_str = ", ".join(type_options)
+                        raise TypeError(
+                            f"Parameter '{param_name}' for {func.__name__} expected one of types "
+                            f"[{expected_types_str}], but got {type(arg_value).__name__} with value {arg_value!r}."
+                        )
+
+                # --- Min/Max Value Validation ---
+                current_value_for_range_check = arg_value
+
+                if not isinstance(current_value_for_range_check, Enum):
+                    min_val = rule.get('min_val')
+                    if min_val is not None:
+                        try:
+                            if float(current_value_for_range_check) < float(min_val):
+                                raise ValueError(
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is less than minimum value {min_val}."
+                                )
+                        except (TypeError, ValueError):
+                            pass 
+
+                    max_val = rule.get('max_val')
+                    if max_val is not None:
+                        try:
+                            if float(current_value_for_range_check) > float(max_val):
+                                raise ValueError(
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is greater than maximum value {max_val}."
+                                )
+                        except (TypeError, ValueError):
+                            pass
+
+            # --- 2. Transformation Phase (Enum to .value for mixed Unions) ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
+
+                if isinstance(arg_value, Enum):
+                    bound_args.arguments[param_name] = arg_value.name
+            
+            return func(*bound_args.args, **bound_args.kwargs)
+        return wrapper
+    return decorator
+
+
+# --- Global Enums ---
+{% for enum_data in global_enums %}
+class {{ enum_data.name }}(Enum):
+    """
+    Enum for {{ enum_data.original_name }}
+    """
+
+{% for member in enum_data.members %}
+    {{ member.name }} = {{ member.value }}
+    {% if member.description %}
+    # {{ member.description }}
+    {% endif %}
+{% endfor %}
+
+
+{% endfor %}
+# --- Command Syntax Enums ---
+{% for enum_data in command_syntax_enums %}
+class {{ enum_data.name }}(Enum):
+    """
+    Enum for command syntaxes of {{ enum_data.command_path_str }}
+    """
+{% for member in enum_data.members %}
+    {{ member.name }} = "{{ member.value_str }}"
+{% endfor %}
+
+
+{% endfor %}
+
+# --- Validator Decorator Definition ---
+
+
+# --- Main Instrument Class ---
+class {{ main_class_name }}(FunctionGenerator, VisaMixin):
+    """Main class for controlling the Keysight {{ sdl_filename_base }} function generators.
+    
+    This class is auto-generated from an SDL file.
+    """
+    _INST_PARAMS_ = ['visa_address']
+    _INST_VISA_INFO_ = (
+        'Agilent Technologies', [
+            {% for model in supported_models %}
+            '{{ model }}',
+            {% endfor %}
+        ]
+    )
+
+    def _initialize(self):
+        super()._initialize() # Call parent _initialize if it exists
+        self._rsrc.timeout = 2000  # ms
+        self._rsrc.write_termination = '\n'
+        self._rsrc.read_termination = '\n'
+
+    # --- Binary Format Handling Methods ---
+    {{ binary_format_methods_code | indent(0) }}
+
+{# --- Macro for generating a single command method --- #}
+{% macro render_command_method(command_info) %}
+{% for overload_def in command_info.overloads %}
+    @overload
+    def {{ command_info.method_name }}(self, {{ overload_def.signature_parts | join(', ') }}) -> None:
+        ...
+
+{% endfor %}
+{% if command_info.parameter_validation_rules_repr and command_info.parameter_validation_rules_repr != '[]' %}
+    @validate_parameters(
+        rules_list={{ command_info.parameter_validation_rules_repr }}
+    )
+{% endif %}
+    def {{ command_info.method_name }}(self{% if command_info.parameters_signature_parts %}, {{ command_info.parameters_signature_parts | join(', ') }}{% endif %}){{ command_info.return_type_annotation }}:
+    {{ command_info.docstring | indent(4, true) }}
+{% if command_info.is_single_syntax %}
+    {# Logic for single syntax commands (or query commands) #}
+    {% set fstring_content = command_info.base_scpi_str_template %}
+    {% set current_syntax_details = command_info.syntaxes_info[0] %}
+    {% if not command_info.is_query and current_syntax_details.params %}
+        {% set param_fstring_parts = [] %}
+        {% for p_detail in current_syntax_details.params %}
+            {# Parameters are used directly; decorator handles Enum.value transformation #}
+            {% do param_fstring_parts.append("{" ~ p_detail.name ~ "}") %}
+        {% endfor %}
+        {% set fstring_content = fstring_content ~ " " ~ (param_fstring_parts | join(", ")) %}
+    {% endif %}
+    {% if command_info.is_query %}
+        {% set fstring_content = fstring_content ~ "?" %}
+    {% endif %}
+        cmd = f"{{ fstring_content }}"
+    {% if command_info.is_query %}
+        response = self._rsrc.query(cmd)
+            {% if command_info.response_converter and command_info.response_converter != "str" %}
+        return {{ command_info.response_converter }}(response)
+            {% else %}
+        return response
+            {% endif %}
+    {% else %}
+        {% if current_syntax_details.is_binary %}
+    # Assuming 'data' is the conventional name for the binary data parameter
+    # and the syntax name is in current_syntax_details.name
+        self._write_binary_data(cmd, data, "{{ current_syntax_details.name }}")
+        {% else %}
+        self._rsrc.write(cmd)
+        {% endif %}
+    {% endif %}
+{% else %}
+    {# Logic for multi-syntax write commands #}
+        match syntax:
+    {% for syn_detail in command_info.syntaxes_info %}
+            case {{ command_info.syntax_enum_name }}.{{ syn_detail.py_name }}:
+            {% set fstring_content_multi = command_info.base_scpi_str_template %}
+            {% set current_param_fstring_parts = [] %}
+            {% for p_common_name in command_info.common_param_names_for_multisyntax %}
+                {# Parameters are used directly #}
+                {% do current_param_fstring_parts.append("{" ~ p_common_name ~ "}") %}
+            {% endfor %}
+            {# Add the 'data' parameter which holds syntax-specific value(s) #}
+            {# 'data' is used directly; decorator handles Enum.value if it was an Enum in a Union #}
+            {% do current_param_fstring_parts.append("{data}") %}
+            {% if current_param_fstring_parts %}
+                {% set fstring_content_multi = fstring_content_multi ~ " " ~ (current_param_fstring_parts | join(", ")) %}
+            {% endif %}
+                cmd = f"{{ fstring_content_multi }}"
+
+            {% if syn_detail.is_binary %}
+                self._write_binary_data(cmd, data, "{{ syn_detail.name }}")
+            {% else %}
+                self._rsrc.write(cmd)
+            {% endif %}
+    {% endfor %}
+            case _:
+                raise ValueError(f"Unsupported syntax '{syntax}' for command {{command_info.method_name}}.")
+{% endif %}
+{% endmacro %}
+
+{# --- Recursive macro for generating methods for a node and its children --- #}
+{% macro render_node_hierarchy_methods(node_item) %}
+{% for cmd_to_render in node_item.commands %}
+{{ render_command_method(cmd_to_render) }}
+{% endfor %}
+{% for child_node in node_item.child_subsystems %}
+{{ render_node_hierarchy_methods(child_node) }}
+{% endfor %}
+{% endmacro %}
+
+    # --- Direct Commands (defined at the root of the SDL) ---
+{% for direct_cmd_info in direct_commands %}
+{{ render_command_method(direct_cmd_info) }}
+{% endfor %}
+    # --- Subsystem Commands ---
+{% for subsystem_data in subsystems %}
+{{ render_node_hierarchy_methods(subsystem_data) }}
+{% endfor %}
+
+# For basic testing or example usage:
+if __name__ == '__main__':
+    # This section is for demonstration and won't run in a typical import scenario.
+    # To use the driver:
+    # 1. Ensure you have a VISA backend installed (e.g., NI-VISA, pyvisa-py).
+    # 2. Connect your instrument.
+    # 3. Instantiate the class:
+    #    instrument = {{ main_class_name }}(visa_address='YOUR_INSTRUMENT_VISA_ADDRESS')
+    #    # Example: instrument = {{ main_class_name }}(visa_address='GPIB0::10::INSTR')
+    #
+    # 4. Call methods:
+    #    # idn = instrument.get_idn() # If *IDN? is defined and generates get_idn()
+    #    # print(idn)
+    #    # instrument.set_output1_function(Output1Function.SIN) # Example assuming such methods
+    
+    print(f"Class '{{ main_class_name }}' is defined in this file.")
+    print(f"To use it, import it into your script and instantiate with a VISA address.")

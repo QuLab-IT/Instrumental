@@ -4233,7 +4233,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             source_num (int): The channel number identifier. (Range: 1-2)
             function (str): The output function.
         """
-        print(f"Setting function to {function}")
+        print(f":SOURce{source_num}:FUNCtion {function}")
         cmd = f":SOURce{source_num}:FUNCtion {function}"
         self._rsrc.write(cmd)
 

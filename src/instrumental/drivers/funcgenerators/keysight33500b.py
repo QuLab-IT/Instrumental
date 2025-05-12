@@ -113,30 +113,11 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
 
             # --- 2. Transformation Phase (Enum to .value for mixed Unions) ---
             for param_name, arg_value in bound_args.arguments.items():
-                print(f"param_name: {param_name}, arg_value: {arg_value}")
                 if param_name == 'self':
                     continue
 
                 if isinstance(arg_value, Enum):
-                    # print("Is Enum")
-                    # bound_args.arguments[param_name] = arg_value.name
-                    rule = param_rules.get(param_name)
-                    if rule:
-                        type_options = rule.get('type_options', [])
-                        enum_type_name = type(arg_value).__name__
-                        
-                        is_enum_in_options = enum_type_name in type_options
-                        is_mixed_union = len(type_options) > 1 
-
-                        if is_enum_in_options and is_mixed_union and hasattr(arg_value, 'value'):
-                            non_enum_type_in_options = False
-                            for opt_str in type_options:
-                                if _BASIC_TYPE_MAP.get(opt_str):
-                                    non_enum_type_in_options = True
-                                    break
-                            
-                            if non_enum_type_in_options:
-                                bound_args.arguments[param_name] = arg_value.name
+                    bound_args.arguments[param_name] = arg_value.name
             
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
@@ -4233,7 +4214,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             source_num (int): The channel number identifier. (Range: 1-2)
             function (str): The output function.
         """
-        print(f":SOURce{source_num}:FUNCtion {function}")
         cmd = f":SOURce{source_num}:FUNCtion {function}"
         self._rsrc.write(cmd)
 

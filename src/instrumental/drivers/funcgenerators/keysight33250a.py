@@ -1,121 +1,141 @@
-from enum import Enum
-from typing import Any, Union, overload
-import pyvisa
+import functools
+import inspect
 import numpy as np
 
-# Generated SCPI enums from SDL file
-# This file is auto-generated. Do not edit manually.
+from enum import Enum
+from instrumental.drivers import VisaMixin
+from instrumental.drivers.funcgenerators import FunctionGenerator # Assuming this is the correct base class
+from numpy.typing import NDArray # Included if any type hints might resolve to NDArray
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List,
+    overload,
+    Union
+) # Added for type hints
 
-class Minmaxdef(Enum):
+
+_BASIC_TYPE_MAP = {
+    'int': int,
+    'float': float,
+    'str': str,
+    'bool': bool,
+    'Boolean': bool, # Handle a common alias
+}
+
+def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
+    if rules_list is None:
+        rules_list = []
+    
+    param_rules: Dict[str, Dict[str, Any]] = {rule['name']: rule for rule in rules_list}
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @functools.wraps(func)
+        def wrapper(self: Any, *args: Any, **kwargs: Any) -> Any:
+            sig = inspect.signature(func)
+            try:
+                bound_args = sig.bind(self, *args, **kwargs)
+            except TypeError as e:
+                raise TypeError(
+                    f"Error binding arguments for {func.__name__}{sig}: {e}. "
+                    f"Provided args: {args}, kwargs: {kwargs}"
+                ) from e
+            
+            bound_args.apply_defaults()
+            
+            # --- 1. Validation Phase ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
+
+                rule = param_rules.get(param_name)
+                if not rule:
+                    continue
+
+                type_options = rule.get('type_options', [])
+                if not type_options or 'Any' in type_options: # Allow 'Any' to bypass type checks
+                    pass
+                else:
+                    type_match_found = False
+                    for type_str_opt in type_options:
+                        expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
+                        if expected_py_type:
+                            # Handle basic Python types (int, float, str, bool)
+                            # Allow int to be passed for a float parameter
+                            if (expected_py_type is float and isinstance(arg_value, int)) or \
+                               isinstance(arg_value, expected_py_type):
+                                type_match_found = True
+                                break
+                        else:
+                            # Assume type_str_opt is an Enum class name string
+                            enum_class = globals().get(type_str_opt)
+                            if enum_class and isinstance(enum_class, type) and issubclass(enum_class, Enum):
+                                if isinstance(arg_value, enum_class):
+                                    type_match_found = True
+                                    break
+                                # else:
+                                    # Coercion logic for enums from raw values was here, removed for stricter typing based on user request focus.
+                                    # If needed, it could be: 
+                                    # try: enum_class(arg_value); type_match_found = True; break
+                                    # except (ValueError, TypeError): pass
+                            # else:
+                                # print(f"Warning: Unrecognized type '{type_str_opt}' in validation rule for '{param_name}' of {func.__name__}")
+
+                    if not type_match_found:
+                        expected_types_str = ", ".join(type_options)
+                        raise TypeError(
+                            f"Parameter '{param_name}' for {func.__name__} expected one of types "
+                            f"[{expected_types_str}], but got {type(arg_value).__name__} with value {arg_value!r}."
+                        )
+
+                # --- Min/Max Value Validation ---
+                current_value_for_range_check = arg_value
+
+                if not isinstance(current_value_for_range_check, Enum):
+                    min_val = rule.get('min_val')
+                    if min_val is not None:
+                        try:
+                            if float(current_value_for_range_check) < float(min_val):
+                                raise ValueError(
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is less than minimum value {min_val}."
+                                )
+                        except (TypeError, ValueError):
+                            pass 
+
+                    max_val = rule.get('max_val')
+                    if max_val is not None:
+                        try:
+                            if float(current_value_for_range_check) > float(max_val):
+                                raise ValueError(
+                                    f"Parameter '{param_name}' for {func.__name__} is {current_value_for_range_check}, "
+                                    f"which is greater than maximum value {max_val}."
+                                )
+                        except (TypeError, ValueError):
+                            pass
+
+            # --- 2. Transformation Phase (Enum to .value for mixed Unions) ---
+            for param_name, arg_value in bound_args.arguments.items():
+                if param_name == 'self':
+                    continue
+
+                if isinstance(arg_value, Enum):
+                    bound_args.arguments[param_name] = arg_value.name
+            
+            return func(*bound_args.args, **bound_args.kwargs)
+        return wrapper
+    return decorator
+
+
+# --- Global Enums ---
+class Boolean(Enum):
     """
-    Enum for MinMaxDef
+    Enum for Boolean
     """
 
-    MINIMUM = 1
-
-    MAXIMUM = 2
-
-    DEFAULT = 5
-
-
-
-class SourVoltLevImmUnitVoltage(Enum):
-    """
-    Enum for sour_volt_lev_imm_unit_voltage
-    """
-
-    VPP = 0
-
-    VRMS = 1
-
-    DBM = 2
-
-
-
-class SourAmIntFuncShape(Enum):
-    """
-    Enum for sour_am_int_func_shape
-    """
-
-    SINUSOID = 0
-
-    SQUARE = 1
-
-    TRIANGLE = 2
-
-    RAMP = 3
-
-    NRAMP = 4
-
-    NOISE = 5
-
-    USER = 6
-
-
-
-class SourFmIntFuncShape(Enum):
-    """
-    Enum for sour_fm_int_func_shape
-    """
-
-    SINUSOID = 0
-
-    SQUARE = 1
-
-    TRIANGLE = 2
-
-    RAMP = 3
-
-    NRAMP = 4
-
-    NOISE = 5
-
-    USER = 6
-
-
-
-class SourBursMode(Enum):
-    """
-    Enum for sour_burs_mode
-    """
-
-    TRIGGERED = 0
-
-    GATED = 1
-
-
-
-class TracDataDac(Enum):
-    """
-    Enum for trac_data_dac
-    """
-
-    VOLATILE = 0
-
-
-
-class SourFskSource(Enum):
-    """
-    Enum for sour_fsk_source
-    """
-
-    INTERNAL = 0
-
-    EXTERNAL = 1
-
-
-
-class SourVoltRangAuto(Enum):
-    """
-    Enum for sour_volt_rang_auto
-    """
-
-    OFF = 0
-
-    ON = 1
-
-    ONCE = 2
-
+    ON = '1'
+    OFF = '0'
 
 
 class Enumminmaxdefinf(Enum):
@@ -123,25 +143,10 @@ class Enumminmaxdefinf(Enum):
     Enum for enumMinMaxDefInf
     """
 
-    MINIMUM = 1
-
-    MAXIMUM = 2
-
-    DEFAULT = 5
-
-    INFINITY = 7
-
-
-
-class SourFmSource(Enum):
-    """
-    Enum for sour_fm_source
-    """
-
-    INTERNAL = 0
-
-    EXTERNAL = 1
-
+    MINIMUM = '1'
+    MAXIMUM = '2'
+    DEFAULT = '5'
+    INFINITY = '7'
 
 
 class FormBorder(Enum):
@@ -149,62 +154,8 @@ class FormBorder(Enum):
     Enum for form_border
     """
 
-    NORMAL = 0
-
-    SWAPPED = 1
-
-
-
-class UnitAngle(Enum):
-    """
-    Enum for unit_angle
-    """
-
-    DEGREE = 0
-
-    RADIAN = 1
-
-
-
-class TracData(Enum):
-    """
-    Enum for trac_data
-    """
-
-    VOLATILE = 0
-
-
-
-class Boolean(Enum):
-    """
-    Enum for Boolean
-    """
-
-    ON = 1
-
-    OFF = 0
-
-
-
-class SourFuncShape(Enum):
-    """
-    Enum for sour_func_shape
-    """
-
-    SINUSOID = 0
-
-    SQUARE = 1
-
-    RAMP = 2
-
-    PULSE = 3
-
-    NOISE = 4
-
-    USER = 5
-
-    DC = 6
-
+    NORMAL = '0'
+    SWAPPED = '1'
 
 
 class Minmax(Enum):
@@ -212,56 +163,18 @@ class Minmax(Enum):
     Enum for MinMax
     """
 
-    MINIMUM = 1
-
-    MAXIMUM = 2
-
+    MINIMUM = '1'
+    MAXIMUM = '2'
 
 
-class OutpTrigSlope(Enum):
+class Minmaxdef(Enum):
     """
-    Enum for outp_trig_slope
+    Enum for MinMaxDef
     """
 
-    POSITIVE = 1
-
-    NEGATIVE = 2
-
-
-
-class TrigSeqSlope(Enum):
-    """
-    Enum for trig_seq_slope
-    """
-
-    POSITIVE = 0
-
-    NEGATIVE = 1
-
-
-
-class TrigSeqSource(Enum):
-    """
-    Enum for trig_seq_source
-    """
-
-    IMMEDIATE = 0
-
-    EXTERNAL = 1
-
-    BUS = 2
-
-
-
-class SourSweSpacing(Enum):
-    """
-    Enum for sour_swe_spacing
-    """
-
-    LINEAR = 0
-
-    LOGARITHMIC = 1
-
+    MINIMUM = '1'
+    MAXIMUM = '2'
+    DEFAULT = '5'
 
 
 class OutpPolarity(Enum):
@@ -269,21 +182,31 @@ class OutpPolarity(Enum):
     Enum for outp_polarity
     """
 
-    NORMAL = 0
-
-    INVERTED = 1
-
+    NORMAL = '0'
+    INVERTED = '1'
 
 
-class SourBursGatePolarity(Enum):
+class OutpTrigSlope(Enum):
     """
-    Enum for sour_burs_gate_polarity
+    Enum for outp_trig_slope
     """
 
-    NORMAL = 0
+    POSITIVE = '1'
+    NEGATIVE = '2'
 
-    INVERTED = 1
 
+class SourAmIntFuncShape(Enum):
+    """
+    Enum for sour_am_int_func_shape
+    """
+
+    SINUSOID = '0'
+    SQUARE = '1'
+    TRIANGLE = '2'
+    RAMP = '3'
+    NRAMP = '4'
+    NOISE = '5'
+    USER = '6'
 
 
 class SourAmSource(Enum):
@@ -291,58 +214,181 @@ class SourAmSource(Enum):
     Enum for sour_am_source
     """
 
-    INTERNAL = 0
-
-    EXTERNAL = 1
-
+    INTERNAL = '0'
+    EXTERNAL = '1'
 
 
+class SourBursGatePolarity(Enum):
+    """
+    Enum for sour_burs_gate_polarity
+    """
 
-# Generated SCPI command syntax enums
-# These enums represent different syntax variants for commands that support multiple formats
+    NORMAL = '0'
+    INVERTED = '1'
 
+
+class SourBursMode(Enum):
+    """
+    Enum for sour_burs_mode
+    """
+
+    TRIGGERED = '0'
+    GATED = '1'
+
+
+class SourFmIntFuncShape(Enum):
+    """
+    Enum for sour_fm_int_func_shape
+    """
+
+    SINUSOID = '0'
+    SQUARE = '1'
+    TRIANGLE = '2'
+    RAMP = '3'
+    NRAMP = '4'
+    NOISE = '5'
+    USER = '6'
+
+
+class SourFmSource(Enum):
+    """
+    Enum for sour_fm_source
+    """
+
+    INTERNAL = '0'
+    EXTERNAL = '1'
+
+
+class SourFskSource(Enum):
+    """
+    Enum for sour_fsk_source
+    """
+
+    INTERNAL = '0'
+    EXTERNAL = '1'
+
+
+class SourFuncShape(Enum):
+    """
+    Enum for sour_func_shape
+    """
+
+    SINUSOID = '0'
+    SQUARE = '1'
+    RAMP = '2'
+    PULSE = '3'
+    NOISE = '4'
+    USER = '5'
+    DC = '6'
+
+
+class SourSweSpacing(Enum):
+    """
+    Enum for sour_swe_spacing
+    """
+
+    LINEAR = '0'
+    LOGARITHMIC = '1'
+
+
+class SourVoltLevImmUnitVoltage(Enum):
+    """
+    Enum for sour_volt_lev_imm_unit_voltage
+    """
+
+    VPP = '0'
+    VRMS = '1'
+    DBM = '2'
+
+
+class SourVoltRangAuto(Enum):
+    """
+    Enum for sour_volt_rang_auto
+    """
+
+    OFF = '0'
+    ON = '1'
+    ONCE = '2'
+
+
+class TracData(Enum):
+    """
+    Enum for trac_data
+    """
+
+    VOLATILE = '0'
+
+
+class TracDataDac(Enum):
+    """
+    Enum for trac_data_dac
+    """
+
+    VOLATILE = '0'
+
+
+class TrigSeqSlope(Enum):
+    """
+    Enum for trig_seq_slope
+    """
+
+    POSITIVE = '0'
+    NEGATIVE = '1'
+
+
+class TrigSeqSource(Enum):
+    """
+    Enum for trig_seq_source
+    """
+
+    IMMEDIATE = '0'
+    EXTERNAL = '1'
+    BUS = '2'
+
+
+class UnitAngle(Enum):
+    """
+    Enum for unit_angle
+    """
+
+    DEGREE = '0'
+    RADIAN = '1'
+
+
+# --- Command Syntax Enums ---
 class DataDataDacSyntax(Enum):
     """
     Enum for command syntaxes of DATA:DATA:DAC
     """
-
     VALUELIST = "ValueList"
-    # Parameters:
-    #   - volatile (String)
-    #     Description: VOLATILE
-    #   - value (Integer)
-    #     Description: The values -2047 and +2047 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the output amplitude to 10 Vpp, "+2047" corresponds to +5V and "-2047" corresponds to -5V. 
-    #     Repeat: *
-
     BINARYBLOCK = "BinaryBlock"
-    # Parameters:
-    #   - volatile (String)
-    #     Description: VOLATILE
-    #   - value (1-D Array)
-    #     Description: The values -2047 and +2047 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the output amplitude to 10 Vpp, "+2047" corresponds to +5V and "-2047" corresponds to -5V. 
 
 
 
+# --- Validator Decorator Definition ---
 
-# Main Keysight33250A class
-# This class provides access to all SCPI commands and subsystems
 
-from instrumental.drivers import VisaMixin
-from instrumental.drivers.funcgenerators import FunctionGenerator
-import numpy as np
-from numpy.typing import NDArray
-
+# --- Main Instrument Class ---
 class Keysight33250A(FunctionGenerator, VisaMixin):
-    """Main class for controlling the Keysight 33250_program_reference/33250A function generators."""
+    """Main class for controlling the Keysight 33250A function generators.
+    
+    This class is auto-generated from an SDL file.
+    """
     _INST_PARAMS_ = ['visa_address']
-    _INST_VISA_INFO_ = ('Agilent Technologies', ['33250A'])
+    _INST_VISA_INFO_ = (
+        'Agilent Technologies', [
+            '33250A',
+        ]
+    )
 
     def _initialize(self):
-        self._rsrc.timeout = 2000  # 2 second timeout
+        super()._initialize() # Call parent _initialize if it exists
+        self._rsrc.timeout = 2000  # ms
         self._rsrc.write_termination = '\n'
         self._rsrc.read_termination = '\n'
 
-
+    # --- Binary Format Handling Methods ---
+    
     def _set_binary_format(self, format_name: str) -> None:
         """Set the binary data format for subsequent commands.
         
@@ -404,7 +450,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         self._rsrc.write_binary_values(cmd, binary_data)
 
 
-    def cls(self):
+
+
+    # --- Direct Commands (defined at the root of the SDL) ---
+    def cls(self) -> None:
         """
         Clear the event register in all register groups. This command also clears the error queue and cancels a *OPC operation. 
 
@@ -412,7 +461,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*CLS"
         self._rsrc.write(cmd)
-
 
     def get_ese(self) -> int:
         """
@@ -426,8 +474,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-
-    def set_ese(self, enableValue: int):
+    @validate_parameters(
+        rules_list=[{'name': 'enableValue', 'type_options': ['int']}]
+    )
+    def set_ese(self, enableValue: int) -> None:
         """
         Enable bits in the Standard Event Status Register to be reported in the Status Byte. The selected bits are summarized in the "Standard Event" bit (bit 5) of the Status Byte Register. 
 
@@ -436,7 +486,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*ESE {enableValue}"
         self._rsrc.write(cmd)
-
 
     def get_esr(self) -> int:
         """
@@ -450,7 +499,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-
     def get_idn(self) -> str:
         """
         Read the function generator's identification string which contains four fields separated by commas. The first field is the manufacturer's name, the second field is the model number, the third field is the serial number, and the fourth field is a revision code which contains four numbers separated by dashes. 
@@ -461,8 +509,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*IDN?"
         response = self._rsrc.query(cmd)
-        return str(response)
-
+        return response
 
     def get_lrn(self) -> str:
         """
@@ -474,8 +521,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*LRN?"
         response = self._rsrc.query(cmd)
-        return str(response)
-
+        return response
 
     def get_opc(self) -> bool:
         """
@@ -489,8 +535,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-
-    def opc(self):
+    def opc(self) -> None:
         """
         Set the "Operation Complete" bit (bit 0) in the Standard Event register after the previous commands have completed. When used with a bus-triggered sweep or burst, you may have the opportunity to execute commands after the *OPC command and before the "Operation Complete" bit is set in the register. 
 
@@ -498,7 +543,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*OPC"
         self._rsrc.write(cmd)
-
 
     def get_psc(self) -> bool:
         """
@@ -512,8 +556,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-
-    def set_psc(self, psc: int):
+    @validate_parameters(
+        rules_list=[{'name': 'psc', 'type_options': ['int']}]
+    )
+    def set_psc(self, psc: int) -> None:
         """
         Power-On Status Clear. Clear the Standard Event enable register and Status Byte condition register at power on (*PSC 1). When *PSC 0 is in effect, these two registers are not cleared at power on. 
 
@@ -523,8 +569,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f"*PSC {psc}"
         self._rsrc.write(cmd)
 
-
-    def set_rcl(self, location: int):
+    @validate_parameters(
+        rules_list=[{'name': 'location', 'type_options': ['int']}]
+    )
+    def set_rcl(self, location: int) -> None:
         """
         Recall the instrument state stored in the specified non-volatile storage location. You cannot recall the instrument state from a storage location that is empty. 
 
@@ -534,8 +582,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f"*RCL {location}"
         self._rsrc.write(cmd)
 
-
-    def rst(self):
+    def rst(self) -> None:
         """
         Reset the function generator to its factory default state.
 
@@ -544,8 +591,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f"*RST"
         self._rsrc.write(cmd)
 
-
-    def set_sav(self, location: int):
+    @validate_parameters(
+        rules_list=[{'name': 'location', 'type_options': ['int']}]
+    )
+    def set_sav(self, location: int) -> None:
         """
         Store (save) the current instrument state in the specified non-volatile storage location. Any state previously stored in the same location will be overwritten (and no error will be generated). 
 
@@ -554,7 +603,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*SAV {location}"
         self._rsrc.write(cmd)
-
 
     def get_sre(self) -> int:
         """
@@ -568,8 +616,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-
-    def set_sre(self, enableValue: int):
+    @validate_parameters(
+        rules_list=[{'name': 'enableValue', 'type_options': ['int']}]
+    )
+    def set_sre(self, enableValue: int) -> None:
         """
         Enable bits in the Status Byte to generate a Service Request. The selected bits are summarized in the "Master Summary" bit (bit 6) of the Status Byte Register. If any of the selected bits change from "0" to "1", a Service Request signal is generated. 
 
@@ -578,7 +628,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*SRE {enableValue}"
         self._rsrc.write(cmd)
-
 
     def get_stb(self) -> int:
         """
@@ -592,8 +641,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-
-    def trg(self):
+    def trg(self) -> None:
         """
         Trigger a sweep or burst from the remote interface only if the bus (software) trigger source is currently selected (TRIG:SOUR BUS command). 
 
@@ -601,7 +649,6 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f"*TRG"
         self._rsrc.write(cmd)
-
 
     def get_tst(self) -> int:
         """
@@ -615,8 +662,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-
-    def wai(self):
+    def wai(self) -> None:
         """
         Wait for all pending operations to complete before executing any additional commands over the interface. 
 
@@ -625,11 +671,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f"*WAI"
         self._rsrc.write(cmd)
 
-
-
-   # Generated SCPI subsystem methods
-   # These methods provide a Pythonic interface to SCPI commands
-
+    # --- Subsystem Commands ---
     def get_apply(self) -> str:
         """
         Query the function generator's current configuration and return a quoted string.
@@ -640,9 +682,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":APPLy?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_apply_dc(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_dc(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output a dc voltage with the level specified by the offset parameter. The dc voltage is output as soon as the command is executed. 
 
@@ -654,7 +699,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:DC {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_noise(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_noise(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output Gaussian noise with the specified amplitude and dc offset. The waveform is output as soon as the command is executed. 
 
@@ -666,7 +715,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:NOISe {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_pulse(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_pulse(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output a pulse wave with the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. 
 
@@ -678,7 +731,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:PULSe {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_ramp(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_ramp(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output a ramp wave with the specified frequency, amplitude, and dc offset. This command overrides the current symmetry setting and automatically selects 100%. The waveform is output as soon as the command is executed. 
 
@@ -690,7 +747,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:RAMP {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_sinusoid(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_sinusoid(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output a sine wave with the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. 
 
@@ -702,7 +763,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:SINusoid {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_square(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_square(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output a square wave with the specified frequency, amplitude, and dc offset. This command overrides the current duty cycle setting and automatically selects 50%. The waveform is output as soon as the command is executed. 
 
@@ -714,7 +779,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":APPLy:SQUare {frequency}, {amplitude}, {offset}"
         self._rsrc.write(cmd)
 
-    def set_apply_user(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]):
+
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}, {'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}, {'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_apply_user(self, frequency: Union[float, Minmaxdef], amplitude: Union[float, Minmaxdef], offset: Union[float, Minmaxdef]) -> None:
         """
         Output the arbitrary waveform currently selected by the FUNC:USER command. The waveform is output using the specified frequency, amplitude, and dc offset. The waveform is output as soon as the command is executed. 
 
@@ -740,6 +809,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
+
     def get_calibrate_count(self) -> int:
         """
         Query the instrument to determine the number of times it has been calibrated. 
@@ -752,7 +822,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def set_calibrate_secure_code(self, newCode: str):
+
+    @validate_parameters(
+        rules_list=[{'name': 'newCode', 'type_options': ['str']}]
+    )
+    def set_calibrate_secure_code(self, newCode: str) -> None:
         """
         Enter a new security code. To change the security code, you must first unsecure the function generator using the old security code, and then enter a new code. The security code is stored in non-volatile memory. 
 
@@ -761,6 +835,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibrate:SECure:CODE {newCode}"
         self._rsrc.write(cmd)
+
 
     def get_calibrate_secure_state(self) -> Boolean:
         """
@@ -774,7 +849,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_calibrate_secure_state(self, state: Boolean, code: str):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'code', 'type_options': ['str']}]
+    )
+    def set_calibrate_secure_state(self, state: Boolean, code: str) -> None:
         """
         Unsecure or secure the instrument for calibration. 
 
@@ -784,6 +862,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibrate:SECure:STATe {state}, {code}"
         self._rsrc.write(cmd)
+
+
 
     def get_calibrate_setup(self) -> int:
         """
@@ -797,7 +877,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def set_calibrate_setup(self, setup: int):
+    @validate_parameters(
+        rules_list=[{'name': 'setup', 'type_options': ['int']}]
+    )
+    def set_calibrate_setup(self, setup: int) -> None:
         """
         Configure the function generator's internal state for each of the calibration steps to be performed. 
 
@@ -806,6 +889,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibrate:SETup {setup}"
         self._rsrc.write(cmd)
+
 
     def get_calibrate_string(self) -> str:
         """
@@ -817,9 +901,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibrate:STRing?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_calibrate_string(self, quotedString: str):
+    @validate_parameters(
+        rules_list=[{'name': 'quotedString', 'type_options': ['str']}]
+    )
+    def set_calibrate_string(self, quotedString: str) -> None:
         """
         Store a message in non-volatile calibration memory. Storing a message will overwrite any message previously stored in memory. 
 
@@ -828,6 +915,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibrate:STRing {quotedString}"
         self._rsrc.write(cmd)
+
 
     def get_calibrate_value(self) -> float:
         """
@@ -841,7 +929,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_calibrate_value(self, value: float):
+    @validate_parameters(
+        rules_list=[{'name': 'value', 'type_options': ['float']}]
+    )
+    def set_calibrate_value(self, value: float) -> None:
         """
         Specify the value of the known calibration signal as outlined in the calibration procedures in the Agilent 33250A Service Guide. 
 
@@ -865,7 +956,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_display_window_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_display_window_state(self, state: Boolean) -> None:
         """
         Disable or enable the function generator front-panel display. When it is disabled, the front-panel display is blanked (however, the bulb used to backlight the display remains enabled). 
 
@@ -875,7 +969,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         cmd = f":DISPlay:WINDow:STATe {state}"
         self._rsrc.write(cmd)
 
-    def display_window_text_clear(self):
+
+    def display_window_text_clear(self) -> None:
         """
         Clear the text message currently shown on the function generator's front-panel display. 
 
@@ -883,6 +978,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":DISPlay:WINDow:TEXT:CLEar"
         self._rsrc.write(cmd)
+
 
     def get_display_window_text_data(self) -> str:
         """
@@ -894,9 +990,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":DISPlay:WINDow:TEXT:DATA?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_display_window_text_data(self, quotedString: str):
+    @validate_parameters(
+        rules_list=[{'name': 'quotedString', 'type_options': ['str']}]
+    )
+    def set_display_window_text_data(self, quotedString: str) -> None:
         """
         Display a text message on the function generator's front-panel display. Sending a text message to the display overrides the display state as set by the DISP command. 
 
@@ -905,6 +1004,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":DISPlay:WINDow:TEXT:DATA {quotedString}"
         self._rsrc.write(cmd)
+
+
 
 
 
@@ -918,9 +1019,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":FORMat:BORDer?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_format_border(self, bOrder: FormBorder):
+    @validate_parameters(
+        rules_list=[{'name': 'bOrder', 'type_options': ['FormBorder']}]
+    )
+    def set_format_border(self, bOrder: FormBorder) -> None:
         """
         Used for binary block transfers only. Select the byte order for binary transfers in the block mode using the DATA:DAC command. 
 
@@ -944,7 +1048,11 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def set_memory_state_delete(self, location: int):
+
+    @validate_parameters(
+        rules_list=[{'name': 'location', 'type_options': ['int']}]
+    )
+    def set_memory_state_delete(self, location: int) -> None:
         """
         Delete the contents of the specified storage location. If you have assigned a user-defined name to a location (MEM:STAT:NAME command), this command also removes the name that you assigned and restores the default name ("AUTO_RECALL", "STATE_1", "STATE_2", etc.). 
 
@@ -953,6 +1061,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:DELete {location}"
         self._rsrc.write(cmd)
+
 
     def get_memory_state_name(self) -> str:
         """
@@ -964,9 +1073,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:NAME?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_memory_state_name(self, location: int, name: str):
+    @validate_parameters(
+        rules_list=[{'name': 'location', 'type_options': ['int']}, {'name': 'name', 'type_options': ['str']}]
+    )
+    def set_memory_state_name(self, location: int, name: str) -> None:
         """
         Assign a custom name to the specified storage location.
 
@@ -976,6 +1088,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:NAME {location}, {name}"
         self._rsrc.write(cmd)
+
 
     def get_memory_state_recall_auto(self) -> Boolean:
         """
@@ -989,7 +1102,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_memory_state_recall_auto(self, auto: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'auto', 'type_options': ['Boolean']}]
+    )
+    def set_memory_state_recall_auto(self, auto: Boolean) -> None:
         """
         Disable or enable the automatic recall of the power-down state from storage location "0" when power is turned on. 
 
@@ -998,6 +1114,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:RECall:AUTO {auto}"
         self._rsrc.write(cmd)
+
+
 
     def get_memory_state_valid(self) -> Boolean:
         """
@@ -1013,6 +1131,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
 
 
 
+
     def get_output_load(self) -> float:
         """
         Select the desired output termination (i.e., the impedance of the load attached to the output of the Agilent 33250A). The specified value is used for amplitude, offset, and high/low level settings. 
@@ -1025,7 +1144,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_output_load(self, ohms: Union[float, Enumminmaxdefinf]):
+    @validate_parameters(
+        rules_list=[{'name': 'ohms', 'type_options': ['float', 'Enumminmaxdefinf']}]
+    )
+    def set_output_load(self, ohms: Union[float, Enumminmaxdefinf]) -> None:
         """
         Select the desired output termination (i.e., the impedance of the load attached to the output of the Agilent 33250A). The specified value is used for amplitude, offset, and high/low level settings. 
 
@@ -1034,6 +1156,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:LOAD {ohms}"
         self._rsrc.write(cmd)
+
 
     def get_output_polarity(self) -> OutpPolarity:
         """
@@ -1045,9 +1168,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:POLarity?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_output_polarity(self, polarity: OutpPolarity):
+    @validate_parameters(
+        rules_list=[{'name': 'polarity', 'type_options': ['OutpPolarity']}]
+    )
+    def set_output_polarity(self, polarity: OutpPolarity) -> None:
         """
         Invert the waveform relative to the offset voltage. In the normal mode (default), the waveform goes positive during the first part of the cycle. In the inverted mode, the waveform goes negative during the first part of the cycle. 
 
@@ -1056,6 +1182,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:POLarity {polarity}"
         self._rsrc.write(cmd)
+
 
     def get_output_state(self) -> Boolean:
         """
@@ -1069,7 +1196,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_output_state(self, state: Boolean) -> None:
         """
         Disable or enable the front-panel Output connector. The default is "OFF". 
 
@@ -1078,6 +1208,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:STATe {state}"
         self._rsrc.write(cmd)
+
 
     def get_output_sync_state(self) -> Boolean:
         """
@@ -1091,7 +1222,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output_sync_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_output_sync_state(self, state: Boolean) -> None:
         """
         Disable or enable the front-panel Sync connector. At lower amplitudes, you can reduce output distortion by disabling the Sync signal. 
 
@@ -1100,6 +1234,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:SYNC:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_output_trigger_slope(self) -> OutpTrigSlope:
         """
@@ -1111,9 +1247,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:TRIGger:SLOPe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_output_trigger_slope(self, slope: OutpTrigSlope):
+    @validate_parameters(
+        rules_list=[{'name': 'slope', 'type_options': ['OutpTrigSlope']}]
+    )
+    def set_output_trigger_slope(self, slope: OutpTrigSlope) -> None:
         """
         Select a rising or falling edge for the "trigger out" signal. When enabled using the OUTP:TRIG command (see below), a TTL-compatible square waveform with the specified edge is output from the rear-panel Trig Out connector at the beginning of the sweep or burst. 
 
@@ -1122,6 +1261,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:TRIGger:SLOPe {slope}"
         self._rsrc.write(cmd)
+
 
     def get_output_trigger_state(self) -> Boolean:
         """
@@ -1135,7 +1275,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_output_trigger_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_output_trigger_state(self, state: Boolean) -> None:
         """
         Disable or enable the "trigger out" signal (used for sweep and burst only). When enabled, a TTL-compatible square waveform with the specified edge (OUTP:TRIG:SLOP command) is output from the rear-panel Trig Out connector at the beginning of the sweep or burst. 
 
@@ -1144,6 +1287,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut:TRIGger:STATe {state}"
         self._rsrc.write(cmd)
+
 
 
 
@@ -1159,7 +1303,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_am_depth(self, depthInPercent: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'depthInPercent', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_am_depth(self, depthInPercent: Union[float, Minmaxdef]) -> None:
         """
         Set the internal modulation depth (or "percent modulation") in percent. 
 
@@ -1168,6 +1315,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:DEPTh {depthInPercent}"
         self._rsrc.write(cmd)
+
 
     def get_source_am_internal_frequency(self) -> float:
         """
@@ -1181,7 +1329,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_am_internal_frequency(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_am_internal_frequency(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the frequency of the modulating waveform. Used only when the Internal modulation source is selected (AM:SOUR INT command). 
 
@@ -1190,6 +1341,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_am_internal_function_shape(self) -> SourAmIntFuncShape:
         """
@@ -1201,9 +1353,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:INTernal:FUNCtion:SHAPe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_am_internal_function_shape(self, shape: SourAmIntFuncShape):
+    @validate_parameters(
+        rules_list=[{'name': 'shape', 'type_options': ['SourAmIntFuncShape']}]
+    )
+    def set_source_am_internal_function_shape(self, shape: SourAmIntFuncShape) -> None:
         """
         Select the shape of the modulating waveform. Used only when the Internal modulation source is selected (AM:SOUR INT command). 
 
@@ -1212,6 +1367,9 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:INTernal:FUNCtion:SHAPe {shape}"
         self._rsrc.write(cmd)
+
+
+
 
     def get_source_am_source(self) -> SourAmSource:
         """
@@ -1223,9 +1381,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:SOURce?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_am_source(self, source: SourAmSource):
+    @validate_parameters(
+        rules_list=[{'name': 'source', 'type_options': ['SourAmSource']}]
+    )
+    def set_source_am_source(self, source: SourAmSource) -> None:
         """
         Select the source of the modulating signal. The function generator will accept an internal or external modulation source. 
 
@@ -1234,6 +1395,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:SOURce {source}"
         self._rsrc.write(cmd)
+
 
     def get_source_am_state(self) -> Boolean:
         """
@@ -1247,7 +1409,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_am_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_am_state(self, state: Boolean) -> None:
         """
         Disable or enable AM. To avoid multiple waveform changes, you can enable AM after you have set up the other modulation parameters. 
 
@@ -1256,6 +1421,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:AM:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_burst_gate_polarity(self) -> SourBursGatePolarity:
         """
@@ -1267,9 +1434,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:GATE:POLarity?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_burst_gate_polarity(self, polarity: SourBursGatePolarity):
+    @validate_parameters(
+        rules_list=[{'name': 'polarity', 'type_options': ['SourBursGatePolarity']}]
+    )
+    def set_source_burst_gate_polarity(self, polarity: SourBursGatePolarity) -> None:
         """
         Select whether the function generator uses true-high or true-low logic levels on the rear-panel Trig In connector for an externally-gated burst. 
 
@@ -1278,6 +1448,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:GATE:POLarity {polarity}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_burst_internal_period(self) -> float:
         """
@@ -1291,7 +1463,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_internal_period(self, period: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'period', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_burst_internal_period(self, period: Union[float, Minmaxdef]) -> None:
         """
         Set the burst period for internally-triggered bursts. 
 
@@ -1300,6 +1475,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:INTernal:PERiod {period}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_burst_mode(self) -> SourBursMode:
         """
@@ -1311,9 +1488,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:MODE?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_burst_mode(self, mode: SourBursMode):
+    @validate_parameters(
+        rules_list=[{'name': 'mode', 'type_options': ['SourBursMode']}]
+    )
+    def set_source_burst_mode(self, mode: SourBursMode) -> None:
         """
         Select the burst mode.
 
@@ -1322,6 +1502,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:MODE {mode}"
         self._rsrc.write(cmd)
+
 
     def get_source_burst_ncycles(self) -> float:
         """
@@ -1335,7 +1516,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_ncycles(self, cycles: Union[float, Enumminmaxdefinf]):
+    @validate_parameters(
+        rules_list=[{'name': 'cycles', 'type_options': ['float', 'Enumminmaxdefinf']}]
+    )
+    def set_source_burst_ncycles(self, cycles: Union[float, Enumminmaxdefinf]) -> None:
         """
         Set the number of cycles to be output per burst (triggered burst mode only).
 
@@ -1344,6 +1528,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:NCYCles {cycles}"
         self._rsrc.write(cmd)
+
 
     def get_source_burst_phase(self) -> float:
         """
@@ -1357,7 +1542,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_burst_phase(self, angle: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'angle', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_burst_phase(self, angle: Union[float, Minmaxdef]) -> None:
         """
         Set the starting phase for the burst in degrees or radians as specified by the previous UNIT:ANGL command. 
 
@@ -1366,6 +1554,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:PHASe {angle}"
         self._rsrc.write(cmd)
+
 
     def get_source_burst_state(self) -> Boolean:
         """
@@ -1379,7 +1568,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_burst_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_burst_state(self, state: Boolean) -> None:
         """
         Disable or enable the burst mode. 
 
@@ -1388,6 +1580,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:BURSt:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_fm_deviation(self) -> float:
         """
@@ -1401,7 +1595,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fm_deviation(self, peakDeviationInHz: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'peakDeviationInHz', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_fm_deviation(self, peakDeviationInHz: Union[float, Minmaxdef]) -> None:
         """
         Set the peak frequency deviation in hertz. This value represents the peak variation in frequency of the modulated waveform from the carrier frequency. 
 
@@ -1410,6 +1607,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:DEViation {peakDeviationInHz}"
         self._rsrc.write(cmd)
+
 
     def get_source_fm_internal_frequency(self) -> float:
         """
@@ -1423,7 +1621,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fm_internal_frequency(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_fm_internal_frequency(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the frequency of the modulating waveform. Used only when the Internal modulation source is selected (FM:SOUR INT command). 
 
@@ -1432,6 +1633,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:INTernal:FREQuency {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_fm_internal_function_shape(self) -> SourFmIntFuncShape:
         """
@@ -1443,9 +1645,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:INTernal:FUNCtion:SHAPe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_fm_internal_function_shape(self, shape: SourFmIntFuncShape):
+    @validate_parameters(
+        rules_list=[{'name': 'shape', 'type_options': ['SourFmIntFuncShape']}]
+    )
+    def set_source_fm_internal_function_shape(self, shape: SourFmIntFuncShape) -> None:
         """
         Select the shape of the modulating waveform. Used only when the Internal modulation source is selected (FM:SOUR INT command). 
 
@@ -1454,6 +1659,9 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:INTernal:FUNCtion:SHAPe {shape}"
         self._rsrc.write(cmd)
+
+
+
 
     def get_source_fm_source(self) -> SourFmSource:
         """
@@ -1465,9 +1673,12 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:SOURce?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_fm_source(self, source: SourFmSource):
+    @validate_parameters(
+        rules_list=[{'name': 'source', 'type_options': ['SourFmSource']}]
+    )
+    def set_source_fm_source(self, source: SourFmSource) -> None:
         """
         Select the source of the modulating signal. The function generator will accept an internal or external modulation source. 
 
@@ -1476,6 +1687,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:SOURce {source}"
         self._rsrc.write(cmd)
+
 
     def get_source_fm_state(self) -> Boolean:
         """
@@ -1489,7 +1701,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_fm_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_fm_state(self, state: Boolean) -> None:
         """
         Disable or enable FM. To avoid multiple waveform changes, you can enable FM after you have set up the other modulation parameters. 
 
@@ -1498,6 +1713,8 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FM:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_frequency_center(self) -> float:
         """
@@ -1511,7 +1728,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_center(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_frequency_center(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the center frequency (used in conjunction with the frequency span). 
 
@@ -1520,6 +1740,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FREQuency:CENTer {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_frequency_cw(self) -> float:
         """
@@ -1533,7 +1754,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_cw(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_frequency_cw(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the output frequency. 
 
@@ -1542,6 +1766,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FREQuency:CW {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_frequency_span(self) -> float:
         """
@@ -1555,7 +1780,10 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_span(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_frequency_span(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the frequency span (used in conjunction with the center frequency). 
 
@@ -1564,6 +1792,7 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce:FREQuency:SPAN {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_frequency_start(self) -> float:
         """
@@ -1577,16 +1806,20 @@ class Keysight33250A(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_start(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_frequency_start(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the start frequency (used in conjunction with the stop frequency). 
 
         Args:
             frequency (float): 1 uHz to 80 MHz (limited to 1 MHz for ramps and 25 MHz 
-for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
+    for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FREQuency:STARt {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_frequency_stop(self) -> float:
         """
@@ -1600,7 +1833,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_frequency_stop(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_frequency_stop(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the stop frequency (used in conjunction with the start frequency).
 
@@ -1609,6 +1845,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FREQuency:STOP {frequency}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_fskey_frequency(self) -> float:
         """
@@ -1622,7 +1860,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fskey_frequency(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_fskey_frequency(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the FSK alternate (or "hop") frequency. 
 
@@ -1631,6 +1872,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FSKey:FREQuency {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_fskey_internal_rate(self) -> float:
         """
@@ -1644,7 +1886,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_fskey_internal_rate(self, rate: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'rate', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_fskey_internal_rate(self, rate: Union[float, Minmaxdef]) -> None:
         """
         Set the rate at which the output frequency "shifts" between the carrier and hop frequency. 
 
@@ -1653,6 +1898,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FSKey:INTernal:RATE {rate}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_fskey_source(self) -> SourFskSource:
         """
@@ -1664,9 +1911,12 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FSKey:SOURce?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_fskey_source(self, source: SourFskSource):
+    @validate_parameters(
+        rules_list=[{'name': 'source', 'type_options': ['SourFskSource']}]
+    )
+    def set_source_fskey_source(self, source: SourFskSource) -> None:
         """
         Select an internal or external FSK source. 
 
@@ -1675,6 +1925,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FSKey:SOURce {source}"
         self._rsrc.write(cmd)
+
 
     def get_source_fskey_state(self) -> Boolean:
         """
@@ -1688,7 +1939,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_fskey_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_fskey_state(self, state: Boolean) -> None:
         """
         Disable or enable FSK modulation. To avoid multiple waveform changes, you can enable FSK after you have set up the other modulation parameters. 
 
@@ -1697,6 +1951,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FSKey:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_function_shape(self) -> SourFuncShape:
         """
@@ -1708,9 +1964,12 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FUNCtion:SHAPe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_function_shape(self, function: SourFuncShape):
+    @validate_parameters(
+        rules_list=[{'name': 'function', 'type_options': ['SourFuncShape']}]
+    )
+    def set_source_function_shape(self, function: SourFuncShape) -> None:
         """
         Select the output function. The selected waveform is output using the previously selected frequency, amplitude, and offset voltage settings. 
 
@@ -1732,7 +1991,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_shape_ramp_symmetry(self, percent: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'percent', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_function_shape_ramp_symmetry(self, percent: Union[float, Minmaxdef]) -> None:
         """
         Set the symmetry percentage for ramp waves. Symmetry represents the amount of time per cycle that the ramp wave is rising (assuming that the waveform polarity is not inverted). 
 
@@ -1741,6 +2003,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FUNCtion:SHAPe:RAMP:SYMMetry {percent}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_function_shape_square_dcycle(self) -> float:
         """
@@ -1754,17 +2018,22 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_function_shape_square_dcycle(self, percent: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'percent', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_function_shape_square_dcycle(self, percent: Union[float, Minmaxdef]) -> None:
         """
         Set the duty cycle percentage for square waves. Duty cycle represents the amount of time per cycle that the square wave is at a high level (assuming that the waveform polarity is not inverted). 
 
         Args:
             percent (float): 20% to 80% (frequency < 25 MHz)
-40% to 60% (25 MHz < frequency < 50 MHz)
-50% (frequency > 50 MHz) 
+    40% to 60% (25 MHz < frequency < 50 MHz)
+    50% (frequency > 50 MHz) 
         """
         cmd = f":SOURce:FUNCtion:SHAPe:SQUare:DCYCle {percent}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_function_shape_user(self) -> str:
         """
@@ -1776,9 +2045,12 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FUNCtion:SHAPe:USER?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_function_shape_user(self, arbName: str):
+    @validate_parameters(
+        rules_list=[{'name': 'arbName', 'type_options': ['str']}]
+    )
+    def set_source_function_shape_user(self, arbName: str) -> None:
         """
         Select one of the five built-in arbitrary waveforms, one of four user-defined waveforms, or the waveform currently downloaded to volatile memory. 
 
@@ -1787,6 +2059,9 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:FUNCtion:SHAPe:USER {arbName}"
         self._rsrc.write(cmd)
+
+
+
 
     def get_source_marker_frequency(self) -> float:
         """
@@ -1800,7 +2075,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_marker_frequency(self, frequency: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'frequency', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_marker_frequency(self, frequency: Union[float, Minmaxdef]) -> None:
         """
         Set the marker frequency. This is the frequency at which the signal on the front-panel Sync connector goes to a logic low during the sweep. The Sync signal always goes from low to high at the beginning of the sweep. 
 
@@ -1809,6 +2087,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:MARKer:FREQuency {frequency}"
         self._rsrc.write(cmd)
+
 
     def get_source_marker_state(self) -> Boolean:
         """
@@ -1822,7 +2101,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_marker_state(self, marker: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'marker', 'type_options': ['Boolean']}]
+    )
+    def set_source_marker_state(self, marker: Boolean) -> None:
         """
         Disable or enable the frequency marker. When the frequency marker is disabled, the signal output from the Sync connector is the normal Sync signal for the carrier waveform.
 
@@ -1831,6 +2113,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:MARKer:STATe {marker}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_phase_adjust(self) -> float:
         """
@@ -1844,7 +2128,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_phase_adjust(self, angle: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'angle', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_phase_adjust(self, angle: Union[float, Minmaxdef]) -> None:
         """
         Adjust the phase offset of the output waveform in degrees or radians as specified by the previous UNIT:ANGL command 
 
@@ -1854,7 +2141,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         cmd = f":SOURce:PHASe:ADJust {angle}"
         self._rsrc.write(cmd)
 
-    def source_phase_reference(self):
+
+    def source_phase_reference(self) -> None:
         """
         Immediately sets a new zero-phase reference point without changing the output of the function generator. That is, this command resets the phase value returned by the PHAS? command but does not affect the output waveform.
 
@@ -1862,6 +2150,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:PHASe:REFerence"
         self._rsrc.write(cmd)
+
 
     def get_source_phase_unlock_error_state(self) -> Boolean:
         """
@@ -1875,7 +2164,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_phase_unlock_error_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_phase_unlock_error_state(self, state: Boolean) -> None:
         """
         Disable or enable the function generator from generating an error if the phase-lock is ever lost. 
 
@@ -1884,6 +2176,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:PHASe:UNLock:ERRor:STATe {state}"
         self._rsrc.write(cmd)
+
+
+
+
 
     def get_source_pulse_period(self) -> float:
         """
@@ -1897,7 +2193,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pulse_period(self, seconds: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'seconds', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_pulse_period(self, seconds: Union[float, Minmaxdef]) -> None:
         """
         Set the period for pulses. 
 
@@ -1906,6 +2205,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:PULSe:PERiod {seconds}"
         self._rsrc.write(cmd)
+
 
     def get_source_pulse_width(self) -> float:
         """
@@ -1919,7 +2219,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_pulse_width(self, seconds: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'seconds', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_pulse_width(self, seconds: Union[float, Minmaxdef]) -> None:
         """
         Set the pulse width in seconds. 
 
@@ -1928,6 +2231,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:PULSe:WIDTh {seconds}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_sweep_spacing(self) -> SourSweSpacing:
         """
@@ -1939,9 +2244,12 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:SWEep:SPACing?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_sweep_spacing(self, spacing: SourSweSpacing):
+    @validate_parameters(
+        rules_list=[{'name': 'spacing', 'type_options': ['SourSweSpacing']}]
+    )
+    def set_source_sweep_spacing(self, spacing: SourSweSpacing) -> None:
         """
         Select linear or logarithmic spacing for the sweep. 
 
@@ -1950,6 +2258,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:SWEep:SPACing {spacing}"
         self._rsrc.write(cmd)
+
 
     def get_source_sweep_state(self) -> Boolean:
         """
@@ -1963,7 +2272,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_sweep_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_source_sweep_state(self, state: Boolean) -> None:
         """
         Disable or enable the sweep mode. To avoid multiple waveform changes, you can enable the sweep mode after you have set up the other sweep parameters. 
 
@@ -1972,6 +2284,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:SWEep:STATe {state}"
         self._rsrc.write(cmd)
+
 
     def get_source_sweep_time(self) -> float:
         """
@@ -1985,7 +2298,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_sweep_time(self, seconds: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'seconds', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_sweep_time(self, seconds: Union[float, Minmaxdef]) -> None:
         """
         Set the number of seconds required to sweep from the start frequency to the stop frequency. 
 
@@ -1994,6 +2310,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:SWEep:TIME {seconds}"
         self._rsrc.write(cmd)
+
+
 
     def get_source_voltage_level_immediate_amplitude(self) -> float:
         """
@@ -2007,7 +2325,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_level_immediate_amplitude(self, amplitude: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'amplitude', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_voltage_level_immediate_amplitude(self, amplitude: Union[float, Minmaxdef]) -> None:
         """
         Set the output amplitude. The default amplitude is 100 mVpp (into 50W) for all functions.
 
@@ -2016,6 +2337,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:AMPLitude {amplitude}"
         self._rsrc.write(cmd)
+
 
     def get_source_voltage_level_immediate_high(self) -> float:
         """
@@ -2029,7 +2351,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_level_immediate_high(self, highVoltage: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'highVoltage', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_voltage_level_immediate_high(self, highVoltage: Union[float, Minmaxdef]) -> None:
         """
         Set the high voltage level. 
 
@@ -2038,6 +2363,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:HIGH {highVoltage}"
         self._rsrc.write(cmd)
+
 
     def get_source_voltage_level_immediate_low(self) -> float:
         """
@@ -2051,7 +2377,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_level_immediate_low(self, lowVoltage: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'lowVoltage', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_voltage_level_immediate_low(self, lowVoltage: Union[float, Minmaxdef]) -> None:
         """
         Set the low voltage level.
 
@@ -2060,6 +2389,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:LOW {lowVoltage}"
         self._rsrc.write(cmd)
+
 
     def get_source_voltage_level_immediate_offset(self) -> float:
         """
@@ -2073,7 +2403,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_source_voltage_level_immediate_offset(self, offset: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'offset', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_source_voltage_level_immediate_offset(self, offset: Union[float, Minmaxdef]) -> None:
         """
         Set the dc offset voltage. 
 
@@ -2082,6 +2415,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:OFFSet {offset}"
         self._rsrc.write(cmd)
+
 
     def get_source_voltage_level_immediate_unit_voltage(self) -> SourVoltLevImmUnitVoltage:
         """
@@ -2093,9 +2427,12 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:UNIT:VOLTage?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_source_voltage_level_immediate_unit_voltage(self, unit: SourVoltLevImmUnitVoltage):
+    @validate_parameters(
+        rules_list=[{'name': 'unit', 'type_options': ['SourVoltLevImmUnitVoltage']}]
+    )
+    def set_source_voltage_level_immediate_unit_voltage(self, unit: SourVoltLevImmUnitVoltage) -> None:
         """
         Select the units for output amplitude (does not affect offset voltage or high/low levels).
 
@@ -2104,6 +2441,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:LEVel:IMMediate:UNIT:VOLTage {unit}"
         self._rsrc.write(cmd)
+
+
+
+
 
     def get_source_voltage_range_auto(self) -> Boolean:
         """
@@ -2117,7 +2458,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_source_voltage_range_auto(self, auto: Union[int, SourVoltRangAuto]):
+    @validate_parameters(
+        rules_list=[{'name': 'auto', 'type_options': ['int', 'SourVoltRangAuto']}]
+    )
+    def set_source_voltage_range_auto(self, auto: Union[int, SourVoltRangAuto]) -> None:
         """
         Disable or enable voltage autoranging for all functions. In the default mode, autoranging is enabled ("ON") and the function generator automatically selects the optimal settings for the output amplifier and attenuators. 
 
@@ -2126,6 +2470,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SOURce:VOLTage:RANGe:AUTO {auto}"
         self._rsrc.write(cmd)
+
+
 
 
 
@@ -2141,6 +2487,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return int(response)
 
+
     def get_status_questionable_enable(self) -> int:
         """
         Enable bits in the enable register in this register group. 
@@ -2153,7 +2500,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def set_status_questionable_enable(self, enableValue: int):
+    @validate_parameters(
+        rules_list=[{'name': 'enableValue', 'type_options': ['int']}]
+    )
+    def set_status_questionable_enable(self, enableValue: int) -> None:
         """
         Enable bits in the enable register in this register group. 
 
@@ -2162,6 +2512,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":STATus:QUEStionable:ENABle {enableValue}"
         self._rsrc.write(cmd)
+
 
     def get_status_questionable_event(self) -> int:
         """
@@ -2175,7 +2526,9 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def status_preset(self):
+
+
+    def status_preset(self) -> None:
         """
         Clear all bits in the Questionable Data enable register and the Standard Operation enable register. 
 
@@ -2186,7 +2539,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
 
 
 
-    def system_beeper_immediate(self):
+    def system_beeper_immediate(self) -> None:
         """
         Issue a single beep immediately. 
 
@@ -2194,6 +2547,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SYSTem:BEEPer:IMMediate"
         self._rsrc.write(cmd)
+
 
     def get_system_beeper_state(self) -> Boolean:
         """
@@ -2207,7 +2561,10 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return bool(response)
 
-    def set_system_beeper_state(self, state: Boolean):
+    @validate_parameters(
+        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+    )
+    def set_system_beeper_state(self, state: Boolean) -> None:
         """
         Disable or enable the tone heard when an error is generated from the front-panel or over the remote interface. The current selection is stored in non-volatile memory. 
 
@@ -2216,6 +2573,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SYSTem:BEEPer:STATe {state}"
         self._rsrc.write(cmd)
+
+
 
     def get_system_error_next(self) -> int:
         """
@@ -2230,7 +2589,9 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return int(response)
 
-    def system_local(self):
+
+
+    def system_local(self) -> None:
         """
         Sets the instrument state to local (the normal power-on default state). Removes any annunciator and unlocks the front panel keyboard. 
 
@@ -2239,7 +2600,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         cmd = f":SYSTem:LOCal"
         self._rsrc.write(cmd)
 
-    def system_rwlock(self):
+
+    def system_rwlock(self) -> None:
         """
         Sets the instrument state to remote with lock. Displays the rwl annunciator and locks the keyboard.
 
@@ -2247,6 +2609,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SYSTem:RWLock"
         self._rsrc.write(cmd)
+
 
     def get_system_version(self) -> str:
         """
@@ -2258,7 +2621,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":SYSTem:VERSion?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
 
 
@@ -2274,6 +2637,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
+
     def get_data_attribute_cfactor(self) -> float:
         """
         Query the crest factor of all data points for the specified arbitrary waveform. Crest factor is the ratio of the peak value to the RMS value of the waveform. 
@@ -2285,6 +2649,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         cmd = f":DATA:ATTRibute:CFACtor?"
         response = self._rsrc.query(cmd)
         return float(response)
+
 
     def get_data_attribute_points(self) -> int:
         """
@@ -2298,6 +2663,7 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return int(response)
 
+
     def get_data_attribute_ptpeak(self) -> float:
         """
         Query the peak-to-peak value of all data points for the specified arbitrary waveform. 
@@ -2310,6 +2676,8 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         response = self._rsrc.query(cmd)
         return float(response)
 
+
+
     def get_data_catalog(self) -> str:
         """
         List the names of all waveforms currently available for selection. 
@@ -2320,12 +2688,16 @@ for arbitrary waveforms). The default is 100 Hz. MIN = 1 uHz. MAX = 80 MHz.
         """
         cmd = f":DATA:CATalog?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_data_copy(self, destinationArbName: str, volatile: TracData):
+
+    @validate_parameters(
+        rules_list=[{'name': 'destinationArbName', 'type_options': ['str']}, {'name': 'volatile', 'type_options': ['TracData']}]
+    )
+    def set_data_copy(self, destinationArbName: str, volatile: TracData) -> None:
         """
         Copy the waveform from volatile memory to the specified name in 
-non-volatile memory. 
+    non-volatile memory. 
 
         Args:
             destinationArbName (str): The arb name may contain up to 12 characters. The first character must be a letter (A-Z), but the remaining characters can be numbers (0-9) or the underscore character (" _ "). Blank spaces are not allowed. If you specify a name with more than 12 characters, a "Program mnemonic too long" error is generated.
@@ -2334,7 +2706,11 @@ non-volatile memory.
         cmd = f":DATA:COPY {destinationArbName}, {volatile}"
         self._rsrc.write(cmd)
 
-    def set_data_data(self, volatile: TracData, value: float):
+
+    @validate_parameters(
+        rules_list=[{'name': 'volatile', 'type_options': ['TracData']}, {'name': 'value', 'type_options': ['float']}]
+    )
+    def set_data_data(self, volatile: TracData, value: float) -> None:
         """
         Download floating-point values from -1 to +1 into volatile memory. You can download from 1 to 65,536 (64K) points per waveform. The function generator takes the specified number of points and expands them to fill waveform memory. 
 
@@ -2346,17 +2722,22 @@ non-volatile memory.
         self._rsrc.write(cmd)
 
     @overload
-    def set_data_data_dac(self, syntax: DataDataDacSyntax.VALUELIST, volatile: TracDataDac, value: int) -> None: ...
+    def set_data_data_dac(self, syntax: DataDataDacSyntax.VALUELIST, volatile: TracDataDac, value: int) -> None:
+        ...
 
     @overload
-    def set_data_data_dac(self, syntax: DataDataDacSyntax.BINARYBLOCK, volatile: TracDataDac, value: Union[bytes] | None) -> None: ...
+    def set_data_data_dac(self, syntax: DataDataDacSyntax.BINARYBLOCK, volatile: TracDataDac, value: Union[bytes] | None) -> None:
+        ...
 
-    def set_data_data_dac(self, volatile: TracDataDac, value: int, data: Union[int, Any], syntax: DataDataDacSyntax):
+    @validate_parameters(
+        rules_list=[{'name': 'syntax', 'type_options': ['DataDataDacSyntax']}, {'name': 'volatile', 'type_options': ['TracDataDac']}, {'name': 'value', 'type_options': ['int']}, {'name': 'data', 'type_options': ['Any']}]
+    )
+    def set_data_data_dac(self, syntax: DataDataDacSyntax, volatile: TracDataDac, value: int, data: Any) -> None:
         """
         Download binary or decimal integer values from -8191 to +8191 into volatile memory. 
 
         Args:
-            syntax (DATADATADACSyntax): The syntax variant to use for this command
+            syntax (DataDataDacSyntax): The syntax variant to use for this command
 
             For syntax ValueList:
                 volatile (str): VOLATILE
@@ -2366,15 +2747,21 @@ non-volatile memory.
                 volatile (str): VOLATILE
                 value (Union[bytes] | None): The values -2047 and +2047 correspond to the peak values of the waveform (if the offset is 0 volts). For example, if you set the output amplitude to 10 Vpp, "+2047" corresponds to +5V and "-2047" corresponds to -5V. 
         """
-        # Get parameters based on selected syntax
         match syntax:
             case DataDataDacSyntax.VALUELIST:
                 cmd = f":DATA:DATA:DAC {volatile}, {value}, {data}"
+
+                self._rsrc.write(cmd)
             case DataDataDacSyntax.BINARYBLOCK:
                 cmd = f":DATA:DATA:DAC {volatile}, {value}, {data}"
-        self._rsrc.write(cmd)
 
-    def data_delete_all(self):
+                self._rsrc.write(cmd)
+            case _:
+                raise ValueError(f"Unsupported syntax '{syntax}' for command set_data_data_dac.")
+
+
+
+    def data_delete_all(self) -> None:
         """
         Delete all user-defined arbitrary waveforms from memory. This command deletes the waveform in volatile memory and all user-defined waveforms in non-volatile memory. The five built-in waveforms in non-volatile memory are not deleted. 
 
@@ -2383,7 +2770,11 @@ non-volatile memory.
         cmd = f":DATA:DELete:ALL"
         self._rsrc.write(cmd)
 
-    def set_data_delete_name(self, arbName: str):
+
+    @validate_parameters(
+        rules_list=[{'name': 'arbName', 'type_options': ['str']}]
+    )
+    def set_data_delete_name(self, arbName: str) -> None:
         """
         Delete the specified arbitrary waveform from memory. You can delete the waveform in volatile memory or any of the four user-defined waveforms in non-volatile memory. 
 
@@ -2392,6 +2783,8 @@ non-volatile memory.
         """
         cmd = f":DATA:DELete:NAME {arbName}"
         self._rsrc.write(cmd)
+
+
 
     def get_data_nvolatile_catalog(self) -> str:
         """
@@ -2403,7 +2796,8 @@ non-volatile memory.
         """
         cmd = f":DATA:NVOLatile:CATalog?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
+
 
     def get_data_nvolatile_free(self) -> int:
         """
@@ -2419,6 +2813,7 @@ non-volatile memory.
 
 
 
+
     def get_trigger_sequence_delay(self) -> float:
         """
         Insert a time delay between the receipt of the trigger and the start of the burst waveform 
@@ -2431,7 +2826,10 @@ non-volatile memory.
         response = self._rsrc.query(cmd)
         return float(response)
 
-    def set_trigger_sequence_delay(self, seconds: Union[float, Minmaxdef]):
+    @validate_parameters(
+        rules_list=[{'name': 'seconds', 'type_options': ['float', 'Minmaxdef']}]
+    )
+    def set_trigger_sequence_delay(self, seconds: Union[float, Minmaxdef]) -> None:
         """
         Insert a time delay between the receipt of the trigger and the start of the burst waveform 
 
@@ -2441,7 +2839,8 @@ non-volatile memory.
         cmd = f":TRIGger:SEQuence:DELay {seconds}"
         self._rsrc.write(cmd)
 
-    def trigger_sequence_immediate(self):
+
+    def trigger_sequence_immediate(self) -> None:
         """
         Trigger a sweep or burst from the remote interface. This command can be used with any of the available trigger sources (TRIG:SOUR command). 
 
@@ -2449,6 +2848,7 @@ non-volatile memory.
         """
         cmd = f":TRIGger:SEQuence:IMMediate"
         self._rsrc.write(cmd)
+
 
     def get_trigger_sequence_slope(self) -> TrigSeqSlope:
         """
@@ -2460,9 +2860,12 @@ non-volatile memory.
         """
         cmd = f":TRIGger:SEQuence:SLOPe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_trigger_sequence_slope(self, slope: TrigSeqSlope):
+    @validate_parameters(
+        rules_list=[{'name': 'slope', 'type_options': ['TrigSeqSlope']}]
+    )
+    def set_trigger_sequence_slope(self, slope: TrigSeqSlope) -> None:
         """
         Select whether the function generator uses the rising edge or falling edge of the trigger signal on the rear-panel Trig In connector. 
 
@@ -2471,6 +2874,7 @@ non-volatile memory.
         """
         cmd = f":TRIGger:SEQuence:SLOPe {slope}"
         self._rsrc.write(cmd)
+
 
     def get_trigger_sequence_source(self) -> TrigSeqSource:
         """
@@ -2482,9 +2886,12 @@ non-volatile memory.
         """
         cmd = f":TRIGger:SEQuence:SOURce?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_trigger_sequence_source(self, source: TrigSeqSource):
+    @validate_parameters(
+        rules_list=[{'name': 'source', 'type_options': ['TrigSeqSource']}]
+    )
+    def set_trigger_sequence_source(self, source: TrigSeqSource) -> None:
         """
         Select the source from which the function generator will accept a trigger. 
 
@@ -2493,6 +2900,7 @@ non-volatile memory.
         """
         cmd = f":TRIGger:SEQuence:SOURce {source}"
         self._rsrc.write(cmd)
+
 
 
 
@@ -2506,9 +2914,12 @@ non-volatile memory.
         """
         cmd = f":UNIT:ANGLe?"
         response = self._rsrc.query(cmd)
-        return str(response)
+        return response
 
-    def set_unit_angle(self, angle: UnitAngle):
+    @validate_parameters(
+        rules_list=[{'name': 'angle', 'type_options': ['UnitAngle']}]
+    )
+    def set_unit_angle(self, angle: UnitAngle) -> None:
         """
         Select degrees or radians to set the phase offset value using the PHAS command (remote interface only). 
 
@@ -2519,3 +2930,22 @@ non-volatile memory.
         self._rsrc.write(cmd)
 
 
+
+
+# For basic testing or example usage:
+if __name__ == '__main__':
+    # This section is for demonstration and won't run in a typical import scenario.
+    # To use the driver:
+    # 1. Ensure you have a VISA backend installed (e.g., NI-VISA, pyvisa-py).
+    # 2. Connect your instrument.
+    # 3. Instantiate the class:
+    #    instrument = Keysight33250A(visa_address='YOUR_INSTRUMENT_VISA_ADDRESS')
+    #    # Example: instrument = Keysight33250A(visa_address='GPIB0::10::INSTR')
+    #
+    # 4. Call methods:
+    #    # idn = instrument.get_idn() # If *IDN? is defined and generates get_idn()
+    #    # print(idn)
+    #    # instrument.set_output1_function(Output1Function.SIN) # Example assuming such methods
+    
+    print(f"Class 'Keysight33250A' is defined in this file.")
+    print(f"To use it, import it into your script and instantiate with a VISA address.")

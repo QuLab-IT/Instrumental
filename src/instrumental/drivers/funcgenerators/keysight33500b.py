@@ -1,15 +1,20 @@
-from enum import Enum
-from typing import Any, Union, overload, List, Dict, Optional, Tuple
-import numpy as np
-from numpy.typing import NDArray # Included if any type hints might resolve to NDArray
-import pyvisa # Generally not directly used if VisaMixin handles all rsrc interactions
-
-from instrumental.drivers import VisaMixin
-from instrumental.drivers.funcgenerators import FunctionGenerator # Assuming this is the correct base class
 import functools
 import inspect
+import numpy as np
+
 from enum import Enum
-from typing import Any, Callable, Dict, List, Union # Added for type hints
+from instrumental.drivers import VisaMixin
+from instrumental.drivers.funcgenerators import FunctionGenerator # Assuming this is the correct base class
+from numpy.typing import NDArray # Included if any type hints might resolve to NDArray
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List,
+    overload,
+    Union
+) # Added for type hints
+
 
 _BASIC_TYPE_MAP = {
     'int': int,
@@ -18,7 +23,6 @@ _BASIC_TYPE_MAP = {
     'bool': bool,
     'Boolean': bool, # Handle a common alias
 }
-
 
 def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
     if rules_list is None:
@@ -122,6 +126,7 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
+
 
 # --- Global Enums ---
 class Boolean(Enum):
@@ -708,7 +713,26 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     This class is auto-generated from an SDL file.
     """
     _INST_PARAMS_ = ['visa_address']
-    _INST_VISA_INFO_ = ('Agilent Technologies', ('33521B', '33522B', '33519B', '33520B', '33511B', '33512B', '33510B', '33611A', '33612A', '33621A', '33622A', '33509B'))
+    _INST_VISA_INFO_ = (
+        'Agilent Technologies', [
+            '33509B',
+            '33510B',
+            '33511B',
+            '33512B',
+            '33519B',
+            '33520B',
+            '33521B',
+            '33522B',
+            '33609A',
+            '33610A',
+            '33611A',
+            '33612A',
+            '33619A',
+            '33620A',
+            '33621A',
+            '33622A',
+        ]
+    )
 
     def _initialize(self):
         super()._initialize() # Call parent _initialize if it exists

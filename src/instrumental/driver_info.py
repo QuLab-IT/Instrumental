@@ -1,4 +1,4 @@
-# Auto-generated 2025-05-07T23:00:03.411038
+# Auto-generated 2025-05-16T22:44:26.650146
 from collections import OrderedDict
 
 driver_info = OrderedDict([
@@ -47,7 +47,7 @@ driver_info = OrderedDict([
     ('funcgenerators.keysight33500b', {
         'params': ['visa_address'],
         'classes': ['Keysight33500B'],
-        'imports': ['instrumental', 'pyvisa'],
+        'imports': ['instrumental'],
         'visa_info': {
             'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B', '33609A', '33610A', '33611A', '33612A', '33619A', '33620A', '33621A', '33622A']),
         },
@@ -197,6 +197,11 @@ driver_info = OrderedDict([
             'TDS_3000': ('TEKTRONIX', ['TDS 3012', 'TDS 3012B', 'TDS 3012C', 'TDS 3014', 'TDS 3014B', 'TDS 3014C', 'TDS 3032', 'TDS 3032B', 'TDS 3032C', 'TDS 3034', 'TDS 3034B', 'TDS 3034C', 'TDS 3052', 'TDS 3052B', 'TDS 3052C', 'TDS 3054', 'TDS 3054B', 'TDS 3054C']),
             'TDS_7000': ('TEKTRONIX', ['TDS7154', 'TDS7254', 'TDS7404']),
         },
+    }),
+    ('spatiallightmodulators.thorlabs', {
+        'params': ['port'],
+        'classes': ['ExulusHD'],
+        'imports': ['cv2', 'mss', 'screeninfo'],
     }),
     ('spectrometers.agilent', {
         'params': ['visa_address'],

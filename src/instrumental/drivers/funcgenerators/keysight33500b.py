@@ -21,6 +21,7 @@ _BASIC_TYPE_MAP = {
     'str': str,
     'bool': bool,
     'Boolean': bool, # Handle a common alias
+    'bytes': bytes,
 }
 
 def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):

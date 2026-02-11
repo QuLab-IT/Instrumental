@@ -3284,11 +3284,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         print(syntax)
         print(type(syntax))
         match syntax:
-            case SourceDataArbitrarySyntax.BLOCKREAL32:
+            case "BLOCKREAL32":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockReal32")
-            case SourceDataArbitrarySyntax.ASCII:
+            case "ASCII":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
@@ -3315,11 +3315,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 binary_block (Union[bytes] | None): Binary block data.
         """
         match syntax:
-            case SourceDataArbitraryDacSyntax.ASCII:
+            case "ASCII":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
-            case SourceDataArbitraryDacSyntax.BLOCKINT16:
+            case "BLOCKINT16":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockInt16")
@@ -3346,11 +3346,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
         match syntax:
-            case SourceDataArbitrary2Syntax.BLOCKREAL32:
+            case "BLOCKREAL32":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockReal32")
-            case SourceDataArbitrary2Syntax.ASCII:
+            case "ASCII":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
@@ -3377,11 +3377,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 binary_block (Union[bytes] | None): Binary block data.
         """
         match syntax:
-            case SourceDataArbitrary2DacSyntax.ASCII:
+            case "ASCII":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
-            case SourceDataArbitrary2DacSyntax.BLOCKINT16:
+            case "BLOCKINT16":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockInt16")

@@ -59,6 +59,8 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                     type_match_found = False
                     for type_str_opt in type_options:
                         expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
+                        print(f"Validating parameter '{param_name}' for {func.__name__}: expected type '{type_str_opt}', got value {arg_value!r} of type '{type(arg_value).__name__}'")
+                        print(f"{expected_py_type} is expected for parameter '{param_name}' of {func.__name__}, got value {arg_value!r} of type '{type(arg_value).__name__}'")
                         if expected_py_type:
                             # Handle basic Python types (int, float, str, bool)
                             # Allow int to be passed for a float parameter

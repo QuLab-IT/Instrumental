@@ -2,6 +2,63 @@ Change Log
 ==========
 
 
+(0.9.5) - 2025-05-03
+------------------
+
+Fixed
+"""""
+- Fixed Arun Gauge detection in NGC Pressure Gauge Controller driver
+
+
+(0.9.4) - 2025-04-18
+------------------
+
+Fixed
+"""""
+- Fixed bake command in NGC Pressure Gauge Controller driver
+
+
+(0.9.3) - 2025-04-18
+------------------
+
+Fixed
+"""""
+- Fixed control command in NGC Pressure Gauge Controller driver
+
+
+(0.9.2) - 2025-04-18
+------------------
+
+Fixed
+"""""
+- Fixed bake command in NGC Pressure Gauge Controller driver
+
+
+(0.9.1) - 2025-04-18
+------------------
+
+Fixed
+"""""
+- Fixed unit parsing in NGC Pressure Gauge Controller driver
+
+(0.9.0) - 2025-04-18
+------------------
+
+Added
+"""""
+- NGC Pressure Gauge Controller driver with support for multiple models:
+  - NGC2: Basic pressure gauge controller
+  - NGC2D: Dual ion gauge controller with bakeout capability
+  - NGC2-D: Dual ion gauge controller
+  - NGC3: Dual ion gauge controller with bakeout capability
+- Basler camera control driver
+
+Changed
+"""""""
+- Made NGC base class abstract to prevent direct instantiation
+- Improved documentation for NGC driver
+
+
 (0.8) - 2024-12-31
 ------------------
 

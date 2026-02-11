@@ -3281,8 +3281,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence to be downloaded to.
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
-        print(syntax)
-        print(type(syntax))
         match syntax:
             case "BLOCKREAL32":
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"

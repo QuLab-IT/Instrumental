@@ -21,7 +21,7 @@ _BASIC_TYPE_MAP = {
     'float': float,
     'str': str,
     'bool': bool,
-    'Boolean': bool, # Handle a common alias
+    # 'Boolean': bool, # Handle a common alias
     'bytes': bytes,
 }
 

@@ -81,6 +81,8 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                                 break
                         else:
                             # Assume type_str_opt is an Enum class name string
+                            if func.__name__ == 'set_output':
+                                print(f"Debug: Checking if '{type_str_opt}' is an Enum for parameter '{param_name}' with value {arg_value!r} in {func.__name__}")
                             enum_class = globals().get(type_str_opt)
                             if enum_class and isinstance(enum_class, type) and issubclass(enum_class, Enum):
                                 if isinstance(arg_value, enum_class):

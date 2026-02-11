@@ -25,7 +25,7 @@ _BASIC_TYPE_MAP = {
     'bytes': bytes,
 }
 
-def _parse_boolean(self, response: str) -> bool:
+def _parse_boolean(response: str) -> bool:
     """Convert VISA response to Python boolean.
     
     Args:

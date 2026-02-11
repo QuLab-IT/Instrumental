@@ -31,17 +31,17 @@ class DefiniteLengthArbitraryBlock:
 @dataclass(frozen=True)
 class EnumMember:
     mnemonic: str
-    # aliases: str
     value: str
+    aliases: List[str] = field(default_factory=list)
     description: Optional[str] = None
 
     def __eq__(self, other):
         if not isinstance(other, EnumMember):
             return False
-        return self.mnemonic == other.mnemonic and self.value == other.value and self.description == other.description
+        return self.mnemonic == other.mnemonic and self.value == other.value and all(alias == other_alias for alias, other_alias in zip(self.aliases, other.aliases)) and self.description == other.description
     
     def __hash__(self):
-        return hash((self.mnemonic, self.value, self.description))
+        return hash((self.mnemonic, self.value, tuple(self.aliases), self.description))
 
 @dataclass(frozen=True)
 class GlobalDefinition:
@@ -301,7 +301,7 @@ def parse_global_definitions(soup: BeautifulSoup) -> Dict[str, GlobalDefinition]
         for member in enum.find_all('Member'):
             member_data = EnumMember(
                 mnemonic=member.get('mnemonic', ''),
-                # aliases=member.get('aliases', ''),
+                aliases=member.get('aliases', '').split(' ') if member.get('aliases') else [],
                 value=member.get('value', ''),
                 description=member.find('Description').text if member.find('Description') else None
             )

@@ -11,6 +11,7 @@ from typing import (
     Callable,
     Dict,
     List,
+    overload,
     Union
 ) # Added for type hints
 
@@ -23,6 +24,17 @@ _BASIC_TYPE_MAP = {
     'Boolean': bool, # Handle a common alias
     'bytes': bytes,
 }
+
+def _parse_boolean(self, response: str) -> bool:
+    """Convert VISA response to Python boolean.
+    
+    Args:
+        response: String response from device ('0' or '1')
+        
+    Returns:
+        Python boolean value
+    """
+    return response.strip() in ('1', 'ON', 'on')
 
 def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
     if rules_list is None:
@@ -58,18 +70,10 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                     pass
                 else:
                     type_match_found = False
-                    if func.__name__ == "set_source_data_sequence":
-                        print("rules_list for set_source_data_sequence:", rules_list)
-                        print("rule:", rule)
-                        print('type_options for set_source_data_sequence:', type_options)
                     for type_str_opt in type_options:
                         expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
-                        if func.__name__ == "set_source_data_sequence":
-                            print("param_rules:", param_rules)
-                            print(f"Validating parameter '{param_name}' for {func.__name__}: expected type '{type_str_opt}', got value {arg_value!r} of type '{type(arg_value).__name__}'")
-                            print(f"{type_str_opt} or rather {expected_py_type} is expected for parameter '{param_name}' of {func.__name__}, got value {arg_value!r} of type '{type(arg_value).__name__}'")
                         if expected_py_type:
-                            # Handle basic Python types (int, float, str, bool)
+                            # Handle basic Python types (int, float, str, bytes)
                             # Allow int to be passed for a float parameter
                             if (expected_py_type is float and isinstance(arg_value, int)) or \
                                isinstance(arg_value, expected_py_type):
@@ -161,8 +165,11 @@ class DispWindUnitArbrate(Enum):
     """
 
     SRATE = '0'
+    SRAT = '0'
     FREQUENCY = '1'
+    FREQ = '1'
     PERIOD = '2'
+    PER = '2'
 
 
 class DispWindUnitPulse(Enum):
@@ -171,7 +178,9 @@ class DispWindUnitPulse(Enum):
     """
 
     WIDTH = '0'
+    WID = '0'
     DUTY = '1'
+    DUT = '1'
 
 
 class DispWindUnitRate(Enum):
@@ -180,7 +189,9 @@ class DispWindUnitRate(Enum):
     """
 
     FREQUENCY = '0'
+    FREQ = '0'
     PERIOD = '1'
+    PER = '1'
 
 
 class DispWindUnitSweep(Enum):
@@ -189,7 +200,9 @@ class DispWindUnitSweep(Enum):
     """
 
     STARTSTOP = '0'
+    STAR = '0'
     CENTERSPAN = '1'
+    CENT = '1'
 
 
 class DispWindUnitVoltage(Enum):
@@ -198,7 +211,9 @@ class DispWindUnitVoltage(Enum):
     """
 
     AMPLITUDEOFF = '0'
+    AMPL = '0'
     HIGHLOW = '1'
+    HIGH = '1'
 
 
 class DispWindView(Enum):
@@ -207,6 +222,7 @@ class DispWindView(Enum):
     """
 
     STANDARD = '0'
+    STAN = '0'
     TEXT = '1'
     GRAPH = '2'
     DUAL = '3'
@@ -218,7 +234,9 @@ class Enumminmaxdef(Enum):
     """
 
     MINIMUM = '1'
+    MIN = '1'
     MAXIMUM = '2'
+    MAX = '2'
 
 
 class Enumminmaxdefinf(Enum):
@@ -227,8 +245,11 @@ class Enumminmaxdefinf(Enum):
     """
 
     MINIMUM = '1'
+    MIN = '1'
     MAXIMUM = '2'
+    MAX = '2'
     INFINITY = '7'
+    INF = '7'
 
 
 class Enumstaticcurrent(Enum):
@@ -237,7 +258,9 @@ class Enumstaticcurrent(Enum):
     """
 
     STATIC = '0'
+    STAT = '0'
     CURRENT = '1'
+    CURR = '1'
 
 
 class FormBorder(Enum):
@@ -246,7 +269,9 @@ class FormBorder(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     SWAPPED = '1'
+    SWAP = '1'
 
 
 class HcopSdumDataFormat(Enum):
@@ -264,7 +289,9 @@ class OutpMode(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     GATED = '1'
+    GAT = '1'
 
 
 class OutpPolarity(Enum):
@@ -273,7 +300,9 @@ class OutpPolarity(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     INVERTED = '1'
+    INV = '1'
 
 
 class OutpSyncMode(Enum):
@@ -282,8 +311,11 @@ class OutpSyncMode(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     CARRIER = '1'
+    CARR = '1'
     MARKER = '2'
+    MARK = '2'
 
 
 class OutpSyncPolarity(Enum):
@@ -292,7 +324,9 @@ class OutpSyncPolarity(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     INVERTED = '1'
+    INV = '1'
 
 
 class OutpSyncSource(Enum):
@@ -310,7 +344,9 @@ class OutpTrigSlope(Enum):
     """
 
     POSITIVE = '1'
+    POS = '1'
     NEGATIVE = '2'
+    NEG = '2'
 
 
 class OutpTrigSource(Enum):
@@ -328,11 +364,16 @@ class SourAmIntFuncShapeclone(Enum):
     """
 
     SINUSOID = '0'
+    SIN = '0'
     SQUARE = '1'
+    SQU = '1'
     TRIANGLE = '2'
+    TRI = '2'
     RAMP = '3'
     NRAMP = '4'
+    NRAM = '4'
     NOISE = '5'
+    NOIS = '5'
     PRBS = '6'
     ARB = '7'
 
@@ -343,7 +384,9 @@ class SourAmSource(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
     CH1 = '2'
     CH2 = '3'
 
@@ -354,7 +397,10 @@ class SourAmSourceclone(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
+    BOTH = '0'
     EXTERNAL = '1'
+    EXT = '1'
 
 
 class SourBursGatePolarity(Enum):
@@ -363,7 +409,9 @@ class SourBursGatePolarity(Enum):
     """
 
     NORMAL = '0'
+    NORM = '0'
     INVERTED = '1'
+    INV = '1'
 
 
 class SourBursMode(Enum):
@@ -372,7 +420,9 @@ class SourBursMode(Enum):
     """
 
     TRIGGERED = '0'
+    TRIG = '0'
     GATED = '1'
+    GAT = '1'
 
 
 class SourCombFeed(Enum):
@@ -391,7 +441,9 @@ class SourFmSource(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
     CH1 = '2'
     CH2 = '3'
 
@@ -402,7 +454,9 @@ class SourFreqCoupMode(Enum):
     """
 
     OFFSET = '0'
+    OFFS = '0'
     RATIO = '1'
+    RAT = '1'
 
 
 class SourFreqMode(Enum):
@@ -411,7 +465,9 @@ class SourFreqMode(Enum):
     """
 
     FIXED = '0'
+    FIX = '0'
     SWEEP = '2'
+    SWE = '2'
     CW = '3'
     LIST = '4'
 
@@ -422,7 +478,9 @@ class SourFuncShapArbAdvance(Enum):
     """
 
     TRIGGER = '0'
+    TRIG = '0'
     SRATE = '1'
+    SRAT = '1'
 
 
 class SourFuncShapArbFilter(Enum):
@@ -432,6 +490,7 @@ class SourFuncShapArbFilter(Enum):
 
     OFF = '0'
     NORMAL = '1'
+    NORM = '1'
     STEP = '2'
 
 
@@ -454,7 +513,9 @@ class SourFuncShapPulsHold(Enum):
     """
 
     WIDTH = '0'
+    WIDT = '0'
     DCYCLE = '1'
+    DCYC = '1'
 
 
 class SourFuncShapeclone(Enum):
@@ -463,12 +524,17 @@ class SourFuncShapeclone(Enum):
     """
 
     SINUSOID = '0'
+    SIN = '0'
     SQUARE = '1'
+    SQU = '1'
     RAMP = '2'
     PULSE = '3'
+    PULS = '3'
     ARB = '4'
     TRIANGLE = '5'
+    TRI = '5'
     NOISE = '6'
+    NOIS = '6'
     PRBS = '7'
     DC = '8'
 
@@ -479,7 +545,9 @@ class SourPmSource(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
     CH1 = '2'
     CH2 = '3'
 
@@ -490,7 +558,9 @@ class SourPwmSource(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
     CH1 = '2'
     CH2 = '3'
 
@@ -501,7 +571,9 @@ class SourRateCoupMode(Enum):
     """
 
     OFFSET = '0'
+    OFFS = '0'
     RATIO = '1'
+    RAT = '1'
 
 
 class SourRoscSourAuto(Enum):
@@ -519,7 +591,9 @@ class SourRoscSourCurrent(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
 
 
 class SourRoscSource(Enum):
@@ -528,7 +602,9 @@ class SourRoscSource(Enum):
     """
 
     INTERNAL = '0'
+    INT = '0'
     EXTERNAL = '1'
+    EXT = '1'
 
 
 class SourSumIntFunctionclone(Enum):
@@ -537,11 +613,16 @@ class SourSumIntFunctionclone(Enum):
     """
 
     SINUSOID = '0'
+    SIN = '0'
     SQUARE = '1'
+    SQU = '1'
     TRIANGLE = '2'
+    TRI = '2'
     RAMP = '3'
     NRAMP = '4'
+    NRAM = '4'
     NOISE = '5'
+    NOIS = '5'
     PRBS = '6'
     ARB = '7'
 
@@ -552,7 +633,9 @@ class SourSweSpacing(Enum):
     """
 
     LINEAR = '0'
+    LIN = '0'
     LOGARITHMIC = '1'
+    LOG = '1'
 
 
 class SourTrack(Enum):
@@ -563,6 +646,7 @@ class SourTrack(Enum):
     OFF = '0'
     ON = '1'
     INVERTED = '2'
+    INV = '2'
 
 
 class SourVoltLevUnit(Enum):
@@ -571,6 +655,8 @@ class SourVoltLevUnit(Enum):
     """
 
     VPP = '0'
+    DEFault = '0'
+    DEF = '0'
     VRMS = '1'
     DBM = '2'
 
@@ -600,7 +686,9 @@ class StdNumEnums(Enum):
     """
 
     MINIMUM = '1'
+    MIN = '1'
     MAXIMUM = '2'
+    MAX = '2'
 
 
 class StdNumEnums1(Enum):
@@ -609,8 +697,11 @@ class StdNumEnums1(Enum):
     """
 
     MINIMUM = '1'
+    MIN = '1'
     MAXIMUM = '2'
+    MAX = '2'
     DEFAULT = '3'
+    DEF = '3'
 
 
 class StdNumEnumsDef(Enum):
@@ -619,6 +710,7 @@ class StdNumEnumsDef(Enum):
     """
 
     DEFAULT = '3'
+    DEF = '3'
 
 
 class SystCommEnableCommandParameter2clone(Enum):
@@ -630,7 +722,9 @@ class SystCommEnableCommandParameter2clone(Enum):
     USB = '1'
     LAN = '2'
     SOCKETS = '3'
+    SOCK = '3'
     TELNET = '4'
+    TELN = '4'
     VXI11 = '5'
     WEB = '6'
 
@@ -652,7 +746,9 @@ class TrigSeqSlope(Enum):
     """
 
     POSITIVE = '0'
+    POS = '0'
     NEGATIVE = '1'
+    NEG = '1'
 
 
 class TrigSeqSource(Enum):
@@ -661,9 +757,12 @@ class TrigSeqSource(Enum):
     """
 
     IMMEDIATE = '0'
+    IMM = '0'
     EXTERNAL = '1'
+    EXT = '1'
     BUS = '2'
     TIMER = '3'
+    TIM = '3'
 
 
 class UnitAngleclone(Enum):
@@ -672,9 +771,13 @@ class UnitAngleclone(Enum):
     """
 
     DEGREE = '0'
+    DEG = '0'
     RADIAN = '1'
+    RAD = '1'
     SECOND = '2'
+    SEC = '2'
     DEFAULT = '3'
+    DEF = '3'
 
 
 # --- Command Syntax Enums ---
@@ -1093,7 +1196,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":CALibration:SECure:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'code', 'type_options': ['str']}]
@@ -1200,7 +1303,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":DISPlay?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
@@ -1518,7 +1621,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":INITiate{initiate_num}:CONTinuous?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -1589,7 +1692,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":LXI:IDENtify:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
@@ -1616,7 +1719,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":LXI:MDNS:ENABle?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
@@ -1785,7 +1888,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:RECall:AUTO?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
@@ -1812,7 +1915,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":MEMory:STATe:VALid?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
 
 
@@ -2212,7 +2315,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut{output_num}?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -2339,7 +2442,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut{output_num}:SYNC?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -2467,7 +2570,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":OUTPut{output_num}:TRIGger?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -2727,7 +2830,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:BURSt:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'boolean', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -2792,7 +2895,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:AM:DSSC?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -2921,7 +3024,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:AM:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -3222,7 +3325,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:BPSK:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -3713,7 +3816,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:FM:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -3905,7 +4008,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:FREQuency:COUPle:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -4164,7 +4267,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:FSKey:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -4387,7 +4490,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary:BALance:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -4570,7 +4673,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:FUNCtion:ARBitrary:SKEW:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -5387,7 +5490,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:PHASe:UNLock:ERRor:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -5551,7 +5654,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:PM:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -5745,7 +5848,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:PWM:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -5874,7 +5977,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:RATE:COUPle:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6120,7 +6223,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:SUM:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6249,7 +6352,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:SWEep:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6449,7 +6552,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:VOLTage:LIMit:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6482,7 +6585,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:VOLTage:RANGe:AUTO?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['int', 'SourVoltRangAuto']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6547,7 +6650,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SOURce{source_num}:VOLTage:COUPle:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6558,7 +6661,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            state (bool): Enable/disable the maintaining of the same amplitude, offset, range, load, and ns on both channels of a two-channel instrument.
+            state (bool): Enable/disable the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument.
         """
         cmd = f":SOURce{source_num}:VOLTage:COUPle:STATe {state}"
         self._rsrc.write(cmd)
@@ -6809,7 +6912,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:BEEPer:STATe?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6842,7 +6945,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:COMMunicate:ENABle?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'interface', 'type_options': ['SystCommEnableCommandParameter2clone']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -6926,7 +7029,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:COMMunicate:LAN:DHCP?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -7427,7 +7530,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:LICense:INSTall?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
     @validate_parameters(
         rules_list=[{'name': 'fileFolder', 'type_options': ['str']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -7510,7 +7613,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:LOCK:REQuest?"
         response = self._rsrc.query(cmd)
-        return bool(response)
+        return _parse_boolean(response)
 
 
 

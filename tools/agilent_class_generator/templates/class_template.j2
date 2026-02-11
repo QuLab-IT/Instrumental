@@ -23,7 +23,19 @@ _BASIC_TYPE_MAP = {
     'str': str,
     'bool': bool,
     'Boolean': bool, # Handle a common alias
+    'bytes': bytes,
 }
+
+def _parse_boolean(self, response: str) -> bool:
+    """Convert VISA response to Python boolean.
+    
+    Args:
+        response: String response from device ('0' or '1')
+        
+    Returns:
+        Python boolean value
+    """
+    return response.strip() in ('1', 'ON', 'on')
 
 def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
     if rules_list is None:
@@ -62,7 +74,7 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                     for type_str_opt in type_options:
                         expected_py_type = _BASIC_TYPE_MAP.get(type_str_opt)
                         if expected_py_type:
-                            # Handle basic Python types (int, float, str, bool)
+                            # Handle basic Python types (int, float, str, bytes)
                             # Allow int to be passed for a float parameter
                             if (expected_py_type is float and isinstance(arg_value, int)) or \
                                isinstance(arg_value, expected_py_type):
@@ -138,6 +150,11 @@ class {{ enum_data.name }}(Enum):
 
 {% for member in enum_data.members %}
     {{ member.name }} = {{ member.value }}
+    {% if member.aliases %}
+    {% for alias in member.aliases %}
+    {{ alias }} = {{ member.value }}
+    {% endfor %}
+    {% endif %}
     {% if member.description %}
     # {{ member.description }}
     {% endif %}

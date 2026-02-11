@@ -368,24 +368,24 @@ def _process_command_for_template(
                 syn_info["params"].append({"name": p_obj.name})
         cmd_dict['syntaxes_info'].append(syn_info)
 
-    cmd_dict['overloads'] = []
-    if not is_query and not cmd_dict['is_single_syntax']:
-        overload_node_suffix_sig_parts = []
-        if nodes_context:
-            for node in nodes_context:
-                if node.suffixes:
-                    suffix_var = f"{node.mnemonic.lower()}_{node.suffixes.name}"
-                    overload_node_suffix_sig_parts.append(f"{suffix_var}: int")
+    # cmd_dict['overloads'] = []
+    # if not is_query and not cmd_dict['is_single_syntax']:
+    #     overload_node_suffix_sig_parts = []
+    #     if nodes_context:
+    #         for node in nodes_context:
+    #             if node.suffixes:
+    #                 suffix_var = f"{node.mnemonic.lower()}_{node.suffixes.name}"
+    #                 overload_node_suffix_sig_parts.append(f"{suffix_var}: int")
 
-        for syn_obj in cmd_info.command_syntaxes:
-            overload_sig_parts: List[str] = list(overload_node_suffix_sig_parts) 
-            overload_sig_parts.append(f"syntax: {cmd_dict['syntax_enum_name']}.{sanitize_enum_name(syn_obj.name).upper()}")
+    #     for syn_obj in cmd_info.command_syntaxes:
+    #         overload_sig_parts: List[str] = list(overload_node_suffix_sig_parts) 
+    #         overload_sig_parts.append(f"syntax: {cmd_dict['syntax_enum_name']}.{sanitize_enum_name(syn_obj.name).upper()}")
             
-            if syn_obj.parameters:
-                for p_data in syn_obj.parameters:
-                    p_types_list = get_parameter_types(p_data, global_defs_map)
-                    overload_sig_parts.append(f"{p_data.name}: {parameter_types_as_string(p_types_list)}")
-            cmd_dict['overloads'].append({"signature_parts": overload_sig_parts})
+    #         if syn_obj.parameters:
+    #             for p_data in syn_obj.parameters:
+    #                 p_types_list = get_parameter_types(p_data, global_defs_map)
+    #                 overload_sig_parts.append(f"{p_data.name}: {parameter_types_as_string(p_types_list)}")
+    #         cmd_dict['overloads'].append({"signature_parts": overload_sig_parts})
             
     return cmd_dict
 
@@ -447,6 +447,7 @@ def prepare_template_data(
 
             members.append({
                 "name": m_name,
+                "aliases": member.aliases,
                 "value": repr(member.value), 
                 "description": member.description or ""
             })

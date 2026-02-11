@@ -46,7 +46,7 @@ def get_python_type_converter(semantic_type: str) -> str:
         str: The corresponding Python type annotation
     """
     type_mapping = {
-        "Boolean": "bool",
+        "Boolean": "_parse_boolean",
         "Integer": "int",
         "Real": "float",
         "String": "str",

@@ -11,7 +11,6 @@ from typing import (
     Callable,
     Dict,
     List,
-    overload,
     Union
 ) # Added for type hints
 
@@ -3263,16 +3262,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         cmd = f":SOURce{source_num}:COMBine:FEED {source}"
         self._rsrc.write(cmd)
 
-
-
-    @overload
-    def set_source_data_arbitrary(self, source_num: int, syntax: SourceDataArbitrarySyntax.BLOCKREAL32, arb_name: str, binary_block: Union[bytes] | None) -> None:
-        ...
-
-    @overload
-    def set_source_data_arbitrary(self, source_num: int, syntax: SourceDataArbitrarySyntax.ASCII, arb_name: str, value: float) -> None:
-        ...
-
     @validate_parameters(
         rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrarySyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
@@ -3303,14 +3292,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 self._rsrc.write(cmd)
             case _:
                 raise ValueError(f"Unsupported syntax '{syntax}' for command set_source_data_arbitrary.")
-
-    @overload
-    def set_source_data_arbitrary_dac(self, source_num: int, syntax: SourceDataArbitraryDacSyntax.ASCII, arb_name: str, value: int) -> None:
-        ...
-
-    @overload
-    def set_source_data_arbitrary_dac(self, source_num: int, syntax: SourceDataArbitraryDacSyntax.BLOCKINT16, arb_name: str, binary_block: Union[bytes] | None) -> None:
-        ...
 
     @validate_parameters(
         rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitraryDacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
@@ -3343,16 +3324,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             case _:
                 raise ValueError(f"Unsupported syntax '{syntax}' for command set_source_data_arbitrary_dac.")
 
-
-
-    @overload
-    def set_source_data_arbitrary2(self, source_num: int, syntax: SourceDataArbitrary2Syntax.BLOCKREAL32, arb_name: str, binary_block: Union[bytes] | None) -> None:
-        ...
-
-    @overload
-    def set_source_data_arbitrary2(self, source_num: int, syntax: SourceDataArbitrary2Syntax.ASCII, arb_name: str, value: float) -> None:
-        ...
-
     @validate_parameters(
         rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2Syntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
@@ -3383,14 +3354,6 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 self._rsrc.write(cmd)
             case _:
                 raise ValueError(f"Unsupported syntax '{syntax}' for command set_source_data_arbitrary2.")
-
-    @overload
-    def set_source_data_arbitrary2_dac(self, source_num: int, syntax: SourceDataArbitrary2DacSyntax.ASCII, arb_name: str, value: int) -> None:
-        ...
-
-    @overload
-    def set_source_data_arbitrary2_dac(self, source_num: int, syntax: SourceDataArbitrary2DacSyntax.BLOCKINT16, arb_name: str, binary_block: Union[bytes] | None) -> None:
-        ...
 
     @validate_parameters(
         rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2DacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]

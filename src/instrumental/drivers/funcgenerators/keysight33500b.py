@@ -136,7 +136,8 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                 if isinstance(arg_value, Enum):
                     bound_args.arguments[param_name] = arg_value.name
                 if isinstance(arg_value, list):
-                    bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
+                    block_string = ",".join(str(v) for v in arg_value)
+                    bound_args.arguments[param_name] = header_tag(block_string) + block_string
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator

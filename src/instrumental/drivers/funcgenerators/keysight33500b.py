@@ -136,11 +136,14 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                 if isinstance(arg_value, Enum):
                     bound_args.arguments[param_name] = arg_value.name
                 if isinstance(arg_value, list):
-                    bound_args.arguments[param_name] = ",".join(arg_value)
+                    bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
 
+def header_tag(sequence):
+    size = len(sequence)
+    return f'#{len(str(size))}{size}'
 
 # --- Global Enums ---
 class Boolean(Enum):
@@ -3547,9 +3550,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
     @validate_parameters(
-        rules_list=[{'name': 'arb_name', 'type_options': ['str']}, {'name': 'binary_block', 'type_options': ['list']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrarySyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary(self, arb_name: str, binary_block: list, source_num: int = 1) -> None:
+    def set_source_data_arbitrary(self, syntax: SourceDataArbitrarySyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
@@ -3565,13 +3568,21 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence to be downloaded to.
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
-        cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {binary_block}"
-        self._write_binary_data(cmd)
+        match syntax:
+            case SourceDataArbitrarySyntax.BLOCKREAL32:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
+
+                self._write_binary_data(cmd, data, "BlockReal32")
+            case SourceDataArbitrarySyntax.ASCII:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
+
+                self._rsrc.write(cmd)
+
 
     @validate_parameters(
-        rules_list=[{'name': 'arb_name', 'type_options': ['str']}, {'name': 'value', 'type_options': ['int']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitraryDacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary_dac(self, arb_name: str, value: int, source_num: int = 1) -> None:
+    def set_source_data_arbitrary_dac(self, syntax: SourceDataArbitraryDacSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
@@ -3587,15 +3598,23 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence name to be downloaded to.
                 binary_block (list): Binary block data.
         """
-        cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {value}"
-        self._rsrc.write(cmd)
+        match syntax:
+            case SourceDataArbitraryDacSyntax.ASCII:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
+
+                self._rsrc.write(cmd)
+            case SourceDataArbitraryDacSyntax.BLOCKINT16:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
+
+                self._write_binary_data(cmd, data, "BlockInt16")
+
 
 
 
     @validate_parameters(
-        rules_list=[{'name': 'arb_name', 'type_options': ['str']}, {'name': 'binary_block', 'type_options': ['list']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2Syntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary2(self, arb_name: str, binary_block: list, source_num: int = 1) -> None:
+    def set_source_data_arbitrary2(self, syntax: SourceDataArbitrary2Syntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[2]:DAC) or floating point values (DATA:ARBitrary[2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
@@ -3611,13 +3630,21 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence to be downloaded to.
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
-        cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {binary_block}"
-        self._write_binary_data(cmd)
+        match syntax:
+            case SourceDataArbitrary2Syntax.BLOCKREAL32:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
+
+                self._write_binary_data(cmd, data, "BlockReal32")
+            case SourceDataArbitrary2Syntax.ASCII:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
+
+                self._rsrc.write(cmd)
+
 
     @validate_parameters(
-        rules_list=[{'name': 'arb_name', 'type_options': ['str']}, {'name': 'value', 'type_options': ['int']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2DacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary2_dac(self, arb_name: str, value: int, source_num: int = 1) -> None:
+    def set_source_data_arbitrary2_dac(self, syntax: SourceDataArbitrary2DacSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
@@ -3633,8 +3660,16 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence name to be downloaded to.
                 binary_block (list): Binary block data.
         """
-        cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {value}"
-        self._rsrc.write(cmd)
+        match syntax:
+            case SourceDataArbitrary2DacSyntax.ASCII:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
+
+                self._rsrc.write(cmd)
+            case SourceDataArbitrary2DacSyntax.BLOCKINT16:
+                cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
+
+                self._write_binary_data(cmd, data, "BlockInt16")
+
 
 
     @validate_parameters(

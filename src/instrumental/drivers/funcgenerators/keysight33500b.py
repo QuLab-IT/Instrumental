@@ -3785,9 +3785,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
     @validate_parameters(
-        rules_list=[{'name': 'block_descriptor', 'type_options': ['list']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'block_descriptor', 'type_options': ['str']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_sequence(self, block_descriptor: list, source_num: int = 1) -> None:
+    def set_source_data_sequence(self, block_descriptor: str, source_num: int = 1) -> None:
         """
         Defines a sequence of waveforms already loaded into waveform memory via MMEMory:LOAD:DATA[1|2] or DATA:ARBitrary.
 

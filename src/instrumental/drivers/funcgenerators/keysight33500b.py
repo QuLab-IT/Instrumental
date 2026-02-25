@@ -3576,7 +3576,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 self._write_binary_data(cmd, data, "BlockReal32")
             case SourceDataArbitrarySyntax.ASCII:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
-
+                print(cmd)
                 self._rsrc.write(cmd)
 
 

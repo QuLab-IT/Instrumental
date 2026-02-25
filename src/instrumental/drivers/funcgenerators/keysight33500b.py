@@ -136,8 +136,7 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                 if isinstance(arg_value, Enum):
                     bound_args.arguments[param_name] = arg_value.name
                 if isinstance(arg_value, list):
-                    block_string = ",".join(str(v) for v in arg_value)
-                    bound_args.arguments[param_name] = header_tag(block_string) + block_string
+                    bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
@@ -3571,7 +3570,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         match syntax:
             case SourceDataArbitrarySyntax.BLOCKREAL32:
-                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
+                header_tag = header_tag(data)
+                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {header_tag}{data}"
 
                 self._write_binary_data(cmd, data, "BlockReal32")
             case SourceDataArbitrarySyntax.ASCII:
@@ -3795,7 +3795,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             source_num (int): The channel number identifier. (Range: 1-2)
             block_descriptor (list): Defines a sequence of waveforms
         """
-        cmd = f":SOURce{source_num}:DATA:SEQuence {block_descriptor}"
+        header_tag = header_tag(block_descriptor)
+        cmd = f":SOURce{source_num}:DATA:SEQuence {header_tag}{block_descriptor}"
         self._rsrc.write(cmd)
 
 

@@ -3568,6 +3568,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence to be downloaded to.
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
+        print("Uploading.....")
         match syntax:
             case SourceDataArbitrarySyntax.BLOCKREAL32:
                 tag = header_tag(data)

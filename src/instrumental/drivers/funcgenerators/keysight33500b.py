@@ -3570,8 +3570,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         match syntax:
             case SourceDataArbitrarySyntax.BLOCKREAL32:
-                header_tag = header_tag(data)
-                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {header_tag}{data}"
+                tag = header_tag(data)
+                cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {tag}{data}"
 
                 self._write_binary_data(cmd, data, "BlockReal32")
             case SourceDataArbitrarySyntax.ASCII:
@@ -3795,8 +3795,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
             source_num (int): The channel number identifier. (Range: 1-2)
             block_descriptor (list): Defines a sequence of waveforms
         """
-        header_tag = header_tag(block_descriptor)
-        cmd = f":SOURce{source_num}:DATA:SEQuence {header_tag}{block_descriptor}"
+        tag = header_tag(block_descriptor)
+        cmd = f":SOURce{source_num}:DATA:SEQuence {tag}{block_descriptor}"
         self._rsrc.write(cmd)
 
 

@@ -22,18 +22,18 @@ _BASIC_TYPE_MAP = {
     'float': float,
     'str': str,
     'bool': bool,
-    'Boolean': bool, # Handle a common alias
+    'bool': bool, # Handle a common alias
     'bytes': bytes,
 }
 
-def _parse_boolean(response: str) -> bool:
-    """Convert VISA response to Python boolean.
+def _parse_bool(response: str) -> bool:
+    """Convert VISA response to Python bool.
     
     Args:
         response: String response from device ('0' or '1')
         
     Returns:
-        Python boolean value
+        Python bool value
     """
     return response.strip() in ('1', 'ON', 'on')
 
@@ -137,6 +137,8 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                     bound_args.arguments[param_name] = arg_value.name
                 if isinstance(arg_value, list):
                     bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
+                if isinstance(arg_value, bool):
+                    bound_args.arguments[param_name] = str(int(arg_value))
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
@@ -146,15 +148,6 @@ def header_tag(sequence):
     return f'#{len(str(size))}{size}'
 
 # --- Global Enums ---
-class Boolean(Enum):
-    """
-    Enum for Boolean
-    """
-
-    ON = '1'
-    OFF = '0'
-
-
 class DispWindFocus(Enum):
     """
     Enum for disp_wind_focus
@@ -998,7 +991,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         response = self._rsrc.query(cmd)
         return response
 
-    def get_psc(self) -> Boolean:
+    def get_psc(self) -> bool:
         """
         Power-On Status Clear. Enables (1) or disables (0) clearing of two specific registers at power on.
 
@@ -1013,7 +1006,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'psc', 'type_options': ['int']}]
     )
-    def set_psc(self, psc: int) -> Boolean:
+    def set_psc(self, psc: int) -> bool:
         """
         Power-On Status Clear. Enables (1) or disables (0) clearing of two specific registers at power on.
 
@@ -1182,7 +1175,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         self._rsrc.write(cmd)
 
 
-    def get_calibration_secure_state(self) -> Boolean:
+    def get_calibration_secure_state(self) -> bool:
         """
         Unsecures or secures the instrument for calibration. 
 
@@ -1195,9 +1188,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'code', 'type_options': ['str']}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'code', 'type_options': ['str']}]
     )
-    def set_calibration_secure_state(self, state: Boolean, code: str) -> Boolean:
+    def set_calibration_secure_state(self, state: bool, code: str) -> bool:
         """
         Unsecures or secures the instrument for calibration. 
 
@@ -1301,7 +1294,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_display(self) -> Boolean:
+    def get_display(self) -> bool:
         """
         Disables or enables the front-panel display.
 
@@ -1314,9 +1307,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}]
     )
-    def set_display(self, state: Boolean) -> Boolean:
+    def set_display(self, state: bool) -> bool:
         """
         Disables or enables the front-panel display.
 
@@ -1650,7 +1643,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_initiate_continuous(self, initiate_num: int = 1) -> Boolean:
+    def get_initiate_continuous(self, initiate_num: int = 1) -> bool:
         """
         Specifies whether the trigger system for one channel always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -1665,9 +1658,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_initiate_continuous(self, state: Boolean, initiate_num: int = 1) -> Boolean:
+    def set_initiate_continuous(self, state: bool, initiate_num: int = 1) -> bool:
         """
         Specifies whether the trigger system for one channel always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -1682,9 +1675,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         self._rsrc.write(cmd)
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'initiate_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_initiate_continuous_all(self, state: Boolean, initiate_num: int = 1) -> None:
+    def set_initiate_continuous_all(self, state: bool, initiate_num: int = 1) -> None:
         """
         Specifies whether the trigger system for both channels (ALL) always returns to the "wait-for-trigger" state (ON) or remains in the "idle" state (OFF), ignoring triggers until INITiate:IMMediate is issued.
 
@@ -1726,7 +1719,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_lxi_identify_state(self) -> Boolean:
+    def get_lxi_identify_state(self) -> bool:
         """
         Turns the LXI Identify Indicator on the display on or off.
 
@@ -1739,9 +1732,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}]
     )
-    def set_lxi_identify_state(self, state: Boolean) -> Boolean:
+    def set_lxi_identify_state(self, state: bool) -> bool:
         """
         Turns the LXI Identify Indicator on the display on or off.
 
@@ -1756,7 +1749,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_lxi_mdns_enable(self) -> Boolean:
+    def get_lxi_mdns_enable(self) -> bool:
         """
         Disables or enables the Multicast Domain Name System (mDNS).
 
@@ -1769,9 +1762,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}]
     )
-    def set_lxi_mdns_enable(self, state: Boolean) -> Boolean:
+    def set_lxi_mdns_enable(self, state: bool) -> bool:
         """
         Disables or enables the Multicast Domain Name System (mDNS).
 
@@ -1934,7 +1927,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         self._rsrc.write(cmd)
 
 
-    def get_memory_state_recall_auto(self) -> Boolean:
+    def get_memory_state_recall_auto(self) -> bool:
         """
         Disables or enables automatic recall of instrument state in storage location "0" at power on.
 
@@ -1947,9 +1940,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}]
     )
-    def set_memory_state_recall_auto(self, state: Boolean) -> Boolean:
+    def set_memory_state_recall_auto(self, state: bool) -> bool:
         """
         Disables or enables automatic recall of instrument state in storage location "0" at power on.
 
@@ -1964,7 +1957,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
 
-    def get_memory_state_valid(self) -> Boolean:
+    def get_memory_state_valid(self) -> bool:
         """
         Indicates whether a valid state is currently stored in a storage location.
 
@@ -1984,8 +1977,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     )
     def get_mmemory_catalog_all(self, mmemory_num: int = 1) -> Tuple[int, int, str]:
         """
-        Returns a list of all files in the current mass storage directory, includin
-    g internal storage and the USB drive.
+        Returns a list of all files in the current mass storage directory, including
+        internal storage and the USB drive.
 
         Args:
             mmemory_num (int): The channel number identifier. (Range: 1-2)
@@ -2369,7 +2362,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_output(self, output_num: int = 1) -> Boolean:
+    def get_output(self, output_num: int = 1) -> bool:
         """
         Enables or disables the front-panel output connector.
 
@@ -2384,9 +2377,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_output(self, state: Boolean, output_num: int = 1) -> Boolean:
+    def set_output(self, state: bool, output_num: int = 1) -> bool:
         """
         Enables or disables the front-panel output connector.
 
@@ -2508,7 +2501,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_output_sync(self, output_num: int = 1) -> Boolean:
+    def get_output_sync(self, output_num: int = 1) -> bool:
         """
         Disables or enables the front-panel Sync connector.  
 
@@ -2523,9 +2516,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_output_sync(self, state: Boolean, output_num: int = 1) -> Boolean:
+    def set_output_sync(self, state: bool, output_num: int = 1) -> bool:
         """
         Disables or enables the front-panel Sync connector.  
 
@@ -2648,7 +2641,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_output_trigger(self, output_num: int = 1) -> Boolean:
+    def get_output_trigger(self, output_num: int = 1) -> bool:
         """
         Disables or enables the "trigger out" signal for sweep and burst modes.
 
@@ -2663,9 +2656,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'output_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_output_trigger(self, state: Boolean, output_num: int = 1) -> Boolean:
+    def set_output_trigger(self, state: bool, output_num: int = 1) -> bool:
         """
         Disables or enables the "trigger out" signal for sweep and burst modes.
 
@@ -2932,7 +2925,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_burst_state(self, source_num: int = 1) -> Boolean:
+    def get_source_burst_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables burst mode.
 
@@ -2947,20 +2940,20 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'boolean', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'bool', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_burst_state(self, boolean: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_burst_state(self, bool: bool, source_num: int = 1) -> bool:
         """
         Enables or disables burst mode.
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            boolean (bool): Enables or disables burst mode.
+            bool (bool): Enables or disables burst mode.
 
         Returns:
             bool: Returns the current state of the burst mode.
         """
-        cmd = f":SOURce{source_num}:BURSt:STATe {boolean}"
+        cmd = f":SOURce{source_num}:BURSt:STATe {bool}"
         self._rsrc.write(cmd)
 
 
@@ -3003,7 +2996,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_am_dssc(self, source_num: int = 1) -> Boolean:
+    def get_source_am_dssc(self, source_num: int = 1) -> bool:
         """
         Selects Amplitude Modulation mode 
 
@@ -3018,9 +3011,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_am_dssc(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_am_dssc(self, state: bool, source_num: int = 1) -> bool:
         """
         Selects Amplitude Modulation mode 
 
@@ -3144,7 +3137,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_am_state(self, source_num: int = 1) -> Boolean:
+    def get_source_am_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -3159,9 +3152,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_am_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_am_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -3457,7 +3450,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_bpsk_state(self, source_num: int = 1) -> Boolean:
+    def get_source_bpsk_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -3472,9 +3465,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_bpsk_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_bpsk_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -3971,7 +3964,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_fm_state(self, source_num: int = 1) -> Boolean:
+    def get_source_fm_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -3988,9 +3981,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_fm_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_fm_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -4185,7 +4178,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_frequency_couple_state(self, source_num: int = 1) -> Boolean:
+    def get_source_frequency_couple_state(self, source_num: int = 1) -> bool:
         """
         Enables/disables frequency coupling between channels in a two-channel instrument.
 
@@ -4200,9 +4193,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_frequency_couple_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_frequency_couple_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables/disables frequency coupling between channels in a two-channel instrument.
 
@@ -4468,7 +4461,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_fskey_state(self, source_num: int = 1) -> Boolean:
+    def get_source_fskey_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -4483,9 +4476,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_fskey_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_fskey_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -4720,7 +4713,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_function_arbitrary_balance_state(self, source_num: int = 1) -> Boolean:
+    def get_source_function_arbitrary_balance_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables channel balancing for dual arbitrary waveforms 
 
@@ -4735,9 +4728,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_function_arbitrary_balance_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_function_arbitrary_balance_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables channel balancing for dual arbitrary waveforms 
 
@@ -4918,7 +4911,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_function_arbitrary_skew_state(self, source_num: int = 1) -> Boolean:
+    def get_source_function_arbitrary_skew_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables skew time compensation (FUNCtion:ARBitrary:SKEW:TIME). This is always OFF for modulated signals, sweeps, lists, and bursts.
 
@@ -4933,9 +4926,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_function_arbitrary_skew_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_function_arbitrary_skew_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables skew time compensation (FUNCtion:ARBitrary:SKEW:TIME). This is always OFF for modulated signals, sweeps, lists, and bursts.
 
@@ -5804,7 +5797,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_phase_unlock_error_state(self, source_num: int = 1) -> Boolean:
+    def get_source_phase_unlock_error_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables the generation of an error if the phase-lock is ever lost by the instrument timebase.
 
@@ -5819,9 +5812,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_phase_unlock_error_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_phase_unlock_error_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables the generation of an error if the phase-lock is ever lost by the instrument timebase.
 
@@ -5983,7 +5976,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_pm_state(self, source_num: int = 1) -> Boolean:
+    def get_source_pm_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -5998,9 +5991,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_pm_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_pm_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -6195,7 +6188,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_pwm_state(self, source_num: int = 1) -> Boolean:
+    def get_source_pwm_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -6210,9 +6203,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_pwm_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_pwm_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables modulation.
 
@@ -6336,7 +6329,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_rate_couple_state(self, source_num: int = 1) -> Boolean:
+    def get_source_rate_couple_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables sample rate coupling between channels, or allows one-time copying of one channel's sample rate into the other channel.
 
@@ -6351,9 +6344,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_rate_couple_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_rate_couple_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables sample rate coupling between channels, or allows one-time copying of one channel's sample rate into the other channel.
 
@@ -6603,7 +6596,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_sum_state(self, source_num: int = 1) -> Boolean:
+    def get_source_sum_state(self, source_num: int = 1) -> bool:
         """
         Disables or enables SUM function.
 
@@ -6618,9 +6611,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_sum_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_sum_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Disables or enables SUM function.
 
@@ -6744,7 +6737,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_sweep_state(self, source_num: int = 1) -> Boolean:
+    def get_source_sweep_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables the sweep.
 
@@ -6759,9 +6752,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_sweep_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_sweep_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables the sweep.
 
@@ -6962,7 +6955,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_voltage_limit_state(self, source_num: int = 1) -> Boolean:
+    def get_source_voltage_limit_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables output amplitude voltage limits.
 
@@ -6977,9 +6970,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_voltage_limit_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_voltage_limit_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables output amplitude voltage limits.
 
@@ -6998,7 +6991,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_voltage_range_auto(self, source_num: int = 1) -> Boolean:
+    def get_source_voltage_range_auto(self, source_num: int = 1) -> bool:
         """
         Disables or enables voltage autoranging for all functions.
 
@@ -7015,7 +7008,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'state', 'type_options': ['int', 'SourVoltRangAuto']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_voltage_range_auto(self, state: Union[int, SourVoltRangAuto], source_num: int = 1) -> Boolean:
+    def set_source_voltage_range_auto(self, state: Union[int, SourVoltRangAuto], source_num: int = 1) -> bool:
         """
         Disables or enables voltage autoranging for all functions.
 
@@ -7069,7 +7062,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_source_voltage_couple_state(self, source_num: int = 1) -> Boolean:
+    def get_source_voltage_couple_state(self, source_num: int = 1) -> bool:
         """
         Enables or disables the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument. 
 
@@ -7084,9 +7077,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_voltage_couple_state(self, state: Boolean, source_num: int = 1) -> Boolean:
+    def set_source_voltage_couple_state(self, state: bool, source_num: int = 1) -> bool:
         """
         Enables or disables the maintaining of the same amplitude, offset, range, load, and units on both channels of a two-channel instrument. 
 
@@ -7349,7 +7342,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_system_beeper_state(self, system_num: int = 1) -> Boolean:
+    def get_system_beeper_state(self, system_num: int = 1) -> bool:
         """
         Disables or enables the beeper tone heard when an error is generated from the front panel or remote interface. 
 
@@ -7364,9 +7357,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_system_beeper_state(self, state: Boolean, system_num: int = 1) -> Boolean:
+    def set_system_beeper_state(self, state: bool, system_num: int = 1) -> bool:
         """
         Disables or enables the beeper tone heard when an error is generated from the front panel or remote interface. 
 
@@ -7385,7 +7378,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_system_communicate_enable(self, system_num: int = 1) -> Boolean:
+    def get_system_communicate_enable(self, system_num: int = 1) -> bool:
         """
         Disables or enables the GPIB, USB, or LAN remote interface.
 
@@ -7400,9 +7393,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'interface', 'type_options': ['SystCommEnableCommandParameter2clone']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'interface', 'type_options': ['SystCommEnableCommandParameter2clone']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_system_communicate_enable(self, state: Boolean, interface: SystCommEnableCommandParameter2clone, system_num: int = 1) -> Boolean:
+    def set_system_communicate_enable(self, state: bool, interface: SystCommEnableCommandParameter2clone, system_num: int = 1) -> bool:
         """
         Disables or enables the GPIB, USB, or LAN remote interface.
 
@@ -7475,7 +7468,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_system_communicate_lan_dhcp(self, system_num: int = 1) -> Boolean:
+    def get_system_communicate_lan_dhcp(self, system_num: int = 1) -> bool:
         """
         Disables or enables instrument's use of DHCP.
 
@@ -7490,9 +7483,9 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         return response
 
     @validate_parameters(
-        rules_list=[{'name': 'state', 'type_options': ['Boolean']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'state', 'type_options': ['bool']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_system_communicate_lan_dhcp(self, state: Boolean, system_num: int = 1) -> Boolean:
+    def set_system_communicate_lan_dhcp(self, state: bool, system_num: int = 1) -> bool:
         """
         Disables or enables instrument's use of DHCP.
 
@@ -8009,7 +8002,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_system_license_install(self, system_num: int = 1) -> Boolean:
+    def get_system_license_install(self, system_num: int = 1) -> bool:
         """
         This command installs all licenses from a specified file or from all license files in the specified folder. 
 
@@ -8026,7 +8019,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'fileFolder', 'type_options': ['str']}, {'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_system_license_install(self, fileFolder: str, system_num: int = 1) -> Boolean:
+    def set_system_license_install(self, fileFolder: str, system_num: int = 1) -> bool:
         """
         This command installs all licenses from a specified file or from all license files in the specified folder. 
 
@@ -8095,7 +8088,7 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
     @validate_parameters(
         rules_list=[{'name': 'system_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def get_system_lock_request(self, system_num: int = 1) -> Boolean:
+    def get_system_lock_request(self, system_num: int = 1) -> bool:
         """
         Requests a lock of the current I/O interface.
 

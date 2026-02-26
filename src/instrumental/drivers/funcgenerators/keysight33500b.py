@@ -7901,7 +7901,8 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
         """
         cmd = f":SYSTem{system_num}:ERRor?"
         response = self._rsrc.query(cmd)
-        return response
+        err_code, description = response.split(',')
+        return int(err_code), description
 
 
     @validate_parameters(

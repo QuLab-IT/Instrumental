@@ -133,7 +133,7 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
                 if param_name == 'self':
                     continue
 
-                if isinstance(arg_value, Enum):
+                if isinstance(arg_value, Enum) and not isinstance(arg_value, CommandSyntax):
                     bound_args.arguments[param_name] = arg_value.name
                 if isinstance(arg_value, list):
                     bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
@@ -786,36 +786,13 @@ class UnitAngleclone(Enum):
 
 
 # --- Command Syntax Enums ---
-class SourceDataArbitrary2DacSyntax(Enum):
+class CommandSyntax(Enum):
     """
-    Enum for command syntaxes of SOURce:DATA:ARBitrary2:DAC
-    """
-    ASCII = "Ascii"
-    BLOCKINT16 = "BlockInt16"
-
-
-class SourceDataArbitrary2Syntax(Enum):
-    """
-    Enum for command syntaxes of SOURce:DATA:ARBitrary2
-    """
-    BLOCKREAL32 = "BlockReal32"
-    ASCII = "Ascii"
-
-
-class SourceDataArbitraryDacSyntax(Enum):
-    """
-    Enum for command syntaxes of SOURce:DATA:ARBitrary:DAC
+    Enum for command syntaxes
     """
     ASCII = "Ascii"
     BLOCKINT16 = "BlockInt16"
-
-
-class SourceDataArbitrarySyntax(Enum):
-    """
-    Enum for command syntaxes of SOURce:DATA:ARBitrary
-    """
     BLOCKREAL32 = "BlockReal32"
-    ASCII = "Ascii"
 
 
 
@@ -3550,15 +3527,15 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
     @validate_parameters(
-        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrarySyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['CommandSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary(self, syntax: SourceDataArbitrarySyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
+    def set_source_data_arbitrary(self, syntax: CommandSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            syntax (SourceDataArbitrarySyntax): The syntax variant to use for this command
+            syntax (CommandSyntax): The syntax variant to use for this command
 
             For syntax BlockReal32:
                 arb_name (str): The arbitrary sequence to be downloaded to.
@@ -3568,29 +3545,29 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 arb_name (str): The arbitrary sequence to be downloaded to.
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
-        print("Uploading.....")
+        print(f"Uploading..... {syntax}, type:{type(syntax)}")
         match syntax:
-            case SourceDataArbitrarySyntax.BLOCKREAL32:
+            case CommandSyntax.BLOCKREAL32:
                 tag = header_tag(data)
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {tag}{data}"
                 print(cmd)
                 self._write_binary_data(cmd, data, "BlockReal32")
-            case SourceDataArbitrarySyntax.ASCII:
+            case CommandSyntax.ASCII:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary {arb_name}, {data}"
                 print(cmd)
                 self._rsrc.write(cmd)
 
 
     @validate_parameters(
-        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitraryDacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['CommandSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary_dac(self, syntax: SourceDataArbitraryDacSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
+    def set_source_data_arbitrary_dac(self, syntax: CommandSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            syntax (SourceDataArbitraryDacSyntax): The syntax variant to use for this command
+            syntax (CommandSyntax): The syntax variant to use for this command
 
             For syntax Ascii:
                 arb_name (str): The arbitrary sequence name to be downloaded to.
@@ -3601,11 +3578,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 binary_block (list): Binary block data.
         """
         match syntax:
-            case SourceDataArbitraryDacSyntax.ASCII:
+            case CommandSyntax.ASCII:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
-            case SourceDataArbitraryDacSyntax.BLOCKINT16:
+            case CommandSyntax.BLOCKINT16:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary:DAC {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockInt16")
@@ -3614,15 +3591,15 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
 
 
     @validate_parameters(
-        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2Syntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['CommandSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary2(self, syntax: SourceDataArbitrary2Syntax, arb_name: str, data: Any, source_num: int = 1) -> None:
+    def set_source_data_arbitrary2(self, syntax: CommandSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[2]:DAC) or floating point values (DATA:ARBitrary[2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            syntax (SourceDataArbitrary2Syntax): The syntax variant to use for this command
+            syntax (CommandSyntax): The syntax variant to use for this command
 
             For syntax BlockReal32:
                 arb_name (str): The arbitrary sequence to be downloaded to.
@@ -3633,26 +3610,26 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 value (float): List of values to be downloaded into waveform memory. (Repeatable: *)
         """
         match syntax:
-            case SourceDataArbitrary2Syntax.BLOCKREAL32:
+            case CommandSyntax.BLOCKREAL32:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockReal32")
-            case SourceDataArbitrary2Syntax.ASCII:
+            case CommandSyntax.ASCII:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2 {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
 
 
     @validate_parameters(
-        rules_list=[{'name': 'syntax', 'type_options': ['SourceDataArbitrary2DacSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
+        rules_list=[{'name': 'syntax', 'type_options': ['CommandSyntax']}, {'name': 'arb_name', 'type_options': ['str']}, {'name': 'data', 'type_options': ['Any']}, {'name': 'source_num', 'type_options': ['int'], 'min_val': 1, 'max_val': 2}]
     )
-    def set_source_data_arbitrary2_dac(self, syntax: SourceDataArbitrary2DacSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
+    def set_source_data_arbitrary2_dac(self, syntax: CommandSyntax, arb_name: str, data: Any, source_num: int = 1) -> None:
         """
         Downloads integer values representing DAC codes (DATA:ARBitrary[1|2]:DAC) or floating point values (DATA:ARBitrary[1|2]) into waveform volatile memory as either a list of comma separated values or binary block of data.
 
         Args:
             source_num (int): The channel number identifier. (Range: 1-2)
-            syntax (SourceDataArbitrary2DacSyntax): The syntax variant to use for this command
+            syntax (CommandSyntax): The syntax variant to use for this command
 
             For syntax Ascii:
                 arb_name (str): The arbitrary sequence name to be downloaded to.
@@ -3663,11 +3640,11 @@ class Keysight33500B(FunctionGenerator, VisaMixin):
                 binary_block (list): Binary block data.
         """
         match syntax:
-            case SourceDataArbitrary2DacSyntax.ASCII:
+            case CommandSyntax.ASCII:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
 
                 self._rsrc.write(cmd)
-            case SourceDataArbitrary2DacSyntax.BLOCKINT16:
+            case CommandSyntax.BLOCKINT16:
                 cmd = f":SOURce{source_num}:DATA:ARBitrary2:DAC {arb_name}, {data}"
 
                 self._write_binary_data(cmd, data, "BlockInt16")

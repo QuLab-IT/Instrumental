@@ -3,13 +3,15 @@
     Controls a SLM as if it was an external monitor
 """
 
-from typing import Final, Literal, TypedDict
-import time
 import cv2
-import screeninfo
+import logging
 import mss
 import numpy as np
-from .. import colorLog as log
+import screeninfo
+import time
+
+from typing import Final, Literal, TypedDict
+
 
 _INST_PARAMS = ['port']
 _INST_CLASSES = ['ExulusHD']
@@ -50,7 +52,11 @@ class ExulusHD:
     """SLM (Spatial light modulator) controller
 
     Args:
-        config (SLMConfig | None, optional): SLM config. Defaults to None.
+        screen_id (int, optional): Screen ID for the SLM. Defaults to 0.
+        force_single_monitor (bool, optional): Forces the SLM controller to start
+            even if there is only one screen. Defaults to False.
+        delay (int, optional): Minimum delay, in milliseconds, after updating the SLM.
+            Defaults to 120.
 
     Raises:
         ValueError: Invalid screen id (No external screen were found)
@@ -60,27 +66,22 @@ class ExulusHD:
 
     WINDOW_NAME: Final[str] = "projector"
 
-    def __init__(self, config: SLMConfig | None = None):
-        # Obtain config
-        if config is None:
-            self.config = ExulusHD.default_config()
-        else:
-            self.config = config
-
-        self.screen_id = self.config["screen_id"]
-        self.delay = self.config["delay"]
-
+    def __init__(self, screen_id: int = 0, force_single_monitor: bool = False, delay: int = 120):
+        self.screen_id = screen_id
+        self.delay = delay
+        self.force_single_monitor = force_single_monitor
+    
+    def initialize(self):
         # Get monitors
         monitors = screeninfo.get_monitors()
 
-        if len(monitors) < 2 and not self.config["force_single_monitor"]:
+        if len(monitors) < 2 and not self.force_single_monitor:
             raise ValueError("No external monitor detected")
 
         if self.screen_id < 0 or self.screen_id >= len(monitors):
             raise IndexError(f"No external monitor detected, with id: {self.screen_id}")
 
-        log.debug("Found " + str(len(monitors)) + " monitors.")
-        # log.debug(screeninfo.get_monitors())
+        logging.debug("Found " + str(len(monitors)) + " monitors.")
 
         # Select screen by id or principal if not stated.
         self.screen = monitors[self.screen_id]
@@ -90,6 +91,22 @@ class ExulusHD:
 
         # Checks if the SLM is ready to use
         self.self_check()
+
+    @classmethod
+    def from_config(cls, config: SLMConfig) -> 'ExulusHD':
+        """Create an ExulusHD instance from a config object.
+
+        Args:
+            config (SLMConfig): The configuration object.
+
+        Returns:
+            ExulusHD: An instance of ExulusHD.
+        """
+        return cls(
+            screen_id=config["screen_id"],
+            force_single_monitor=config["force_single_monitor"],
+            delay=config["delay"]
+        )
 
     def update_array(self, image: cv2.typing.MatLike):
         """Updates the BGR image projected onto the SLM
@@ -156,17 +173,21 @@ class ExulusHD:
         """
         rand_img = (np.random.standard_normal([3, 3, 3]) * 255).astype("uint8")
         rand_img = cv2.resize(
-            rand_img, [self.width, self.height], interpolation=cv2.INTER_NEAREST
+            rand_img,
+            [self.width, self.height],
+            interpolation=cv2.INTER_NEAREST,
         )
         self.update_array(rand_img)
+        time.sleep(self.delay / 1000 + 0.1)  # Wait for the screen to update
         screenshot = self.capture_screen()
         self.close()
         rand_img_rgb = cv2.cvtColor(rand_img, cv2.COLOR_RGB2BGR)
 
-        absolute_diferrence = np.abs(np.sum(screenshot - rand_img_rgb))
-        if absolute_diferrence > 1:
+        absolute_difference = np.abs(np.sum(screenshot - rand_img_rgb))
+        if absolute_difference > 1:
+            self.close()
             raise RuntimeError(
-                f"The image is not shown as itended on the SLM | diff:{absolute_diferrence}"
+                f"The image is not shown as itended on the SLM | diff:{absolute_difference}"
             )
 
     def close(self):
@@ -183,4 +204,4 @@ class ExulusHD:
         Returns:
             SLMConfig: Default SLM config
         """
-        return default()
+        return SLMConfig.default_config()

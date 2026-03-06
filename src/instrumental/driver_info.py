@@ -46,7 +46,7 @@ driver_info = OrderedDict([
     }),
     ('funcgenerators.keysight33500b', {
         'params': ['visa_address'],
-        'classes': ['Keysight33500B'],
+        'classes': ['Keysight33500B', 'pyvisa'],
         'imports': ['instrumental'],
         'visa_info': {
             'Keysight33500B': ('Agilent Technologies', ['33509B', '33510B', '33511B', '33512B', '33519B', '33520B', '33521B', '33522B', '33609A', '33610A', '33611A', '33612A', '33619A', '33620A', '33621A', '33622A']),

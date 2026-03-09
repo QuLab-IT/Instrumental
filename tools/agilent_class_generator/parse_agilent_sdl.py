@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup, Tag, NavigableString
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Optional, Union, Any
 from enum import Enum
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
+import json
 from utils import sanitize_enum_name, get_python_type, get_python_type_converter
 
 
@@ -90,7 +91,7 @@ class ParameterType:
             "NR1Numeric": "int",
             "NR2Numeric": "float",
             "NR3Numeric": "float",
-            "ArbitraryBlock": "bytes",
+            "ArbitraryBlock": "list",
         }
         
         return type_mapping.get(self.type_name, "Any")
@@ -105,7 +106,12 @@ class ResponseType:
             return sanitize_enum_name(self.enum_ref)
         return self.type_name
     
-
+all_semantic_types = {
+    "Boolean": "bool",
+    "Integer": "int",
+    "Real": "float",
+    "String": "str",
+}
 @dataclass(frozen=True)
 class ParameterData:
     name: str
@@ -113,6 +119,7 @@ class ParameterData:
     description: str
     parameter_types: List[ParameterType]
     repeat: Optional[str] = None
+    optional: bool = False
 
 
     def to_python_type(self) -> str:
@@ -133,12 +140,19 @@ class ParameterData:
                 "Integer": "int",
                 "Real": "float",
                 "String": "str",
+                "1-D Array": "list",
             }
             if self.semantic_type in semantic_mapping:
                 return semantic_mapping[self.semantic_type]
-        
         types = [param_type.to_python_type() for param_type in self.parameter_types]
-        return f"Union[{', '.join(types)}] | None"
+        
+        if len(types) == 1:
+            types_str = types[0]
+        else:
+            types_str = f"Union[{', '.join(types)}]"
+        if self.optional:
+            return f"Optional[{types_str}]"
+        return types_str
 
 @dataclass(frozen=True)
 class CommandSyntax:
@@ -150,7 +164,8 @@ class ResponseData:
     name: str
     semantic_type: str
     description: str
-    response_types: List[ParameterType]
+    repeat: str
+    response_types: List[ResponseType]
 
     def to_python_type(self) -> str:
         """
@@ -179,13 +194,19 @@ class ResponseData:
         return get_python_type_converter(self.semantic_type)
 
 @dataclass(frozen=True)
+class QuerySyntax:
+    name: str
+    responses: List[ResponseData]
+    parameters: List[ParameterData]
+
+@dataclass(frozen=True)
 class CommandInfo:
     synopsis: str
     has_query: bool
     has_write: bool
     path: List[str]
     command_syntaxes: List[CommandSyntax]
-    responses: List[ResponseData]
+    query_syntaxes:List[QuerySyntax]
 
 @dataclass(frozen=True)
 class NodeSuffix:
@@ -394,7 +415,7 @@ def parse_command_node(command_node: Tag) -> CommandInfo:
     command_syntaxes: List[CommandSyntax] = []
     if has_write:
         for cmd_syntax in command_node.find_all('CommandSyntax'):
-            parameters: List[ParameterData] = []
+            command_parameters: List[ParameterData] = []
             for param in cmd_syntax.find_all('Parameter'):
                 param_type_node = param.find('ParameterType')
                 semantic_type = param.get('semanticType', '')
@@ -405,20 +426,22 @@ def parse_command_node(command_node: Tag) -> CommandInfo:
                     semantic_type=semantic_type,
                     description=param.get('description', ''),
                     parameter_types=param_types,
-                    repeat=param.get('repeat') if param.get('repeat') else None
+                    repeat=param.get('repeat') if param.get('repeat') else None,
+                    optional=param.get('optional') == 'true' if param.get('optional') else False
                 )
-                parameters.append(param_data)
+                command_parameters.append(param_data)
             
             syntax_data = CommandSyntax(
                 name=cmd_syntax.get('name', ''),
-                parameters=parameters
+                parameters=command_parameters
             )
             command_syntaxes.append(syntax_data)
     
     # Parse responses from QuerySyntax
-    responses: List[ResponseData] = []
+    query_syntaxes: List[QuerySyntax] = []
     if has_query:
         for query_syntax in command_node.find_all('QuerySyntax'):
+            responses: List[ResponseData] = []
             for response in query_syntax.find_all('Response'):
                 response_type_node = response.find('ResponseType')
                 response_types = parse_response_type(response_type_node) if response_type_node else []
@@ -427,9 +450,31 @@ def parse_command_node(command_node: Tag) -> CommandInfo:
                     name=response.get('name', ''),
                     semantic_type=response.get('semanticType', ''),
                     description=response.get('description', ''),
+                    repeat=response.get('repeat', 'false'),
                     response_types=response_types
                 )
                 responses.append(response_data)
+            
+            query_parameters: List[ParameterData] = []
+            for parameter in query_syntax.find_all('Parameter'):
+                parameter_type_node = parameter.find('ParameterType')
+                response_types = parse_parameter_type(parameter_type_node) if parameter_type_node else []
+                
+                response_data = ParameterData(
+                    name=parameter.get('name', ''),
+                    semantic_type=parameter.get('semanticType', ''),
+                    description=parameter.get('description', ''),
+                    parameter_types=response_types,
+                    optional=parameter.get('optional') == 'true' if parameter.get('optional') else False
+                )
+                query_parameters.append(response_data)
+
+            syntax_data = QuerySyntax(
+                name=query_syntax.get('name', ''),
+                responses=responses,
+                parameters=query_parameters
+            )
+            query_syntaxes.append(syntax_data)
     
     return CommandInfo(
         synopsis=command_node.find('Synopsis').text if command_node.find('Synopsis') else '',
@@ -437,7 +482,7 @@ def parse_command_node(command_node: Tag) -> CommandInfo:
         has_write=has_write,
         path=command_path,
         command_syntaxes=command_syntaxes,
-        responses=responses
+        query_syntaxes=query_syntaxes,
     )
 
 def parse_node_suffixes(node: Tag) -> Optional[NodeSuffix]:
@@ -692,9 +737,25 @@ def extract_supported_models(idf_file: str) -> List[str]:
         return []
 
 if __name__ == "__main__":
-    file_path: str = "33500B_program_reference/33500B.sdl"
+    file_path: str = "docs/33500B.sdl"
     parsed_data: ParsedData = parse_sdl_file(file_path)
     
+    # Save parsed_data to JSON file
+    def serialize_parsed_data(obj):
+        """Helper function to serialize non-standard types for JSON"""
+        if isinstance(obj, Enum):
+            return obj.value
+        if hasattr(obj, '__dataclass_fields__'):
+            return asdict(obj)
+        return str(obj)
+    
+    # Convert parsed_data to dictionary and save to JSON
+    parsed_dict = asdict(parsed_data)
+    with open('parsed_data.json', 'w') as f:
+        json.dump(parsed_dict, f, indent=2, default=serialize_parsed_data)
+    
+    print("Parsed data saved to parsed_data.json")
+
     # Print global definitions
     # print_global_definitions(parsed_data.global_definitions)
     

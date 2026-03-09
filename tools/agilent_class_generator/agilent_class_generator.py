@@ -82,10 +82,11 @@ def generate_method_docstring(cmd_info: CommandInfo, is_write: bool, nodes: List
                         else:
                             docstring += f"        {param.name} ({param.to_python_type()}): {param_desc}\n"
 
-    if not is_write and cmd_info.responses:
+    if cmd_info.query_syntaxes and cmd_info.query_syntaxes[0].responses:
         docstring += "\n    Returns:\n"
-        for response in cmd_info.responses:
-            docstring += f"        {response.to_python_type()}: {response.description}\n"
+        if cmd_info.query_syntaxes[0].responses:
+            for response in cmd_info.query_syntaxes[0].responses:
+                docstring += f"        {response.to_python_type()}: {response.description}\n"
 
     docstring += '''    """'''
     return docstring
@@ -122,21 +123,24 @@ def parameter_types_as_string(types: List[str]) -> str:
     if len(concrete_types) == 1: return concrete_types[0]
     return f"Union[{', '.join(concrete_types)}]"
 
-def get_response_type(response: ResponseData, definitions: Dict[str, GlobalDefinition] = None) -> str:
-    types = []
-    if response.response_types:
-        for rt in response.response_types:
-            if rt.enum_ref:
-                enum_original_name = definitions[rt.enum_ref].name if definitions and rt.enum_ref in definitions else rt.enum_ref
-                type_name = sanitize_enum_name(enum_original_name)
-            else:
-                type_name = response.to_python_type() 
-            if type_name not in types:
-                types.append(type_name)
-    
-    actual_types = types if types else ["Any"]
-    if len(actual_types) == 1: return actual_types[0]
-    return f"Union[{', '.join(actual_types)}]"
+def response_types_as_string(responses: List[ResponseData], definitions: Dict[str, GlobalDefinition] = None) -> str:
+    response_strings = []
+    for resp in responses:
+        types = []
+        if resp.response_types:
+            for rt in resp.response_types:
+                if rt.enum_ref:
+                    enum_original_name = definitions[rt.enum_ref].name if definitions and rt.enum_ref in definitions else rt.enum_ref
+                    type_name = sanitize_enum_name(enum_original_name)
+                else:
+                    type_name = resp.to_python_type() 
+                if type_name not in types:
+                    types.append(type_name)
+        
+        actual_types = types if types else ["Any"]
+        if len(actual_types) == 1: response_strings.append(actual_types[0])
+        else: response_strings.append(f"Union[{', '.join(actual_types)}]")
+    return f"Tuple[{', '.join(response_strings)}]" if len(response_strings) > 1 else response_strings[0]
 
 
 def generate_binary_format_methods_code() -> str:
@@ -220,6 +224,9 @@ def _process_command_for_template(
     params_sig_parts: List[str] = []
     validation_rules_list: List[Dict[str, Any]] = []
 
+    # Treat commands with multiple write syntaxes as multi‑syntax commands
+    # so that we can expose a single Python method with a `syntax` enum
+    # argument and a unified `data` parameter when appropriate.
     cmd_dict['is_single_syntax'] = len(cmd_info.command_syntaxes) <= 1
     cmd_dict['syntaxes_info'] = []
 
@@ -286,11 +293,15 @@ def _process_command_for_template(
     cmd_dict['parameters_signature_parts'] = params_sig_parts
     cmd_dict['parameter_validation_rules_repr'] = repr(validation_rules_list)
 
-    if is_query and cmd_info.responses:
-        response_type_list = get_response_type(cmd_info.responses[0], global_defs_map)
+    if cmd_info.query_syntaxes and cmd_info.query_syntaxes[0].responses:
+        response_type_list = response_types_as_string(cmd_info.query_syntaxes[0].responses, global_defs_map)
         # get_response_type already returns a string, potentially Union string or single type
         cmd_dict['return_type_annotation'] = f" -> {response_type_list}"
-        cmd_dict['response_converter'] = cmd_info.responses[0].to_python_type_converter()
+        response_converters = [response.to_python_type_converter() for response in cmd_info.query_syntaxes[0].responses]
+        if len(response_converters) == 1:
+            cmd_dict['response_converter'] = f"{response_converters[0]}(response)"
+        else:
+            cmd_dict['response_converter'] = f"({', '.join(response_converters)})"
     elif not is_query:
         cmd_dict['return_type_annotation'] = " -> None"
     else: 
@@ -537,7 +548,9 @@ def generate_code(parsed_data: ParsedData, sdl_file_path: str, supported_mdls: L
 
     print("Preparing data for template...")
     template_input_data = prepare_template_data(parsed_data, sdl_file_path, supported_mdls)
-    
+    with open('parsed_data.json', 'w') as f:
+        import json
+        json.dump(template_input_data, f, indent=2)
     print("Rendering template...")
     class_code = template.render(template_input_data)
     

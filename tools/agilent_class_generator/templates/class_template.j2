@@ -12,6 +12,7 @@ from typing import (
     Callable,
     Dict,
     List,
+    Tuple,
     overload,
     Union
 ) # Added for type hints
@@ -135,11 +136,15 @@ def validate_parameters(rules_list: List[Dict[str, Any]] | None = None):
 
                 if isinstance(arg_value, Enum):
                     bound_args.arguments[param_name] = arg_value.name
-            
+                if isinstance(arg_value, list):
+                    bound_args.arguments[param_name] = ",".join(str(v) for v in arg_value)
             return func(*bound_args.args, **bound_args.kwargs)
         return wrapper
     return decorator
 
+def header_tag(sequence):
+    size = len(sequence)
+    return f'#{len(str(size))}{size}'
 
 # --- Global Enums ---
 {% for enum_data in global_enums %}
@@ -235,16 +240,14 @@ class {{ main_class_name }}(FunctionGenerator, VisaMixin):
         cmd = f"{{ fstring_content }}"
     {% if command_info.is_query %}
         response = self._rsrc.query(cmd)
-            {% if command_info.response_converter and command_info.response_converter != "str" %}
-        return {{ command_info.response_converter }}(response)
+            {% if False %}
+        return {{ command_info.response_converter }}
             {% else %}
         return response
             {% endif %}
     {% else %}
         {% if current_syntax_details.is_binary %}
-    # Assuming 'data' is the conventional name for the binary data parameter
-    # and the syntax name is in current_syntax_details.name
-        self._write_binary_data(cmd, data, "{{ current_syntax_details.name }}")
+        self._write_binary_data(cmd)
         {% else %}
         self._rsrc.write(cmd)
         {% endif %}
@@ -257,7 +260,7 @@ class {{ main_class_name }}(FunctionGenerator, VisaMixin):
             {% set fstring_content_multi = command_info.base_scpi_str_template %}
             {% set current_param_fstring_parts = [] %}
             {% for p_common_name in command_info.common_param_names_for_multisyntax %}
-                {# Parameters are used directly #}
+                {# Common parameters are used directly #}
                 {% do current_param_fstring_parts.append("{" ~ p_common_name ~ "}") %}
             {% endfor %}
             {# Add the 'data' parameter which holds syntax-specific value(s) #}
@@ -274,8 +277,7 @@ class {{ main_class_name }}(FunctionGenerator, VisaMixin):
                 self._rsrc.write(cmd)
             {% endif %}
     {% endfor %}
-            case _:
-                raise ValueError(f"Unsupported syntax '{syntax}' for command {{command_info.method_name}}.")
+
 {% endif %}
 {% endmacro %}
 

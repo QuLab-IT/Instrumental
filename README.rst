@@ -67,3 +67,12 @@ For install information, documentation, examples, and more, see our page on
           :alt: Instrumental
 
 If you would like to cite Instrumental, to give it more visibility to other researchers, you can cite the repository through Zenodo (DOI: `10.5281/zenodo.2556398 <https://doi.org/10.5281/zenodo.2556398>`_).
+
+Local Install
+===================
+
+You can install this version of the library by cloning this repo, navigating into its root directory and running::
+
+    >>> pip install -e .
+
+This will install the local code into the python environment you are in. From then you may use the library as any other regular python package.
